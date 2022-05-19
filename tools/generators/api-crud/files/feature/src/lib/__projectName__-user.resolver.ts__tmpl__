@@ -1,0 +1,64 @@
+import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
+import { UseGuards } from '@nestjs/common'
+import { GraphQLResolveInfo } from 'graphql'
+import {
+  UserCreate<%= modelClassName %>Input,
+  UserList<%= modelClassName %>Input,
+  UserUpdate<%= modelClassName %>Input,
+  <%= apiClassName %><%= modelClassName %>DataAccessUserService,
+  <%= modelClassName %>,
+} from '@<%= npmScope %>/<%= directory %>/<%= modelName %>/data-access'
+import { CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
+import {
+  CtxUser,
+  GqlAuthGuard,
+} from '@<%= npmScope %>/<%= directory %>/auth/util'
+import { User } from '@<%= npmScope %>/<%= directory %>/auth/data-access'
+
+@Resolver()
+@UseGuards(GqlAuthGuard)
+export class <%= projectClassName %>UserResolver {
+  constructor(private readonly service: <%= apiClassName %><%= modelClassName %>DataAccessUserService) {}
+
+  @Query(() => [<%= modelClassName %>], { nullable: true })
+  user<%= pluralClassName %>(
+    @CtxUser() user: User,
+    @Info() info: GraphQLResolveInfo,
+    @Args({ name: 'input', type: () => UserList<%= modelClassName %>Input, nullable: true }) input?: UserList<%= modelClassName %>Input,
+  ) {
+    return this.service.user<%= pluralClassName %>(info, user.id, input)
+  }
+
+  @Query(() => CorePaging, { nullable: true })
+  userCount<%= pluralClassName %>(
+    @CtxUser() user: User,
+    @Args({ name: 'input', type: () => UserList<%= modelClassName %>Input, nullable: true }) input?: UserList<%= modelClassName %>Input,
+  ) {
+    return this.service.userCount<%= pluralClassName %>(user.id, input)
+  }
+
+  @Query(() => <%= modelClassName %>, { nullable: true })
+  user<%= modelClassName %>(@CtxUser() user: User, @Info() info: GraphQLResolveInfo, @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string) {
+    return this.service.user<%= modelClassName %>(info, user.id, <%= modelPropertyName %>Id)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  userCreate<%= modelClassName %>(@CtxUser() user: User, @Info() info: GraphQLResolveInfo, @Args('input') input: UserCreate<%= modelClassName %>Input,) {
+    return this.service.userCreate<%= modelClassName %>(info, user.id, input)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  userUpdate<%= modelClassName %>(
+    @CtxUser() user: User,
+    @Info() info: GraphQLResolveInfo,
+    @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string,
+    @Args('input') input: UserUpdate<%= modelClassName %>Input,
+  ) {
+    return this.service.userUpdate<%= modelClassName %>(info, user.id, <%= modelPropertyName %>Id, input)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  userDelete<%= modelClassName %>(@CtxUser() user: User,@Info() info: GraphQLResolveInfo, @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string) {
+    return this.service.userDelete<%= modelClassName %>(info, user.id, <%= modelPropertyName %>Id)
+  }
+}

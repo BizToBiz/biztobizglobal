@@ -1,0 +1,12 @@
+import { Controller, Get } from '@nestjs/common'
+import { <%= className %>CoreFeatureService } from './<%= name %>-core-feature.service'
+
+@Controller()
+export class <%= className %>CoreFeatureController {
+  constructor(private readonly service: <%= className %>CoreFeatureService) {}
+
+  @Get('uptime')
+  uptime() {
+    return this.service.uptime()
+  }
+}

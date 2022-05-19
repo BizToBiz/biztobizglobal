@@ -1,0 +1,23 @@
+{
+  "root": "libs/web-ui/form",
+  "sourceRoot": "libs/web-ui/form/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web-ui/form/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web-ui/form"],
+      "options": {
+        "jestConfig": "libs/web-ui/form/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

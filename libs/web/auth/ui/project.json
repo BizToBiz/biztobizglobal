@@ -1,0 +1,23 @@
+{
+  "root": "libs/web/auth/ui",
+  "sourceRoot": "libs/web/auth/ui/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/auth/ui/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/auth/ui"],
+      "options": {
+        "jestConfig": "libs/web/auth/ui/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:web", "type:ui"]
+}

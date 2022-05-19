@@ -1,0 +1,2 @@
+export * from './lib/<%= name %>-core-feature.module'
+export * from './lib/<%= name %>-core-feature.service'

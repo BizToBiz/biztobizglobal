@@ -1,0 +1,45 @@
+{
+  "cli": "nx",
+  "id": "api-crud",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Api schema name - usually singular (i.e. 'person')",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the library?",
+      "pattern": "^[a-zA-Z]{1}.*$"
+    },
+    "model": {
+      "type": "string",
+      "description": "Optional: defaults to name.  Only necessary if you want a different model and library name.",
+      "alias": "m"
+    },
+    "primaryField": {
+      "type": "string",
+      "description": "Name of the primary field to add by default (i.e. Title or Name)",
+      "alias": "n",
+      "default": "name"
+    },
+    "plural": {
+      "type": "string",
+      "description": "Plural of name (default just adds s)",
+      "alias": "p"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the project (used for linting)",
+      "alias": "t"
+    },
+    "directory": {
+      "type": "string",
+      "description": "A directory where the project is placed (only use if you want a specific place)",
+      "alias": "d",
+      "default": "api"
+    }
+  },
+  "required": ["name"]
+}

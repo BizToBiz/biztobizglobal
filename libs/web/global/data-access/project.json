@@ -1,0 +1,23 @@
+{
+  "root": "libs/web/global/data-access",
+  "sourceRoot": "libs/web/global/data-access/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web/global/data-access/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/global/data-access"],
+      "options": {
+        "jestConfig": "libs/web/global/data-access/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

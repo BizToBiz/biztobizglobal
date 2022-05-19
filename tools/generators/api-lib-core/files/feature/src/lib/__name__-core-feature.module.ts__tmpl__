@@ -1,0 +1,35 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { GraphQLIntercomModule } from '@kikstart-playground/graphql-intercom'
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
+import { GraphQLModule } from '@nestjs/graphql'
+import { PubSub } from 'graphql-subscriptions'
+import { join } from 'path'
+
+import { configuration } from './config/configuration'
+import { validationSchema } from './config/validation'
+import { <%= className %>CoreFeatureController } from './<%= name %>-core-feature.controller'
+import { <%= className %>CoreFeatureResolver } from './<%= name %>-core-feature.resolver'
+import { <%= className %>CoreFeatureService } from './<%= name %>-core-feature.service'
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+      validationSchema,
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'api-schema.graphql'),
+      context: ({ req, res }) => ({ req, res }),
+      installSubscriptionHandlers: true,
+      sortSchema: true,
+    }),
+    GraphQLIntercomModule.forRoot({ pubSub: new PubSub() }),
+  ],
+  controllers: [<%= className %>CoreFeatureController],
+  providers: [<%= className %>CoreFeatureResolver, <%= className %>CoreFeatureService],
+  exports: [<%= className %>CoreFeatureService],
+})
+export class <%= className %>CoreFeatureModule {}

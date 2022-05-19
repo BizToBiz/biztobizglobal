@@ -1,0 +1,23 @@
+{
+  "root": "libs/native/profile/feature",
+  "sourceRoot": "libs/native/profile/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/native/profile/feature/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/native/profile/feature"],
+      "options": {
+        "jestConfig": "libs/native/profile/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:native", "type:feature"]
+}

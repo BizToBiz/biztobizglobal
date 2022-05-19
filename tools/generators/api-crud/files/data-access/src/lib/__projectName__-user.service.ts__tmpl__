@@ -1,0 +1,57 @@
+import { Injectable } from '@nestjs/common'
+import { PrismaSelect } from '@paljs/plugins'
+import { GraphQLResolveInfo } from 'graphql'
+import { <%= apiClassName %>CoreDataAccessService, CorePaging, CorePagingInput } from '@<%= npmScope %>/<%= directory %>/core/data-access'
+
+import { UserCreate<%= modelClassName %>Input } from './dto/user-create-<%= modelName %>.input'
+import { UserList<%= modelClassName %>Input } from './dto/user-list-<%= modelName %>.input'
+import { UserUpdate<%= modelClassName %>Input } from './dto/user-update-<%= modelName %>.input'
+
+@Injectable()
+export class <%= apiClassName %><%= modelClassName %>DataAccessUserService {
+  constructor(private readonly data: <%= apiClassName %>CoreDataAccessService) {}
+
+  user<%= pluralClassName %>(info: GraphQLResolveInfo, userId: string, input?: UserList<%= modelClassName %>Input) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.findMany({
+      take: input?.limit,
+      skip: input?.skip,
+      ...select,
+    })
+  }
+
+  async userCount<%= pluralClassName %>(userId: string, input?: UserList<%= modelClassName %>Input): Promise<CorePaging> {
+    const total = await this.data.<%= modelPropertyName %>.count()
+    return {
+      limit: input?.limit,
+      skip: input?.skip,
+      total,
+    }
+  }
+
+  user<%= modelClassName %>(info: GraphQLResolveInfo, userId: string, <%= modelPropertyName %>Id) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.findUnique({ where: { id: <%= modelPropertyName %>Id }, ...select })
+  }
+
+  userCreate<%= modelClassName %>(info: GraphQLResolveInfo, userId: string, input: UserCreate<%= modelClassName %>Input) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.create({
+      data: { <%= primaryField %>: input.<%= primaryField %> },
+      ...select,
+    })
+  }
+
+  userUpdate<%= modelClassName %>(info: GraphQLResolveInfo, userId: string, <%= modelPropertyName %>Id, input: UserUpdate<%= modelClassName %>Input) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.update({
+      where: { id: <%= modelPropertyName %>Id },
+      data: { <%= primaryField %>: input.<%= primaryField %> },
+      ...select,
+    })
+  }
+
+  userDelete<%= modelClassName %>(info: GraphQLResolveInfo, userId: string, <%= modelPropertyName %>Id) {
+    return this.data.<%= modelPropertyName %>.delete({ where: { id: <%= modelPropertyName %>Id } })
+  }
+}

@@ -1,0 +1,65 @@
+name: build-test
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  push:
+    branches:
+      - main
+      - develop
+    paths-ignore:
+      - '**.md'
+
+env:
+  NX_BRANCH: ${{ github.event.number }}
+  NX_RUN_GROUP: ${{ github.run_id }}
+  DATABASE_URL: postgresql://prisma:prisma@localhost:5432/prisma?schema=e2e
+  JWT_SECRET: NxrnDotDevJwtSecret
+  SAMPLE_DATA: true
+  API_URL: http://localhost:3000
+  APP_NAME: NX-React-Stack
+  APP_EMAIL: test@test.com
+  APP_SUPPORT_EMAIL: test@test.com
+  APP_ADMIN_EMAILS: test@test.com
+  SITE_URL: http://localhost:4200
+  SMTP_HOST: localhost
+  SMTP_PORT: 1025
+  SMTP_USER: test
+  SMTP_PASS: test
+
+jobs:
+  build:
+    runs-on: ${{ matrix.operating-system }}
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_DB: prisma
+          POSTGRES_USER: prisma
+          POSTGRES_PASSWORD: prisma
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      mailhog:
+        image: mailhog/mailhog
+        ports:
+          - '1025:1025'
+          - '8025:8025'
+    strategy:
+      matrix:
+        node-version: [16.x]
+        operating-system: [ubuntu-20.04]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn format:check --base=origin/develop --head=origin/develop
+      - run: yarn test:ci

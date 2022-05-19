@@ -1,0 +1,23 @@
+{
+  "root": "libs/native/ui-button",
+  "sourceRoot": "libs/native/ui-button/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/native/ui-button/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/native/ui-button"],
+      "options": {
+        "jestConfig": "libs/native/ui-button/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:native", "type:ui"]
+}

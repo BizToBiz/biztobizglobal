@@ -1,0 +1,30 @@
+{
+  "name": "native",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "react-native": "*",
+    "react": "*",
+    "@testing-library/react-native": "*",
+    "@testing-library/jest-native": "*",
+    "react-native-svg": "*",
+    "@apollo/client": "*",
+    "react-native-simple-toast": "*",
+    "@testing-library/react": "*",
+    "tailwind-rn": "*",
+    "react-hook-form": "*",
+    "react-native-keychain": "*",
+    "jotai": "*",
+    "@react-native-async-storage/async-storage": "*",
+    "@react-navigation/native": "*",
+    "react-native-safe-area-context": "*",
+    "@react-navigation/stack": "*",
+    "@react-navigation/bottom-tabs": "*",
+    "react-native-gesture-handler": "*",
+    "react-native-screens": "*",
+    "twrnc": "*",
+    "@heroicons/react": "*",
+    "react-router-dom": "*",
+    "react-native-heroicons": "*"
+  }
+}

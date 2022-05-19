@@ -1,0 +1,57 @@
+import { Injectable } from '@nestjs/common'
+import { PrismaSelect } from '@paljs/plugins'
+import { GraphQLResolveInfo } from 'graphql'
+import { <%= apiClassName %>CoreDataAccessService, CorePaging, CorePagingInput } from '@<%= npmScope %>/<%= directory %>/core/data-access'
+
+import { AdminCreate<%= modelClassName %>Input } from './dto/admin-create-<%= modelName %>.input'
+import { AdminList<%= modelClassName %>Input } from './dto/admin-list-<%= modelName %>.input'
+import { AdminUpdate<%= modelClassName %>Input } from './dto/admin-update-<%= modelName %>.input'
+
+@Injectable()
+export class <%= apiClassName %><%= modelClassName %>DataAccessAdminService {
+  constructor(private readonly data: <%= apiClassName %>CoreDataAccessService) {}
+
+  admin<%= pluralClassName %>(info: GraphQLResolveInfo, adminId: string, input?: AdminList<%= modelClassName %>Input) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.findMany({
+      take: input?.limit,
+      skip: input?.skip,
+      ...select,
+    })
+  }
+
+  async adminCount<%= pluralClassName %>(adminId: string, input?: AdminList<%= modelClassName %>Input): Promise<CorePaging> {
+    const total = await this.data.<%= modelPropertyName %>.count()
+    return {
+      limit: input?.limit,
+      skip: input?.skip,
+      total,
+    }
+  }
+
+  admin<%= modelClassName %>(info: GraphQLResolveInfo, adminId: string, <%= modelPropertyName %>Id) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.findUnique({ where: { id: <%= modelPropertyName %>Id }, ...select, })
+  }
+
+  adminCreate<%= modelClassName %>(info: GraphQLResolveInfo, adminId: string, input: AdminCreate<%= modelClassName %>Input) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.create({
+      data: { <%= primaryField %>: input.<%= primaryField %> },
+      ...select,
+    })
+  }
+
+  adminUpdate<%= modelClassName %>(info: GraphQLResolveInfo, adminId: string, <%= modelPropertyName %>Id, input: AdminUpdate<%= modelClassName %>Input) {
+    const select = new PrismaSelect(info).value
+    return this.data.<%= modelPropertyName %>.update({
+      where: { id: <%= modelPropertyName %>Id },
+      data: { <%= primaryField %>: input.<%= primaryField %> },
+      ...select,
+    })
+  }
+
+  adminDelete<%= modelClassName %>(info: GraphQLResolveInfo, adminId: string, <%= modelPropertyName %>Id) {
+    return this.data.<%= modelPropertyName %>.delete({ where: { id: <%= modelPropertyName %>Id } })
+  }
+}

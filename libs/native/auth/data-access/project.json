@@ -1,0 +1,23 @@
+{
+  "root": "libs/native/auth/data-access",
+  "sourceRoot": "libs/native/auth/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/native/auth/data-access/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/native/auth/data-access"],
+      "options": {
+        "jestConfig": "libs/native/auth/data-access/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:native", "type:data-access"]
+}

@@ -1,0 +1,23 @@
+{
+  "root": "libs/native/auth/ui",
+  "sourceRoot": "libs/native/auth/ui/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/native/auth/ui/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/native/auth/ui"],
+      "options": {
+        "jestConfig": "libs/native/auth/ui/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:native", "type:ui"]
+}

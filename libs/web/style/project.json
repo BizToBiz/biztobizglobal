@@ -1,0 +1,7 @@
+{
+  "root": "libs/web/style",
+  "sourceRoot": "libs/web/style/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:web", "type:style"]
+}

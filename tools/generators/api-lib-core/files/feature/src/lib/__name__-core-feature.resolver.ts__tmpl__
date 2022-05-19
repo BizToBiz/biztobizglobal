@@ -1,0 +1,12 @@
+import { Float, Query, Resolver } from '@nestjs/graphql'
+import { <%= className %>CoreFeatureService } from './<%= name %>-core-feature.service'
+
+@Resolver()
+export class <%= className %>CoreFeatureResolver {
+  constructor(private readonly service: <%= className %>CoreFeatureService) {}
+
+  @Query(() => Float, { nullable: true })
+  uptime() {
+    return this.service.uptime()
+  }
+}

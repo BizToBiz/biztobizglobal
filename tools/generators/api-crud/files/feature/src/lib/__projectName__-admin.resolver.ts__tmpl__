@@ -1,0 +1,64 @@
+import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
+import { UseGuards } from '@nestjs/common'
+import { GraphQLResolveInfo } from 'graphql'
+import {
+  AdminCreate<%= modelClassName %>Input,
+  AdminList<%= modelClassName %>Input,
+  AdminUpdate<%= modelClassName %>Input,
+  <%= apiClassName %><%= modelClassName %>DataAccessAdminService,
+  <%= modelClassName %>,
+} from '@<%= npmScope %>/<%= directory %>/<%= modelName %>/data-access'
+import { CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
+import {
+  CtxUser,
+  GqlAuthAdminGuard,
+} from '@<%= npmScope %>/<%= directory %>/auth/util'
+import { User } from '@<%= npmScope %>/<%= directory %>/auth/data-access'
+
+@Resolver()
+@UseGuards(GqlAuthAdminGuard)
+export class <%= projectClassName %>AdminResolver {
+  constructor(private readonly service: <%= apiClassName %><%= modelClassName %>DataAccessAdminService) {}
+
+  @Query(() => [<%= modelClassName %>], { nullable: true })
+  admin<%= pluralClassName %>(
+    @CtxUser() admin: User,
+    @Info() info: GraphQLResolveInfo,
+    @Args({ name: 'input', type: () => AdminList<%= modelClassName %>Input, nullable: true }) input?: AdminList<%= modelClassName %>Input,
+  ) {
+    return this.service.admin<%= pluralClassName %>(info, admin.id, input)
+  }
+
+  @Query(() => CorePaging, { nullable: true })
+  adminCount<%= pluralClassName %>(
+    @CtxUser() admin: User,
+    @Args({ name: 'input', type: () => AdminList<%= modelClassName %>Input, nullable: true }) input?: AdminList<%= modelClassName %>Input,
+  ) {
+    return this.service.adminCount<%= pluralClassName %>(admin.id, input)
+  }
+
+  @Query(() => <%= modelClassName %>, { nullable: true })
+  admin<%= modelClassName %>(@CtxUser() admin: User, @Info() info: GraphQLResolveInfo, @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string) {
+    return this.service.admin<%= modelClassName %>(info, admin.id, <%= modelPropertyName %>Id)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  adminCreate<%= modelClassName %>(@CtxUser() admin: User, @Info() info: GraphQLResolveInfo,@Args('input') input: AdminCreate<%= modelClassName %>Input,) {
+    return this.service.adminCreate<%= modelClassName %>(info, admin.id, input)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  adminUpdate<%= modelClassName %>(
+    @CtxUser() admin: User,
+     @Info() info: GraphQLResolveInfo,
+    @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string,
+    @Args('input') input: AdminUpdate<%= modelClassName %>Input,
+  ) {
+    return this.service.adminUpdate<%= modelClassName %>(info, admin.id, <%= modelPropertyName %>Id, input)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  adminDelete<%= modelClassName %>(@CtxUser() admin: User, @Info() info: GraphQLResolveInfo, @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string) {
+    return this.service.adminDelete<%= modelClassName %>(info, admin.id, <%= modelPropertyName %>Id)
+  }
+}

@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common'
+
+import { <%= className %>CoreDataAccessService } from './<%= name %>-core-data-access.service'
+
+@Module({
+  providers: [<%= className %>CoreDataAccessService],
+  exports: [<%= className %>CoreDataAccessService],
+})
+export class <%= className %>CoreDataAccessModule {}

@@ -1,0 +1,23 @@
+{
+  "root": "libs/native/dashboard/feature",
+  "sourceRoot": "libs/native/dashboard/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/native/dashboard/feature/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/native/dashboard/feature"],
+      "options": {
+        "jestConfig": "libs/native/dashboard/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:native", "type:feature"]
+}
