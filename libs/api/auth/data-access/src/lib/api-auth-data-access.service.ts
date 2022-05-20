@@ -39,7 +39,7 @@ export class ApiAuthDataAccessService {
         data: {
           firstName: input.firstName,
           lastName: input.lastName,
-          emails: { create: { email, primary: true } },
+          email: input.email,
           phone: input.phone,
           username,
           avatarUrl: input.avatarUrl || getGravatarUrl(input.email.toLowerCase()),
@@ -143,7 +143,7 @@ export class ApiAuthDataAccessService {
   }
 
   public findUserByEmail(email: string) {
-    return this.data.email.findUnique({ where: { email } }).owner({ include: { emails: true } })
+    return this.data.user.findUnique({ where: { email } })
   }
 
   public findUserById(userId: string) {

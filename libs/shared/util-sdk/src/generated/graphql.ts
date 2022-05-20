@@ -19,6 +19,26 @@ export type Scalars = {
   JSON: any
 }
 
+export type AccountCreateEmailInput = {
+  email: Scalars['String']
+}
+
+export type AccountUpdatePasswordInput = {
+  currentPassword: Scalars['String']
+  password: Scalars['String']
+  verified: Scalars['String']
+}
+
+export type AccountUpdateProfileInput = {
+  avatarUrl?: InputMaybe<Scalars['String']>
+  bio?: InputMaybe<Scalars['String']>
+  dob?: InputMaybe<Scalars['DateTime']>
+  firstName?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
+  location?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+}
+
 export type AdminCreateUserInput = {
   email: Scalars['String']
   firstName?: InputMaybe<Scalars['String']>
@@ -85,6 +105,15 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation'
+  accountCreateEmail?: Maybe<Email>
+  accountDeleteEmail?: Maybe<Email>
+  accountMarkEmailPrimary?: Maybe<Email>
+  accountMarkEmailPrivate?: Maybe<Email>
+  accountMarkEmailPublic?: Maybe<Email>
+  accountResetPassword?: Maybe<Scalars['Boolean']>
+  accountUpdatePassword?: Maybe<Scalars['Boolean']>
+  accountUpdateProfile?: Maybe<User>
+  accountUpdateUsername?: Maybe<User>
   adminCreateUser?: Maybe<User>
   adminDeleteUser?: Maybe<User>
   adminSetUserPassword?: Maybe<User>
@@ -95,6 +124,38 @@ export type Mutation = {
   logout?: Maybe<Scalars['Boolean']>
   register?: Maybe<UserToken>
   resetPassword?: Maybe<User>
+}
+
+export type MutationAccountCreateEmailArgs = {
+  input: AccountCreateEmailInput
+}
+
+export type MutationAccountDeleteEmailArgs = {
+  emailId: Scalars['String']
+}
+
+export type MutationAccountMarkEmailPrimaryArgs = {
+  emailId: Scalars['String']
+}
+
+export type MutationAccountMarkEmailPrivateArgs = {
+  emailId: Scalars['String']
+}
+
+export type MutationAccountMarkEmailPublicArgs = {
+  emailId: Scalars['String']
+}
+
+export type MutationAccountUpdatePasswordArgs = {
+  input: AccountUpdatePasswordInput
+}
+
+export type MutationAccountUpdateProfileArgs = {
+  input: AccountUpdateProfileInput
+}
+
+export type MutationAccountUpdateUsernameArgs = {
+  username: Scalars['String']
 }
 
 export type MutationAdminCreateUserArgs = {
@@ -139,11 +200,18 @@ export type MutationResetPasswordArgs = {
 
 export type Query = {
   __typename?: 'Query'
+  accountEmails?: Maybe<Array<Email>>
+  accountProfile?: Maybe<User>
+  accountUsernameAvailable?: Maybe<Scalars['Boolean']>
   adminCountUsers?: Maybe<CorePaging>
   adminUser?: Maybe<User>
   adminUsers?: Maybe<Array<User>>
   me?: Maybe<User>
   uptime?: Maybe<Scalars['Float']>
+}
+
+export type QueryAccountUsernameAvailableArgs = {
+  username: Scalars['String']
 }
 
 export type QueryAdminCountUsersArgs = {

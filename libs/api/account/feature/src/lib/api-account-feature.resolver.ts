@@ -14,11 +14,6 @@ import { Email, User } from '@biztobiz/api/user/data-access'
 export class ApiAccountFeatureResolver {
   constructor(private readonly service: ApiAccountDataAccessService) {}
 
-  @Query(() => [Email], { nullable: true })
-  accountEmails(@CtxUser() user: User) {
-    return this.service.accountEmails(user.id)
-  }
-
   @Query(() => User, { nullable: true })
   accountProfile(@CtxUser() user: User) {
     return this.service.accountProfile(user.id)

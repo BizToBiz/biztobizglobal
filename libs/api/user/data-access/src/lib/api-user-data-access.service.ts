@@ -13,7 +13,6 @@ export class ApiUserDataAccessService {
     return this.data.user.findMany({
       take: paging.limit,
       skip: paging.skip,
-      include: { emails: true },
     })
   }
 
@@ -29,7 +28,7 @@ export class ApiUserDataAccessService {
 
   async adminUser(adminId: string, userId: string) {
     await this.data.ensureAdminUser(adminId)
-    return this.data.user.findUnique({ where: { id: userId }, include: { emails: true } })
+    return this.data.user.findUnique({ where: { id: userId } })
   }
 
   async adminCreateUser(adminId: string, input: AdminCreateUserInput) {
@@ -41,14 +40,13 @@ export class ApiUserDataAccessService {
 
     return this.data.user.create({
       data: {
-        emails: { create: { email, primary: true } },
+        email: input.email,
         role: input.role,
         firstName: input.firstName,
         lastName: input.lastName,
         avatarUrl,
         username,
       },
-      include: { emails: true },
     })
   }
 
@@ -57,7 +55,6 @@ export class ApiUserDataAccessService {
     return this.data.user.update({
       where: { id: userId },
       data: { ...input },
-      include: { emails: true },
     })
   }
 

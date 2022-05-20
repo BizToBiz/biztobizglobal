@@ -3574,7 +3574,7 @@
     webpack-merge "^5.8.0"
     webpack-node-externals "^3.0.0"
 
-"@nrwl/nx-cloud@14.0.5":
+"@nrwl/nx-cloud@14.1.7":
   version "14.0.5"
   resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-14.0.5.tgz#43ee0ddd2dc494689ecd2b10fdd1c2855d59b6c1"
   integrity sha512-ADLGWiorW7sHT9hJw1OrxCG9JE9ALYfzNtXWJbvn4ulERul3hSsj+7P+uyUBtflpCrG1bmw5SxkQ77EH/DkY5A==
@@ -3665,7 +3665,7 @@
     tslib "^2.0.0"
     yargs-parser "20.0.0"
 
-"@nrwl/tao@14.1.7":
+"@nrwl/tao@14.1.7", "@nrwl/tao@^14.1.7":
   version "14.1.7"
   resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-14.1.7.tgz#c589544092f92380bb9f5c51bf60c40603b39c27"
   integrity sha512-7jzPqEwElMiTKCZm2iuqC5aPIs+IwocWR6Tl1JhC1eK2PWskHOhdgTQM186lfXwPKWH4NJAE3eZFqtECnGDCJg==

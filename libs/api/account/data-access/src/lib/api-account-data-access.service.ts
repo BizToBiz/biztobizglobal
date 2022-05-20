@@ -10,10 +10,6 @@ import { AccountUpdateProfileInput } from './dto/account-update-profile.input'
 export class ApiAccountDataAccessService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  accountEmails(userId: string) {
-    return this.data.email.findMany({ where: { owner: { id: userId } }, orderBy: { primary: 'desc' } })
-  }
-
   accountProfile(userId: string) {
     return this.data.findUserById(userId)
   }
@@ -91,29 +87,7 @@ export class ApiAccountDataAccessService {
     return this.updateUserEmail(userId, userEmailId, { public: false })
   }
 
-  async accountMarkEmailPublic(userId: string, userEmailId: string) {
-    return this.updateUserEmail(userId, userEmailId, { public: true })
-  }
-
-  async accountMarkEmailPrimary(userId: string, userEmailId: string) {
-    // Check if we are the owner
-    await this.userEmailOwner(userId, userEmailId)
-    // Mark all emails as non primary
-    await this.data.email.updateMany({
-      where: { owner: { id: userId } },
-      data: { primary: false },
-    })
-    // Mark the chosen one
-    return this.updateUserEmail(userId, userEmailId, { primary: true })
-  }
-
   async accountResetPassword(userId: string) {
-    const emails = await this.accountEmails(userId)
-    const primary = emails.find((email) => email.primary)
-
-    if (!primary) {
-      throw new BadRequestException(`Could not find primary email for user with id ${userId}`)
-    }
     Logger.verbose(`TODO: Implement Account Reset Password`)
     // await this.auth.forgotPassword(primary.email)
     return true

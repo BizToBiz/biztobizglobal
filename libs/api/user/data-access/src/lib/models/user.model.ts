@@ -1,5 +1,4 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { Email } from './email.model'
 import { Role } from './role.enum'
 
 @ObjectType()
@@ -37,8 +36,8 @@ export class User {
   @Field(() => Role, { nullable: true })
   role: Role
 
-  @Field(() => [Email], { nullable: true })
-  emails?: Email[]
+  @Field({ nullable: true })
+  email?: string
 
   password?: string
 }

@@ -32,7 +32,7 @@ export class ApiCoreDataAccessService extends PrismaClient implements OnModuleIn
       data: {
         firstName: input.firstName,
         lastName: input.lastName,
-        emails: { create: { email, primary: true } },
+        email: input.email,
         username: email,
         avatarUrl: input.avatarUrl || getGravatarUrl(input.email.toLowerCase()),
         password,
@@ -41,16 +41,16 @@ export class ApiCoreDataAccessService extends PrismaClient implements OnModuleIn
     })
   }
 
-  findUserByEmail(email: string) {
-    return this.email.findUnique({ where: { email } }).owner({ include: { emails: true } })
+  public findUserByEmail(email: string) {
+    return this.user.findUnique({ where: { email } })
   }
 
-  findUserById(userId: string) {
-    return this.user.findUnique({ where: { id: userId }, include: { emails: true } })
+  public findUserById(userId: string) {
+    return this.user.findUnique({ where: { id: userId } })
   }
 
-  findUserByUsername(username: string) {
-    return this.user.findUnique({ where: { username }, include: { emails: true } })
+  public findUserByUsername(username: string) {
+    return this.user.findUnique({ where: { username } })
   }
 
   async ensureAdminUser(adminId: string): Promise<boolean> {
