@@ -1,5 +1,4 @@
 {
-  "root": "apps/native",
   "sourceRoot": "apps/native/src",
   "projectType": "application",
   "targets": {

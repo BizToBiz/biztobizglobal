@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/dashboard/feature",
   "sourceRoot": "libs/native/dashboard/feature/src",
   "projectType": "library",
   "targets": {

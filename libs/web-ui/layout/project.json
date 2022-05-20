@@ -1,5 +1,4 @@
 {
-  "root": "libs/web-ui/layout",
   "sourceRoot": "libs/web-ui/layout/src",
   "projectType": "library",
   "tags": [],

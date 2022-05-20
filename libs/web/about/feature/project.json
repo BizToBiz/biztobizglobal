@@ -1,5 +1,4 @@
 {
-  "root": "libs/web/about/feature",
   "sourceRoot": "libs/web/about/feature/src",
   "projectType": "library",
   "targets": {

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'native',
   preset: 'react-native',
   resolver: '@nrwl/jest/plugins/resolver',

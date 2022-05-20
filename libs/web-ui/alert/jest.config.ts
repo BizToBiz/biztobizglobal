@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'web-ui-alert',
 
   transform: {
@@ -6,5 +6,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/web-ui/alert',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 }

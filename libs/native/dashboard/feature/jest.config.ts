@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'native-dashboard-feature',
 
   transform: {
@@ -6,5 +6,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../../coverage/libs/native/dashboard/feature',
-  preset: '../../../../jest.preset.ts',
+  preset: '../../../../jest.preset.js',
 }

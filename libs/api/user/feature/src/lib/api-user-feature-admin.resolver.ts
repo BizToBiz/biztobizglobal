@@ -2,7 +2,12 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UseGuards } from '@nestjs/common'
 import { CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
 import { CtxUser, GqlAuthAdminGuard } from '@biztobiz/api/auth/util'
-import { AdminCreateUserInput, AdminUpdateUserInput, ApiUserDataAccessService, User } from '@biztobiz/api/user/data-access'
+import {
+  AdminCreateUserInput,
+  AdminUpdateUserInput,
+  ApiUserDataAccessService,
+  User,
+} from '@biztobiz/api/user/data-access'
 
 @Resolver()
 @UseGuards(GqlAuthAdminGuard)

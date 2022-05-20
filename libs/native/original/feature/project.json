@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/original/feature",
   "sourceRoot": "libs/native/original/feature/src",
   "projectType": "library",
   "tags": [],

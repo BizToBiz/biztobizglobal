@@ -1,5 +1,4 @@
 {
-  "root": "libs/shared/auth/data-access",
   "sourceRoot": "libs/shared/auth/data-access/src",
   "projectType": "library",
   "tags": [],

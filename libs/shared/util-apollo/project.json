@@ -1,5 +1,4 @@
 {
-  "root": "libs/shared/util-apollo",
   "sourceRoot": "libs/shared/util-apollo/src",
   "projectType": "library",
   "targets": {

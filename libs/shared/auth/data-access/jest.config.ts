@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'shared-auth-data-access',
 
   transform: {
@@ -6,5 +6,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../../coverage/libs/shared/auth/data-access',
-  preset: '../../../../jest.preset.ts',
+  preset: '../../../../jest.preset.js',
 }

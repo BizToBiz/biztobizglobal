@@ -1,5 +1,4 @@
 {
-  "root": "libs/web-ui/form",
   "sourceRoot": "libs/web-ui/form/src",
   "projectType": "library",
   "tags": [],

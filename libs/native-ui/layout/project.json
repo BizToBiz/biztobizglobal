@@ -1,5 +1,4 @@
 {
-  "root": "libs/native-ui/layout",
   "sourceRoot": "libs/native-ui/layout/src",
   "projectType": "library",
   "tags": [],

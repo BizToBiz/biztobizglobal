@@ -1,5 +1,4 @@
 {
-  "root": "libs/native-ui/alert",
   "sourceRoot": "libs/native-ui/alert/src",
   "projectType": "library",
   "tags": [],

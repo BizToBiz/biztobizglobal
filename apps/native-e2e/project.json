@@ -1,5 +1,4 @@
 {
-  "root": "apps/native-e2e",
   "sourceRoot": "apps/native-e2e/src",
   "projectType": "application",
   "targets": {

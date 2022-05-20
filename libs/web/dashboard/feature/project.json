@@ -1,5 +1,4 @@
 {
-  "root": "libs/web/dashboard/feature",
   "sourceRoot": "libs/web/dashboard/feature/src",
   "projectType": "library",
   "targets": {

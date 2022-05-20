@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'shared-util-apollo',
 
   transform: {
@@ -6,5 +6,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/shared/util-apollo',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 }

@@ -1,5 +1,4 @@
 {
-  "root": "libs/web/style",
   "sourceRoot": "libs/web/style/src",
   "projectType": "library",
   "targets": {},

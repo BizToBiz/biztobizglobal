@@ -1,5 +1,4 @@
 {
-  "root": "libs/web/environments",
   "sourceRoot": "libs/web/environments/src",
   "projectType": "library",
   "targets": {

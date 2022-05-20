@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/shell/feature",
   "sourceRoot": "libs/native/shell/feature/src",
   "projectType": "library",
   "targets": {

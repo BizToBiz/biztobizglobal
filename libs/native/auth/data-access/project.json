@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/auth/data-access",
   "sourceRoot": "libs/native/auth/data-access/src",
   "projectType": "library",
   "targets": {

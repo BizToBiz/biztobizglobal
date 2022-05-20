@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/auth/ui",
   "sourceRoot": "libs/native/auth/ui/src",
   "projectType": "library",
   "targets": {

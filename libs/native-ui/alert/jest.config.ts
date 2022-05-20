@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'native-ui-alert',
 
   transform: {
@@ -6,5 +6,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/native-ui/alert',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 }

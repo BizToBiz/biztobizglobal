@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/ui-button",
   "sourceRoot": "libs/native/ui-button/src",
   "projectType": "library",
   "targets": {

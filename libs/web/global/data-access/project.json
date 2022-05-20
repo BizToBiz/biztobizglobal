@@ -1,5 +1,4 @@
 {
-  "root": "libs/web/global/data-access",
   "sourceRoot": "libs/web/global/data-access/src",
   "projectType": "library",
   "tags": [],

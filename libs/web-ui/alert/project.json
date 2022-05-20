@@ -1,5 +1,4 @@
 {
-  "root": "libs/web-ui/alert",
   "sourceRoot": "libs/web-ui/alert/src",
   "projectType": "library",
   "tags": [],

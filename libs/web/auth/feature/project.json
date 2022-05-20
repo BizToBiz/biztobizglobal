@@ -1,5 +1,4 @@
 {
-  "root": "libs/web/auth/feature",
   "sourceRoot": "libs/web/auth/feature/src",
   "projectType": "library",
   "targets": {

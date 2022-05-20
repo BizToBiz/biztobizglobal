@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'api-e2e',
 
   globals: {
@@ -9,5 +9,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/apps/api-e2e',
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 }

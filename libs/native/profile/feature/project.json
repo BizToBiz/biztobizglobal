@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/profile/feature",
   "sourceRoot": "libs/native/profile/feature/src",
   "projectType": "library",
   "targets": {

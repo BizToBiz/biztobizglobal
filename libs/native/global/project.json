@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/global",
   "sourceRoot": "libs/native/global/src",
   "projectType": "library",
   "tags": [],

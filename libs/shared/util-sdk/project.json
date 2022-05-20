@@ -1,5 +1,4 @@
 {
-  "root": "libs/shared/util-sdk",
   "sourceRoot": "libs/shared/util-sdk/src",
   "projectType": "library",
   "targets": {

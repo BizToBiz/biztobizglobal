@@ -1,5 +1,4 @@
 {
-  "root": "libs/native/ui-form",
   "sourceRoot": "libs/native/ui-form/src",
   "projectType": "library",
   "targets": {

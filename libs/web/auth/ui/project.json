@@ -1,5 +1,4 @@
 {
-  "root": "libs/web/auth/ui",
   "sourceRoot": "libs/web/auth/ui/src",
   "projectType": "library",
   "targets": {
