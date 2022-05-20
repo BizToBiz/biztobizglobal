@@ -1,13 +1,12 @@
 import { UseGuards, ValidationPipe } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import {
-  AccountCreateEmailInput,
   AccountUpdatePasswordInput,
   AccountUpdateProfileInput,
   ApiAccountDataAccessService,
 } from '@biztobiz/api/account/data-access'
 import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
-import { Email, User } from '@biztobiz/api/user/data-access'
+import { User } from '@biztobiz/api/user/data-access'
 
 @Resolver()
 @UseGuards(GqlAuthGuard)
@@ -24,39 +23,9 @@ export class ApiAccountFeatureResolver {
     return this.service.accountUsernameAvailable(user.id, username)
   }
 
-  @Mutation(() => Email, { nullable: true })
-  accountCreateEmail(@CtxUser() user: User, @Args('input', new ValidationPipe()) input: AccountCreateEmailInput) {
-    return this.service.accountCreateEmail(user.id, input)
-  }
-
-  @Mutation(() => Email, { nullable: true })
-  accountDeleteEmail(@CtxUser() user: User, @Args('emailId') emailId: string) {
-    return this.service.accountDeleteEmail(user.id, emailId)
-  }
-
-  @Mutation(() => Email, { nullable: true })
-  accountMarkEmailPrimary(@CtxUser() user: User, @Args('emailId') emailId: string) {
-    return this.service.accountMarkEmailPrimary(user.id, emailId)
-  }
-
-  @Mutation(() => Email, { nullable: true })
-  accountMarkEmailPrivate(@CtxUser() user: User, @Args('emailId') emailId: string) {
-    return this.service.accountMarkEmailPrivate(user.id, emailId)
-  }
-
-  @Mutation(() => Email, { nullable: true })
-  accountMarkEmailPublic(@CtxUser() user: User, @Args('emailId') emailId: string) {
-    return this.service.accountMarkEmailPublic(user.id, emailId)
-  }
-
   @Mutation(() => User, { nullable: true })
   accountUpdateProfile(@CtxUser() user: User, @Args('input', new ValidationPipe()) input: AccountUpdateProfileInput) {
     return this.service.accountUpdateProfile(user.id, input)
-  }
-
-  @Mutation(() => User, { nullable: true })
-  accountUpdateUsername(@CtxUser() user: User, @Args('username') username: string) {
-    return this.service.accountUpdateUsername(user.id, username)
   }
 
   @Mutation(() => Boolean, { nullable: true })

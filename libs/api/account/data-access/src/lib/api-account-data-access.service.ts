@@ -1,8 +1,6 @@
-import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
+import { BadRequestException, Injectable, Logger } from '@nestjs/common'
 import { ApiCoreDataAccessService } from '@biztobiz/api/core/data-access'
 import { hashPassword, validatePassword } from '@biztobiz/api/auth/data-access'
-import { Prisma } from '@prisma/client'
-import { AccountCreateEmailInput } from './dto/account-create-email.input'
 import { AccountUpdatePasswordInput } from './dto/account-update-password.input'
 import { AccountUpdateProfileInput } from './dto/account-update-profile.input'
 
@@ -12,26 +10,6 @@ export class ApiAccountDataAccessService {
 
   accountProfile(userId: string) {
     return this.data.findUserById(userId)
-  }
-
-  async accountCreateEmail(userId: string, input: AccountCreateEmailInput) {
-    const exists = await this.data.findUserByEmail(input.email)
-    if (exists) {
-      throw new BadRequestException(`Can't add email address ${input.email}`)
-    }
-    return this.data.email.create({ data: { ownerId: userId, email: input.email, primary: false } })
-  }
-
-  async accountDeleteEmail(userId: string, userEmailId: string) {
-    const owner = await this.data.email.findUnique({ where: { id: userEmailId } }).owner()
-    if (owner.id !== userId) {
-      throw new UnauthorizedException()
-    }
-    const email = await this.data.email.findUnique({ where: { id: userEmailId } })
-    if (email.primary) {
-      throw new BadRequestException(`You can't delete your primary email`)
-    }
-    return this.data.email.delete({ where: { id: userEmailId } })
   }
 
   accountUpdateProfile(userId: string, input: AccountUpdateProfileInput) {
@@ -68,23 +46,6 @@ export class ApiAccountDataAccessService {
       where: { username },
     })
     return count === 0
-  }
-
-  async userEmailOwner(userId: string, userEmailId: string) {
-    const owner = await this.data.email.findUnique({ where: { id: userEmailId } }).owner()
-    if (owner.id !== userId) {
-      throw new UnauthorizedException()
-    }
-    return owner
-  }
-
-  async updateUserEmail(userId: string, userEmailId: string, input: Prisma.EmailUpdateInput) {
-    await this.userEmailOwner(userId, userEmailId)
-    return this.data.email.update({ where: { id: userEmailId }, data: { ...input } })
-  }
-
-  async accountMarkEmailPrivate(userId: string, userEmailId: string) {
-    return this.updateUserEmail(userId, userEmailId, { public: false })
   }
 
   async accountResetPassword(userId: string) {
