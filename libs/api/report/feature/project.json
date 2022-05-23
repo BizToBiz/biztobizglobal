@@ -1,0 +1,38 @@
+{
+  "sourceRoot": "libs/api/report/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/report/feature/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/report/feature"],
+      "options": {
+        "jestConfig": "libs/api/report/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/report/feature"],
+      "options": {
+        "jestConfig": "libs/api/report/feature/jest.e2e.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "load-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/report/feature"],
+      "options": {
+        "jestConfig": "libs/api/report/feature/jest.load.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "type:feature"]
+}
