@@ -1,25 +1,22 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class Email {
+export class CompanyMember {
   @Field({ nullable: true })
-  id: string
+  id?: string
 
   @Field({ nullable: true })
-  createdAt: Date
+  fromDate?: Date
 
   @Field({ nullable: true })
-  updatedAt: Date
+  thruDate?: Date
 
   @Field({ nullable: true })
-  email: string
+  role?: string
 
   @Field({ nullable: true })
-  public: boolean
+  location?: string
 
-  @Field({ nullable: true })
-  primary: boolean
-
-  @Field({ nullable: true })
-  verified: boolean
+  company?: Record<string, unknown>
+  member?: Record<string, unknown>
 }

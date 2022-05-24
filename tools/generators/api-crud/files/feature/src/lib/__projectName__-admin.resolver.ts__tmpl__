@@ -13,7 +13,7 @@ import {
   CtxUser,
   GqlAuthAdminGuard,
 } from '@<%= npmScope %>/<%= directory %>/auth/util'
-import { User } from '@<%= npmScope %>/<%= directory %>/auth/data-access'
+import { User } from '@<%= npmScope %>/<%= directory %>/user/data-access'
 
 @Resolver()
 @UseGuards(GqlAuthAdminGuard)

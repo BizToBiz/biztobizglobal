@@ -19,7 +19,7 @@
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "parallel": 1,
-        "accessToken": "ZmY3YzVmNGQtNDFmMi00ZTM4LThmZjMtNDFiMzFkZDIyOTNmfHJlYWQtd3JpdGU="
+        "accessToken": "NjVjNTIzY2ItZWVkNi00MDRjLWI4NjMtYjQxMDlmZGY1YWIyfHJlYWQtd3JpdGU="
       }
     }
   },
