@@ -4,7 +4,7 @@ import { DayOfWeek } from './day-of-week.enum'
 import { SubstituteGroup } from '@biztobiz/api/substitute-group/data-access'
 import { Region } from '@biztobiz/api/region/data-access'
 import { Upload } from '@biztobiz/api/upload/data-access'
-import { ChapterMember } from './chapter-member.model'
+import { ChapterMember } from '@biztobiz/api/chapter-member/data-access'
 
 @ObjectType()
 export class Chapter {

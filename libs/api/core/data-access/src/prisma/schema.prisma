@@ -460,12 +460,3 @@ enum PowerHourStatus {
   Declined
   Proposed
 }
-
-
-model Report {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name String
-}
-

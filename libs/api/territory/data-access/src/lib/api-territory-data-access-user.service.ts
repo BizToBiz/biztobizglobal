@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { UserCreateTerritoryInput } from './dto/user-create-territory.input'
 import { UserListTerritoryInput } from './dto/user-list-territory.input'
@@ -11,7 +11,7 @@ import { UserUpdateTerritoryInput } from './dto/user-update-territory.input'
 export class ApiTerritoryDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  userTerritorys(info: GraphQLResolveInfo, userId: string, input?: UserListTerritoryInput) {
+  userTerritories(info: GraphQLResolveInfo, userId: string, input?: UserListTerritoryInput) {
     const select = new PrismaSelect(info).value
     return this.data.territory.findMany({
       take: input?.limit,
@@ -20,7 +20,7 @@ export class ApiTerritoryDataAccessUserService {
     })
   }
 
-  async userCountTerritorys(userId: string, input?: UserListTerritoryInput): Promise<CorePaging> {
+  async userCountTerritories(userId: string, input?: UserListTerritoryInput): Promise<CorePaging> {
     const total = await this.data.territory.count()
     return {
       limit: input?.limit,

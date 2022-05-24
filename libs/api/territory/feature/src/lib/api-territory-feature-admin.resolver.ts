@@ -18,20 +18,20 @@ export class ApiTerritoryFeatureAdminResolver {
   constructor(private readonly service: ApiTerritoryDataAccessAdminService) {}
 
   @Query(() => [Territory], { nullable: true })
-  adminTerritorys(
+  adminTerritories(
     @CtxUser() admin: User,
     @Info() info: GraphQLResolveInfo,
     @Args({ name: 'input', type: () => AdminListTerritoryInput, nullable: true }) input?: AdminListTerritoryInput,
   ) {
-    return this.service.adminTerritorys(info, admin.id, input)
+    return this.service.adminTerritories(info, admin.id, input)
   }
 
   @Query(() => CorePaging, { nullable: true })
-  adminCountTerritorys(
+  adminCountTerritories(
     @CtxUser() admin: User,
     @Args({ name: 'input', type: () => AdminListTerritoryInput, nullable: true }) input?: AdminListTerritoryInput,
   ) {
-    return this.service.adminCountTerritorys(admin.id, input)
+    return this.service.adminCountTerritories(admin.id, input)
   }
 
   @Query(() => Territory, { nullable: true })

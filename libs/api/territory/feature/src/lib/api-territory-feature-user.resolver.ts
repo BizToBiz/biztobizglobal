@@ -18,20 +18,20 @@ export class ApiTerritoryFeatureUserResolver {
   constructor(private readonly service: ApiTerritoryDataAccessUserService) {}
 
   @Query(() => [Territory], { nullable: true })
-  userTerritorys(
+  userTerritories(
     @CtxUser() user: User,
     @Info() info: GraphQLResolveInfo,
     @Args({ name: 'input', type: () => UserListTerritoryInput, nullable: true }) input?: UserListTerritoryInput,
   ) {
-    return this.service.userTerritorys(info, user.id, input)
+    return this.service.userTerritories(info, user.id, input)
   }
 
   @Query(() => CorePaging, { nullable: true })
-  userCountTerritorys(
+  userCountTerritories(
     @CtxUser() user: User,
     @Args({ name: 'input', type: () => UserListTerritoryInput, nullable: true }) input?: UserListTerritoryInput,
   ) {
-    return this.service.userCountTerritorys(user.id, input)
+    return this.service.userCountTerritories(user.id, input)
   }
 
   @Query(() => Territory, { nullable: true })
