@@ -65,17 +65,15 @@ export class ApiAuthDataAccessService {
   }
 
   async login(input: LoginInput) {
-    Logger.warn({ input })
     const email = input.email.trim()
     const password = input.password.trim()
     const user = await this.findUserByEmail(email)
-    Logger.log({ user })
 
     if (!user) {
       throw new NotFoundException(`No user found for email: ${email}`)
     }
 
-    const passwordValid = await validatePassword(password, user.password)
+    const passwordValid = validatePassword(password, user.password)
 
     if (!passwordValid) {
       throw new BadRequestException('Invalid password')

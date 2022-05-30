@@ -64,6 +64,7 @@
     "shared-util-sdk": "libs/shared/util-sdk",
     "web": "apps/web",
     "web-about-feature": "libs/web/about/feature",
+    "web-admin-dashboard-feature": "libs/web/admin-dashboard/feature",
     "web-assets": "libs/web/assets",
     "web-auth-feature": "libs/web/auth/feature",
     "web-auth-ui": "libs/web/auth/ui",
@@ -73,6 +74,7 @@
     "web-global-data-access": "libs/web/global/data-access",
     "web-shell-feature": "libs/web/shell/feature",
     "web-style": "libs/web/style",
+    "web-ui-admin-layout-feature": "libs/web-ui/admin-layout/feature",
     "web-ui-alert": "libs/web-ui/alert",
     "web-ui-form": "libs/web-ui/form",
     "web-ui-layout": "libs/web-ui/layout"

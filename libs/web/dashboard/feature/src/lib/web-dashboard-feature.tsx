@@ -1,4 +1,4 @@
-import { useMeQuery, useUptimeQuery } from '@biztobiz/shared/util-sdk'
+import { useMeQuery } from '@biztobiz/shared/util-sdk'
 import React from 'react'
 import { useAtom } from 'jotai'
 import { isAdminAtom, isAuthenticatedAtom } from '@biztobiz/web/global/data-access'
@@ -17,7 +17,7 @@ export function WebDashboardFeature() {
           React Dashboard
         </div>
         <div className="flex py-40 rounded-lg bg-pink-100 text-pink-800 items-center justify-center my-3 ">
-          Logged in as: {me?.data?.me?.username}
+          Logged in as: {me?.data?.me?.firstName}
         </div>
         <WebDashboardUptimeWidget />
       </div>

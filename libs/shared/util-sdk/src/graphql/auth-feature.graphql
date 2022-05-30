@@ -9,9 +9,9 @@ fragment UserDetails on User {
   id
   firstName
   lastName
-  username
   avatarUrl
   email
+  role
 }
 
 query me {
