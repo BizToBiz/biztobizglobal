@@ -13,6 +13,8 @@ import {
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import { User } from '@biztobiz/shared/util-sdk'
+import logo from './assets/logo.png'
+import fullLogo from './assets/full-logo.png'
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -32,7 +34,6 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-/* eslint-disable-next-line */
 export interface WebAdminDashboardFeatureProps {
   children: React.ReactNode
   user: User
@@ -90,8 +91,8 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                   </Transition.Child>
                   <div className="flex-shrink-0 flex items-center px-4">
                     <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
+                      className="h-12 w-auto"
+                      src={fullLogo}
                       alt="Workflow"
                     />
                   </div>
@@ -132,15 +133,15 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
         {/* Static sidebar for desktop */}
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
+          <div className="flex flex-col flex-grow border-r border-gray-200 pt-1 bg-white overflow-y-auto">
             <div className="flex items-center flex-shrink-0 px-4">
               <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
+                className="h-16 w-auto"
+                src={fullLogo}
                 alt="Workflow"
               />
             </div>
-            <div className="mt-5 flex-grow flex flex-col">
+            <div className="mt-3 flex-grow flex flex-col">
               <nav className="flex-1 px-2 pb-4 space-y-1">
                 {navigation.map((item) => (
                   <a
@@ -211,7 +212,7 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={props.user.avatarUrl ? props.user.avatarUrl : ''}
                         alt=""
                       />
                     </Menu.Button>
@@ -254,11 +255,9 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                 <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
               </div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                {/* Replace with your content */}
                 <div className="py-4">
-                  <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
+                {props.children}
                 </div>
-                {/* /End replace */}
               </div>
             </div>
           </main>
