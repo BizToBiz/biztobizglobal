@@ -45,7 +45,7 @@ export function WebFeatureLogin() {
             {children}
 
             <div className="text-sm">
-              <Link to="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <Link to="/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
                 Forgot your password?
               </Link>
             </div>
@@ -62,7 +62,7 @@ export function WebFeatureLogin() {
       subtitle={
         <p className="mt-2 text-center text-sm text-gray-600">
           No Account?{' '}
-          <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
             Register Here
           </Link>
         </p>

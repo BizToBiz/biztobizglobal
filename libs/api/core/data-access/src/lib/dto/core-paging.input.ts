@@ -3,7 +3,7 @@ import { Field, InputType } from '@nestjs/graphql'
 @InputType()
 export class CorePagingInput {
   @Field({ nullable: true, defaultValue: 20 })
-  limit?: number
+  take?: number
 
   @Field({ nullable: true, defaultValue: 0 })
   skip?: number

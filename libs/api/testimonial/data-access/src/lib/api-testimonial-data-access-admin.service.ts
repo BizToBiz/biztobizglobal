@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateTestimonialInput } from './dto/admin-create-testimonial.input'
 import { AdminListTestimonialInput } from './dto/admin-list-testimonial.input'
@@ -14,7 +14,7 @@ export class ApiTestimonialDataAccessAdminService {
   adminTestimonials(info: GraphQLResolveInfo, adminId: string, input?: AdminListTestimonialInput) {
     const select = new PrismaSelect(info).value
     return this.data.testimonial.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiTestimonialDataAccessAdminService {
   async adminCountTestimonials(adminId: string, input?: AdminListTestimonialInput): Promise<CorePaging> {
     const total = await this.data.testimonial.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

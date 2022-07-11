@@ -13,17 +13,17 @@ export class ApiChapterMemberDataAccessUserService {
 
   userChapterMembers(info: GraphQLResolveInfo, userId: string, input?: UserListChapterMemberInput) {
     const select = new PrismaSelect(info).value
-    return this.data.chapterMemberModel.findMany({
-      take: input?.limit,
+    return this.data.chapterMember.findMany({
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
   }
 
   async userCountChapterMembers(userId: string, input?: UserListChapterMemberInput): Promise<CorePaging> {
-    const total = await this.data.chapterMemberModel.count()
+    const total = await this.data.chapterMember.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }
@@ -31,12 +31,12 @@ export class ApiChapterMemberDataAccessUserService {
 
   userChapterMember(info: GraphQLResolveInfo, userId: string, chapterMemberId) {
     const select = new PrismaSelect(info).value
-    return this.data.chapterMemberModel.findUnique({ where: { chapterId_memberId: chapterMemberId }, ...select })
+    return this.data.chapterMember.findUnique({ where: { chapterId_memberId: chapterMemberId }, ...select })
   }
 
   userCreateChapterMember(info: GraphQLResolveInfo, userId: string, input: UserCreateChapterMemberInput) {
     const select = new PrismaSelect(info).value
-    return this.data.chapterMemberModel.create({
+    return this.data.chapterMember.create({
       data: { name: input.name },
       ...select,
     })
@@ -49,7 +49,7 @@ export class ApiChapterMemberDataAccessUserService {
     input: UserUpdateChapterMemberInput,
   ) {
     const select = new PrismaSelect(info).value
-    return this.data.chapterMemberModel.update({
+    return this.data.chapterMember.update({
       where: { id: chapterMemberId },
       data: { name: input.name },
       ...select,
@@ -57,6 +57,6 @@ export class ApiChapterMemberDataAccessUserService {
   }
 
   userDeleteChapterMember(info: GraphQLResolveInfo, userId: string, chapterMemberId) {
-    return this.data.chapterMemberModel.delete({ where: { chapterId_memberId: chapterMemberId } })
+    return this.data.chapterMember.delete({ where: { chapterId_memberId: chapterMemberId } })
   }
 }

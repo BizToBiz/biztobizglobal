@@ -56,7 +56,7 @@ export function WebFeatureResetPassword() {
       title="Choose a New Password"
       subtitle={
         <p className="mt-2 text-center text-sm text-gray-600">
-          <Link to="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link to="/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
             Return to Forgotten Password Page
           </Link>
         </p>

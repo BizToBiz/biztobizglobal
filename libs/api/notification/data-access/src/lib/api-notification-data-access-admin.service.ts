@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateNotificationInput } from './dto/admin-create-notification.input'
 import { AdminListNotificationInput } from './dto/admin-list-notification.input'
@@ -14,7 +14,7 @@ export class ApiNotificationDataAccessAdminService {
   adminNotifications(info: GraphQLResolveInfo, adminId: string, input?: AdminListNotificationInput) {
     const select = new PrismaSelect(info).value
     return this.data.notification.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiNotificationDataAccessAdminService {
   async adminCountNotifications(adminId: string, input?: AdminListNotificationInput): Promise<CorePaging> {
     const total = await this.data.notification.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

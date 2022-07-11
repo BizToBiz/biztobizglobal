@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateUploadInput } from './dto/admin-create-upload.input'
 import { AdminListUploadInput } from './dto/admin-list-upload.input'
@@ -14,7 +14,7 @@ export class ApiUploadDataAccessAdminService {
   adminUploads(info: GraphQLResolveInfo, adminId: string, input?: AdminListUploadInput) {
     const select = new PrismaSelect(info).value
     return this.data.upload.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiUploadDataAccessAdminService {
   async adminCountUploads(adminId: string, input?: AdminListUploadInput): Promise<CorePaging> {
     const total = await this.data.upload.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

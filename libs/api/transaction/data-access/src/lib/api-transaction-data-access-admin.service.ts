@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateTransactionInput } from './dto/admin-create-transaction.input'
 import { AdminListTransactionInput } from './dto/admin-list-transaction.input'
@@ -14,7 +14,7 @@ export class ApiTransactionDataAccessAdminService {
   adminTransactions(info: GraphQLResolveInfo, adminId: string, input?: AdminListTransactionInput) {
     const select = new PrismaSelect(info).value
     return this.data.transaction.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiTransactionDataAccessAdminService {
   async adminCountTransactions(adminId: string, input?: AdminListTransactionInput): Promise<CorePaging> {
     const total = await this.data.transaction.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

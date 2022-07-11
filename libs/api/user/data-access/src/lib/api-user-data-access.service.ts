@@ -11,7 +11,7 @@ export class ApiUserDataAccessService {
   async adminUsers(userId: string, paging: CorePagingInput) {
     await this.data.ensureAdminUser(userId)
     return this.data.user.findMany({
-      take: paging.limit,
+      take: paging.take,
       skip: paging.skip,
     })
   }
@@ -20,7 +20,7 @@ export class ApiUserDataAccessService {
     await this.data.ensureAdminUser(adminId)
     const total = await this.data.user.count()
     return {
-      limit: paging.limit,
+      take: paging.take,
       skip: paging.skip,
       total,
     }

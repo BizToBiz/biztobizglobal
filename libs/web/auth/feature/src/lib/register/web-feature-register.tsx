@@ -31,7 +31,7 @@ export function WebFeatureRegister() {
       subtitle={
         <p className="mt-2 text-center text-sm text-gray-600">
           Already a Member?{' '}
-          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
             Log In Here
           </Link>
         </p>

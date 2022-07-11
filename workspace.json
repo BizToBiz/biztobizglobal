@@ -62,6 +62,7 @@
     "shared-auth-data-access": "libs/shared/auth/data-access",
     "shared-util-apollo": "libs/shared/util-apollo",
     "shared-util-sdk": "libs/shared/util-sdk",
+    "shared-utils-feature": "libs/shared/utils/feature",
     "web": "apps/web",
     "web-about-feature": "libs/web/about/feature",
     "web-admin-dashboard-feature": "libs/web/admin-dashboard/feature",
@@ -76,7 +77,10 @@
     "web-style": "libs/web/style",
     "web-ui-admin-layout-feature": "libs/web-ui/admin-layout/feature",
     "web-ui-alert": "libs/web-ui/alert",
+    "web-ui-data-table-feature": "libs/web-ui/data-table/feature",
+    "web-ui-dev-data-feature": "libs/web-ui/dev-data/feature",
     "web-ui-form": "libs/web-ui/form",
     "web-ui-layout": "libs/web-ui/layout"
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

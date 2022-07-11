@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { UserCreateTestimonialInput } from './dto/user-create-testimonial.input'
 import { UserListTestimonialInput } from './dto/user-list-testimonial.input'
@@ -14,7 +14,7 @@ export class ApiTestimonialDataAccessUserService {
   userTestimonials(info: GraphQLResolveInfo, userId: string, input?: UserListTestimonialInput) {
     const select = new PrismaSelect(info).value
     return this.data.testimonial.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiTestimonialDataAccessUserService {
   async userCountTestimonials(userId: string, input?: UserListTestimonialInput): Promise<CorePaging> {
     const total = await this.data.testimonial.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

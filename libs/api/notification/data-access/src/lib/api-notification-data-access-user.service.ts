@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { UserCreateNotificationInput } from './dto/user-create-notification.input'
 import { UserListNotificationInput } from './dto/user-list-notification.input'
@@ -14,7 +14,7 @@ export class ApiNotificationDataAccessUserService {
   userNotifications(info: GraphQLResolveInfo, userId: string, input?: UserListNotificationInput) {
     const select = new PrismaSelect(info).value
     return this.data.notification.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiNotificationDataAccessUserService {
   async userCountNotifications(userId: string, input?: UserListNotificationInput): Promise<CorePaging> {
     const total = await this.data.notification.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

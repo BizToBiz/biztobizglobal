@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateReferralInput } from './dto/admin-create-referral.input'
 import { AdminListReferralInput } from './dto/admin-list-referral.input'
@@ -14,7 +14,7 @@ export class ApiReferralDataAccessAdminService {
   adminReferrals(info: GraphQLResolveInfo, adminId: string, input?: AdminListReferralInput) {
     const select = new PrismaSelect(info).value
     return this.data.referral.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiReferralDataAccessAdminService {
   async adminCountReferrals(adminId: string, input?: AdminListReferralInput): Promise<CorePaging> {
     const total = await this.data.referral.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

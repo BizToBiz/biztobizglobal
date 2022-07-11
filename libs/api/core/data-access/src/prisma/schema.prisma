@@ -87,7 +87,7 @@ model User {
   notifyBySMS           Boolean?
   notifyByWeb           Boolean?
   notifyByMobile        Boolean?
-  chapter               ChapterMemberModel?       @relation("ChapterMember_BelongsTo_User")
+  chapter               ChapterMember?       @relation("ChapterMember_BelongsTo_User")
   companies             CompanyMember[]      @relation("CompanyMember_BelongsTo_User")
   notificationsSent     Notification[]       @relation("Notification_HasOne_FromUser")
   notificationsReceived Notification[]       @relation("Notification_HasOne_ToUser")
@@ -153,7 +153,7 @@ model Chapter {
   meetingDetails     String?
   status             ChapterStatus
   meetings           Meeting[]            @relation("Meeting_BelongsTo_Chapter")
-  members            ChapterMemberModel[]      @relation("ChapterMember_BelongsTo_Chapter")
+  members            ChapterMember[]      @relation("ChapterMember_BelongsTo_Chapter")
   transactions       Transaction[]        @relation("Transactions_BelongsTo_Chapter")
   referralsFrom      Referral[]           @relation("Referral_HasOne_FromChapter")
   referralsTo        Referral[]           @relation("Referral_HasOne_ToChapter")
@@ -242,7 +242,7 @@ model AttendanceReminder {
   sentToId  String
 }
 
-model ChapterMemberModel {
+model ChapterMember {
   id        String            @default(cuid())
   createdAt DateTime          @default(now())
   updatedAt DateTime          @default(now()) @updatedAt

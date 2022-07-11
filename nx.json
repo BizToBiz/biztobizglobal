@@ -31,9 +31,6 @@
       }
     ]
   },
-  "cli": {
-    "defaultCollection": "@nrwl/nest"
-  },
   "generators": {
     "@nrwl/react": {
       "application": {
@@ -50,5 +47,6 @@
       }
     }
   },
-  "defaultProject": "api"
+  "defaultProject": "api",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }

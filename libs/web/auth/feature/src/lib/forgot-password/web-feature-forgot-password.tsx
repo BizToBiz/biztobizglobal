@@ -34,7 +34,7 @@ export function WebFeatureForgotPassword() {
       title="Forgot Your Password?"
       subtitle={
         <p className="mt-2 text-center text-sm text-gray-600">
-          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
             Back to Login
           </Link>
         </p>

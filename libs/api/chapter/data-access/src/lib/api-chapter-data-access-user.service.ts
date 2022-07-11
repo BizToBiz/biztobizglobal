@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { UserCreateChapterInput } from './dto/user-create-chapter.input'
 import { UserListChapterInput } from './dto/user-list-chapter.input'
@@ -14,7 +14,7 @@ export class ApiChapterDataAccessUserService {
   userChapters(info: GraphQLResolveInfo, userId: string, input?: UserListChapterInput) {
     const select = new PrismaSelect(info).value
     return this.data.chapter.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiChapterDataAccessUserService {
   async userCountChapters(userId: string, input?: UserListChapterInput): Promise<CorePaging> {
     const total = await this.data.chapter.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

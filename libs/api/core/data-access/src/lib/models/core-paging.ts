@@ -9,7 +9,7 @@ export class CorePaging {
   count?: number
 
   @Field({ nullable: true })
-  limit?: number
+  take?: number
 
   @Field({ nullable: true })
   page?: number

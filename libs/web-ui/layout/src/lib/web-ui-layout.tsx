@@ -139,7 +139,7 @@ export function WebUiLayout(props: WebUiLayoutProps) {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? 'bg-indigo-50 border-blue-700 text-indigo-700'
+                          ? 'bg-blue-50 border-blue-700 text-blue-700'
                           : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800',
                         'block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
                       )}
@@ -203,13 +203,13 @@ export function WebUiLayout(props: WebUiLayoutProps) {
 
 //
 // <div>
-//   <nav className="p-3 bg-indigo-800 text-indigo-100 ">
+//   <nav className="p-3 bg-blue-800 text-blue-100 ">
 //     <div className="flex justify-between">
 //       <div className="flex space-x-3 items-center">
-//         <div className="bg-indigo-700 rounded px-2 py-1">
+//         <div className="bg-blue-700 rounded px-2 py-1">
 //           <Link to="/dashboard">Dashboard</Link>
 //         </div>
-//         <div className="bg-indigo-700 rounded px-2 py-1">
+//         <div className="bg-blue-700 rounded px-2 py-1">
 //           <Link to="/about">About</Link>
 //         </div>
 //       </div>
@@ -217,12 +217,12 @@ export function WebUiLayout(props: WebUiLayoutProps) {
 //         {isAuthenticated ? (
 //           <>
 //             <img src={props.avatarUrl} alt="User Avatar" className="h-8 w-8 rounded-full" />
-//             <div className="bg-indigo-700 rounded px-2 py-1">
+//             <div className="bg-blue-700 rounded px-2 py-1">
 //               <button onClick={logout}>Log out</button>
 //             </div>
 //           </>
 //         ) : (
-//           <div className="bg-indigo-700 rounded px-2 py-1">
+//           <div className="bg-blue-700 rounded px-2 py-1">
 //             <button onClick={() => navigate('/login')}>Log in</button>
 //           </div>
 //         )}

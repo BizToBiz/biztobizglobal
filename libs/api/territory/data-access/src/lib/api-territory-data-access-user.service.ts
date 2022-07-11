@@ -14,7 +14,7 @@ export class ApiTerritoryDataAccessUserService {
   userTerritories(info: GraphQLResolveInfo, userId: string, input?: UserListTerritoryInput) {
     const select = new PrismaSelect(info).value
     return this.data.territory.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiTerritoryDataAccessUserService {
   async userCountTerritories(userId: string, input?: UserListTerritoryInput): Promise<CorePaging> {
     const total = await this.data.territory.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

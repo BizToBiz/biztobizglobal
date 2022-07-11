@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateSubstituteGroupInput } from './dto/admin-create-substitute-group.input'
 import { AdminListSubstituteGroupInput } from './dto/admin-list-substitute-group.input'
@@ -14,7 +14,7 @@ export class ApiSubstituteGroupDataAccessAdminService {
   adminSubstituteGroups(info: GraphQLResolveInfo, adminId: string, input?: AdminListSubstituteGroupInput) {
     const select = new PrismaSelect(info).value
     return this.data.substituteGroup.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiSubstituteGroupDataAccessAdminService {
   async adminCountSubstituteGroups(adminId: string, input?: AdminListSubstituteGroupInput): Promise<CorePaging> {
     const total = await this.data.substituteGroup.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

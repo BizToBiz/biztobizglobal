@@ -1,0 +1,38 @@
+query AdminChapter($chapterId: String!) {
+  chapter: adminChapter(chapterId: $chapterId) {
+    ...AdminChapterDetails
+  }
+}
+
+#query AdminChapterMeetings($chapterId: String!) {
+#  meetings: adminChapterMeetings(chapterId: $chapterId) {
+#    ...MeetingDetails
+#  }
+#}
+
+query AdminChapters($input: AdminListChapterInput!) {
+  chapters: adminChapters(input: $input) {
+    ...AdminChapterDetails
+  }
+  counters: adminCountChapters(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+#query AdminSubstituteGroups {
+#  substituteGroups: adminSubstituteGroups {
+#    id
+#    createdAt
+#    updatedAt
+#    name
+#    chapters {
+#      ...AdminChapterDetails
+#    }
+#  }
+#}
+
+#query AdminMembersWithoutChapter {
+#  members: adminMembersWithoutChapter {
+#    ...UserBasics
+#  }
+#}

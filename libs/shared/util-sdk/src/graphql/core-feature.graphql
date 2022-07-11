@@ -2,6 +2,14 @@ query Uptime {
   uptime
 }
 
+fragment CorePagingDetails on CorePaging {
+  count
+  take
+  page
+  skip
+  total
+}
+
 fragment IntercomDetails on IntercomMessage {
   type
   scope

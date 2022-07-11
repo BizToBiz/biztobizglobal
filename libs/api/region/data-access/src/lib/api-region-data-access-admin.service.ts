@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateRegionInput } from './dto/admin-create-region.input'
 import { AdminListRegionInput } from './dto/admin-list-region.input'
@@ -14,7 +14,7 @@ export class ApiRegionDataAccessAdminService {
   adminRegions(info: GraphQLResolveInfo, adminId: string, input?: AdminListRegionInput) {
     const select = new PrismaSelect(info).value
     return this.data.region.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiRegionDataAccessAdminService {
   async adminCountRegions(adminId: string, input?: AdminListRegionInput): Promise<CorePaging> {
     const total = await this.data.region.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

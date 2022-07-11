@@ -16,7 +16,12 @@ import {
 import { useAtom } from 'jotai'
 import { identityAtom, isAdminAtom, isAuthenticatedAtom, isRememberedAtom } from '@biztobiz/web/global/data-access'
 import { SharedAuthProvider } from '@biztobiz/shared/auth/data-access'
-import { WebAdminDashboardFeature } from '@biztobiz/web/admin-dashboard/feature'
+import {
+  WebAdminChapterCreate,
+  WebAdminChapterList,
+  WebAdminChapterUpdate,
+  WebAdminDashboardFeature,
+} from '@biztobiz/web/admin-dashboard/feature'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 
 function PrivateOutlet(props) {
@@ -54,6 +59,11 @@ export function WebShellFeature() {
           </Route>
           <Route path="admin" element={<AdminOutlet user={user} />}>
             <Route path="dashboard" element={<WebAdminDashboardFeature />} />
+            <Route path="chapters" element={<WebAdminChapterList />} />
+            <Route path="chapter">
+              <Route path="new" element={<WebAdminChapterCreate />} />
+              <Route path=":id" element={<WebAdminChapterUpdate />} />
+            </Route>
           </Route>
           <Route path="/" element={<WebAboutFeature />} />
           <Route path="about" element={<WebAboutFeature />} />

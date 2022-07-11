@@ -36,7 +36,20 @@ export type AccountUpdateProfileInput = {
 }
 
 export type AdminCreateChapterInput = {
-  name: Scalars['String']
+  avatarEmail?: InputMaybe<Scalars['String']>
+  avatarUrl?: InputMaybe<Scalars['String']>
+  city?: InputMaybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
+  establishedDate?: InputMaybe<Scalars['String']>
+  facebook?: InputMaybe<Scalars['String']>
+  latitude?: InputMaybe<Scalars['String']>
+  longitude?: InputMaybe<Scalars['String']>
+  meetingDay?: InputMaybe<DayOfWeek>
+  meetingDetails?: InputMaybe<Scalars['String']>
+  meetingTime?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  status?: InputMaybe<ChapterStatus>
 }
 
 export type AdminCreateChapterMemberInput = {
@@ -96,124 +109,137 @@ export type AdminCreateUserInput = {
 }
 
 export type AdminListChapterInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListChapterMemberInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListCompanyInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListMeetingInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListNotificationInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListPowerHourInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListReferralInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListRegionInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListSubstituteGroupInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListTerritoryInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListTestimonialInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListTransactionInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListUploadInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminUpdateChapterInput = {
+  avatarEmail?: InputMaybe<Scalars['String']>
+  avatarUrl?: InputMaybe<Scalars['String']>
+  city?: InputMaybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
+  establishedDate?: InputMaybe<Scalars['String']>
+  facebook?: InputMaybe<Scalars['String']>
+  latitude?: InputMaybe<Scalars['String']>
+  longitude?: InputMaybe<Scalars['String']>
+  meetingDay?: InputMaybe<DayOfWeek>
+  meetingDetails?: InputMaybe<Scalars['String']>
+  meetingTime?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  status?: InputMaybe<ChapterStatus>
 }
 
 export type AdminUpdateChapterMemberInput = {
@@ -349,18 +375,18 @@ export type CompanyMember = {
 export type CorePaging = {
   __typename?: 'CorePaging'
   count?: Maybe<Scalars['Float']>
-  limit?: Maybe<Scalars['Float']>
   page?: Maybe<Scalars['Float']>
   skip?: Maybe<Scalars['Float']>
+  take?: Maybe<Scalars['Float']>
   total?: Maybe<Scalars['Float']>
 }
 
 export type CorePagingInput = {
-  limit?: InputMaybe<Scalars['Float']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 /** Day of Week */
@@ -1658,120 +1684,120 @@ export type UserCreateUploadInput = {
 }
 
 export type UserListChapterInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListChapterMemberInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListCompanyInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListMeetingInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListNotificationInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListPowerHourInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListReferralInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListRegionInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListSubstituteGroupInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListTerritoryInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListTestimonialInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListTransactionInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListUploadInput = {
-  limit?: InputMaybe<Scalars['Float']>
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 /** User status */
@@ -1845,6 +1871,157 @@ export type UserUpdateUploadInput = {
   name?: InputMaybe<Scalars['String']>
 }
 
+export type AdminChapterDetailsFragment = {
+  __typename?: 'Chapter'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  name?: string | null
+  description?: string | null
+  status?: ChapterStatus | null
+  state?: string | null
+  establishedDate?: any | null
+  avatarEmail?: string | null
+  avatarUrl?: string | null
+  latitude?: string | null
+  longitude?: string | null
+  city?: string | null
+  meetingDay?: DayOfWeek | null
+  meetingDetails?: string | null
+  meetingTime?: string | null
+  facebook?: string | null
+}
+
+export type AdminCreateChapterMutationVariables = Exact<{
+  input: AdminCreateChapterInput
+}>
+
+export type AdminCreateChapterMutation = {
+  __typename?: 'Mutation'
+  createChapter?: {
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    description?: string | null
+    status?: ChapterStatus | null
+    state?: string | null
+    establishedDate?: any | null
+    avatarEmail?: string | null
+    avatarUrl?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
+    meetingDay?: DayOfWeek | null
+    meetingDetails?: string | null
+    meetingTime?: string | null
+    facebook?: string | null
+  } | null
+}
+
+export type AdminDeleteChapterMutationVariables = Exact<{
+  chapterId: Scalars['String']
+}>
+
+export type AdminDeleteChapterMutation = {
+  __typename?: 'Mutation'
+  deleteChapter?: { __typename?: 'Chapter'; id?: string | null } | null
+}
+
+export type AdminUpdateChapterMutationVariables = Exact<{
+  chapterId: Scalars['String']
+  input: AdminUpdateChapterInput
+}>
+
+export type AdminUpdateChapterMutation = {
+  __typename?: 'Mutation'
+  updateChapter?: {
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    description?: string | null
+    status?: ChapterStatus | null
+    state?: string | null
+    establishedDate?: any | null
+    avatarEmail?: string | null
+    avatarUrl?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
+    meetingDay?: DayOfWeek | null
+    meetingDetails?: string | null
+    meetingTime?: string | null
+    facebook?: string | null
+  } | null
+}
+
+export type AdminChapterQueryVariables = Exact<{
+  chapterId: Scalars['String']
+}>
+
+export type AdminChapterQuery = {
+  __typename?: 'Query'
+  chapter?: {
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    description?: string | null
+    status?: ChapterStatus | null
+    state?: string | null
+    establishedDate?: any | null
+    avatarEmail?: string | null
+    avatarUrl?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
+    meetingDay?: DayOfWeek | null
+    meetingDetails?: string | null
+    meetingTime?: string | null
+    facebook?: string | null
+  } | null
+}
+
+export type AdminChaptersQueryVariables = Exact<{
+  input: AdminListChapterInput
+}>
+
+export type AdminChaptersQuery = {
+  __typename?: 'Query'
+  chapters?: Array<{
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    description?: string | null
+    status?: ChapterStatus | null
+    state?: string | null
+    establishedDate?: any | null
+    avatarEmail?: string | null
+    avatarUrl?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
+    meetingDay?: DayOfWeek | null
+    meetingDetails?: string | null
+    meetingTime?: string | null
+    facebook?: string | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
 export type UserTokenDetailsFragment = {
   __typename?: 'UserToken'
   token: string
@@ -1856,6 +2033,7 @@ export type UserTokenDetailsFragment = {
     avatarUrl?: string | null
     email?: string | null
     role?: Role | null
+    developer?: boolean | null
   }
 }
 
@@ -1867,6 +2045,7 @@ export type UserDetailsFragment = {
   avatarUrl?: string | null
   email?: string | null
   role?: Role | null
+  developer?: boolean | null
 }
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>
@@ -1881,6 +2060,7 @@ export type MeQuery = {
     avatarUrl?: string | null
     email?: string | null
     role?: Role | null
+    developer?: boolean | null
   } | null
 }
 
@@ -1905,6 +2085,7 @@ export type LoginMutation = {
       avatarUrl?: string | null
       email?: string | null
       role?: Role | null
+      developer?: boolean | null
     }
   } | null
 }
@@ -1926,6 +2107,7 @@ export type RegisterMutation = {
       avatarUrl?: string | null
       email?: string | null
       role?: Role | null
+      developer?: boolean | null
     }
   } | null
 }
@@ -1948,6 +2130,15 @@ export type ResetPasswordMutation = {
 export type UptimeQueryVariables = Exact<{ [key: string]: never }>
 
 export type UptimeQuery = { __typename?: 'Query'; uptime?: number | null }
+
+export type CorePagingDetailsFragment = {
+  __typename?: 'CorePaging'
+  count?: number | null
+  take?: number | null
+  page?: number | null
+  skip?: number | null
+  total?: number | null
+}
 
 export type IntercomDetailsFragment = {
   __typename?: 'IntercomMessage'
@@ -1984,6 +2175,28 @@ export type IntercomSubSubscription = {
   } | null
 }
 
+export const AdminChapterDetailsFragmentDoc = gql`
+  fragment AdminChapterDetails on Chapter {
+    id
+    createdAt
+    updatedAt
+    name
+    description
+    status
+    state
+    establishedDate
+    avatarEmail
+    avatarUrl
+    latitude
+    longitude
+    city
+    state
+    meetingDay
+    meetingDetails
+    meetingTime
+    facebook
+  }
+`
 export const UserDetailsFragmentDoc = gql`
   fragment UserDetails on User {
     id
@@ -1992,6 +2205,7 @@ export const UserDetailsFragmentDoc = gql`
     avatarUrl
     email
     role
+    developer
   }
 `
 export const UserTokenDetailsFragmentDoc = gql`
@@ -2003,6 +2217,15 @@ export const UserTokenDetailsFragmentDoc = gql`
   }
   ${UserDetailsFragmentDoc}
 `
+export const CorePagingDetailsFragmentDoc = gql`
+  fragment CorePagingDetails on CorePaging {
+    count
+    take
+    page
+    skip
+    total
+  }
+`
 export const IntercomDetailsFragmentDoc = gql`
   fragment IntercomDetails on IntercomMessage {
     type
@@ -2010,6 +2233,225 @@ export const IntercomDetailsFragmentDoc = gql`
     payload
   }
 `
+export const AdminCreateChapterDocument = gql`
+  mutation adminCreateChapter($input: AdminCreateChapterInput!) {
+    createChapter: adminCreateChapter(input: $input) {
+      ...AdminChapterDetails
+    }
+  }
+  ${AdminChapterDetailsFragmentDoc}
+`
+export type AdminCreateChapterMutationFn = Apollo.MutationFunction<
+  AdminCreateChapterMutation,
+  AdminCreateChapterMutationVariables
+>
+
+/**
+ * __useAdminCreateChapterMutation__
+ *
+ * To run a mutation, you first call `useAdminCreateChapterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminCreateChapterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminCreateChapterMutation, { data, loading, error }] = useAdminCreateChapterMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCreateChapterMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminCreateChapterMutation, AdminCreateChapterMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminCreateChapterMutation, AdminCreateChapterMutationVariables>(
+    AdminCreateChapterDocument,
+    options,
+  )
+}
+export type AdminCreateChapterMutationHookResult = ReturnType<typeof useAdminCreateChapterMutation>
+export type AdminCreateChapterMutationResult = Apollo.MutationResult<AdminCreateChapterMutation>
+export type AdminCreateChapterMutationOptions = Apollo.BaseMutationOptions<
+  AdminCreateChapterMutation,
+  AdminCreateChapterMutationVariables
+>
+export const AdminDeleteChapterDocument = gql`
+  mutation adminDeleteChapter($chapterId: String!) {
+    deleteChapter: adminDeleteChapter(chapterId: $chapterId) {
+      id
+    }
+  }
+`
+export type AdminDeleteChapterMutationFn = Apollo.MutationFunction<
+  AdminDeleteChapterMutation,
+  AdminDeleteChapterMutationVariables
+>
+
+/**
+ * __useAdminDeleteChapterMutation__
+ *
+ * To run a mutation, you first call `useAdminDeleteChapterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminDeleteChapterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminDeleteChapterMutation, { data, loading, error }] = useAdminDeleteChapterMutation({
+ *   variables: {
+ *      chapterId: // value for 'chapterId'
+ *   },
+ * });
+ */
+export function useAdminDeleteChapterMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminDeleteChapterMutation, AdminDeleteChapterMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminDeleteChapterMutation, AdminDeleteChapterMutationVariables>(
+    AdminDeleteChapterDocument,
+    options,
+  )
+}
+export type AdminDeleteChapterMutationHookResult = ReturnType<typeof useAdminDeleteChapterMutation>
+export type AdminDeleteChapterMutationResult = Apollo.MutationResult<AdminDeleteChapterMutation>
+export type AdminDeleteChapterMutationOptions = Apollo.BaseMutationOptions<
+  AdminDeleteChapterMutation,
+  AdminDeleteChapterMutationVariables
+>
+export const AdminUpdateChapterDocument = gql`
+  mutation adminUpdateChapter($chapterId: String!, $input: AdminUpdateChapterInput!) {
+    updateChapter: adminUpdateChapter(chapterId: $chapterId, input: $input) {
+      ...AdminChapterDetails
+    }
+  }
+  ${AdminChapterDetailsFragmentDoc}
+`
+export type AdminUpdateChapterMutationFn = Apollo.MutationFunction<
+  AdminUpdateChapterMutation,
+  AdminUpdateChapterMutationVariables
+>
+
+/**
+ * __useAdminUpdateChapterMutation__
+ *
+ * To run a mutation, you first call `useAdminUpdateChapterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminUpdateChapterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminUpdateChapterMutation, { data, loading, error }] = useAdminUpdateChapterMutation({
+ *   variables: {
+ *      chapterId: // value for 'chapterId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminUpdateChapterMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminUpdateChapterMutation, AdminUpdateChapterMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminUpdateChapterMutation, AdminUpdateChapterMutationVariables>(
+    AdminUpdateChapterDocument,
+    options,
+  )
+}
+export type AdminUpdateChapterMutationHookResult = ReturnType<typeof useAdminUpdateChapterMutation>
+export type AdminUpdateChapterMutationResult = Apollo.MutationResult<AdminUpdateChapterMutation>
+export type AdminUpdateChapterMutationOptions = Apollo.BaseMutationOptions<
+  AdminUpdateChapterMutation,
+  AdminUpdateChapterMutationVariables
+>
+export const AdminChapterDocument = gql`
+  query AdminChapter($chapterId: String!) {
+    chapter: adminChapter(chapterId: $chapterId) {
+      ...AdminChapterDetails
+    }
+  }
+  ${AdminChapterDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminChapterQuery__
+ *
+ * To run a query within a React component, call `useAdminChapterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminChapterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminChapterQuery({
+ *   variables: {
+ *      chapterId: // value for 'chapterId'
+ *   },
+ * });
+ */
+export function useAdminChapterQuery(
+  baseOptions: Apollo.QueryHookOptions<AdminChapterQuery, AdminChapterQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminChapterQuery, AdminChapterQueryVariables>(AdminChapterDocument, options)
+}
+export function useAdminChapterLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminChapterQuery, AdminChapterQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminChapterQuery, AdminChapterQueryVariables>(AdminChapterDocument, options)
+}
+export type AdminChapterQueryHookResult = ReturnType<typeof useAdminChapterQuery>
+export type AdminChapterLazyQueryHookResult = ReturnType<typeof useAdminChapterLazyQuery>
+export type AdminChapterQueryResult = Apollo.QueryResult<AdminChapterQuery, AdminChapterQueryVariables>
+export const AdminChaptersDocument = gql`
+  query AdminChapters($input: AdminListChapterInput!) {
+    chapters: adminChapters(input: $input) {
+      ...AdminChapterDetails
+    }
+    counters: adminCountChapters(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${AdminChapterDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminChaptersQuery__
+ *
+ * To run a query within a React component, call `useAdminChaptersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminChaptersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminChaptersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminChaptersQuery(
+  baseOptions: Apollo.QueryHookOptions<AdminChaptersQuery, AdminChaptersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminChaptersQuery, AdminChaptersQueryVariables>(AdminChaptersDocument, options)
+}
+export function useAdminChaptersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminChaptersQuery, AdminChaptersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminChaptersQuery, AdminChaptersQueryVariables>(AdminChaptersDocument, options)
+}
+export type AdminChaptersQueryHookResult = ReturnType<typeof useAdminChaptersQuery>
+export type AdminChaptersLazyQueryHookResult = ReturnType<typeof useAdminChaptersLazyQuery>
+export type AdminChaptersQueryResult = Apollo.QueryResult<AdminChaptersQuery, AdminChaptersQueryVariables>
 export const MeDocument = gql`
   query me {
     me {

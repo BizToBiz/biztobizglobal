@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
+import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreatePowerHourInput } from './dto/admin-create-power-hour.input'
 import { AdminListPowerHourInput } from './dto/admin-list-power-hour.input'
@@ -14,7 +14,7 @@ export class ApiPowerHourDataAccessAdminService {
   adminPowerHours(info: GraphQLResolveInfo, adminId: string, input?: AdminListPowerHourInput) {
     const select = new PrismaSelect(info).value
     return this.data.powerHour.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiPowerHourDataAccessAdminService {
   async adminCountPowerHours(adminId: string, input?: AdminListPowerHourInput): Promise<CorePaging> {
     const total = await this.data.powerHour.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }

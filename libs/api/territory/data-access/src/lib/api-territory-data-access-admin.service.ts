@@ -14,7 +14,7 @@ export class ApiTerritoryDataAccessAdminService {
   adminTerritories(info: GraphQLResolveInfo, adminId: string, input?: AdminListTerritoryInput) {
     const select = new PrismaSelect(info).value
     return this.data.territory.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -23,7 +23,7 @@ export class ApiTerritoryDataAccessAdminService {
   async adminCountTerritories(adminId: string, input?: AdminListTerritoryInput): Promise<CorePaging> {
     const total = await this.data.territory.count()
     return {
-      limit: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       total,
     }
