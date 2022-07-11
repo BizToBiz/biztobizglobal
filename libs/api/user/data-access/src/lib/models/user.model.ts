@@ -1,11 +1,11 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Role } from './role.enum'
 import { UserStatus } from './user-status.enum'
-import { Chapter } from '@biztobiz/api/chapter/data-access'
 import { Company } from '@biztobiz/api/company/data-access'
 import { Territory } from '@biztobiz/api/territory/data-access'
 import { Region } from '@biztobiz/api/region/data-access'
 import { Upload } from '@biztobiz/api/upload/data-access'
+import { ChapterMember } from '@biztobiz/api/chapter-member/data-access'
 
 @ObjectType()
 export class User {
@@ -216,8 +216,8 @@ export class User {
   @Field({ nullable: true })
   notifyByMobile?: boolean
 
-  @Field(() => Chapter, { nullable: true })
-  chapter?: Chapter
+  @Field(() => ChapterMember, { nullable: true })
+  chapter?: ChapterMember
 
   @Field(() => [Company], { nullable: 'itemsAndList' })
   companies?: Company[]
