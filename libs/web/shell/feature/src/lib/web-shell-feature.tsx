@@ -23,6 +23,9 @@ import {
   WebAdminDashboardFeature,
 } from '@biztobiz/web/admin-dashboard/feature'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
+import { WebAdminUserList } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-list'
+import { WebAdminUserCreate } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-create'
+import { WebAdminUserUpdate } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-update'
 
 function PrivateOutlet(props) {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom)
@@ -63,6 +66,11 @@ export function WebShellFeature() {
             <Route path="chapter">
               <Route path="new" element={<WebAdminChapterCreate />} />
               <Route path=":id" element={<WebAdminChapterUpdate />} />
+            </Route>
+            <Route path="users" element={<WebAdminUserList />} />
+            <Route path="user">
+              <Route path="new" element={<WebAdminUserCreate />} />
+              <Route path=":id" element={<WebAdminUserUpdate />} />
             </Route>
           </Route>
           <Route path="/" element={<WebAboutFeature />} />

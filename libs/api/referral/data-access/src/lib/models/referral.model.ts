@@ -39,17 +39,17 @@ export class Referral {
   rating?: ReferralRating
 
   @Field(() => User, { nullable: true })
-  from?: User
+  from?: () => User
 
   @Field(() => Chapter, { nullable: true })
-  fromChapter?: Chapter
+  fromChapter?: () => Chapter
 
   @Field(() => User, { nullable: true })
-  sentBy?: User
+  sentBy?: () => User
 
   @Field(() => User, { nullable: true })
-  to?: User
+  to?: () => User
 
   @Field(() => Chapter, { nullable: true })
-  toChapter?: Chapter
+  toChapter?: () => Chapter
 }

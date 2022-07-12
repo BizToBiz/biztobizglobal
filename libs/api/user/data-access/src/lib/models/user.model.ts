@@ -6,6 +6,15 @@ import { Territory } from '@biztobiz/api/territory/data-access'
 import { Region } from '@biztobiz/api/region/data-access'
 import { Upload } from '@biztobiz/api/upload/data-access'
 import { ChapterMember } from '@biztobiz/api/chapter-member/data-access'
+import { UserOnlineStatus } from './user-online-status.enum'
+import { PowerHour } from '@biztobiz/api/power-hour/data-access'
+import { Referral } from '@biztobiz/api/referral/data-access'
+import { Testimonial } from '@biztobiz/api/testimonial/data-access'
+import { Transaction } from '@biztobiz/api/transaction/data-access'
+import { MeetingPresence } from '@biztobiz/api/meeting/data-access'
+import { AttendanceReminder } from '@biztobiz/api/attendance-reminder/data-access'
+import { Substitute } from '@biztobiz/api/substitute/data-access'
+import { Notification } from '@biztobiz/api/notification/data-access'
 
 @ObjectType()
 export class User {
@@ -19,34 +28,88 @@ export class User {
   updatedAt?: Date
 
   @Field({ nullable: true })
+  lastSeen?: Date
+
+  @Field(() => UserOnlineStatus, { nullable: true })
+  onlineStatus?: UserOnlineStatus
+
+  @Field(() => UserStatus, { nullable: true })
+  status?: UserStatus
+
+  @Field({ nullable: true })
+  developer?: boolean
+
+  @Field(() => Role, { nullable: true })
+  role?: Role
+
+  @Field({ nullable: true })
+  email?: string
+
+  @Field({ nullable: true })
+  emailConfirmed?: boolean
+
+  @Field({ nullable: true })
+  username?: string
+
+  @Field(() => Int, { nullable: true })
+  infusionsoftId?: number
+
+  @Field({ nullable: true })
   firstName?: string
 
   @Field({ nullable: true })
   lastName?: string
 
   @Field({ nullable: true })
-  avatarUrl?: string
+  password?: string
+
+  @Field({ nullable: true })
+  passwordResetToken?: string
+
+  @Field({ nullable: true })
+  passwordResetExpires?: Date
+
+  @Field({ nullable: true })
+  confirmEmailToken?: string
+
+  @Field({ nullable: true })
+  confirmEmailExpires?: Date
 
   @Field({ nullable: true })
   showGravatar?: boolean
 
-  @Field(() => Role, { nullable: true })
-  role?: Role
+  @Field({ nullable: true })
+  avatarUrl?: string
 
   @Field({ nullable: true })
-  developer?: boolean
+  applicationDate?: Date
 
   @Field({ nullable: true })
-  bio?: string
+  inactiveDate?: Date
 
   @Field({ nullable: true })
-  email?: string
+  inquiryDate?: Date
+
+  @Field({ nullable: true })
+  membershipDate?: Date
+
+  @Field({ nullable: true })
+  renewalDate?: Date
+
+  @Field({ nullable: true })
+  terminationDate?: Date
+
+  @Field({ nullable: true })
+  transferDate?: Date
+
+  @Field({ nullable: true })
+  location?: string
 
   @Field({ nullable: true })
   phone?: string
 
   @Field({ nullable: true })
-  location?: string
+  bio?: string
 
   @Field({ nullable: true })
   facebook?: string
@@ -55,19 +118,16 @@ export class User {
   twitter?: string
 
   @Field({ nullable: true })
-  instagram?: string
+  youtube?: string
 
   @Field({ nullable: true })
   linkedin?: string
 
   @Field({ nullable: true })
-  youtube?: string
+  instagram?: string
 
   @Field({ nullable: true })
   website?: string
-
-  @Field({ nullable: true })
-  lastSeen?: Date
 
   @Field({ nullable: true })
   industry?: string
@@ -80,9 +140,6 @@ export class User {
 
   @Field({ nullable: true })
   address2?: string
-
-  @Field({ nullable: true })
-  applicationDate?: Date
 
   @Field({ nullable: true })
   cell?: string
@@ -109,19 +166,10 @@ export class User {
   hearOther?: string
 
   @Field({ nullable: true })
-  inactiveDate?: Date
-
-  @Field({ nullable: true })
-  inquiryDate?: Date
-
-  @Field({ nullable: true })
   internalComments?: string
 
   @Field({ nullable: true })
   launchComplete?: boolean
-
-  @Field({ nullable: true })
-  membershipDate?: Date
 
   @Field({ nullable: true })
   mentorName?: string
@@ -157,9 +205,6 @@ export class User {
   recognized?: number
 
   @Field({ nullable: true })
-  renewalDate?: Date
-
-  @Field({ nullable: true })
   salesAgentName?: string
 
   @Field({ nullable: true })
@@ -178,9 +223,6 @@ export class User {
   terminatedByName?: string
 
   @Field({ nullable: true })
-  terminationDate?: Date
-
-  @Field({ nullable: true })
   terminationComments?: string
 
   @Field({ nullable: true })
@@ -193,16 +235,10 @@ export class User {
   title?: string
 
   @Field({ nullable: true })
-  transferDate?: Date
-
-  @Field({ nullable: true })
   type?: string
 
   @Field({ nullable: true })
   vet?: boolean
-
-  @Field(() => UserStatus, { nullable: true })
-  status?: UserStatus
 
   @Field({ nullable: true })
   notifyByEmail?: boolean
@@ -222,18 +258,60 @@ export class User {
   @Field(() => [Company], { nullable: 'itemsAndList' })
   companies?: Company[]
 
+  @Field(() => [Notification], { nullable: 'itemsAndList' })
+  notificationsSent?: Notification[]
+
+  @Field(() => [Notification], { nullable: 'itemsAndList' })
+  notificationsReceived?: Notification[]
+
+  @Field(() => [PowerHour], { nullable: 'itemsAndList' })
+  powerHoursFrom?: PowerHour[]
+
+  @Field(() => [PowerHour], { nullable: 'itemsAndList' })
+  powerHoursTo?: PowerHour[]
+
+  @Field(() => [Referral], { nullable: 'itemsAndList' })
+  referralsSent?: Referral[]
+
+  @Field(() => [Referral], { nullable: 'itemsAndList' })
+  referralsFrom?: Referral[]
+
+  @Field(() => [Referral], { nullable: 'itemsAndList' })
+  referralsTo?: Referral[]
+
+  @Field(() => [AttendanceReminder], { nullable: 'itemsAndList' })
+  reminderSentBy?: AttendanceReminder[]
+
+  @Field(() => [AttendanceReminder], { nullable: 'itemsAndList' })
+  reminderSentTo?: AttendanceReminder[]
+
+  @Field(() => [Substitute], { nullable: 'itemsAndList' })
+  substituteAccepted?: Substitute[]
+
+  @Field(() => [Substitute], { nullable: 'itemsAndList' })
+  substituteInvited?: Substitute[]
+
+  @Field(() => [Substitute], { nullable: 'itemsAndList' })
+  substitutesSentBy?: Substitute[]
+
+  @Field(() => [Testimonial], { nullable: 'itemsAndList' })
+  testimonialsFrom?: Testimonial[]
+
+  @Field(() => [Testimonial], { nullable: 'itemsAndList' })
+  testimonialsto?: Testimonial[]
+
+  @Field(() => [Transaction], { nullable: true })
+  transactions?: Transaction[]
+
   @Field(() => Territory, { nullable: true })
   territoryManaged?: Territory
 
   @Field(() => Region, { nullable: true })
   regionManaged?: Region
 
-  @Field(() => Int, { nullable: true })
-  infusionsoftId?: number
-
-  @Field({ nullable: true })
-  password?: string
-
   @Field(() => Upload, { nullable: true })
   avatar?: Upload
+
+  @Field(() => MeetingPresence, { nullable: true })
+  presence?: MeetingPresence
 }

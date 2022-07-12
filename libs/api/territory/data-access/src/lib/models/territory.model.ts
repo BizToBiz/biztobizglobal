@@ -16,7 +16,7 @@ export class Territory {
   name?: string
 
   @Field(() => [Region], { nullable: 'itemsAndList' })
-  regions?: Region[]
+  regions?: () => Region[]
 
   manager?: Record<string, unknown>
 }

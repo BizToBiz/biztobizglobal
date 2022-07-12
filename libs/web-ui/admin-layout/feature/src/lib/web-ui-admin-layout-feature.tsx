@@ -9,7 +9,7 @@ import {
   InboxIcon,
   MenuAlt2Icon,
   UserGroupIcon,
-  UsersIcon,
+  UserIcon,
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
@@ -22,7 +22,7 @@ import { currentPathAtom, searchAtom } from '@biztobiz/web/global/data-access'
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Chapters', href: '/admin/chapters', icon: UserGroupIcon, current: false },
-  { name: 'Members', href: '/admin/members', icon: UsersIcon, current: false },
+  { name: 'Users', href: '/admin/users', icon: UserIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: InboxIcon, current: false },

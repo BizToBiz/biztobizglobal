@@ -17,5 +17,5 @@ export class MeetingPresence {
   attendance?: MeetingAttendance
 
   @Field(() => User, { nullable: true })
-  member?: User
+  member?: () => User
 }

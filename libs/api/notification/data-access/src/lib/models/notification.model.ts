@@ -29,9 +29,9 @@ export class Notification {
   @Field(() => NotificationReferenceType, { nullable: true })
   referenceType?: NotificationReferenceType
 
-  @Field({ nullable: true })
-  actor?: User
+  @Field(() => User, { nullable: true })
+  actor?: () => User
 
-  @Field({ nullable: true })
-  to?: User
+  @Field(() => User, { nullable: true })
+  to?: () => User
 }

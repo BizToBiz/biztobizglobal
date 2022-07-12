@@ -35,6 +35,10 @@ export type AccountUpdateProfileInput = {
   phone?: InputMaybe<Scalars['String']>
 }
 
+export type AdminCreateAttendanceReminderInput = {
+  name: Scalars['String']
+}
+
 export type AdminCreateChapterInput = {
   avatarEmail?: InputMaybe<Scalars['String']>
   avatarUrl?: InputMaybe<Scalars['String']>
@@ -84,6 +88,10 @@ export type AdminCreateSubstituteGroupInput = {
   name: Scalars['String']
 }
 
+export type AdminCreateSubstituteInput = {
+  name: Scalars['String']
+}
+
 export type AdminCreateTerritoryInput = {
   name: Scalars['String']
 }
@@ -106,6 +114,15 @@ export type AdminCreateUserInput = {
   lastName?: InputMaybe<Scalars['String']>
   role: Role
   username?: InputMaybe<Scalars['String']>
+}
+
+export type AdminListAttendanceReminderInput = {
+  name?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type AdminListChapterInput = {
@@ -189,6 +206,15 @@ export type AdminListSubstituteGroupInput = {
   take?: InputMaybe<Scalars['Float']>
 }
 
+export type AdminListSubstituteInput = {
+  name?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
 export type AdminListTerritoryInput = {
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
@@ -223,6 +249,10 @@ export type AdminListUploadInput = {
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
   take?: InputMaybe<Scalars['Float']>
+}
+
+export type AdminUpdateAttendanceReminderInput = {
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateChapterInput = {
@@ -274,6 +304,10 @@ export type AdminUpdateSubstituteGroupInput = {
   name?: InputMaybe<Scalars['String']>
 }
 
+export type AdminUpdateSubstituteInput = {
+  name?: InputMaybe<Scalars['String']>
+}
+
 export type AdminUpdateTerritoryInput = {
   name?: InputMaybe<Scalars['String']>
 }
@@ -299,6 +333,16 @@ export type AdminUpdateUserInput = {
   phone?: InputMaybe<Scalars['String']>
   role?: InputMaybe<Role>
   username?: InputMaybe<Scalars['String']>
+}
+
+export type AttendanceReminder = {
+  __typename?: 'AttendanceReminder'
+  chapter?: Maybe<Chapter>
+  createdAt?: Maybe<Scalars['DateTime']>
+  id?: Maybe<Scalars['String']>
+  sentBy?: Maybe<User>
+  sentTo?: Maybe<User>
+  updatedAt?: Maybe<Scalars['DateTime']>
 }
 
 export type Chapter = {
@@ -452,6 +496,7 @@ export type Mutation = {
   accountResetPassword?: Maybe<Scalars['Boolean']>
   accountUpdatePassword?: Maybe<Scalars['Boolean']>
   accountUpdateProfile?: Maybe<User>
+  adminCreateAttendanceReminder?: Maybe<AttendanceReminder>
   adminCreateChapter?: Maybe<Chapter>
   adminCreateChapterMember?: Maybe<ChapterMember>
   adminCreateCompany?: Maybe<Company>
@@ -460,12 +505,14 @@ export type Mutation = {
   adminCreatePowerHour?: Maybe<PowerHour>
   adminCreateReferral?: Maybe<Referral>
   adminCreateRegion?: Maybe<Region>
+  adminCreateSubstitute?: Maybe<Substitute>
   adminCreateSubstituteGroup?: Maybe<SubstituteGroup>
   adminCreateTerritory?: Maybe<Territory>
   adminCreateTestimonial?: Maybe<Testimonial>
   adminCreateTransaction?: Maybe<Transaction>
   adminCreateUpload?: Maybe<Upload>
   adminCreateUser?: Maybe<User>
+  adminDeleteAttendanceReminder?: Maybe<AttendanceReminder>
   adminDeleteChapter?: Maybe<Chapter>
   adminDeleteChapterMember?: Maybe<ChapterMember>
   adminDeleteCompany?: Maybe<Company>
@@ -474,6 +521,7 @@ export type Mutation = {
   adminDeletePowerHour?: Maybe<PowerHour>
   adminDeleteReferral?: Maybe<Referral>
   adminDeleteRegion?: Maybe<Region>
+  adminDeleteSubstitute?: Maybe<Substitute>
   adminDeleteSubstituteGroup?: Maybe<SubstituteGroup>
   adminDeleteTerritory?: Maybe<Territory>
   adminDeleteTestimonial?: Maybe<Testimonial>
@@ -481,6 +529,7 @@ export type Mutation = {
   adminDeleteUpload?: Maybe<Upload>
   adminDeleteUser?: Maybe<User>
   adminSetUserPassword?: Maybe<User>
+  adminUpdateAttendanceReminder?: Maybe<AttendanceReminder>
   adminUpdateChapter?: Maybe<Chapter>
   adminUpdateChapterMember?: Maybe<ChapterMember>
   adminUpdateCompany?: Maybe<Company>
@@ -489,6 +538,7 @@ export type Mutation = {
   adminUpdatePowerHour?: Maybe<PowerHour>
   adminUpdateReferral?: Maybe<Referral>
   adminUpdateRegion?: Maybe<Region>
+  adminUpdateSubstitute?: Maybe<Substitute>
   adminUpdateSubstituteGroup?: Maybe<SubstituteGroup>
   adminUpdateTerritory?: Maybe<Territory>
   adminUpdateTestimonial?: Maybe<Testimonial>
@@ -501,6 +551,7 @@ export type Mutation = {
   logout?: Maybe<Scalars['Boolean']>
   register?: Maybe<UserToken>
   resetPassword?: Maybe<User>
+  userCreateAttendanceReminder?: Maybe<AttendanceReminder>
   userCreateChapter?: Maybe<Chapter>
   userCreateChapterMember?: Maybe<ChapterMember>
   userCreateCompany?: Maybe<Company>
@@ -509,11 +560,13 @@ export type Mutation = {
   userCreatePowerHour?: Maybe<PowerHour>
   userCreateReferral?: Maybe<Referral>
   userCreateRegion?: Maybe<Region>
+  userCreateSubstitute?: Maybe<Substitute>
   userCreateSubstituteGroup?: Maybe<SubstituteGroup>
   userCreateTerritory?: Maybe<Territory>
   userCreateTestimonial?: Maybe<Testimonial>
   userCreateTransaction?: Maybe<Transaction>
   userCreateUpload?: Maybe<Upload>
+  userDeleteAttendanceReminder?: Maybe<AttendanceReminder>
   userDeleteChapter?: Maybe<Chapter>
   userDeleteChapterMember?: Maybe<ChapterMember>
   userDeleteCompany?: Maybe<Company>
@@ -522,11 +575,13 @@ export type Mutation = {
   userDeletePowerHour?: Maybe<PowerHour>
   userDeleteReferral?: Maybe<Referral>
   userDeleteRegion?: Maybe<Region>
+  userDeleteSubstitute?: Maybe<Substitute>
   userDeleteSubstituteGroup?: Maybe<SubstituteGroup>
   userDeleteTerritory?: Maybe<Territory>
   userDeleteTestimonial?: Maybe<Testimonial>
   userDeleteTransaction?: Maybe<Transaction>
   userDeleteUpload?: Maybe<Upload>
+  userUpdateAttendanceReminder?: Maybe<AttendanceReminder>
   userUpdateChapter?: Maybe<Chapter>
   userUpdateChapterMember?: Maybe<ChapterMember>
   userUpdateCompany?: Maybe<Company>
@@ -535,6 +590,7 @@ export type Mutation = {
   userUpdatePowerHour?: Maybe<PowerHour>
   userUpdateReferral?: Maybe<Referral>
   userUpdateRegion?: Maybe<Region>
+  userUpdateSubstitute?: Maybe<Substitute>
   userUpdateSubstituteGroup?: Maybe<SubstituteGroup>
   userUpdateTerritory?: Maybe<Territory>
   userUpdateTestimonial?: Maybe<Testimonial>
@@ -548,6 +604,10 @@ export type MutationAccountUpdatePasswordArgs = {
 
 export type MutationAccountUpdateProfileArgs = {
   input: AccountUpdateProfileInput
+}
+
+export type MutationAdminCreateAttendanceReminderArgs = {
+  input: AdminCreateAttendanceReminderInput
 }
 
 export type MutationAdminCreateChapterArgs = {
@@ -582,6 +642,10 @@ export type MutationAdminCreateRegionArgs = {
   input: AdminCreateRegionInput
 }
 
+export type MutationAdminCreateSubstituteArgs = {
+  input: AdminCreateSubstituteInput
+}
+
 export type MutationAdminCreateSubstituteGroupArgs = {
   input: AdminCreateSubstituteGroupInput
 }
@@ -604,6 +668,10 @@ export type MutationAdminCreateUploadArgs = {
 
 export type MutationAdminCreateUserArgs = {
   input: AdminCreateUserInput
+}
+
+export type MutationAdminDeleteAttendanceReminderArgs = {
+  attendanceReminderId: Scalars['String']
 }
 
 export type MutationAdminDeleteChapterArgs = {
@@ -638,6 +706,10 @@ export type MutationAdminDeleteRegionArgs = {
   regionId: Scalars['String']
 }
 
+export type MutationAdminDeleteSubstituteArgs = {
+  substituteId: Scalars['String']
+}
+
 export type MutationAdminDeleteSubstituteGroupArgs = {
   substituteGroupId: Scalars['String']
 }
@@ -665,6 +737,11 @@ export type MutationAdminDeleteUserArgs = {
 export type MutationAdminSetUserPasswordArgs = {
   password: Scalars['String']
   userId: Scalars['String']
+}
+
+export type MutationAdminUpdateAttendanceReminderArgs = {
+  attendanceReminderId: Scalars['String']
+  input: AdminUpdateAttendanceReminderInput
 }
 
 export type MutationAdminUpdateChapterArgs = {
@@ -705,6 +782,11 @@ export type MutationAdminUpdateReferralArgs = {
 export type MutationAdminUpdateRegionArgs = {
   input: AdminUpdateRegionInput
   regionId: Scalars['String']
+}
+
+export type MutationAdminUpdateSubstituteArgs = {
+  input: AdminUpdateSubstituteInput
+  substituteId: Scalars['String']
 }
 
 export type MutationAdminUpdateSubstituteGroupArgs = {
@@ -759,6 +841,10 @@ export type MutationResetPasswordArgs = {
   input: ResetPasswordInput
 }
 
+export type MutationUserCreateAttendanceReminderArgs = {
+  input: UserCreateAttendanceReminderInput
+}
+
 export type MutationUserCreateChapterArgs = {
   input: UserCreateChapterInput
 }
@@ -791,6 +877,10 @@ export type MutationUserCreateRegionArgs = {
   input: UserCreateRegionInput
 }
 
+export type MutationUserCreateSubstituteArgs = {
+  input: UserCreateSubstituteInput
+}
+
 export type MutationUserCreateSubstituteGroupArgs = {
   input: UserCreateSubstituteGroupInput
 }
@@ -809,6 +899,10 @@ export type MutationUserCreateTransactionArgs = {
 
 export type MutationUserCreateUploadArgs = {
   input: UserCreateUploadInput
+}
+
+export type MutationUserDeleteAttendanceReminderArgs = {
+  attendanceReminderId: Scalars['String']
 }
 
 export type MutationUserDeleteChapterArgs = {
@@ -843,6 +937,10 @@ export type MutationUserDeleteRegionArgs = {
   regionId: Scalars['String']
 }
 
+export type MutationUserDeleteSubstituteArgs = {
+  substituteId: Scalars['String']
+}
+
 export type MutationUserDeleteSubstituteGroupArgs = {
   substituteGroupId: Scalars['String']
 }
@@ -861,6 +959,11 @@ export type MutationUserDeleteTransactionArgs = {
 
 export type MutationUserDeleteUploadArgs = {
   uploadId: Scalars['String']
+}
+
+export type MutationUserUpdateAttendanceReminderArgs = {
+  attendanceReminderId: Scalars['String']
+  input: UserUpdateAttendanceReminderInput
 }
 
 export type MutationUserUpdateChapterArgs = {
@@ -901,6 +1004,11 @@ export type MutationUserUpdateReferralArgs = {
 export type MutationUserUpdateRegionArgs = {
   input: UserUpdateRegionInput
   regionId: Scalars['String']
+}
+
+export type MutationUserUpdateSubstituteArgs = {
+  input: UserUpdateSubstituteInput
+  substituteId: Scalars['String']
 }
 
 export type MutationUserUpdateSubstituteGroupArgs = {
@@ -989,12 +1097,15 @@ export type Query = {
   __typename?: 'Query'
   accountProfile?: Maybe<User>
   accountUsernameAvailable?: Maybe<Scalars['Boolean']>
+  adminAttendanceReminder?: Maybe<AttendanceReminder>
+  adminAttendanceReminders?: Maybe<Array<AttendanceReminder>>
   adminChapter?: Maybe<Chapter>
   adminChapterMember?: Maybe<ChapterMember>
   adminChapterMembers?: Maybe<Array<ChapterMember>>
   adminChapters?: Maybe<Array<Chapter>>
   adminCompany?: Maybe<Company>
   adminCompanys?: Maybe<Array<Company>>
+  adminCountAttendanceReminders?: Maybe<CorePaging>
   adminCountChapterMembers?: Maybe<CorePaging>
   adminCountChapters?: Maybe<CorePaging>
   adminCountCompanys?: Maybe<CorePaging>
@@ -1004,6 +1115,7 @@ export type Query = {
   adminCountReferrals?: Maybe<CorePaging>
   adminCountRegions?: Maybe<CorePaging>
   adminCountSubstituteGroups?: Maybe<CorePaging>
+  adminCountSubstitutes?: Maybe<CorePaging>
   adminCountTerritories?: Maybe<CorePaging>
   adminCountTestimonials?: Maybe<CorePaging>
   adminCountTransactions?: Maybe<CorePaging>
@@ -1019,8 +1131,10 @@ export type Query = {
   adminReferrals?: Maybe<Array<Referral>>
   adminRegion?: Maybe<Region>
   adminRegions?: Maybe<Array<Region>>
+  adminSubstitute?: Maybe<Substitute>
   adminSubstituteGroup?: Maybe<SubstituteGroup>
   adminSubstituteGroups?: Maybe<Array<SubstituteGroup>>
+  adminSubstitutes?: Maybe<Array<Substitute>>
   adminTerritories?: Maybe<Array<Territory>>
   adminTerritory?: Maybe<Territory>
   adminTestimonial?: Maybe<Testimonial>
@@ -1040,12 +1154,15 @@ export type Query = {
   reportTransactionsTotalChapter: Scalars['Float']
   reportTransactionsTotalUser: Scalars['Float']
   uptime?: Maybe<Scalars['Float']>
+  userAttendanceReminder?: Maybe<AttendanceReminder>
+  userAttendanceReminders?: Maybe<Array<AttendanceReminder>>
   userChapter?: Maybe<Chapter>
   userChapterMember?: Maybe<ChapterMember>
   userChapterMembers?: Maybe<Array<ChapterMember>>
   userChapters?: Maybe<Array<Chapter>>
   userCompany?: Maybe<Company>
   userCompanys?: Maybe<Array<Company>>
+  userCountAttendanceReminders?: Maybe<CorePaging>
   userCountChapterMembers?: Maybe<CorePaging>
   userCountChapters?: Maybe<CorePaging>
   userCountCompanys?: Maybe<CorePaging>
@@ -1055,6 +1172,7 @@ export type Query = {
   userCountReferrals?: Maybe<CorePaging>
   userCountRegions?: Maybe<CorePaging>
   userCountSubstituteGroups?: Maybe<CorePaging>
+  userCountSubstitutes?: Maybe<CorePaging>
   userCountTerritories?: Maybe<CorePaging>
   userCountTestimonials?: Maybe<CorePaging>
   userCountTransactions?: Maybe<CorePaging>
@@ -1069,8 +1187,10 @@ export type Query = {
   userReferrals?: Maybe<Array<Referral>>
   userRegion?: Maybe<Region>
   userRegions?: Maybe<Array<Region>>
+  userSubstitute?: Maybe<Substitute>
   userSubstituteGroup?: Maybe<SubstituteGroup>
   userSubstituteGroups?: Maybe<Array<SubstituteGroup>>
+  userSubstitutes?: Maybe<Array<Substitute>>
   userTerritories?: Maybe<Array<Territory>>
   userTerritory?: Maybe<Territory>
   userTestimonial?: Maybe<Testimonial>
@@ -1083,6 +1203,14 @@ export type Query = {
 
 export type QueryAccountUsernameAvailableArgs = {
   username: Scalars['String']
+}
+
+export type QueryAdminAttendanceReminderArgs = {
+  attendanceReminderId: Scalars['String']
+}
+
+export type QueryAdminAttendanceRemindersArgs = {
+  input?: InputMaybe<AdminListAttendanceReminderInput>
 }
 
 export type QueryAdminChapterArgs = {
@@ -1107,6 +1235,10 @@ export type QueryAdminCompanyArgs = {
 
 export type QueryAdminCompanysArgs = {
   input?: InputMaybe<AdminListCompanyInput>
+}
+
+export type QueryAdminCountAttendanceRemindersArgs = {
+  input?: InputMaybe<AdminListAttendanceReminderInput>
 }
 
 export type QueryAdminCountChapterMembersArgs = {
@@ -1145,6 +1277,10 @@ export type QueryAdminCountSubstituteGroupsArgs = {
   input?: InputMaybe<AdminListSubstituteGroupInput>
 }
 
+export type QueryAdminCountSubstitutesArgs = {
+  input?: InputMaybe<AdminListSubstituteInput>
+}
+
 export type QueryAdminCountTerritoriesArgs = {
   input?: InputMaybe<AdminListTerritoryInput>
 }
@@ -1162,7 +1298,7 @@ export type QueryAdminCountUploadsArgs = {
 }
 
 export type QueryAdminCountUsersArgs = {
-  paging?: InputMaybe<CorePagingInput>
+  input?: InputMaybe<CorePagingInput>
 }
 
 export type QueryAdminMeetingArgs = {
@@ -1205,12 +1341,20 @@ export type QueryAdminRegionsArgs = {
   input?: InputMaybe<AdminListRegionInput>
 }
 
+export type QueryAdminSubstituteArgs = {
+  substituteId: Scalars['String']
+}
+
 export type QueryAdminSubstituteGroupArgs = {
   substituteGroupId: Scalars['String']
 }
 
 export type QueryAdminSubstituteGroupsArgs = {
   input?: InputMaybe<AdminListSubstituteGroupInput>
+}
+
+export type QueryAdminSubstitutesArgs = {
+  input?: InputMaybe<AdminListSubstituteInput>
 }
 
 export type QueryAdminTerritoriesArgs = {
@@ -1250,7 +1394,7 @@ export type QueryAdminUserArgs = {
 }
 
 export type QueryAdminUsersArgs = {
-  paging?: InputMaybe<CorePagingInput>
+  input?: InputMaybe<CorePagingInput>
 }
 
 export type QueryReportReferralsFromChapterArgs = {
@@ -1263,6 +1407,14 @@ export type QueryReportReferralsToChapterArgs = {
 
 export type QueryReportTransactionsTotalChapterArgs = {
   chapterId: Scalars['String']
+}
+
+export type QueryUserAttendanceReminderArgs = {
+  attendanceReminderId: Scalars['String']
+}
+
+export type QueryUserAttendanceRemindersArgs = {
+  input?: InputMaybe<UserListAttendanceReminderInput>
 }
 
 export type QueryUserChapterArgs = {
@@ -1287,6 +1439,10 @@ export type QueryUserCompanyArgs = {
 
 export type QueryUserCompanysArgs = {
   input?: InputMaybe<UserListCompanyInput>
+}
+
+export type QueryUserCountAttendanceRemindersArgs = {
+  input?: InputMaybe<UserListAttendanceReminderInput>
 }
 
 export type QueryUserCountChapterMembersArgs = {
@@ -1323,6 +1479,10 @@ export type QueryUserCountRegionsArgs = {
 
 export type QueryUserCountSubstituteGroupsArgs = {
   input?: InputMaybe<UserListSubstituteGroupInput>
+}
+
+export type QueryUserCountSubstitutesArgs = {
+  input?: InputMaybe<UserListSubstituteInput>
 }
 
 export type QueryUserCountTerritoriesArgs = {
@@ -1381,12 +1541,20 @@ export type QueryUserRegionsArgs = {
   input?: InputMaybe<UserListRegionInput>
 }
 
+export type QueryUserSubstituteArgs = {
+  substituteId: Scalars['String']
+}
+
 export type QueryUserSubstituteGroupArgs = {
   substituteGroupId: Scalars['String']
 }
 
 export type QueryUserSubstituteGroupsArgs = {
   input?: InputMaybe<UserListSubstituteGroupInput>
+}
+
+export type QueryUserSubstitutesArgs = {
+  input?: InputMaybe<UserListSubstituteInput>
 }
 
 export type QueryUserTerritoriesArgs = {
@@ -1490,6 +1658,17 @@ export type SubscriptionIntercomSubArgs = {
   type?: InputMaybe<Scalars['String']>
 }
 
+export type Substitute = {
+  __typename?: 'Substitute'
+  Substitute?: Maybe<User>
+  createdAt?: Maybe<Scalars['DateTime']>
+  id?: Maybe<Scalars['String']>
+  invited?: Maybe<User>
+  meeting?: Maybe<Meeting>
+  sentBy?: Maybe<User>
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
 export type SubstituteGroup = {
   __typename?: 'SubstituteGroup'
   chapters?: Maybe<Array<Chapter>>
@@ -1559,15 +1738,18 @@ export type User = {
   avatarUrl?: Maybe<Scalars['String']>
   bio?: Maybe<Scalars['String']>
   cell?: Maybe<Scalars['String']>
-  chapter?: Maybe<Chapter>
+  chapter?: Maybe<ChapterMember>
   chapterTitle?: Maybe<Scalars['String']>
   city?: Maybe<Scalars['String']>
   comments?: Maybe<Scalars['String']>
   companies?: Maybe<Array<Maybe<Company>>>
   company?: Maybe<Scalars['String']>
+  confirmEmailExpires?: Maybe<Scalars['DateTime']>
+  confirmEmailToken?: Maybe<Scalars['String']>
   createdAt?: Maybe<Scalars['DateTime']>
   developer?: Maybe<Scalars['Boolean']>
   email?: Maybe<Scalars['String']>
+  emailConfirmed?: Maybe<Scalars['Boolean']>
   facebook?: Maybe<Scalars['String']>
   fax?: Maybe<Scalars['String']>
   firstName?: Maybe<Scalars['String']>
@@ -1591,20 +1773,33 @@ export type User = {
   multipleBusinesses?: Maybe<Scalars['Boolean']>
   multipleLocations?: Maybe<Scalars['Boolean']>
   name?: Maybe<Scalars['String']>
+  notificationsReceived?: Maybe<Array<Maybe<Notification>>>
+  notificationsSent?: Maybe<Array<Maybe<Notification>>>
   notifyByEmail?: Maybe<Scalars['Boolean']>
   notifyByMobile?: Maybe<Scalars['Boolean']>
   notifyBySMS?: Maybe<Scalars['Boolean']>
   notifyByWeb?: Maybe<Scalars['Boolean']>
   numberOfEmployees?: Maybe<Scalars['Int']>
+  onlineStatus?: Maybe<UserOnlineStatus>
   organizer?: Maybe<Scalars['Int']>
   otherBusinesses?: Maybe<Scalars['String']>
   otherLocations?: Maybe<Scalars['String']>
   password?: Maybe<Scalars['String']>
+  passwordResetExpires?: Maybe<Scalars['DateTime']>
+  passwordResetToken?: Maybe<Scalars['String']>
   phone?: Maybe<Scalars['String']>
   postcode?: Maybe<Scalars['String']>
+  powerHoursFrom?: Maybe<Array<Maybe<PowerHour>>>
+  powerHoursTo?: Maybe<Array<Maybe<PowerHour>>>
+  presence?: Maybe<MeetingPresence>
   promoter?: Maybe<Scalars['Int']>
   recognized?: Maybe<Scalars['Int']>
+  referralsFrom?: Maybe<Array<Maybe<Referral>>>
+  referralsSent?: Maybe<Array<Maybe<Referral>>>
+  referralsTo?: Maybe<Array<Maybe<Referral>>>
   regionManaged?: Maybe<Region>
+  reminderSentBy?: Maybe<Array<Maybe<AttendanceReminder>>>
+  reminderSentTo?: Maybe<Array<Maybe<AttendanceReminder>>>
   renewalDate?: Maybe<Scalars['DateTime']>
   role?: Maybe<Role>
   salesAgentName?: Maybe<Scalars['String']>
@@ -1613,22 +1808,33 @@ export type User = {
   status?: Maybe<UserStatus>
   strategizer?: Maybe<Scalars['Int']>
   substitute?: Maybe<Scalars['Boolean']>
+  substituteAccepted?: Maybe<Array<Maybe<Substitute>>>
+  substituteInvited?: Maybe<Array<Maybe<Substitute>>>
+  substitutesSentBy?: Maybe<Array<Maybe<Substitute>>>
   tagline?: Maybe<Scalars['String']>
   terminatedByName?: Maybe<Scalars['String']>
   terminationComments?: Maybe<Scalars['String']>
   terminationDate?: Maybe<Scalars['DateTime']>
   terminationReason?: Maybe<Scalars['String']>
   territoryManaged?: Maybe<Territory>
+  testimonialsFrom?: Maybe<Array<Maybe<Testimonial>>>
+  testimonialsto?: Maybe<Array<Maybe<Testimonial>>>
   thinker?: Maybe<Scalars['Int']>
   timeInIndustry?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
+  transactions?: Maybe<Array<Transaction>>
   transferDate?: Maybe<Scalars['DateTime']>
   twitter?: Maybe<Scalars['String']>
   type?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['DateTime']>
+  username?: Maybe<Scalars['String']>
   vet?: Maybe<Scalars['Boolean']>
   website?: Maybe<Scalars['String']>
   youtube?: Maybe<Scalars['String']>
+}
+
+export type UserCreateAttendanceReminderInput = {
+  name: Scalars['String']
 }
 
 export type UserCreateChapterInput = {
@@ -1667,6 +1873,10 @@ export type UserCreateSubstituteGroupInput = {
   name: Scalars['String']
 }
 
+export type UserCreateSubstituteInput = {
+  name: Scalars['String']
+}
+
 export type UserCreateTerritoryInput = {
   name: Scalars['String']
 }
@@ -1681,6 +1891,15 @@ export type UserCreateTransactionInput = {
 
 export type UserCreateUploadInput = {
   name: Scalars['String']
+}
+
+export type UserListAttendanceReminderInput = {
+  name?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type UserListChapterInput = {
@@ -1764,6 +1983,15 @@ export type UserListSubstituteGroupInput = {
   take?: InputMaybe<Scalars['Float']>
 }
 
+export type UserListSubstituteInput = {
+  name?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
 export type UserListTerritoryInput = {
   name?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
@@ -1800,6 +2028,13 @@ export type UserListUploadInput = {
   take?: InputMaybe<Scalars['Float']>
 }
 
+/** User online status */
+export enum UserOnlineStatus {
+  Away = 'Away',
+  Offline = 'Offline',
+  Online = 'Online',
+}
+
 /** User status */
 export enum UserStatus {
   Active = 'Active',
@@ -1817,6 +2052,10 @@ export type UserToken = {
   /** JWT Bearer token */
   token: Scalars['String']
   user: User
+}
+
+export type UserUpdateAttendanceReminderInput = {
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type UserUpdateChapterInput = {
@@ -1852,6 +2091,10 @@ export type UserUpdateRegionInput = {
 }
 
 export type UserUpdateSubstituteGroupInput = {
+  name?: InputMaybe<Scalars['String']>
+}
+
+export type UserUpdateSubstituteInput = {
   name?: InputMaybe<Scalars['String']>
 }
 
@@ -2011,6 +2254,462 @@ export type AdminChaptersQuery = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminUserDetailsFragment = {
+  __typename?: 'User'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  lastSeen?: any | null
+  onlineStatus?: UserOnlineStatus | null
+  status?: UserStatus | null
+  developer?: boolean | null
+  role?: Role | null
+  email?: string | null
+  emailConfirmed?: boolean | null
+  username?: string | null
+  infusionsoftId?: number | null
+  firstName?: string | null
+  lastName?: string | null
+  password?: string | null
+  passwordResetToken?: string | null
+  passwordResetExpires?: any | null
+  confirmEmailToken?: string | null
+  confirmEmailExpires?: any | null
+  showGravatar?: boolean | null
+  avatarUrl?: string | null
+  applicationDate?: any | null
+  inactiveDate?: any | null
+  inquiryDate?: any | null
+  membershipDate?: any | null
+  renewalDate?: any | null
+  terminationDate?: any | null
+  transferDate?: any | null
+  location?: string | null
+  phone?: string | null
+  bio?: string | null
+  facebook?: string | null
+  twitter?: string | null
+  youtube?: string | null
+  linkedin?: string | null
+  instagram?: string | null
+  website?: string | null
+  industry?: string | null
+  timeInIndustry?: string | null
+  address?: string | null
+  address2?: string | null
+  cell?: string | null
+  chapterTitle?: string | null
+  city?: string | null
+  comments?: string | null
+  company?: string | null
+  fax?: string | null
+  hear?: string | null
+  hearOther?: string | null
+  internalComments?: string | null
+  launchComplete?: boolean | null
+  mentorName?: string | null
+  merchantCircle?: string | null
+  multipleBusinesses?: boolean | null
+  multipleLocations?: boolean | null
+  numberOfEmployees?: number | null
+  organizer?: number | null
+  otherBusinesses?: string | null
+  otherLocations?: string | null
+  postcode?: string | null
+  promoter?: number | null
+  recognized?: number | null
+  salesAgentName?: string | null
+  state?: string | null
+  strategizer?: number | null
+  substitute?: boolean | null
+  tagline?: string | null
+  terminatedByName?: string | null
+  terminationComments?: string | null
+  terminationReason?: string | null
+  thinker?: number | null
+  title?: string | null
+  type?: string | null
+  vet?: boolean | null
+  notifyByEmail?: boolean | null
+  notifyBySMS?: boolean | null
+  notifyByWeb?: boolean | null
+  notifyByMobile?: boolean | null
+}
+
+export type AdminCreateUserMutationVariables = Exact<{
+  input: AdminCreateUserInput
+}>
+
+export type AdminCreateUserMutation = {
+  __typename?: 'Mutation'
+  createUser?: {
+    __typename?: 'User'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    lastSeen?: any | null
+    onlineStatus?: UserOnlineStatus | null
+    status?: UserStatus | null
+    developer?: boolean | null
+    role?: Role | null
+    email?: string | null
+    emailConfirmed?: boolean | null
+    username?: string | null
+    infusionsoftId?: number | null
+    firstName?: string | null
+    lastName?: string | null
+    password?: string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: any | null
+    confirmEmailToken?: string | null
+    confirmEmailExpires?: any | null
+    showGravatar?: boolean | null
+    avatarUrl?: string | null
+    applicationDate?: any | null
+    inactiveDate?: any | null
+    inquiryDate?: any | null
+    membershipDate?: any | null
+    renewalDate?: any | null
+    terminationDate?: any | null
+    transferDate?: any | null
+    location?: string | null
+    phone?: string | null
+    bio?: string | null
+    facebook?: string | null
+    twitter?: string | null
+    youtube?: string | null
+    linkedin?: string | null
+    instagram?: string | null
+    website?: string | null
+    industry?: string | null
+    timeInIndustry?: string | null
+    address?: string | null
+    address2?: string | null
+    cell?: string | null
+    chapterTitle?: string | null
+    city?: string | null
+    comments?: string | null
+    company?: string | null
+    fax?: string | null
+    hear?: string | null
+    hearOther?: string | null
+    internalComments?: string | null
+    launchComplete?: boolean | null
+    mentorName?: string | null
+    merchantCircle?: string | null
+    multipleBusinesses?: boolean | null
+    multipleLocations?: boolean | null
+    numberOfEmployees?: number | null
+    organizer?: number | null
+    otherBusinesses?: string | null
+    otherLocations?: string | null
+    postcode?: string | null
+    promoter?: number | null
+    recognized?: number | null
+    salesAgentName?: string | null
+    state?: string | null
+    strategizer?: number | null
+    substitute?: boolean | null
+    tagline?: string | null
+    terminatedByName?: string | null
+    terminationComments?: string | null
+    terminationReason?: string | null
+    thinker?: number | null
+    title?: string | null
+    type?: string | null
+    vet?: boolean | null
+    notifyByEmail?: boolean | null
+    notifyBySMS?: boolean | null
+    notifyByWeb?: boolean | null
+    notifyByMobile?: boolean | null
+  } | null
+}
+
+export type AdminDeleteUserMutationVariables = Exact<{
+  userId: Scalars['String']
+}>
+
+export type AdminDeleteUserMutation = {
+  __typename?: 'Mutation'
+  deleteUser?: { __typename?: 'User'; id?: string | null } | null
+}
+
+export type AdminUpdateUserMutationVariables = Exact<{
+  userId: Scalars['String']
+  input: AdminUpdateUserInput
+}>
+
+export type AdminUpdateUserMutation = {
+  __typename?: 'Mutation'
+  updateUser?: {
+    __typename?: 'User'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    lastSeen?: any | null
+    onlineStatus?: UserOnlineStatus | null
+    status?: UserStatus | null
+    developer?: boolean | null
+    role?: Role | null
+    email?: string | null
+    emailConfirmed?: boolean | null
+    username?: string | null
+    infusionsoftId?: number | null
+    firstName?: string | null
+    lastName?: string | null
+    password?: string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: any | null
+    confirmEmailToken?: string | null
+    confirmEmailExpires?: any | null
+    showGravatar?: boolean | null
+    avatarUrl?: string | null
+    applicationDate?: any | null
+    inactiveDate?: any | null
+    inquiryDate?: any | null
+    membershipDate?: any | null
+    renewalDate?: any | null
+    terminationDate?: any | null
+    transferDate?: any | null
+    location?: string | null
+    phone?: string | null
+    bio?: string | null
+    facebook?: string | null
+    twitter?: string | null
+    youtube?: string | null
+    linkedin?: string | null
+    instagram?: string | null
+    website?: string | null
+    industry?: string | null
+    timeInIndustry?: string | null
+    address?: string | null
+    address2?: string | null
+    cell?: string | null
+    chapterTitle?: string | null
+    city?: string | null
+    comments?: string | null
+    company?: string | null
+    fax?: string | null
+    hear?: string | null
+    hearOther?: string | null
+    internalComments?: string | null
+    launchComplete?: boolean | null
+    mentorName?: string | null
+    merchantCircle?: string | null
+    multipleBusinesses?: boolean | null
+    multipleLocations?: boolean | null
+    numberOfEmployees?: number | null
+    organizer?: number | null
+    otherBusinesses?: string | null
+    otherLocations?: string | null
+    postcode?: string | null
+    promoter?: number | null
+    recognized?: number | null
+    salesAgentName?: string | null
+    state?: string | null
+    strategizer?: number | null
+    substitute?: boolean | null
+    tagline?: string | null
+    terminatedByName?: string | null
+    terminationComments?: string | null
+    terminationReason?: string | null
+    thinker?: number | null
+    title?: string | null
+    type?: string | null
+    vet?: boolean | null
+    notifyByEmail?: boolean | null
+    notifyBySMS?: boolean | null
+    notifyByWeb?: boolean | null
+    notifyByMobile?: boolean | null
+  } | null
+}
+
+export type AdminUserQueryVariables = Exact<{
+  userId: Scalars['String']
+}>
+
+export type AdminUserQuery = {
+  __typename?: 'Query'
+  user?: {
+    __typename?: 'User'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    lastSeen?: any | null
+    onlineStatus?: UserOnlineStatus | null
+    status?: UserStatus | null
+    developer?: boolean | null
+    role?: Role | null
+    email?: string | null
+    emailConfirmed?: boolean | null
+    username?: string | null
+    infusionsoftId?: number | null
+    firstName?: string | null
+    lastName?: string | null
+    password?: string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: any | null
+    confirmEmailToken?: string | null
+    confirmEmailExpires?: any | null
+    showGravatar?: boolean | null
+    avatarUrl?: string | null
+    applicationDate?: any | null
+    inactiveDate?: any | null
+    inquiryDate?: any | null
+    membershipDate?: any | null
+    renewalDate?: any | null
+    terminationDate?: any | null
+    transferDate?: any | null
+    location?: string | null
+    phone?: string | null
+    bio?: string | null
+    facebook?: string | null
+    twitter?: string | null
+    youtube?: string | null
+    linkedin?: string | null
+    instagram?: string | null
+    website?: string | null
+    industry?: string | null
+    timeInIndustry?: string | null
+    address?: string | null
+    address2?: string | null
+    cell?: string | null
+    chapterTitle?: string | null
+    city?: string | null
+    comments?: string | null
+    company?: string | null
+    fax?: string | null
+    hear?: string | null
+    hearOther?: string | null
+    internalComments?: string | null
+    launchComplete?: boolean | null
+    mentorName?: string | null
+    merchantCircle?: string | null
+    multipleBusinesses?: boolean | null
+    multipleLocations?: boolean | null
+    numberOfEmployees?: number | null
+    organizer?: number | null
+    otherBusinesses?: string | null
+    otherLocations?: string | null
+    postcode?: string | null
+    promoter?: number | null
+    recognized?: number | null
+    salesAgentName?: string | null
+    state?: string | null
+    strategizer?: number | null
+    substitute?: boolean | null
+    tagline?: string | null
+    terminatedByName?: string | null
+    terminationComments?: string | null
+    terminationReason?: string | null
+    thinker?: number | null
+    title?: string | null
+    type?: string | null
+    vet?: boolean | null
+    notifyByEmail?: boolean | null
+    notifyBySMS?: boolean | null
+    notifyByWeb?: boolean | null
+    notifyByMobile?: boolean | null
+  } | null
+}
+
+export type AdminUsersQueryVariables = Exact<{
+  input: CorePagingInput
+}>
+
+export type AdminUsersQuery = {
+  __typename?: 'Query'
+  users?: Array<{
+    __typename?: 'User'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    lastSeen?: any | null
+    onlineStatus?: UserOnlineStatus | null
+    status?: UserStatus | null
+    developer?: boolean | null
+    role?: Role | null
+    email?: string | null
+    emailConfirmed?: boolean | null
+    username?: string | null
+    infusionsoftId?: number | null
+    firstName?: string | null
+    lastName?: string | null
+    password?: string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: any | null
+    confirmEmailToken?: string | null
+    confirmEmailExpires?: any | null
+    showGravatar?: boolean | null
+    avatarUrl?: string | null
+    applicationDate?: any | null
+    inactiveDate?: any | null
+    inquiryDate?: any | null
+    membershipDate?: any | null
+    renewalDate?: any | null
+    terminationDate?: any | null
+    transferDate?: any | null
+    location?: string | null
+    phone?: string | null
+    bio?: string | null
+    facebook?: string | null
+    twitter?: string | null
+    youtube?: string | null
+    linkedin?: string | null
+    instagram?: string | null
+    website?: string | null
+    industry?: string | null
+    timeInIndustry?: string | null
+    address?: string | null
+    address2?: string | null
+    cell?: string | null
+    chapterTitle?: string | null
+    city?: string | null
+    comments?: string | null
+    company?: string | null
+    fax?: string | null
+    hear?: string | null
+    hearOther?: string | null
+    internalComments?: string | null
+    launchComplete?: boolean | null
+    mentorName?: string | null
+    merchantCircle?: string | null
+    multipleBusinesses?: boolean | null
+    multipleLocations?: boolean | null
+    numberOfEmployees?: number | null
+    organizer?: number | null
+    otherBusinesses?: string | null
+    otherLocations?: string | null
+    postcode?: string | null
+    promoter?: number | null
+    recognized?: number | null
+    salesAgentName?: string | null
+    state?: string | null
+    strategizer?: number | null
+    substitute?: boolean | null
+    tagline?: string | null
+    terminatedByName?: string | null
+    terminationComments?: string | null
+    terminationReason?: string | null
+    thinker?: number | null
+    title?: string | null
+    type?: string | null
+    vet?: boolean | null
+    notifyByEmail?: boolean | null
+    notifyBySMS?: boolean | null
+    notifyByWeb?: boolean | null
+    notifyByMobile?: boolean | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -2195,6 +2894,88 @@ export const AdminChapterDetailsFragmentDoc = gql`
     meetingDetails
     meetingTime
     facebook
+  }
+`
+export const AdminUserDetailsFragmentDoc = gql`
+  fragment AdminUserDetails on User {
+    id
+    createdAt
+    updatedAt
+    lastSeen
+    onlineStatus
+    status
+    developer
+    role
+    email
+    emailConfirmed
+    username
+    infusionsoftId
+    firstName
+    lastName
+    password
+    passwordResetToken
+    passwordResetExpires
+    confirmEmailToken
+    confirmEmailExpires
+    showGravatar
+    avatarUrl
+    applicationDate
+    inactiveDate
+    inquiryDate
+    membershipDate
+    renewalDate
+    terminationDate
+    transferDate
+    location
+    phone
+    bio
+    facebook
+    twitter
+    youtube
+    linkedin
+    instagram
+    website
+    industry
+    timeInIndustry
+    address
+    address2
+    cell
+    chapterTitle
+    city
+    comments
+    company
+    fax
+    hear
+    hearOther
+    internalComments
+    launchComplete
+    mentorName
+    merchantCircle
+    multipleBusinesses
+    multipleLocations
+    numberOfEmployees
+    organizer
+    otherBusinesses
+    otherLocations
+    postcode
+    promoter
+    recognized
+    salesAgentName
+    state
+    strategizer
+    substitute
+    tagline
+    terminatedByName
+    terminationComments
+    terminationReason
+    thinker
+    title
+    type
+    vet
+    notifyByEmail
+    notifyBySMS
+    notifyByWeb
+    notifyByMobile
   }
 `
 export const UserDetailsFragmentDoc = gql`
@@ -2452,6 +3233,212 @@ export function useAdminChaptersLazyQuery(
 export type AdminChaptersQueryHookResult = ReturnType<typeof useAdminChaptersQuery>
 export type AdminChaptersLazyQueryHookResult = ReturnType<typeof useAdminChaptersLazyQuery>
 export type AdminChaptersQueryResult = Apollo.QueryResult<AdminChaptersQuery, AdminChaptersQueryVariables>
+export const AdminCreateUserDocument = gql`
+  mutation adminCreateUser($input: AdminCreateUserInput!) {
+    createUser: adminCreateUser(input: $input) {
+      ...AdminUserDetails
+    }
+  }
+  ${AdminUserDetailsFragmentDoc}
+`
+export type AdminCreateUserMutationFn = Apollo.MutationFunction<
+  AdminCreateUserMutation,
+  AdminCreateUserMutationVariables
+>
+
+/**
+ * __useAdminCreateUserMutation__
+ *
+ * To run a mutation, you first call `useAdminCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminCreateUserMutation, { data, loading, error }] = useAdminCreateUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCreateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminCreateUserMutation, AdminCreateUserMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminCreateUserMutation, AdminCreateUserMutationVariables>(AdminCreateUserDocument, options)
+}
+export type AdminCreateUserMutationHookResult = ReturnType<typeof useAdminCreateUserMutation>
+export type AdminCreateUserMutationResult = Apollo.MutationResult<AdminCreateUserMutation>
+export type AdminCreateUserMutationOptions = Apollo.BaseMutationOptions<
+  AdminCreateUserMutation,
+  AdminCreateUserMutationVariables
+>
+export const AdminDeleteUserDocument = gql`
+  mutation adminDeleteUser($userId: String!) {
+    deleteUser: adminDeleteUser(userId: $userId) {
+      id
+    }
+  }
+`
+export type AdminDeleteUserMutationFn = Apollo.MutationFunction<
+  AdminDeleteUserMutation,
+  AdminDeleteUserMutationVariables
+>
+
+/**
+ * __useAdminDeleteUserMutation__
+ *
+ * To run a mutation, you first call `useAdminDeleteUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminDeleteUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminDeleteUserMutation, { data, loading, error }] = useAdminDeleteUserMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useAdminDeleteUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminDeleteUserMutation, AdminDeleteUserMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminDeleteUserMutation, AdminDeleteUserMutationVariables>(AdminDeleteUserDocument, options)
+}
+export type AdminDeleteUserMutationHookResult = ReturnType<typeof useAdminDeleteUserMutation>
+export type AdminDeleteUserMutationResult = Apollo.MutationResult<AdminDeleteUserMutation>
+export type AdminDeleteUserMutationOptions = Apollo.BaseMutationOptions<
+  AdminDeleteUserMutation,
+  AdminDeleteUserMutationVariables
+>
+export const AdminUpdateUserDocument = gql`
+  mutation adminUpdateUser($userId: String!, $input: AdminUpdateUserInput!) {
+    updateUser: adminUpdateUser(userId: $userId, input: $input) {
+      ...AdminUserDetails
+    }
+  }
+  ${AdminUserDetailsFragmentDoc}
+`
+export type AdminUpdateUserMutationFn = Apollo.MutationFunction<
+  AdminUpdateUserMutation,
+  AdminUpdateUserMutationVariables
+>
+
+/**
+ * __useAdminUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useAdminUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminUpdateUserMutation, { data, loading, error }] = useAdminUpdateUserMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminUpdateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminUpdateUserMutation, AdminUpdateUserMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminUpdateUserMutation, AdminUpdateUserMutationVariables>(AdminUpdateUserDocument, options)
+}
+export type AdminUpdateUserMutationHookResult = ReturnType<typeof useAdminUpdateUserMutation>
+export type AdminUpdateUserMutationResult = Apollo.MutationResult<AdminUpdateUserMutation>
+export type AdminUpdateUserMutationOptions = Apollo.BaseMutationOptions<
+  AdminUpdateUserMutation,
+  AdminUpdateUserMutationVariables
+>
+export const AdminUserDocument = gql`
+  query AdminUser($userId: String!) {
+    user: adminUser(userId: $userId) {
+      ...AdminUserDetails
+    }
+  }
+  ${AdminUserDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminUserQuery__
+ *
+ * To run a query within a React component, call `useAdminUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminUserQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useAdminUserQuery(baseOptions: Apollo.QueryHookOptions<AdminUserQuery, AdminUserQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminUserQuery, AdminUserQueryVariables>(AdminUserDocument, options)
+}
+export function useAdminUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminUserQuery, AdminUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminUserQuery, AdminUserQueryVariables>(AdminUserDocument, options)
+}
+export type AdminUserQueryHookResult = ReturnType<typeof useAdminUserQuery>
+export type AdminUserLazyQueryHookResult = ReturnType<typeof useAdminUserLazyQuery>
+export type AdminUserQueryResult = Apollo.QueryResult<AdminUserQuery, AdminUserQueryVariables>
+export const AdminUsersDocument = gql`
+  query AdminUsers($input: CorePagingInput!) {
+    users: adminUsers(input: $input) {
+      ...AdminUserDetails
+    }
+    counters: adminCountUsers(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${AdminUserDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminUsersQuery__
+ *
+ * To run a query within a React component, call `useAdminUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminUsersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminUsersQuery(baseOptions: Apollo.QueryHookOptions<AdminUsersQuery, AdminUsersQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminUsersQuery, AdminUsersQueryVariables>(AdminUsersDocument, options)
+}
+export function useAdminUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminUsersQuery, AdminUsersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminUsersQuery, AdminUsersQueryVariables>(AdminUsersDocument, options)
+}
+export type AdminUsersQueryHookResult = ReturnType<typeof useAdminUsersQuery>
+export type AdminUsersLazyQueryHookResult = ReturnType<typeof useAdminUsersLazyQuery>
+export type AdminUsersQueryResult = Apollo.QueryResult<AdminUsersQuery, AdminUsersQueryVariables>
 export const MeDocument = gql`
   query me {
     me {

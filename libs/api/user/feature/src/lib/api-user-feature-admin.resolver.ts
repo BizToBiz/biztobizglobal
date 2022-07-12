@@ -17,17 +17,17 @@ export class ApiUserFeatureAdminResolver {
   @Query(() => [User], { nullable: true })
   adminUsers(
     @CtxUser() admin: User,
-    @Args({ name: 'paging', type: () => CorePagingInput, nullable: true }) paging?: CorePagingInput,
+    @Args({ name: 'input', type: () => CorePagingInput, nullable: true }) input?: CorePagingInput,
   ) {
-    return this.service.adminUsers(admin.id, paging)
+    return this.service.adminUsers(admin.id, input)
   }
 
   @Query(() => CorePaging, { nullable: true })
   adminCountUsers(
     @CtxUser() admin: User,
-    @Args({ name: 'paging', type: () => CorePagingInput, nullable: true }) paging?: CorePagingInput,
+    @Args({ name: 'input', type: () => CorePagingInput, nullable: true }) input?: CorePagingInput,
   ) {
-    return this.service.adminCountUsers(admin.id, paging)
+    return this.service.adminCountUsers(admin.id, input)
   }
 
   @Query(() => User, { nullable: true })

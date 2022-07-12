@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common'
 import { ApiAuthFeatureModule } from '@biztobiz/api/auth/feature'
 import { ApiUserFeatureModule } from '@biztobiz/api/user/feature'
 import { ApiCoreFeatureModule } from '@biztobiz/api/core/feature'
+import { ApiSubstituteFeatureModule } from '@biztobiz/api/substitute/feature'
+import { ApiAttendanceReminderFeatureModule } from '@biztobiz/api/attendance-reminder/feature'
 import { ApiChapterMemberFeatureModule } from '@biztobiz/api/chapter-member/feature'
 import { ApiReportFeatureModule } from '@biztobiz/api/report/feature'
 import { ApiReferralFeatureModule } from '@biztobiz/api/referral/feature'
@@ -23,6 +25,8 @@ import { ApiAccountFeatureModule } from '@biztobiz/api/account/feature'
     ApiAuthFeatureModule,
     ApiUserFeatureModule,
     ApiCoreFeatureModule,
+    ApiSubstituteFeatureModule,
+    ApiAttendanceReminderFeatureModule,
     ApiChapterMemberFeatureModule,
     ApiReportFeatureModule,
     ApiReferralFeatureModule,

@@ -8,20 +8,20 @@ import { AdminUpdateUserInput } from './dto/admin-update-user.input'
 export class ApiUserDataAccessService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  async adminUsers(userId: string, paging: CorePagingInput) {
+  async adminUsers(userId: string, input: CorePagingInput) {
     await this.data.ensureAdminUser(userId)
     return this.data.user.findMany({
-      take: paging.take,
-      skip: paging.skip,
+      take: input.take,
+      skip: input.skip,
     })
   }
 
-  async adminCountUsers(adminId: string, paging: CorePagingInput): Promise<CorePaging> {
+  async adminCountUsers(adminId: string, input: CorePagingInput): Promise<CorePaging> {
     await this.data.ensureAdminUser(adminId)
     const total = await this.data.user.count()
     return {
-      take: paging.take,
-      skip: paging.skip,
+      take: input.take,
+      skip: input.skip,
       total,
     }
   }
