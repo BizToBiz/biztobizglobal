@@ -325,14 +325,81 @@ export type AdminUpdateUploadInput = {
 }
 
 export type AdminUpdateUserInput = {
+  address?: InputMaybe<Scalars['String']>
+  address2?: InputMaybe<Scalars['String']>
+  applicationDate?: InputMaybe<Scalars['DateTime']>
   avatarUrl?: InputMaybe<Scalars['String']>
   bio?: InputMaybe<Scalars['String']>
+  cell?: InputMaybe<Scalars['String']>
+  chapterTitle?: InputMaybe<Scalars['String']>
+  city?: InputMaybe<Scalars['String']>
+  comments?: InputMaybe<Scalars['String']>
+  company?: InputMaybe<Scalars['String']>
+  confirmEmailExpires?: InputMaybe<Scalars['DateTime']>
+  confirmEmailToken?: InputMaybe<Scalars['String']>
+  developer?: InputMaybe<Scalars['Boolean']>
+  email?: InputMaybe<Scalars['String']>
+  emailConfirmed?: InputMaybe<Scalars['Boolean']>
+  facebook?: InputMaybe<Scalars['String']>
+  fax?: InputMaybe<Scalars['String']>
   firstName?: InputMaybe<Scalars['String']>
+  hear?: InputMaybe<Scalars['String']>
+  hearOther?: InputMaybe<Scalars['String']>
+  inactiveDate?: InputMaybe<Scalars['DateTime']>
+  industry?: InputMaybe<Scalars['String']>
+  infusionsoftId?: InputMaybe<Scalars['Int']>
+  inquiryDate?: InputMaybe<Scalars['DateTime']>
+  instagram?: InputMaybe<Scalars['String']>
+  internalComments?: InputMaybe<Scalars['String']>
   lastName?: InputMaybe<Scalars['String']>
+  lastSeen?: InputMaybe<Scalars['DateTime']>
+  launchComplete?: InputMaybe<Scalars['Boolean']>
+  linkedin?: InputMaybe<Scalars['String']>
   location?: InputMaybe<Scalars['String']>
+  membershipDate?: InputMaybe<Scalars['DateTime']>
+  mentorName?: InputMaybe<Scalars['String']>
+  merchantCircle?: InputMaybe<Scalars['String']>
+  multipleBusinesses?: InputMaybe<Scalars['Boolean']>
+  multipleLocations?: InputMaybe<Scalars['Boolean']>
+  notifyByEmail?: InputMaybe<Scalars['Boolean']>
+  notifyByMobile?: InputMaybe<Scalars['Boolean']>
+  notifyBySMS?: InputMaybe<Scalars['Boolean']>
+  notifyByWeb?: InputMaybe<Scalars['Boolean']>
+  numberOfEmployees?: InputMaybe<Scalars['Int']>
+  onlineStatus?: InputMaybe<UserOnlineStatus>
+  organizer?: InputMaybe<Scalars['Int']>
+  otherBusinesses?: InputMaybe<Scalars['String']>
+  otherLocations?: InputMaybe<Scalars['String']>
+  password?: InputMaybe<Scalars['String']>
+  passwordResetExpires?: InputMaybe<Scalars['DateTime']>
+  passwordResetToken?: InputMaybe<Scalars['String']>
   phone?: InputMaybe<Scalars['String']>
+  postcode?: InputMaybe<Scalars['String']>
+  promoter?: InputMaybe<Scalars['Int']>
+  recognized?: InputMaybe<Scalars['Int']>
+  renewalDate?: InputMaybe<Scalars['DateTime']>
   role?: InputMaybe<Role>
+  salesAgentName?: InputMaybe<Scalars['String']>
+  showGravatar?: InputMaybe<Scalars['Boolean']>
+  state?: InputMaybe<Scalars['String']>
+  status?: InputMaybe<UserStatus>
+  strategizer?: InputMaybe<Scalars['Int']>
+  substitute?: InputMaybe<Scalars['Boolean']>
+  tagline?: InputMaybe<Scalars['String']>
+  terminatedByName?: InputMaybe<Scalars['String']>
+  terminationComments?: InputMaybe<Scalars['String']>
+  terminationDate?: InputMaybe<Scalars['DateTime']>
+  terminationReason?: InputMaybe<Scalars['String']>
+  thinker?: InputMaybe<Scalars['Int']>
+  timeInIndustry?: InputMaybe<Scalars['String']>
+  title?: InputMaybe<Scalars['String']>
+  transferDate?: InputMaybe<Scalars['DateTime']>
+  twitter?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<Scalars['String']>
   username?: InputMaybe<Scalars['String']>
+  vet?: InputMaybe<Scalars['Boolean']>
+  website?: InputMaybe<Scalars['String']>
+  youtube?: InputMaybe<Scalars['String']>
 }
 
 export type AttendanceReminder = {

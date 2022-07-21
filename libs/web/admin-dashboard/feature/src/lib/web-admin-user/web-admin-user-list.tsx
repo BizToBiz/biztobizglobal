@@ -42,7 +42,7 @@ export function WebAdminUserList() {
       <WebUiDataTableFeature
         data={users?.users}
         path={'/admin/user'}
-        fields={['firstname', 'lastname', 'email', 'status']}
+        fields={['firstName', 'lastName', 'email', 'status']}
         pagination={users?.counters}
         setSkip={setSkip}
       />
