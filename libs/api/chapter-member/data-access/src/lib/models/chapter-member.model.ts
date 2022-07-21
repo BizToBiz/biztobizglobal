@@ -1,5 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { ChapterMemberRole } from './chapter-member-role.enum'
+import { User } from '@biztobiz/api/user/data-access'
+import { Chapter } from '@biztobiz/api/chapter/data-access'
 
 @ObjectType()
 export class ChapterMember {
@@ -15,6 +17,9 @@ export class ChapterMember {
   @Field({ nullable: true })
   isTrainer?: boolean
 
-  member?: Record<string, unknown>
-  chapter?: Record<string, unknown>
+  @Field(() => User, { nullable: true })
+  member?: Omit<[User], ''>
+
+  @Field(() => Chapter, { nullable: true })
+  chapter?: Omit<[Chapter], ''>
 }

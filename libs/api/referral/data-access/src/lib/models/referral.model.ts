@@ -39,17 +39,17 @@ export class Referral {
   rating?: ReferralRating
 
   @Field(() => User, { nullable: true })
-  from?: () => User
+  from?: Omit<[User], ''>
 
   @Field(() => Chapter, { nullable: true })
-  fromChapter?: () => Chapter
+  fromChapter?: Omit<[Chapter], ''>
 
   @Field(() => User, { nullable: true })
-  sentBy?: () => User
+  sentBy?: Omit<[User], ''>
 
   @Field(() => User, { nullable: true })
-  to?: () => User
+  to?: Omit<[User], ''>
 
   @Field(() => Chapter, { nullable: true })
-  toChapter?: () => Chapter
+  toChapter?: Omit<[Chapter], ''>
 }

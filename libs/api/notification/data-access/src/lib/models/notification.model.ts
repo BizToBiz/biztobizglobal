@@ -30,8 +30,8 @@ export class Notification {
   referenceType?: NotificationReferenceType
 
   @Field(() => User, { nullable: true })
-  actor?: () => User
+  actor?: Omit<[User], ''>
 
   @Field(() => User, { nullable: true })
-  to?: () => User
+  to?: Omit<[User], ''>
 }

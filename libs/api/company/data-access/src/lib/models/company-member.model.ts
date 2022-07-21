@@ -1,4 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { User } from '@biztobiz/api/user/data-access'
+import { Company } from './company.model'
 
 @ObjectType()
 export class CompanyMember {
@@ -17,6 +19,9 @@ export class CompanyMember {
   @Field({ nullable: true })
   location?: string
 
-  company?: Record<string, unknown>
-  member?: Record<string, unknown>
+  @Field(() => Company, { nullable: true })
+  company?: Omit<[Company], ''>
+
+  @Field(() => User, { nullable: true })
+  member?: Omit<[User], ''>
 }

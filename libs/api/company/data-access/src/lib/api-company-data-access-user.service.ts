@@ -11,7 +11,7 @@ import { UserUpdateCompanyInput } from './dto/user-update-company.input'
 export class ApiCompanyDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  userCompanys(info: GraphQLResolveInfo, userId: string, input?: UserListCompanyInput) {
+  userCompanies(info: GraphQLResolveInfo, userId: string, input?: UserListCompanyInput) {
     const select = new PrismaSelect(info).value
     return this.data.company.findMany({
       take: input?.take,
@@ -20,7 +20,7 @@ export class ApiCompanyDataAccessUserService {
     })
   }
 
-  async userCountCompanys(userId: string, input?: UserListCompanyInput): Promise<CorePaging> {
+  async userCountCompanies(userId: string, input?: UserListCompanyInput): Promise<CorePaging> {
     const total = await this.data.company.count()
     return {
       take: input?.take,

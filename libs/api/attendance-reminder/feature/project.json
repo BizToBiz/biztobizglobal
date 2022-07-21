@@ -1,5 +1,4 @@
 {
-  "root": "libs/api/attendance-reminder/feature",
   "sourceRoot": "libs/api/attendance-reminder/feature/src",
   "projectType": "library",
   "targets": {

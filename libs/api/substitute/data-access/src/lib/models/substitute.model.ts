@@ -14,14 +14,14 @@ export class Substitute {
   updatedAt?: Date
 
   @Field(() => Meeting, { nullable: true })
-  meeting?: () => Meeting
+  meeting?: Omit<[Meeting], ''>
 
   @Field(() => User, { nullable: true })
-  invited?: () => User
+  invited?: Omit<[User], ''>
 
   @Field(() => User, { nullable: true })
-  sentBy?: () => User
+  sentBy?: Omit<[User], ''>
 
   @Field(() => User, { nullable: true })
-  Substitute?: () => User
+  Substitute?: Omit<[User], ''>
 }

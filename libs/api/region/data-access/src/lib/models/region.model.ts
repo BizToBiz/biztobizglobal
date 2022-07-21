@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { Territory } from '@biztobiz/api/territory/data-access'
 import { Chapter } from '@biztobiz/api/chapter/data-access'
+import { User } from '@biztobiz/api/user/data-access'
 
 @ObjectType()
 export class Region {
@@ -20,7 +21,8 @@ export class Region {
   chapters?: Chapter[]
 
   @Field(() => Territory, { nullable: true })
-  territory?: () => Territory
+  territory?: Omit<[Territory], ''>
 
-  manager?: Record<string, unknown>
+  @Field(() => User, { nullable: true })
+  manager?: Omit<[User], ''>
 }

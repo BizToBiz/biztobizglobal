@@ -18,20 +18,20 @@ export class ApiCompanyFeatureUserResolver {
   constructor(private readonly service: ApiCompanyDataAccessUserService) {}
 
   @Query(() => [Company], { nullable: true })
-  userCompanys(
+  userCompanies(
     @CtxUser() user: User,
     @Info() info: GraphQLResolveInfo,
     @Args({ name: 'input', type: () => UserListCompanyInput, nullable: true }) input?: UserListCompanyInput,
   ) {
-    return this.service.userCompanys(info, user.id, input)
+    return this.service.userCompanies(info, user.id, input)
   }
 
   @Query(() => CorePaging, { nullable: true })
-  userCountCompanys(
+  userCountCompanies(
     @CtxUser() user: User,
     @Args({ name: 'input', type: () => UserListCompanyInput, nullable: true }) input?: UserListCompanyInput,
   ) {
-    return this.service.userCountCompanys(user.id, input)
+    return this.service.userCountCompanies(user.id, input)
   }
 
   @Query(() => Company, { nullable: true })

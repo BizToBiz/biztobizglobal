@@ -1,5 +1,4 @@
 {
-  "root": "libs/api/substitute/feature",
   "sourceRoot": "libs/api/substitute/feature/src",
   "projectType": "library",
   "targets": {

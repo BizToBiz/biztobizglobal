@@ -21,7 +21,6 @@
     "api-mailer-data-access": "libs/api/mailer/data-access",
     "api-meeting-data-access": "libs/api/meeting/data-access",
     "api-meeting-feature": "libs/api/meeting/feature",
-    "api-models-data-access": "libs/api/models/data-access",
     "api-notification-data-access": "libs/api/notification/data-access",
     "api-notification-feature": "libs/api/notification/feature",
     "api-power-hour-data-access": "libs/api/power-hour/data-access",

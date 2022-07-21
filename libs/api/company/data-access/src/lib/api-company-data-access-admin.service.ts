@@ -11,7 +11,7 @@ import { AdminUpdateCompanyInput } from './dto/admin-update-company.input'
 export class ApiCompanyDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  adminCompanys(info: GraphQLResolveInfo, adminId: string, input?: AdminListCompanyInput) {
+  adminCompanies(info: GraphQLResolveInfo, adminId: string, input?: AdminListCompanyInput) {
     const select = new PrismaSelect(info).value
     return this.data.company.findMany({
       take: input?.take,
@@ -20,7 +20,7 @@ export class ApiCompanyDataAccessAdminService {
     })
   }
 
-  async adminCountCompanys(adminId: string, input?: AdminListCompanyInput): Promise<CorePaging> {
+  async adminCountCompanies(adminId: string, input?: AdminListCompanyInput): Promise<CorePaging> {
     const total = await this.data.company.count()
     return {
       take: input?.take,

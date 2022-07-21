@@ -16,8 +16,8 @@ export class Testimonial {
   text?: string
 
   @Field(() => User, { nullable: true })
-  from?: () => User
+  from?: Omit<[User], ''>
 
   @Field(() => User, { nullable: true })
-  to?: () => User
+  to?: Omit<[User], ''>
 }

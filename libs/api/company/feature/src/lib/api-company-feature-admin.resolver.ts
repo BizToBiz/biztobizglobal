@@ -18,20 +18,20 @@ export class ApiCompanyFeatureAdminResolver {
   constructor(private readonly service: ApiCompanyDataAccessAdminService) {}
 
   @Query(() => [Company], { nullable: true })
-  adminCompanys(
+  adminCompanies(
     @CtxUser() admin: User,
     @Info() info: GraphQLResolveInfo,
     @Args({ name: 'input', type: () => AdminListCompanyInput, nullable: true }) input?: AdminListCompanyInput,
   ) {
-    return this.service.adminCompanys(info, admin.id, input)
+    return this.service.adminCompanies(info, admin.id, input)
   }
 
   @Query(() => CorePaging, { nullable: true })
-  adminCountCompanys(
+  adminCountCompanies(
     @CtxUser() admin: User,
     @Args({ name: 'input', type: () => AdminListCompanyInput, nullable: true }) input?: AdminListCompanyInput,
   ) {
-    return this.service.adminCountCompanys(admin.id, input)
+    return this.service.adminCountCompanies(admin.id, input)
   }
 
   @Query(() => Company, { nullable: true })

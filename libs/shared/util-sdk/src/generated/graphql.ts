@@ -409,9 +409,11 @@ export type Company = {
 
 export type CompanyMember = {
   __typename?: 'CompanyMember'
+  company?: Maybe<Company>
   fromDate?: Maybe<Scalars['DateTime']>
   id?: Maybe<Scalars['String']>
   location?: Maybe<Scalars['String']>
+  member?: Maybe<User>
   role?: Maybe<Scalars['String']>
   thruDate?: Maybe<Scalars['DateTime']>
 }
@@ -1103,12 +1105,12 @@ export type Query = {
   adminChapterMember?: Maybe<ChapterMember>
   adminChapterMembers?: Maybe<Array<ChapterMember>>
   adminChapters?: Maybe<Array<Chapter>>
+  adminCompanies?: Maybe<Array<Company>>
   adminCompany?: Maybe<Company>
-  adminCompanys?: Maybe<Array<Company>>
   adminCountAttendanceReminders?: Maybe<CorePaging>
   adminCountChapterMembers?: Maybe<CorePaging>
   adminCountChapters?: Maybe<CorePaging>
-  adminCountCompanys?: Maybe<CorePaging>
+  adminCountCompanies?: Maybe<CorePaging>
   adminCountMeetings?: Maybe<CorePaging>
   adminCountNotifications?: Maybe<CorePaging>
   adminCountPowerHours?: Maybe<CorePaging>
@@ -1160,12 +1162,12 @@ export type Query = {
   userChapterMember?: Maybe<ChapterMember>
   userChapterMembers?: Maybe<Array<ChapterMember>>
   userChapters?: Maybe<Array<Chapter>>
+  userCompanies?: Maybe<Array<Company>>
   userCompany?: Maybe<Company>
-  userCompanys?: Maybe<Array<Company>>
   userCountAttendanceReminders?: Maybe<CorePaging>
   userCountChapterMembers?: Maybe<CorePaging>
   userCountChapters?: Maybe<CorePaging>
-  userCountCompanys?: Maybe<CorePaging>
+  userCountCompanies?: Maybe<CorePaging>
   userCountMeetings?: Maybe<CorePaging>
   userCountNotifications?: Maybe<CorePaging>
   userCountPowerHours?: Maybe<CorePaging>
@@ -1229,12 +1231,12 @@ export type QueryAdminChaptersArgs = {
   input?: InputMaybe<AdminListChapterInput>
 }
 
-export type QueryAdminCompanyArgs = {
-  companyId: Scalars['String']
+export type QueryAdminCompaniesArgs = {
+  input?: InputMaybe<AdminListCompanyInput>
 }
 
-export type QueryAdminCompanysArgs = {
-  input?: InputMaybe<AdminListCompanyInput>
+export type QueryAdminCompanyArgs = {
+  companyId: Scalars['String']
 }
 
 export type QueryAdminCountAttendanceRemindersArgs = {
@@ -1249,7 +1251,7 @@ export type QueryAdminCountChaptersArgs = {
   input?: InputMaybe<AdminListChapterInput>
 }
 
-export type QueryAdminCountCompanysArgs = {
+export type QueryAdminCountCompaniesArgs = {
   input?: InputMaybe<AdminListCompanyInput>
 }
 
@@ -1433,12 +1435,12 @@ export type QueryUserChaptersArgs = {
   input?: InputMaybe<UserListChapterInput>
 }
 
-export type QueryUserCompanyArgs = {
-  companyId: Scalars['String']
+export type QueryUserCompaniesArgs = {
+  input?: InputMaybe<UserListCompanyInput>
 }
 
-export type QueryUserCompanysArgs = {
-  input?: InputMaybe<UserListCompanyInput>
+export type QueryUserCompanyArgs = {
+  companyId: Scalars['String']
 }
 
 export type QueryUserCountAttendanceRemindersArgs = {
@@ -1453,7 +1455,7 @@ export type QueryUserCountChaptersArgs = {
   input?: InputMaybe<UserListChapterInput>
 }
 
-export type QueryUserCountCompanysArgs = {
+export type QueryUserCountCompaniesArgs = {
   input?: InputMaybe<UserListCompanyInput>
 }
 
