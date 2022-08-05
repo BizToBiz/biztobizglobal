@@ -3,25 +3,43 @@ import { ApiCoreDataAccessService, CorePaging, CorePagingInput } from '@biztobiz
 import { getGravatarUrl, hashPassword, uniqueSuffix } from '@biztobiz/api/auth/data-access'
 import { AdminCreateUserInput } from './dto/admin-create-user.input'
 import { AdminUpdateUserInput } from './dto/admin-update-user.input'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiUserDataAccessService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
+  private readonly searchFields = ['firstName', 'lastName', 'email']
+  private where(query = ''): Prisma.UserWhereInput {
+    query = query?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+    return {
+      AND: terms.map((term) => ({
+        OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+      })),
+    }
+  }
+
   async adminUsers(userId: string, input: CorePagingInput) {
     await this.data.ensureAdminUser(userId)
     return this.data.user.findMany({
-      take: input.take,
-      skip: input.skip,
+      take: input?.take ?? 20,
+      skip: input?.skip ?? 0,
+      where: this.where(input?.search),
     })
   }
 
   async adminCountUsers(adminId: string, input: CorePagingInput): Promise<CorePaging> {
     await this.data.ensureAdminUser(adminId)
+    const take = input?.take ?? 20
+    const skip = input?.skip ?? 0
     const total = await this.data.user.count()
+    const count = await this.data.user.count({ where: this.where(input?.search) })
     return {
-      take: input.take,
-      skip: input.skip,
+      take,
+      skip,
+      page: skip / take,
+      count,
       total,
     }
   }

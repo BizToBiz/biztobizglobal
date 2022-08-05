@@ -10,7 +10,7 @@ query AdminUser($userId: String!) {
 #  }
 #}
 
-query AdminUsers($input: CorePagingInput!) {
+query AdminUsers($input: CorePagingInput) {
   users: adminUsers(input: $input) {
     ...AdminUserDetails
   }

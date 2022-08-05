@@ -1,35 +1,39 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom } from '@biztobiz/web/global/data-access'
-import { AdminUpdateUserInput, useAdminUpdateUserMutation, useAdminUserQuery } from '@biztobiz/shared/util-sdk'
+import {
+  AdminUpdateTransactionInput,
+  useAdminTransactionQuery,
+  useAdminUpdateTransactionMutation,
+} from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 import { useParams } from 'react-router-dom'
 import { WebUiForm } from '@biztobiz/web-ui/form'
-import { userFields } from './web-admin-user-helper'
+import { transactionFields } from './web-admin-transaction-helper'
 import { cleanObject } from '@biztobiz/shared/utils/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
 
-export function WebAdminUserUpdate() {
+export function WebAdminTransactionUpdate() {
   const [isDev] = useAtom(isDevAtom)
   const params = useParams()
   const [, setCurrentPath] = useAtom(currentPathAtom)
   const [loading, setLoading] = useState(false)
 
-  const [updateUser] = useAdminUpdateUserMutation()
+  const [updateTransaction] = useAdminUpdateTransactionMutation()
 
-  const { data: user } = useAdminUserQuery({
+  const { data: transaction } = useAdminTransactionQuery({
     skip: !params?.['id'],
     variables: {
-      userId: params?.['id'] ?? 'NoUserId',
+      transactionId: params?.['id'] ?? 'NoTransactionId',
     },
   })
 
-  const submit = async (input: AdminUpdateUserInput) => {
+  const submit = async (input: AdminUpdateTransactionInput) => {
     setLoading(true)
     const cleanedInput = cleanObject(input)
-    await updateUser({
+    await updateTransaction({
       variables: {
-        userId: params?.['id'] ?? 'NoUserId',
+        transactionId: params?.['id'] ?? 'NoTransactionId',
         input: {
           ...cleanedInput,
         },
@@ -41,12 +45,12 @@ export function WebAdminUserUpdate() {
 
   useLayoutEffect(() => {
     setCurrentPath({
-      path: '/admin/users/:id',
-      name: 'Edit User',
-      description: 'Update the information for this user',
+      path: '/admin/transactions/:id',
+      name: 'Edit Transaction',
+      description: 'Update the information for this transaction',
       showSearch: false,
-      actionText: 'Back to User List',
-      actionLink: '/admin/users',
+      actionText: 'Back to Transaction List',
+      actionLink: '/admin/transactions',
     })
 
     return () => {
@@ -55,10 +59,13 @@ export function WebAdminUserUpdate() {
   }, [])
 
   function defaultValues() {
-    if (user?.user) {
-      return cleanObject({
-        ...user.user,
-      })
+    if (transaction?.transaction) {
+      const transactionValue = cleanObject(transaction.transaction)
+      transactionValue['userId'] = {
+        label: `${transaction?.transaction?.user?.firstName} ${transaction?.transaction?.user?.lastName}`,
+        value: transaction?.transaction?.user?.id,
+      }
+      return transactionValue
     } else {
       return undefined
     }
@@ -66,10 +73,10 @@ export function WebAdminUserUpdate() {
   return (
     <>
       <WebUiForm
-        fields={userFields}
-        submit={(values) => submit(values as AdminUpdateUserInput)}
+        fields={transactionFields}
+        submit={(values) => submit(values as AdminUpdateTransactionInput)}
         defaultValues={defaultValues()}
-        buttonText={'Update User'}
+        buttonText={'Update Transaction'}
         loading={loading}
       />
       {isDev ? <WebUiDevDataFeature data={defaultValues()} /> : null}

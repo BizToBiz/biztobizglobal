@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { Chapter } from '@biztobiz/api/chapter/data-access'
 import { Referral } from '@biztobiz/api/referral/data-access'
+import { User } from '@biztobiz/api/user/data-access'
 
 @ObjectType()
 export class Transaction {
@@ -33,6 +34,9 @@ export class Transaction {
 
   @Field(() => Chapter, { nullable: true })
   chapter?: Chapter
+
+  @Field(() => User, { nullable: true })
+  user?: Omit<[User], ''>
 
   @Field(() => Referral, { nullable: true })
   referral?: Referral

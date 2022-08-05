@@ -1,17 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import {
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UserGroupIcon,
-  UserIcon,
-  XIcon,
-} from '@heroicons/react/outline'
+import { BellIcon, CashIcon, HomeIcon, MenuAlt2Icon, UserGroupIcon, UserIcon, XIcon } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import { User } from '@biztobiz/shared/util-sdk'
 import fullLogo from './assets/full-logo.png'
@@ -19,15 +8,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { currentPathAtom, searchAtom } from '@biztobiz/web/global/data-access'
 
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Chapters', href: '/admin/chapters', icon: UserGroupIcon, current: false },
-  { name: 'Users', href: '/admin/users', icon: UserIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
@@ -48,6 +28,22 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
   const [currentPath] = useAtom(currentPathAtom)
   const [search, setSearch] = useAtom(searchAtom)
   const navigate = useNavigate()
+
+  const navigation = [
+    { name: 'Dashboard', href: '#', icon: HomeIcon, current: currentPath.name.includes('Dashboard') },
+    { name: 'Chapters', href: '/admin/chapters', icon: UserGroupIcon, current: currentPath.name.includes('Chapter') },
+    { name: 'Users', href: '/admin/users', icon: UserIcon, current: currentPath.name.includes('User') },
+    {
+      name: 'Transactions',
+      href: '/admin/transactions',
+      icon: CashIcon,
+      current: currentPath.name.includes('Transaction'),
+    },
+    // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+    // { name: 'Documents', href: '#', icon: InboxIcon, current: false },
+    // { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  ]
+
   return (
     <div>
       <Transition.Root show={sidebarOpen} as={Fragment}>

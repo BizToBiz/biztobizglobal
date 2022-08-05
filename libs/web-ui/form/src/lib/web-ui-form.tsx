@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
-import { useForm, UseFormProps } from 'react-hook-form'
+import { Controller, useForm, UseFormProps } from 'react-hook-form'
 import { WebUiFormField, WebUiFormFieldType } from './web-ui-form-fields'
+import { Switch } from '@headlessui/react'
+import { RelationSelect } from './field-types/relation-select'
 
 export interface WebUiFormProps extends UseFormProps {
   fields: WebUiFormField[]
@@ -15,11 +17,16 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm({ defaultValues: defaultValues })
 
   useEffect(() => {
     reset(defaultValues)
   }, [defaultValues])
+
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
+  }
 
   function renderFieldWrapper(field: WebUiFormField) {
     const checkBoxWrapper = (
@@ -45,9 +52,20 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
       </div>
     )
 
+    const switchWrapper = (
+      <Switch.Group as="div" key={field.key} className="flex items-center">
+        {renderField(field)}
+        <Switch.Label as="span" className="ml-3">
+          <span className="text-sm font-medium text-gray-900">{field?.options?.label}</span>
+        </Switch.Label>
+      </Switch.Group>
+    )
+
     switch (field.type) {
       case WebUiFormFieldType.CheckBox:
         return field?.options?.customWrapper ? field.options.customWrapper(checkBoxWrapper) : checkBoxWrapper
+      case WebUiFormFieldType.Switch:
+        return field?.options?.customWrapper ? field.options.customWrapper(switchWrapper) : switchWrapper
       default:
         return field?.options?.customWrapper ? field.options.customWrapper(standardWrapper) : standardWrapper
     }
@@ -100,6 +118,15 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         )
+      case WebUiFormFieldType.Number:
+        return (
+          <input
+            id={field.key}
+            type="number"
+            {...register(`${field.key}`, { required: field?.options?.required })}
+            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          />
+        )
       case WebUiFormFieldType.CheckBox:
         return (
           <input
@@ -117,7 +144,7 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
             {...register(`${field.key}`, {
               required: field?.options?.required,
               valueAsDate: true,
-              setValueAs: (v) => v.toISOString().split('T')[0],
+              setValueAs: (v) => v.split('T')[0],
             })}
             className="text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
@@ -136,6 +163,8 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
             ))}
           </select>
         )
+      case WebUiFormFieldType.RelationSelect:
+        return <RelationSelect field={field} control={control} />
       case WebUiFormFieldType.EnumSelect:
         return (
           <select
@@ -152,6 +181,33 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
               </option>
             ))}
           </select>
+        )
+      case WebUiFormFieldType.Switch:
+        return (
+          <Controller
+            control={control}
+            name={field.key}
+            defaultValue={field?.options?.defaultValue}
+            render={({ field: { onChange, value } }) => (
+              <Switch
+                {...register(`${field.key}`, { required: field?.options?.required })}
+                checked={value}
+                onChange={onChange}
+                className={classNames(
+                  value ? 'bg-indigo-600' : 'bg-gray-200',
+                  'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                )}
+              >
+                <span
+                  aria-hidden="true"
+                  className={classNames(
+                    value ? 'translate-x-5' : 'translate-x-0',
+                    'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
+                  )}
+                />
+              </Switch>
+            )}
+          />
         )
 
       default:

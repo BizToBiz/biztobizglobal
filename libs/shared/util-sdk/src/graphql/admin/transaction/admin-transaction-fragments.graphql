@@ -1,0 +1,16 @@
+fragment AdminTransactionDetails on Transaction {
+  id
+  createdAt
+  updatedAt
+  date
+  amount
+  enteredBy
+  enteredOn
+  industry
+  state
+  user {
+    id
+    firstName
+    lastName
+  }
+}

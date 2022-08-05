@@ -1,4 +1,6 @@
 import React, { ReactNode } from 'react'
+import { DocumentNode, TypedDocumentNode } from '@apollo/client'
+import { OptionsOrGroups } from 'react-select'
 
 export enum WebUiFormFieldType {
   Email = 'Email',
@@ -10,6 +12,9 @@ export enum WebUiFormFieldType {
   Url = 'Url',
   Select = 'Select',
   EnumSelect = 'EnumSelect',
+  RelationSelect = 'RelationSelect',
+  Switch = 'Switch',
+  Number = 'Number',
 }
 
 export interface WebUiFormFieldOptions {
@@ -19,8 +24,11 @@ export interface WebUiFormFieldOptions {
   customWrapper?: (children: ReactNode) => JSX.Element
   defaultValue?: string | number | readonly string[] | undefined
   defaultChecked?: boolean
-  selectOptions?: { label: string; value: string }[]
   enum?: { [s: string]: unknown } | ArrayLike<unknown>
+  selectOptions?: { label: string; value: string }[]
+  document?: DocumentNode | TypedDocumentNode
+  dataType?: string
+  selectOptionsFunction?: (data: Record<string, unknown>[]) => OptionsOrGroups<any, any>[]
 }
 
 export interface WebUiFormField {
@@ -68,5 +76,17 @@ export class WebUiFormField {
 
   static enumSelect(key: string, options: WebUiFormFieldOptions = { enum: undefined }): WebUiFormField {
     return this.field(WebUiFormFieldType.EnumSelect, key, options)
+  }
+
+  static relationSelect(key: string, options: WebUiFormFieldOptions = {}): WebUiFormField {
+    return this.field(WebUiFormFieldType.RelationSelect, key, options)
+  }
+
+  static switch(key: string, options: WebUiFormFieldOptions = {}): WebUiFormField {
+    return this.field(WebUiFormFieldType.Switch, key, options)
+  }
+
+  static number(key: string, options: WebUiFormFieldOptions = {}): WebUiFormField {
+    return this.field(WebUiFormFieldType.Number, key, options)
   }
 }

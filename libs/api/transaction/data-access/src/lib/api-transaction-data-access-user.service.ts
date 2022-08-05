@@ -6,16 +6,37 @@ import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-ac
 import { UserCreateTransactionInput } from './dto/user-create-transaction.input'
 import { UserListTransactionInput } from './dto/user-list-transaction.input'
 import { UserUpdateTransactionInput } from './dto/user-update-transaction.input'
+import { AdminListTransactionInput } from './dto/admin-list-transaction.input'
 
 @Injectable()
 export class ApiTransactionDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  userTransactions(info: GraphQLResolveInfo, userId: string, input?: UserListTransactionInput) {
+  transactionWhere(input: AdminListTransactionInput) {
+    const whereInput = []
+    if (input.userId) {
+      whereInput.push({ userId: input.userId })
+    }
+    if (input.chapterId) {
+      whereInput.push({ chapterId: input.chapterId })
+    }
+    if (input.referralId) {
+      whereInput.push({ referralId: input.referralId })
+    }
+    return {
+      where: {
+        ...whereInput,
+      },
+    }
+  }
+
+  userTransactions(info: GraphQLResolveInfo, userId: string, input?: AdminListTransactionInput) {
     const select = new PrismaSelect(info).value
+    const where = this.transactionWhere(input)
     return this.data.transaction.findMany({
       take: input?.take,
       skip: input?.skip,
+      ...where,
       ...select,
     })
   }

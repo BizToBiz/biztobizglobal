@@ -5,6 +5,7 @@ import { RESET } from 'jotai/utils'
 import { WebUiForm } from '@biztobiz/web-ui/form'
 import { AdminCreateUserInput, useAdminCreateUserMutation } from '@biztobiz/shared/util-sdk'
 import { userFields } from './web-admin-user-helper'
+import { cleanObject } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminUserCreate() {
   const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
@@ -14,9 +15,10 @@ export function WebAdminUserCreate() {
 
   const submit = async (input: AdminCreateUserInput) => {
     setLoading(true)
+    const cleanedInput = cleanObject(input)
     await createMember({
       variables: {
-        input,
+        input: cleanedInput,
       },
     })
     setLoading(false)

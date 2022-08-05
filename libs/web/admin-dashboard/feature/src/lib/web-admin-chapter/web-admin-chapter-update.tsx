@@ -10,7 +10,7 @@ import { cleanObject } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminChapterUpdate() {
   const params = useParams()
-  const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
+  const [, setCurrentPath] = useAtom(currentPathAtom)
   const [loading, setLoading] = useState(false)
 
   const [updateChapter] = useAdminUpdateChapterMutation()
@@ -54,14 +54,12 @@ export function WebAdminChapterUpdate() {
 
   function defaultValues() {
     if (chapter?.chapter) {
-      return cleanObject({
-        ...chapter.chapter,
-        establishedDate: chapter.chapter.establishedDate?.split('T')[0],
-      })
+      return cleanObject(chapter.chapter)
     } else {
       return undefined
     }
   }
+
   return (
     <WebUiForm
       fields={chapterFields}

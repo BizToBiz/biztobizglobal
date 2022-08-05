@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { capitalizeFirstLetter } from '@biztobiz/shared/utils/feature'
 import { CorePaging } from '@biztobiz/shared/util-sdk'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export interface WebUiDataTableFeatureProps {
   data?: any
@@ -17,7 +19,7 @@ export function WebUiDataTableFeature(props: WebUiDataTableFeatureProps) {
     return (p?.take ?? 0) + (p?.skip ?? 0)
   }
 
-  return (
+  return props.data ? (
     <>
       <div className="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
         <table className="min-w-full divide-y divide-gray-300">
@@ -137,7 +139,11 @@ export function WebUiDataTableFeature(props: WebUiDataTableFeatureProps) {
             ) : null}
           </div>
         </nav>
-      ) : null}
+      ) : (
+        <Skeleton />
+      )}
     </>
+  ) : (
+    <Skeleton count={5} />
   )
 }

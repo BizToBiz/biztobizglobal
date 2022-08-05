@@ -1,0 +1,41 @@
+query AdminTransaction($transactionId: String!) {
+  transaction: adminTransaction(transactionId: $transactionId) {
+    ...AdminTransactionDetails
+  }
+}
+
+#query AdminTransactionMeetings($transactionId: String!) {
+#  meetings: adminTransactionMeetings(transactionId: $transactionId) {
+#    ...MeetingDetails
+#  }
+#}
+
+query AdminTransactions($input: AdminListTransactionInput!) {
+  transactions: adminTransactions(input: $input) {
+    ...AdminTransactionDetails
+  }
+}
+
+query AdminTransactionPagination($input: AdminListTransactionInput!) {
+  counters: adminCountTransactions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+#query AdminSubstituteGroups {
+#  substituteGroups: adminSubstituteGroups {
+#    id
+#    createdAt
+#    updatedAt
+#    name
+#    transactions {
+#      ...AdminTransactionDetails
+#    }
+#  }
+#}
+
+#query AdminMembersWithoutTransaction {
+#  members: adminMembersWithoutTransaction {
+#    ...UserBasics
+#  }
+#}

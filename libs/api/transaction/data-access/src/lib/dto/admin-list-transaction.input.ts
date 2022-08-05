@@ -4,5 +4,11 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 @InputType()
 export class AdminListTransactionInput extends CorePagingInput {
   @Field({ nullable: true })
-  name?: string
+  userId?: string
+
+  @Field({ nullable: true })
+  chapterId?: string
+
+  @Field({ nullable: true })
+  referralId?: string
 }

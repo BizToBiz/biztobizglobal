@@ -26,6 +26,9 @@ import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 import { WebAdminUserList } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-list'
 import { WebAdminUserCreate } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-create'
 import { WebAdminUserUpdate } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-update'
+import { WebAdminTransactionCreate } from '../../../../admin-dashboard/feature/src/lib/web-admin-transaction/web-admin-transaction-create'
+import { WebAdminTransactionUpdate } from '../../../../admin-dashboard/feature/src/lib/web-admin-transaction/web-admin-transaction-update'
+import { WebAdminTransactionList } from '../../../../admin-dashboard/feature/src/lib/web-admin-transaction/web-admin-transaction-list'
 
 function PrivateOutlet(props) {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom)
@@ -71,6 +74,11 @@ export function WebShellFeature() {
             <Route path="user">
               <Route path="new" element={<WebAdminUserCreate />} />
               <Route path=":id" element={<WebAdminUserUpdate />} />
+            </Route>
+            <Route path="transactions" element={<WebAdminTransactionList />} />
+            <Route path="transaction">
+              <Route path="new" element={<WebAdminTransactionCreate />} />
+              <Route path=":id" element={<WebAdminTransactionUpdate />} />
             </Route>
           </Route>
           <Route path="/" element={<WebAboutFeature />} />
