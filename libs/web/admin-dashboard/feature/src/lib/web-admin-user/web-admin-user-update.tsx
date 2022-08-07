@@ -1,58 +1,23 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { useAtom } from 'jotai'
-import { currentPathAtom, isDevAtom } from '@biztobiz/web/global/data-access'
-import { AdminUpdateUserInput, useAdminUpdateUserMutation, useAdminUserQuery } from '@biztobiz/shared/util-sdk'
-import { RESET } from 'jotai/utils'
+import React from 'react'
+import { AdminUpdateUserDocument, useAdminUserQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { WebUiForm } from '@biztobiz/web-ui/form'
-import { userFields } from './web-admin-user-helper'
 import { cleanObject } from '@biztobiz/shared/utils/feature'
-import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
+import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
+import { userFields } from './web-admin-user-helper'
 
 export function WebAdminUserUpdate() {
-  const [isDev] = useAtom(isDevAtom)
   const params = useParams()
-  const [, setCurrentPath] = useAtom(currentPathAtom)
-  const [loading, setLoading] = useState(false)
-
-  const [updateUser] = useAdminUpdateUserMutation()
 
   const { data: user } = useAdminUserQuery({
     skip: !params?.['id'],
     variables: {
-      userId: params?.['id'] ?? 'NoUserId',
+      userId: params?.['id'] ?? 'NoId',
     },
   })
 
-  const submit = async (input: AdminUpdateUserInput) => {
-    setLoading(true)
-    const cleanedInput = cleanObject(input)
-    await updateUser({
-      variables: {
-        userId: params?.['id'] ?? 'NoUserId',
-        input: {
-          ...cleanedInput,
-        },
-      },
-    })
-    setLoading(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  if (!params?.['id']) {
+    return <div>No Id</div>
   }
-
-  useLayoutEffect(() => {
-    setCurrentPath({
-      path: '/admin/users/:id',
-      name: 'Edit User',
-      description: 'Update the information for this user',
-      showSearch: false,
-      actionText: 'Back to User List',
-      actionLink: '/admin/users',
-    })
-
-    return () => {
-      setCurrentPath(RESET)
-    }
-  }, [])
 
   function defaultValues() {
     if (user?.user) {
@@ -63,16 +28,25 @@ export function WebAdminUserUpdate() {
       return undefined
     }
   }
+
+  const pathData = {
+    path: '/admin/users/:id',
+    name: 'Edit User',
+    description: 'Update the information for this user',
+    showSearch: false,
+    actionText: 'Back to User List',
+    actionLink: '/admin/user',
+  }
+
   return (
-    <>
-      <WebUiForm
-        fields={userFields}
-        submit={(values) => submit(values as AdminUpdateUserInput)}
-        defaultValues={defaultValues()}
-        buttonText={'Update User'}
-        loading={loading}
-      />
-      {isDev ? <WebUiDevDataFeature data={defaultValues()} /> : null}
-    </>
+    <WebAdminUpdateForm
+      pathData={pathData}
+      id={params['id']}
+      defaultValues={defaultValues()}
+      document={AdminUpdateUserDocument}
+      buttonText={'Update User'}
+      fields={userFields}
+      idName={'userId'}
+    />
   )
 }

@@ -1,0 +1,44 @@
+query AdminTerritory($territoryId: String!) {
+  territory: adminTerritory(territoryId: $territoryId) {
+    ...AdminTerritoryDetails
+  }
+}
+
+#query AdminTerritoryMeetings($territoryId: String!) {
+#  meetings: adminTerritoryMeetings(territoryId: $territoryId) {
+#    ...MeetingDetails
+#  }
+#}
+
+query AdminTerritories($input: AdminListTerritoryInput) {
+  territories: adminTerritories(input: $input) {
+    ...AdminTerritoryDetails
+  }
+  counters: adminCountTerritories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminTerritoryPagination($input: AdminListTerritoryInput) {
+  counters: adminCountTerritories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+#query AdminSubstituteGroups {
+#  substituteGroups: adminSubstituteGroups {
+#    id
+#    createdAt
+#    updatedAt
+#    name
+#    territories {
+#      ...AdminTerritoryDetails
+#    }
+#  }
+#}
+
+#query AdminMembersWithoutTerritory {
+#  members: adminMembersWithoutTerritory {
+#    ...UserBasics
+#  }
+#}

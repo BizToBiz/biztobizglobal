@@ -1,10 +1,7 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
-import { AdminUsersDocument, User } from '@biztobiz/shared/util-sdk'
+import { AdminChaptersDocument, AdminUsersDocument, Chapter, User } from '@biztobiz/shared/util-sdk'
 import React from 'react'
-
-export function mapUsers(users: User[]): any {
-  return users?.map((option) => ({ value: `${option.id}`, label: `${option.firstName} ${option.lastName}` }))
-}
+import { mapChapters, mapUsers } from '../web-admin-helper/web-admin-helper'
 
 export const transactionFields: WebUiFormField[] = [
   WebUiFormField.number('amount', { label: 'Amount', required: true }),
@@ -18,5 +15,11 @@ export const transactionFields: WebUiFormField[] = [
     document: AdminUsersDocument,
     selectOptionsFunction: mapUsers,
     dataType: 'users',
+  }),
+  WebUiFormField.relationSelect('chapterId', {
+    label: 'Chapter',
+    document: AdminChaptersDocument,
+    selectOptionsFunction: mapChapters,
+    dataType: 'chapters',
   }),
 ]

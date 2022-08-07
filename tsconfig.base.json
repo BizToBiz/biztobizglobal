@@ -31,6 +31,7 @@
       "@biztobiz/api/company/feature": ["libs/api/company/feature/src/index.ts"],
       "@biztobiz/api/core/data-access": ["libs/api/core/data-access/src/index.ts"],
       "@biztobiz/api/core/feature": ["libs/api/core/feature/src/index.ts"],
+      "@biztobiz/api/core/util": ["libs/api/core/util/src/index.ts"],
       "@biztobiz/api/mailer/data-access": ["libs/api/mailer/data-access/src/index.ts"],
       "@biztobiz/api/meeting/data-access": ["libs/api/meeting/data-access/src/index.ts"],
       "@biztobiz/api/meeting/feature": ["libs/api/meeting/feature/src/index.ts"],

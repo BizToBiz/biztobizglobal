@@ -1,56 +1,26 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React from 'react'
 import { useAtom } from 'jotai'
-import { currentPathAtom } from '@biztobiz/web/global/data-access'
-import { AdminUpdateChapterInput, useAdminChapterQuery, useAdminUpdateChapterMutation } from '@biztobiz/shared/util-sdk'
-import { RESET } from 'jotai/utils'
+import { isDevAtom } from '@biztobiz/web/global/data-access'
+import { AdminUpdateChapterDocument, useAdminChapterQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { WebUiForm } from '@biztobiz/web-ui/form'
-import { chapterFields } from './web-admin-chapter-helper'
 import { cleanObject } from '@biztobiz/shared/utils/feature'
+import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
+import { chapterFields } from './web-admin-chapter-helper'
 
 export function WebAdminChapterUpdate() {
   const params = useParams()
-  const [, setCurrentPath] = useAtom(currentPathAtom)
-  const [loading, setLoading] = useState(false)
-
-  const [updateChapter] = useAdminUpdateChapterMutation()
+  const [isDev] = useAtom(isDevAtom)
 
   const { data: chapter } = useAdminChapterQuery({
     skip: !params?.['id'],
     variables: {
-      chapterId: params?.['id'] ?? 'NoChapterId',
+      chapterId: params?.['id'] ?? 'NoId',
     },
   })
 
-  const submit = async (input: AdminUpdateChapterInput) => {
-    setLoading(true)
-    const cleanedInput = cleanObject(input)
-    await updateChapter({
-      variables: {
-        chapterId: params?.['id'] ?? 'NoChapterId',
-        input: {
-          ...cleanedInput,
-        },
-      },
-    })
-    setLoading(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  if (!params?.['id']) {
+    return <div>No Id</div>
   }
-
-  useLayoutEffect(() => {
-    setCurrentPath({
-      path: '/admin/chapters/:id',
-      name: 'Edit Chapter',
-      description: 'Update the information for this chapter',
-      showSearch: false,
-      actionText: 'Back to Chapter List',
-      actionLink: '/admin/chapters',
-    })
-
-    return () => {
-      setCurrentPath(RESET)
-    }
-  }, [])
 
   function defaultValues() {
     if (chapter?.chapter) {
@@ -59,14 +29,24 @@ export function WebAdminChapterUpdate() {
       return undefined
     }
   }
+  const pathData = {
+    path: '/admin/chapter/:id',
+    name: 'Edit Chapter',
+    description: 'Update the information for this chapter',
+    showSearch: false,
+    actionText: 'Back to Chapter List',
+    actionLink: '/admin/chapter',
+  }
 
   return (
-    <WebUiForm
-      fields={chapterFields}
-      submit={(values) => submit(values as AdminUpdateChapterInput)}
+    <WebAdminUpdateForm
+      pathData={pathData}
+      id={params['id']}
       defaultValues={defaultValues()}
+      document={AdminUpdateChapterDocument}
       buttonText={'Update Chapter'}
-      loading={loading}
+      fields={chapterFields}
+      idName={'chapterId'}
     />
   )
 }

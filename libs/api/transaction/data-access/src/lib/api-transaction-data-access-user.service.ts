@@ -58,7 +58,7 @@ export class ApiTransactionDataAccessUserService {
   userCreateTransaction(info: GraphQLResolveInfo, userId: string, input: UserCreateTransactionInput) {
     const select = new PrismaSelect(info).value
     return this.data.transaction.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -67,7 +67,7 @@ export class ApiTransactionDataAccessUserService {
     const select = new PrismaSelect(info).value
     return this.data.transaction.update({
       where: { id: transactionId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

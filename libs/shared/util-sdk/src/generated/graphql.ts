@@ -81,7 +81,8 @@ export type AdminCreateReferralInput = {
 }
 
 export type AdminCreateRegionInput = {
-  name: Scalars['String']
+  managerId?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateSubstituteGroupInput = {
@@ -93,7 +94,8 @@ export type AdminCreateSubstituteInput = {
 }
 
 export type AdminCreateTerritoryInput = {
-  name: Scalars['String']
+  managerId?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateTestimonialInput = {
@@ -204,11 +206,13 @@ export type AdminListAttendanceReminderInput = {
 }
 
 export type AdminListChapterInput = {
-  name?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
+  regionId?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  substituteGroupId?: InputMaybe<Scalars['String']>
   take?: InputMaybe<Scalars['Float']>
 }
 
@@ -397,7 +401,15 @@ export type AdminUpdateTestimonialInput = {
 }
 
 export type AdminUpdateTransactionInput = {
-  name?: InputMaybe<Scalars['String']>
+  amount?: InputMaybe<Scalars['Float']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date?: InputMaybe<Scalars['DateTime']>
+  enteredBy?: InputMaybe<Scalars['String']>
+  enteredOn?: InputMaybe<Scalars['String']>
+  industry?: InputMaybe<Scalars['String']>
+  referralId?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateUploadInput = {
@@ -508,7 +520,7 @@ export type Chapter = {
   meetingDay?: Maybe<DayOfWeek>
   meetingDetails?: Maybe<Scalars['String']>
   meetingTime?: Maybe<Scalars['String']>
-  members: Array<ChapterMember>
+  members?: Maybe<Array<ChapterMember>>
   name?: Maybe<Scalars['String']>
   region?: Maybe<Region>
   state?: Maybe<Scalars['String']>
@@ -2257,7 +2269,15 @@ export type UserUpdateTestimonialInput = {
 }
 
 export type UserUpdateTransactionInput = {
-  name?: InputMaybe<Scalars['String']>
+  amount?: InputMaybe<Scalars['Float']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date?: InputMaybe<Scalars['DateTime']>
+  enteredBy?: InputMaybe<Scalars['String']>
+  enteredOn?: InputMaybe<Scalars['String']>
+  industry?: InputMaybe<Scalars['String']>
+  referralId?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type UserUpdateUploadInput = {
@@ -2380,7 +2400,7 @@ export type AdminChapterQuery = {
 }
 
 export type AdminChaptersQueryVariables = Exact<{
-  input: AdminListChapterInput
+  input?: InputMaybe<AdminListChapterInput>
 }>
 
 export type AdminChaptersQuery = {
@@ -2415,6 +2435,332 @@ export type AdminChaptersQuery = {
   } | null
 }
 
+export type AdminCompanyDetailsFragment = {
+  __typename?: 'Company'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  name?: string | null
+}
+
+export type AdminCreateCompanyMutationVariables = Exact<{
+  input: AdminCreateCompanyInput
+}>
+
+export type AdminCreateCompanyMutation = {
+  __typename?: 'Mutation'
+  createCompany?: {
+    __typename?: 'Company'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  } | null
+}
+
+export type AdminDeleteCompanyMutationVariables = Exact<{
+  companyId: Scalars['String']
+}>
+
+export type AdminDeleteCompanyMutation = {
+  __typename?: 'Mutation'
+  deleteCompany?: { __typename?: 'Company'; id?: string | null } | null
+}
+
+export type AdminUpdateCompanyMutationVariables = Exact<{
+  companyId: Scalars['String']
+  input: AdminUpdateCompanyInput
+}>
+
+export type AdminUpdateCompanyMutation = {
+  __typename?: 'Mutation'
+  updateCompany?: {
+    __typename?: 'Company'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  } | null
+}
+
+export type AdminCompanyQueryVariables = Exact<{
+  companyId: Scalars['String']
+}>
+
+export type AdminCompanyQuery = {
+  __typename?: 'Query'
+  company?: {
+    __typename?: 'Company'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  } | null
+}
+
+export type AdminCompaniesQueryVariables = Exact<{
+  input?: InputMaybe<AdminListCompanyInput>
+}>
+
+export type AdminCompaniesQuery = {
+  __typename?: 'Query'
+  companies?: Array<{
+    __typename?: 'Company'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminCompanyPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListCompanyInput>
+}>
+
+export type AdminCompanyPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminRegionDetailsFragment = {
+  __typename?: 'Region'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  name?: string | null
+  territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+  manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+}
+
+export type AdminCreateRegionMutationVariables = Exact<{
+  input: AdminCreateRegionInput
+}>
+
+export type AdminCreateRegionMutation = {
+  __typename?: 'Mutation'
+  createRegion?: {
+    __typename?: 'Region'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminDeleteRegionMutationVariables = Exact<{
+  regionId: Scalars['String']
+}>
+
+export type AdminDeleteRegionMutation = {
+  __typename?: 'Mutation'
+  deleteRegion?: { __typename?: 'Region'; id?: string | null } | null
+}
+
+export type AdminUpdateRegionMutationVariables = Exact<{
+  regionId: Scalars['String']
+  input: AdminUpdateRegionInput
+}>
+
+export type AdminUpdateRegionMutation = {
+  __typename?: 'Mutation'
+  updateRegion?: {
+    __typename?: 'Region'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminRegionQueryVariables = Exact<{
+  regionId: Scalars['String']
+}>
+
+export type AdminRegionQuery = {
+  __typename?: 'Query'
+  region?: {
+    __typename?: 'Region'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminRegionsQueryVariables = Exact<{
+  input?: InputMaybe<AdminListRegionInput>
+}>
+
+export type AdminRegionsQuery = {
+  __typename?: 'Query'
+  regions?: Array<{
+    __typename?: 'Region'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminRegionPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListRegionInput>
+}>
+
+export type AdminRegionPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminTerritoryDetailsFragment = {
+  __typename?: 'Territory'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  name?: string | null
+  regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
+  manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+}
+
+export type AdminCreateTerritoryMutationVariables = Exact<{
+  input: AdminCreateTerritoryInput
+}>
+
+export type AdminCreateTerritoryMutation = {
+  __typename?: 'Mutation'
+  createTerritory?: {
+    __typename?: 'Territory'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminDeleteTerritoryMutationVariables = Exact<{
+  territoryId: Scalars['String']
+}>
+
+export type AdminDeleteTerritoryMutation = {
+  __typename?: 'Mutation'
+  deleteTerritory?: { __typename?: 'Territory'; id?: string | null } | null
+}
+
+export type AdminUpdateTerritoryMutationVariables = Exact<{
+  territoryId: Scalars['String']
+  input: AdminUpdateTerritoryInput
+}>
+
+export type AdminUpdateTerritoryMutation = {
+  __typename?: 'Mutation'
+  updateTerritory?: {
+    __typename?: 'Territory'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminTerritoryQueryVariables = Exact<{
+  territoryId: Scalars['String']
+}>
+
+export type AdminTerritoryQuery = {
+  __typename?: 'Query'
+  territory?: {
+    __typename?: 'Territory'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminTerritoriesQueryVariables = Exact<{
+  input?: InputMaybe<AdminListTerritoryInput>
+}>
+
+export type AdminTerritoriesQuery = {
+  __typename?: 'Query'
+  territories?: Array<{
+    __typename?: 'Territory'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
+    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminTerritoryPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListTerritoryInput>
+}>
+
+export type AdminTerritoryPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
 export type AdminTransactionDetailsFragment = {
   __typename?: 'Transaction'
   id?: string | null
@@ -2427,6 +2773,7 @@ export type AdminTransactionDetailsFragment = {
   industry?: string | null
   state?: string | null
   user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
 }
 
 export type AdminCreateTransactionMutationVariables = Exact<{
@@ -2447,6 +2794,7 @@ export type AdminCreateTransactionMutation = {
     industry?: string | null
     state?: string | null
     user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2478,6 +2826,7 @@ export type AdminUpdateTransactionMutation = {
     industry?: string | null
     state?: string | null
     user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2499,11 +2848,12 @@ export type AdminTransactionQuery = {
     industry?: string | null
     state?: string | null
     user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   } | null
 }
 
 export type AdminTransactionsQueryVariables = Exact<{
-  input: AdminListTransactionInput
+  input?: InputMaybe<AdminListTransactionInput>
 }>
 
 export type AdminTransactionsQuery = {
@@ -2520,11 +2870,20 @@ export type AdminTransactionsQuery = {
     industry?: string | null
     state?: string | null
     user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
 }
 
 export type AdminTransactionPaginationQueryVariables = Exact<{
-  input: AdminListTransactionInput
+  input?: InputMaybe<AdminListTransactionInput>
 }>
 
 export type AdminTransactionPaginationQuery = {
@@ -3170,6 +3529,48 @@ export const AdminChapterDetailsFragmentDoc = gql`
     facebook
   }
 `
+export const AdminCompanyDetailsFragmentDoc = gql`
+  fragment AdminCompanyDetails on Company {
+    id
+    createdAt
+    updatedAt
+    name
+  }
+`
+export const AdminRegionDetailsFragmentDoc = gql`
+  fragment AdminRegionDetails on Region {
+    id
+    createdAt
+    updatedAt
+    name
+    territory {
+      id
+      name
+    }
+    manager {
+      id
+      firstName
+      lastName
+    }
+  }
+`
+export const AdminTerritoryDetailsFragmentDoc = gql`
+  fragment AdminTerritoryDetails on Territory {
+    id
+    createdAt
+    updatedAt
+    name
+    regions {
+      id
+      name
+    }
+    manager {
+      id
+      firstName
+      lastName
+    }
+  }
+`
 export const AdminTransactionDetailsFragmentDoc = gql`
   fragment AdminTransactionDetails on Transaction {
     id
@@ -3185,6 +3586,10 @@ export const AdminTransactionDetailsFragmentDoc = gql`
       id
       firstName
       lastName
+    }
+    chapter {
+      id
+      name
     }
   }
 `
@@ -3482,7 +3887,7 @@ export type AdminChapterQueryHookResult = ReturnType<typeof useAdminChapterQuery
 export type AdminChapterLazyQueryHookResult = ReturnType<typeof useAdminChapterLazyQuery>
 export type AdminChapterQueryResult = Apollo.QueryResult<AdminChapterQuery, AdminChapterQueryVariables>
 export const AdminChaptersDocument = gql`
-  query AdminChapters($input: AdminListChapterInput!) {
+  query AdminChapters($input: AdminListChapterInput) {
     chapters: adminChapters(input: $input) {
       ...AdminChapterDetails
     }
@@ -3511,7 +3916,7 @@ export const AdminChaptersDocument = gql`
  * });
  */
 export function useAdminChaptersQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminChaptersQuery, AdminChaptersQueryVariables>,
+  baseOptions?: Apollo.QueryHookOptions<AdminChaptersQuery, AdminChaptersQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<AdminChaptersQuery, AdminChaptersQueryVariables>(AdminChaptersDocument, options)
@@ -3525,6 +3930,808 @@ export function useAdminChaptersLazyQuery(
 export type AdminChaptersQueryHookResult = ReturnType<typeof useAdminChaptersQuery>
 export type AdminChaptersLazyQueryHookResult = ReturnType<typeof useAdminChaptersLazyQuery>
 export type AdminChaptersQueryResult = Apollo.QueryResult<AdminChaptersQuery, AdminChaptersQueryVariables>
+export const AdminCreateCompanyDocument = gql`
+  mutation adminCreateCompany($input: AdminCreateCompanyInput!) {
+    createCompany: adminCreateCompany(input: $input) {
+      ...AdminCompanyDetails
+    }
+  }
+  ${AdminCompanyDetailsFragmentDoc}
+`
+export type AdminCreateCompanyMutationFn = Apollo.MutationFunction<
+  AdminCreateCompanyMutation,
+  AdminCreateCompanyMutationVariables
+>
+
+/**
+ * __useAdminCreateCompanyMutation__
+ *
+ * To run a mutation, you first call `useAdminCreateCompanyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminCreateCompanyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminCreateCompanyMutation, { data, loading, error }] = useAdminCreateCompanyMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCreateCompanyMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminCreateCompanyMutation, AdminCreateCompanyMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminCreateCompanyMutation, AdminCreateCompanyMutationVariables>(
+    AdminCreateCompanyDocument,
+    options,
+  )
+}
+export type AdminCreateCompanyMutationHookResult = ReturnType<typeof useAdminCreateCompanyMutation>
+export type AdminCreateCompanyMutationResult = Apollo.MutationResult<AdminCreateCompanyMutation>
+export type AdminCreateCompanyMutationOptions = Apollo.BaseMutationOptions<
+  AdminCreateCompanyMutation,
+  AdminCreateCompanyMutationVariables
+>
+export const AdminDeleteCompanyDocument = gql`
+  mutation adminDeleteCompany($companyId: String!) {
+    deleteCompany: adminDeleteCompany(companyId: $companyId) {
+      id
+    }
+  }
+`
+export type AdminDeleteCompanyMutationFn = Apollo.MutationFunction<
+  AdminDeleteCompanyMutation,
+  AdminDeleteCompanyMutationVariables
+>
+
+/**
+ * __useAdminDeleteCompanyMutation__
+ *
+ * To run a mutation, you first call `useAdminDeleteCompanyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminDeleteCompanyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminDeleteCompanyMutation, { data, loading, error }] = useAdminDeleteCompanyMutation({
+ *   variables: {
+ *      companyId: // value for 'companyId'
+ *   },
+ * });
+ */
+export function useAdminDeleteCompanyMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminDeleteCompanyMutation, AdminDeleteCompanyMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminDeleteCompanyMutation, AdminDeleteCompanyMutationVariables>(
+    AdminDeleteCompanyDocument,
+    options,
+  )
+}
+export type AdminDeleteCompanyMutationHookResult = ReturnType<typeof useAdminDeleteCompanyMutation>
+export type AdminDeleteCompanyMutationResult = Apollo.MutationResult<AdminDeleteCompanyMutation>
+export type AdminDeleteCompanyMutationOptions = Apollo.BaseMutationOptions<
+  AdminDeleteCompanyMutation,
+  AdminDeleteCompanyMutationVariables
+>
+export const AdminUpdateCompanyDocument = gql`
+  mutation adminUpdateCompany($companyId: String!, $input: AdminUpdateCompanyInput!) {
+    updateCompany: adminUpdateCompany(companyId: $companyId, input: $input) {
+      ...AdminCompanyDetails
+    }
+  }
+  ${AdminCompanyDetailsFragmentDoc}
+`
+export type AdminUpdateCompanyMutationFn = Apollo.MutationFunction<
+  AdminUpdateCompanyMutation,
+  AdminUpdateCompanyMutationVariables
+>
+
+/**
+ * __useAdminUpdateCompanyMutation__
+ *
+ * To run a mutation, you first call `useAdminUpdateCompanyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminUpdateCompanyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminUpdateCompanyMutation, { data, loading, error }] = useAdminUpdateCompanyMutation({
+ *   variables: {
+ *      companyId: // value for 'companyId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminUpdateCompanyMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminUpdateCompanyMutation, AdminUpdateCompanyMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminUpdateCompanyMutation, AdminUpdateCompanyMutationVariables>(
+    AdminUpdateCompanyDocument,
+    options,
+  )
+}
+export type AdminUpdateCompanyMutationHookResult = ReturnType<typeof useAdminUpdateCompanyMutation>
+export type AdminUpdateCompanyMutationResult = Apollo.MutationResult<AdminUpdateCompanyMutation>
+export type AdminUpdateCompanyMutationOptions = Apollo.BaseMutationOptions<
+  AdminUpdateCompanyMutation,
+  AdminUpdateCompanyMutationVariables
+>
+export const AdminCompanyDocument = gql`
+  query AdminCompany($companyId: String!) {
+    company: adminCompany(companyId: $companyId) {
+      ...AdminCompanyDetails
+    }
+  }
+  ${AdminCompanyDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminCompanyQuery__
+ *
+ * To run a query within a React component, call `useAdminCompanyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminCompanyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminCompanyQuery({
+ *   variables: {
+ *      companyId: // value for 'companyId'
+ *   },
+ * });
+ */
+export function useAdminCompanyQuery(
+  baseOptions: Apollo.QueryHookOptions<AdminCompanyQuery, AdminCompanyQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminCompanyQuery, AdminCompanyQueryVariables>(AdminCompanyDocument, options)
+}
+export function useAdminCompanyLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminCompanyQuery, AdminCompanyQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminCompanyQuery, AdminCompanyQueryVariables>(AdminCompanyDocument, options)
+}
+export type AdminCompanyQueryHookResult = ReturnType<typeof useAdminCompanyQuery>
+export type AdminCompanyLazyQueryHookResult = ReturnType<typeof useAdminCompanyLazyQuery>
+export type AdminCompanyQueryResult = Apollo.QueryResult<AdminCompanyQuery, AdminCompanyQueryVariables>
+export const AdminCompaniesDocument = gql`
+  query AdminCompanies($input: AdminListCompanyInput) {
+    companies: adminCompanies(input: $input) {
+      ...AdminCompanyDetails
+    }
+    counters: adminCountCompanies(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${AdminCompanyDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminCompaniesQuery__
+ *
+ * To run a query within a React component, call `useAdminCompaniesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminCompaniesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminCompaniesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCompaniesQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminCompaniesQuery, AdminCompaniesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminCompaniesQuery, AdminCompaniesQueryVariables>(AdminCompaniesDocument, options)
+}
+export function useAdminCompaniesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminCompaniesQuery, AdminCompaniesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminCompaniesQuery, AdminCompaniesQueryVariables>(AdminCompaniesDocument, options)
+}
+export type AdminCompaniesQueryHookResult = ReturnType<typeof useAdminCompaniesQuery>
+export type AdminCompaniesLazyQueryHookResult = ReturnType<typeof useAdminCompaniesLazyQuery>
+export type AdminCompaniesQueryResult = Apollo.QueryResult<AdminCompaniesQuery, AdminCompaniesQueryVariables>
+export const AdminCompanyPaginationDocument = gql`
+  query AdminCompanyPagination($input: AdminListCompanyInput) {
+    counters: adminCountCompanies(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminCompanyPaginationQuery__
+ *
+ * To run a query within a React component, call `useAdminCompanyPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminCompanyPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminCompanyPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCompanyPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminCompanyPaginationQuery, AdminCompanyPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminCompanyPaginationQuery, AdminCompanyPaginationQueryVariables>(
+    AdminCompanyPaginationDocument,
+    options,
+  )
+}
+export function useAdminCompanyPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminCompanyPaginationQuery, AdminCompanyPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminCompanyPaginationQuery, AdminCompanyPaginationQueryVariables>(
+    AdminCompanyPaginationDocument,
+    options,
+  )
+}
+export type AdminCompanyPaginationQueryHookResult = ReturnType<typeof useAdminCompanyPaginationQuery>
+export type AdminCompanyPaginationLazyQueryHookResult = ReturnType<typeof useAdminCompanyPaginationLazyQuery>
+export type AdminCompanyPaginationQueryResult = Apollo.QueryResult<
+  AdminCompanyPaginationQuery,
+  AdminCompanyPaginationQueryVariables
+>
+export const AdminCreateRegionDocument = gql`
+  mutation adminCreateRegion($input: AdminCreateRegionInput!) {
+    createRegion: adminCreateRegion(input: $input) {
+      ...AdminRegionDetails
+    }
+  }
+  ${AdminRegionDetailsFragmentDoc}
+`
+export type AdminCreateRegionMutationFn = Apollo.MutationFunction<
+  AdminCreateRegionMutation,
+  AdminCreateRegionMutationVariables
+>
+
+/**
+ * __useAdminCreateRegionMutation__
+ *
+ * To run a mutation, you first call `useAdminCreateRegionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminCreateRegionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminCreateRegionMutation, { data, loading, error }] = useAdminCreateRegionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCreateRegionMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminCreateRegionMutation, AdminCreateRegionMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminCreateRegionMutation, AdminCreateRegionMutationVariables>(
+    AdminCreateRegionDocument,
+    options,
+  )
+}
+export type AdminCreateRegionMutationHookResult = ReturnType<typeof useAdminCreateRegionMutation>
+export type AdminCreateRegionMutationResult = Apollo.MutationResult<AdminCreateRegionMutation>
+export type AdminCreateRegionMutationOptions = Apollo.BaseMutationOptions<
+  AdminCreateRegionMutation,
+  AdminCreateRegionMutationVariables
+>
+export const AdminDeleteRegionDocument = gql`
+  mutation adminDeleteRegion($regionId: String!) {
+    deleteRegion: adminDeleteRegion(regionId: $regionId) {
+      id
+    }
+  }
+`
+export type AdminDeleteRegionMutationFn = Apollo.MutationFunction<
+  AdminDeleteRegionMutation,
+  AdminDeleteRegionMutationVariables
+>
+
+/**
+ * __useAdminDeleteRegionMutation__
+ *
+ * To run a mutation, you first call `useAdminDeleteRegionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminDeleteRegionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminDeleteRegionMutation, { data, loading, error }] = useAdminDeleteRegionMutation({
+ *   variables: {
+ *      regionId: // value for 'regionId'
+ *   },
+ * });
+ */
+export function useAdminDeleteRegionMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminDeleteRegionMutation, AdminDeleteRegionMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminDeleteRegionMutation, AdminDeleteRegionMutationVariables>(
+    AdminDeleteRegionDocument,
+    options,
+  )
+}
+export type AdminDeleteRegionMutationHookResult = ReturnType<typeof useAdminDeleteRegionMutation>
+export type AdminDeleteRegionMutationResult = Apollo.MutationResult<AdminDeleteRegionMutation>
+export type AdminDeleteRegionMutationOptions = Apollo.BaseMutationOptions<
+  AdminDeleteRegionMutation,
+  AdminDeleteRegionMutationVariables
+>
+export const AdminUpdateRegionDocument = gql`
+  mutation adminUpdateRegion($regionId: String!, $input: AdminUpdateRegionInput!) {
+    updateRegion: adminUpdateRegion(regionId: $regionId, input: $input) {
+      ...AdminRegionDetails
+    }
+  }
+  ${AdminRegionDetailsFragmentDoc}
+`
+export type AdminUpdateRegionMutationFn = Apollo.MutationFunction<
+  AdminUpdateRegionMutation,
+  AdminUpdateRegionMutationVariables
+>
+
+/**
+ * __useAdminUpdateRegionMutation__
+ *
+ * To run a mutation, you first call `useAdminUpdateRegionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminUpdateRegionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminUpdateRegionMutation, { data, loading, error }] = useAdminUpdateRegionMutation({
+ *   variables: {
+ *      regionId: // value for 'regionId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminUpdateRegionMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminUpdateRegionMutation, AdminUpdateRegionMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminUpdateRegionMutation, AdminUpdateRegionMutationVariables>(
+    AdminUpdateRegionDocument,
+    options,
+  )
+}
+export type AdminUpdateRegionMutationHookResult = ReturnType<typeof useAdminUpdateRegionMutation>
+export type AdminUpdateRegionMutationResult = Apollo.MutationResult<AdminUpdateRegionMutation>
+export type AdminUpdateRegionMutationOptions = Apollo.BaseMutationOptions<
+  AdminUpdateRegionMutation,
+  AdminUpdateRegionMutationVariables
+>
+export const AdminRegionDocument = gql`
+  query AdminRegion($regionId: String!) {
+    region: adminRegion(regionId: $regionId) {
+      ...AdminRegionDetails
+    }
+  }
+  ${AdminRegionDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminRegionQuery__
+ *
+ * To run a query within a React component, call `useAdminRegionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminRegionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminRegionQuery({
+ *   variables: {
+ *      regionId: // value for 'regionId'
+ *   },
+ * });
+ */
+export function useAdminRegionQuery(baseOptions: Apollo.QueryHookOptions<AdminRegionQuery, AdminRegionQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminRegionQuery, AdminRegionQueryVariables>(AdminRegionDocument, options)
+}
+export function useAdminRegionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminRegionQuery, AdminRegionQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminRegionQuery, AdminRegionQueryVariables>(AdminRegionDocument, options)
+}
+export type AdminRegionQueryHookResult = ReturnType<typeof useAdminRegionQuery>
+export type AdminRegionLazyQueryHookResult = ReturnType<typeof useAdminRegionLazyQuery>
+export type AdminRegionQueryResult = Apollo.QueryResult<AdminRegionQuery, AdminRegionQueryVariables>
+export const AdminRegionsDocument = gql`
+  query AdminRegions($input: AdminListRegionInput) {
+    regions: adminRegions(input: $input) {
+      ...AdminRegionDetails
+    }
+    counters: adminCountRegions(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${AdminRegionDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminRegionsQuery__
+ *
+ * To run a query within a React component, call `useAdminRegionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminRegionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminRegionsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminRegionsQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminRegionsQuery, AdminRegionsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminRegionsQuery, AdminRegionsQueryVariables>(AdminRegionsDocument, options)
+}
+export function useAdminRegionsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminRegionsQuery, AdminRegionsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminRegionsQuery, AdminRegionsQueryVariables>(AdminRegionsDocument, options)
+}
+export type AdminRegionsQueryHookResult = ReturnType<typeof useAdminRegionsQuery>
+export type AdminRegionsLazyQueryHookResult = ReturnType<typeof useAdminRegionsLazyQuery>
+export type AdminRegionsQueryResult = Apollo.QueryResult<AdminRegionsQuery, AdminRegionsQueryVariables>
+export const AdminRegionPaginationDocument = gql`
+  query AdminRegionPagination($input: AdminListRegionInput) {
+    counters: adminCountRegions(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminRegionPaginationQuery__
+ *
+ * To run a query within a React component, call `useAdminRegionPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminRegionPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminRegionPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminRegionPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>(
+    AdminRegionPaginationDocument,
+    options,
+  )
+}
+export function useAdminRegionPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>(
+    AdminRegionPaginationDocument,
+    options,
+  )
+}
+export type AdminRegionPaginationQueryHookResult = ReturnType<typeof useAdminRegionPaginationQuery>
+export type AdminRegionPaginationLazyQueryHookResult = ReturnType<typeof useAdminRegionPaginationLazyQuery>
+export type AdminRegionPaginationQueryResult = Apollo.QueryResult<
+  AdminRegionPaginationQuery,
+  AdminRegionPaginationQueryVariables
+>
+export const AdminCreateTerritoryDocument = gql`
+  mutation adminCreateTerritory($input: AdminCreateTerritoryInput!) {
+    createTerritory: adminCreateTerritory(input: $input) {
+      ...AdminTerritoryDetails
+    }
+  }
+  ${AdminTerritoryDetailsFragmentDoc}
+`
+export type AdminCreateTerritoryMutationFn = Apollo.MutationFunction<
+  AdminCreateTerritoryMutation,
+  AdminCreateTerritoryMutationVariables
+>
+
+/**
+ * __useAdminCreateTerritoryMutation__
+ *
+ * To run a mutation, you first call `useAdminCreateTerritoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminCreateTerritoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminCreateTerritoryMutation, { data, loading, error }] = useAdminCreateTerritoryMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCreateTerritoryMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminCreateTerritoryMutation, AdminCreateTerritoryMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminCreateTerritoryMutation, AdminCreateTerritoryMutationVariables>(
+    AdminCreateTerritoryDocument,
+    options,
+  )
+}
+export type AdminCreateTerritoryMutationHookResult = ReturnType<typeof useAdminCreateTerritoryMutation>
+export type AdminCreateTerritoryMutationResult = Apollo.MutationResult<AdminCreateTerritoryMutation>
+export type AdminCreateTerritoryMutationOptions = Apollo.BaseMutationOptions<
+  AdminCreateTerritoryMutation,
+  AdminCreateTerritoryMutationVariables
+>
+export const AdminDeleteTerritoryDocument = gql`
+  mutation adminDeleteTerritory($territoryId: String!) {
+    deleteTerritory: adminDeleteTerritory(territoryId: $territoryId) {
+      id
+    }
+  }
+`
+export type AdminDeleteTerritoryMutationFn = Apollo.MutationFunction<
+  AdminDeleteTerritoryMutation,
+  AdminDeleteTerritoryMutationVariables
+>
+
+/**
+ * __useAdminDeleteTerritoryMutation__
+ *
+ * To run a mutation, you first call `useAdminDeleteTerritoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminDeleteTerritoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminDeleteTerritoryMutation, { data, loading, error }] = useAdminDeleteTerritoryMutation({
+ *   variables: {
+ *      territoryId: // value for 'territoryId'
+ *   },
+ * });
+ */
+export function useAdminDeleteTerritoryMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminDeleteTerritoryMutation, AdminDeleteTerritoryMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminDeleteTerritoryMutation, AdminDeleteTerritoryMutationVariables>(
+    AdminDeleteTerritoryDocument,
+    options,
+  )
+}
+export type AdminDeleteTerritoryMutationHookResult = ReturnType<typeof useAdminDeleteTerritoryMutation>
+export type AdminDeleteTerritoryMutationResult = Apollo.MutationResult<AdminDeleteTerritoryMutation>
+export type AdminDeleteTerritoryMutationOptions = Apollo.BaseMutationOptions<
+  AdminDeleteTerritoryMutation,
+  AdminDeleteTerritoryMutationVariables
+>
+export const AdminUpdateTerritoryDocument = gql`
+  mutation adminUpdateTerritory($territoryId: String!, $input: AdminUpdateTerritoryInput!) {
+    updateTerritory: adminUpdateTerritory(territoryId: $territoryId, input: $input) {
+      ...AdminTerritoryDetails
+    }
+  }
+  ${AdminTerritoryDetailsFragmentDoc}
+`
+export type AdminUpdateTerritoryMutationFn = Apollo.MutationFunction<
+  AdminUpdateTerritoryMutation,
+  AdminUpdateTerritoryMutationVariables
+>
+
+/**
+ * __useAdminUpdateTerritoryMutation__
+ *
+ * To run a mutation, you first call `useAdminUpdateTerritoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminUpdateTerritoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminUpdateTerritoryMutation, { data, loading, error }] = useAdminUpdateTerritoryMutation({
+ *   variables: {
+ *      territoryId: // value for 'territoryId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminUpdateTerritoryMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminUpdateTerritoryMutation, AdminUpdateTerritoryMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminUpdateTerritoryMutation, AdminUpdateTerritoryMutationVariables>(
+    AdminUpdateTerritoryDocument,
+    options,
+  )
+}
+export type AdminUpdateTerritoryMutationHookResult = ReturnType<typeof useAdminUpdateTerritoryMutation>
+export type AdminUpdateTerritoryMutationResult = Apollo.MutationResult<AdminUpdateTerritoryMutation>
+export type AdminUpdateTerritoryMutationOptions = Apollo.BaseMutationOptions<
+  AdminUpdateTerritoryMutation,
+  AdminUpdateTerritoryMutationVariables
+>
+export const AdminTerritoryDocument = gql`
+  query AdminTerritory($territoryId: String!) {
+    territory: adminTerritory(territoryId: $territoryId) {
+      ...AdminTerritoryDetails
+    }
+  }
+  ${AdminTerritoryDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminTerritoryQuery__
+ *
+ * To run a query within a React component, call `useAdminTerritoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTerritoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTerritoryQuery({
+ *   variables: {
+ *      territoryId: // value for 'territoryId'
+ *   },
+ * });
+ */
+export function useAdminTerritoryQuery(
+  baseOptions: Apollo.QueryHookOptions<AdminTerritoryQuery, AdminTerritoryQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminTerritoryQuery, AdminTerritoryQueryVariables>(AdminTerritoryDocument, options)
+}
+export function useAdminTerritoryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminTerritoryQuery, AdminTerritoryQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminTerritoryQuery, AdminTerritoryQueryVariables>(AdminTerritoryDocument, options)
+}
+export type AdminTerritoryQueryHookResult = ReturnType<typeof useAdminTerritoryQuery>
+export type AdminTerritoryLazyQueryHookResult = ReturnType<typeof useAdminTerritoryLazyQuery>
+export type AdminTerritoryQueryResult = Apollo.QueryResult<AdminTerritoryQuery, AdminTerritoryQueryVariables>
+export const AdminTerritoriesDocument = gql`
+  query AdminTerritories($input: AdminListTerritoryInput) {
+    territories: adminTerritories(input: $input) {
+      ...AdminTerritoryDetails
+    }
+    counters: adminCountTerritories(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${AdminTerritoryDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminTerritoriesQuery__
+ *
+ * To run a query within a React component, call `useAdminTerritoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTerritoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTerritoriesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminTerritoriesQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>(AdminTerritoriesDocument, options)
+}
+export function useAdminTerritoriesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>(AdminTerritoriesDocument, options)
+}
+export type AdminTerritoriesQueryHookResult = ReturnType<typeof useAdminTerritoriesQuery>
+export type AdminTerritoriesLazyQueryHookResult = ReturnType<typeof useAdminTerritoriesLazyQuery>
+export type AdminTerritoriesQueryResult = Apollo.QueryResult<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>
+export const AdminTerritoryPaginationDocument = gql`
+  query AdminTerritoryPagination($input: AdminListTerritoryInput) {
+    counters: adminCountTerritories(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminTerritoryPaginationQuery__
+ *
+ * To run a query within a React component, call `useAdminTerritoryPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTerritoryPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTerritoryPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminTerritoryPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>(
+    AdminTerritoryPaginationDocument,
+    options,
+  )
+}
+export function useAdminTerritoryPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>(
+    AdminTerritoryPaginationDocument,
+    options,
+  )
+}
+export type AdminTerritoryPaginationQueryHookResult = ReturnType<typeof useAdminTerritoryPaginationQuery>
+export type AdminTerritoryPaginationLazyQueryHookResult = ReturnType<typeof useAdminTerritoryPaginationLazyQuery>
+export type AdminTerritoryPaginationQueryResult = Apollo.QueryResult<
+  AdminTerritoryPaginationQuery,
+  AdminTerritoryPaginationQueryVariables
+>
 export const AdminCreateTransactionDocument = gql`
   mutation adminCreateTransaction($input: AdminCreateTransactionInput!) {
     createTransaction: adminCreateTransaction(input: $input) {
@@ -3701,12 +4908,16 @@ export type AdminTransactionQueryHookResult = ReturnType<typeof useAdminTransact
 export type AdminTransactionLazyQueryHookResult = ReturnType<typeof useAdminTransactionLazyQuery>
 export type AdminTransactionQueryResult = Apollo.QueryResult<AdminTransactionQuery, AdminTransactionQueryVariables>
 export const AdminTransactionsDocument = gql`
-  query AdminTransactions($input: AdminListTransactionInput!) {
+  query AdminTransactions($input: AdminListTransactionInput) {
     transactions: adminTransactions(input: $input) {
       ...AdminTransactionDetails
     }
+    counters: adminCountTransactions(input: $input) {
+      ...CorePagingDetails
+    }
   }
   ${AdminTransactionDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
 `
 
 /**
@@ -3726,7 +4937,7 @@ export const AdminTransactionsDocument = gql`
  * });
  */
 export function useAdminTransactionsQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminTransactionsQuery, AdminTransactionsQueryVariables>,
+  baseOptions?: Apollo.QueryHookOptions<AdminTransactionsQuery, AdminTransactionsQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<AdminTransactionsQuery, AdminTransactionsQueryVariables>(AdminTransactionsDocument, options)
@@ -3744,7 +4955,7 @@ export type AdminTransactionsQueryHookResult = ReturnType<typeof useAdminTransac
 export type AdminTransactionsLazyQueryHookResult = ReturnType<typeof useAdminTransactionsLazyQuery>
 export type AdminTransactionsQueryResult = Apollo.QueryResult<AdminTransactionsQuery, AdminTransactionsQueryVariables>
 export const AdminTransactionPaginationDocument = gql`
-  query AdminTransactionPagination($input: AdminListTransactionInput!) {
+  query AdminTransactionPagination($input: AdminListTransactionInput) {
     counters: adminCountTransactions(input: $input) {
       ...CorePagingDetails
     }
@@ -3769,7 +4980,7 @@ export const AdminTransactionPaginationDocument = gql`
  * });
  */
 export function useAdminTransactionPaginationQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminTransactionPaginationQuery, AdminTransactionPaginationQueryVariables>,
+  baseOptions?: Apollo.QueryHookOptions<AdminTransactionPaginationQuery, AdminTransactionPaginationQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<AdminTransactionPaginationQuery, AdminTransactionPaginationQueryVariables>(

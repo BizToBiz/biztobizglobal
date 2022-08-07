@@ -10,13 +10,16 @@ query AdminTransaction($transactionId: String!) {
 #  }
 #}
 
-query AdminTransactions($input: AdminListTransactionInput!) {
+query AdminTransactions($input: AdminListTransactionInput) {
   transactions: adminTransactions(input: $input) {
     ...AdminTransactionDetails
   }
+  counters: adminCountTransactions(input: $input) {
+    ...CorePagingDetails
+  }
 }
 
-query AdminTransactionPagination($input: AdminListTransactionInput!) {
+query AdminTransactionPagination($input: AdminListTransactionInput) {
   counters: adminCountTransactions(input: $input) {
     ...CorePagingDetails
   }

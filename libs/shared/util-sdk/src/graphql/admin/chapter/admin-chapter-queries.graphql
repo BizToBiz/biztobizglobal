@@ -10,7 +10,7 @@ query AdminChapter($chapterId: String!) {
 #  }
 #}
 
-query AdminChapters($input: AdminListChapterInput!) {
+query AdminChapters($input: AdminListChapterInput) {
   chapters: adminChapters(input: $input) {
     ...AdminChapterDetails
   }

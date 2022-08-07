@@ -13,13 +13,29 @@ export class ApiChapterDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
   private readonly searchFields = ['name', 'description', 'city', 'state', 'meetingTime']
-  private where(query = ''): Prisma.ChapterWhereInput {
-    query = query?.trim()
+  private where(input: AdminListChapterInput): Prisma.ChapterWhereInput {
+    const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    function relationalSearch() {
+      if (input?.regionId) {
+        return { regionId: input.regionId }
+      }
+      if (input?.substituteGroupId) {
+        return { substituteGroupId: input.substituteGroupId }
+      }
+      if (input?.memberId) {
+        return { members: { some: { id: input.memberId } } }
+      }
+      return null
+    }
     return {
-      AND: terms.map((term) => ({
-        OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
-      })),
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
     }
   }
 
@@ -28,18 +44,21 @@ export class ApiChapterDataAccessAdminService {
     return this.data.chapter.findMany({
       take: input?.take,
       skip: input?.skip,
-      where: this.where(input?.search),
+      where: this.where(input),
       ...select,
     })
   }
 
   async adminCountChapters(adminId: string, input?: AdminListChapterInput): Promise<CorePaging> {
     const total = await this.data.chapter.count()
-    const count = await this.data.chapter.count({ where: this.where(input?.search) })
+    const count = await this.data.chapter.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
-      page: input?.skip / input?.take,
+      take,
+      skip,
+      page,
       count,
       total,
     }
@@ -59,7 +78,6 @@ export class ApiChapterDataAccessAdminService {
   }
 
   adminUpdateChapter(info: GraphQLResolveInfo, adminId: string, chapterId, input: AdminUpdateChapterInput) {
-    console.log({ input })
     const select = new PrismaSelect(info).value
     return this.data.chapter.update({
       where: { id: chapterId },

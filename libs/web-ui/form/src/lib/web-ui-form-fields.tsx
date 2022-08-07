@@ -28,7 +28,9 @@ export interface WebUiFormFieldOptions {
   selectOptions?: { label: string; value: string }[]
   document?: DocumentNode | TypedDocumentNode
   dataType?: string
-  selectOptionsFunction?: (data: Record<string, unknown>[]) => OptionsOrGroups<any, any>[]
+  selectOptionsFunction?: (data: any[]) => OptionsOrGroups<any, any>[]
+  multiselect?: boolean
+  filter?: (data: any) => void
 }
 
 export interface WebUiFormField {
@@ -78,7 +80,7 @@ export class WebUiFormField {
     return this.field(WebUiFormFieldType.EnumSelect, key, options)
   }
 
-  static relationSelect(key: string, options: WebUiFormFieldOptions = {}): WebUiFormField {
+  static relationSelect(key: string, options: WebUiFormFieldOptions = { filter: undefined }): WebUiFormField {
     return this.field(WebUiFormFieldType.RelationSelect, key, options)
   }
 

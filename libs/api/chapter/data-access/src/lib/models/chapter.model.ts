@@ -62,9 +62,10 @@ export class Chapter {
   @Field(() => SubstituteGroup, { nullable: true })
   substituteGroup?: SubstituteGroup
 
-  region?: Region
+  @Field(() => Region, { nullable: true })
+  region?: Omit<[Region], ''>
 
-  @Field(() => [ChapterMember])
+  @Field(() => [ChapterMember], { nullable: true })
   members?: ChapterMember[]
 
   @Field(() => Upload, { nullable: true })

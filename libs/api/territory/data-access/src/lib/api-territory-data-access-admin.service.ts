@@ -6,10 +6,38 @@ import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-ac
 import { AdminCreateTerritoryInput } from './dto/admin-create-territory.input'
 import { AdminListTerritoryInput } from './dto/admin-list-territory.input'
 import { AdminUpdateTerritoryInput } from './dto/admin-update-territory.input'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiTerritoryDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = ['name']
+  private where(input: AdminListTerritoryInput): Prisma.TerritoryWhereInput {
+    const query = input?.search?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    // function relationalSearch() {
+    //   if (input?.regionId) {
+    //     return { regionId: input.regionId }
+    //   }
+    //   if (input?.substituteGroupId) {
+    //     return { substituteGroupId: input.substituteGroupId }
+    //   }
+    //   if (input?.memberId) {
+    //     return { members: { some: { id: input.memberId } } }
+    //   }
+    //   return null
+    // }
+    return {
+      AND: [
+        // relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
+    }
+  }
 
   adminTerritories(info: GraphQLResolveInfo, adminId: string, input?: AdminListTerritoryInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +50,15 @@ export class ApiTerritoryDataAccessAdminService {
 
   async adminCountTerritories(adminId: string, input?: AdminListTerritoryInput): Promise<CorePaging> {
     const total = await this.data.territory.count()
+    const count = await this.data.territory.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +71,7 @@ export class ApiTerritoryDataAccessAdminService {
   adminCreateTerritory(info: GraphQLResolveInfo, adminId: string, input: AdminCreateTerritoryInput) {
     const select = new PrismaSelect(info).value
     return this.data.territory.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -46,7 +80,7 @@ export class ApiTerritoryDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.territory.update({
       where: { id: territoryId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

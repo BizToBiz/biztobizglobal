@@ -73,4 +73,19 @@ export class ApiCoreDataAccessService extends PrismaClient implements OnModuleIn
     ]
     return denied.includes(username)
   }
+
+  async generateCount(dataType: string, input, thisWhere) {
+    const total = await this?.['dataType'].count()
+    const count = await this.region.count({ where: thisWhere })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
+    return {
+      take,
+      skip,
+      page,
+      count,
+      total,
+    }
+  }
 }

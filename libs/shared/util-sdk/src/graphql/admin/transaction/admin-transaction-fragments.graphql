@@ -13,4 +13,8 @@ fragment AdminTransactionDetails on Transaction {
     firstName
     lastName
   }
+  chapter {
+    id
+    name
+  }
 }

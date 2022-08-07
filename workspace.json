@@ -17,6 +17,7 @@
     "api-company-feature": "libs/api/company/feature",
     "api-core-data-access": "libs/api/core/data-access",
     "api-core-feature": "libs/api/core/feature",
+    "api-core-util": "libs/api/core/util",
     "api-e2e": "apps/api-e2e",
     "api-mailer-data-access": "libs/api/mailer/data-access",
     "api-meeting-data-access": "libs/api/meeting/data-access",

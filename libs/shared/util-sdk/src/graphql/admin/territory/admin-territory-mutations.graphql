@@ -1,0 +1,17 @@
+mutation adminCreateTerritory($input: AdminCreateTerritoryInput!) {
+  createTerritory: adminCreateTerritory(input: $input) {
+    ...AdminTerritoryDetails
+  }
+}
+
+mutation adminDeleteTerritory($territoryId: String!) {
+  deleteTerritory: adminDeleteTerritory(territoryId: $territoryId) {
+    id
+  }
+}
+
+mutation adminUpdateTerritory($territoryId: String!, $input: AdminUpdateTerritoryInput!) {
+  updateTerritory: adminUpdateTerritory(territoryId: $territoryId, input: $input) {
+    ...AdminTerritoryDetails
+  }
+}

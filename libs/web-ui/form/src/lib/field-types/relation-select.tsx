@@ -14,12 +14,14 @@ interface RelationSelectProps {
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch } = useQuery(props?.field?.options?.document ?? UptimeDocument)
 
-  console.log(props.control)
+  let dataList = props?.field?.options?.dataType && !loading ? data?.[props.field.options.dataType] : []
+  if (props?.field?.options?.filter && !loading) {
+    dataList = props.field.options.filter(dataList)
+  }
 
-  const defaultOptions =
-    props?.field?.options?.selectOptionsFunction && props?.field?.options?.dataType
-      ? props?.field?.options?.selectOptionsFunction(data?.[props.field.options.dataType])
-      : [{ value: '', label: 'Loading...' }]
+  const defaultOptions = props?.field?.options?.selectOptionsFunction
+    ? props?.field?.options?.selectOptionsFunction(dataList)
+    : [{ value: '', label: 'Loading...' }]
 
   async function getStorageOptions(inputText: string): Promise<OptionsOrGroups<any, GroupBase<any>>> {
     return refetch({ input: { search: inputText } }).then((res) => {
@@ -46,6 +48,7 @@ export function RelationSelect(props: RelationSelectProps) {
           loadOptions={getStorageOptions}
           onChange={onChange}
           isLoading={loading}
+          isMulti={props.field.options.multiselect}
         />
       )}
     />

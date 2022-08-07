@@ -1,51 +1,26 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { useAtom } from 'jotai'
-import { currentPathAtom } from '@biztobiz/web/global/data-access'
-import { RESET } from 'jotai/utils'
-import { WebUiForm } from '@biztobiz/web-ui/form'
-import { AdminCreateUserInput, useAdminCreateUserMutation } from '@biztobiz/shared/util-sdk'
+import React from 'react'
+import { AdminCreateUserDocument } from '@biztobiz/shared/util-sdk'
 import { userFields } from './web-admin-user-helper'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
+import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
 
 export function WebAdminUserCreate() {
-  const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
-  const [loading, setLoading] = useState(false)
-
-  const [createMember] = useAdminCreateUserMutation()
-
-  const submit = async (input: AdminCreateUserInput) => {
-    setLoading(true)
-    const cleanedInput = cleanObject(input)
-    await createMember({
-      variables: {
-        input: cleanedInput,
-      },
-    })
-    setLoading(false)
+  const pathData = {
+    path: '/admin/users/new',
+    name: 'Create a User',
+    description: 'Use the form below to add a new User',
+    showSearch: false,
+    actionText: 'Back to User List',
+    actionLink: '/admin/users',
   }
 
-  useLayoutEffect(() => {
-    setCurrentPath({
-      path: '/admin/members/new',
-      name: 'Create a Member',
-      description: 'Use the form below to add a new Member',
-      showSearch: false,
-      actionText: 'Back to Member List',
-      actionLink: '/admin/members',
-    })
-
-    return () => {
-      setCurrentPath(RESET)
-    }
-  }, [])
-
   return (
-    <WebUiForm
+    <WebAdminCreateForm
       fields={userFields}
-      submit={(values) => submit(values as AdminCreateUserInput)}
-      defaultValues={undefined}
-      buttonText={'Create Member'}
-      loading={loading}
+      buttonText={'Create User'}
+      document={AdminCreateUserDocument}
+      navigateTo={'/admin/user'}
+      pathData={pathData}
+      mutationName={'createUser'}
     />
   )
 }

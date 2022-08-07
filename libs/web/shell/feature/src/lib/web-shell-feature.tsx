@@ -20,15 +20,24 @@ import {
   WebAdminChapterCreate,
   WebAdminChapterList,
   WebAdminChapterUpdate,
+  WebAdminCompanyCreate,
+  WebAdminCompanyList,
+  WebAdminCompanyUpdate,
   WebAdminDashboardFeature,
+  WebAdminRegionCreate,
+  WebAdminRegionList,
+  WebAdminRegionUpdate,
+  WebAdminTerritoryCreate,
+  WebAdminTerritoryList,
+  WebAdminTerritoryUpdate,
+  WebAdminTransactionCreate,
+  WebAdminTransactionList,
+  WebAdminTransactionUpdate,
+  WebAdminUserCreate,
+  WebAdminUserList,
+  WebAdminUserUpdate,
 } from '@biztobiz/web/admin-dashboard/feature'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
-import { WebAdminUserList } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-list'
-import { WebAdminUserCreate } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-create'
-import { WebAdminUserUpdate } from '../../../../admin-dashboard/feature/src/lib/web-admin-user/web-admin-user-update'
-import { WebAdminTransactionCreate } from '../../../../admin-dashboard/feature/src/lib/web-admin-transaction/web-admin-transaction-create'
-import { WebAdminTransactionUpdate } from '../../../../admin-dashboard/feature/src/lib/web-admin-transaction/web-admin-transaction-update'
-import { WebAdminTransactionList } from '../../../../admin-dashboard/feature/src/lib/web-admin-transaction/web-admin-transaction-list'
 
 function PrivateOutlet(props) {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom)
@@ -79,6 +88,21 @@ export function WebShellFeature() {
             <Route path="transaction">
               <Route path="new" element={<WebAdminTransactionCreate />} />
               <Route path=":id" element={<WebAdminTransactionUpdate />} />
+            </Route>
+            <Route path="companies" element={<WebAdminCompanyList />} />
+            <Route path="company">
+              <Route path="new" element={<WebAdminCompanyCreate />} />
+              <Route path=":id" element={<WebAdminCompanyUpdate />} />
+            </Route>
+            <Route path="territories" element={<WebAdminTerritoryList />} />
+            <Route path="territory">
+              <Route path="new" element={<WebAdminTerritoryCreate />} />
+              <Route path=":id" element={<WebAdminTerritoryUpdate />} />
+            </Route>{' '}
+            <Route path="regions" element={<WebAdminRegionList />} />
+            <Route path="region">
+              <Route path="new" element={<WebAdminRegionCreate />} />
+              <Route path=":id" element={<WebAdminRegionUpdate />} />
             </Route>
           </Route>
           <Route path="/" element={<WebAboutFeature />} />

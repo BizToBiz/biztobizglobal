@@ -12,7 +12,6 @@ function isValidDate(d: any) {
 }
 
 export function cleanObject(obj: Record<string, unknown>) {
-  console.log(obj)
   return Object.fromEntries(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
@@ -31,23 +30,20 @@ export function cleanObject(obj: Record<string, unknown>) {
         return true
       })
       .map(([k, v]) => {
-        console.log('Unfiltered', k)
         // Reformat date strings for storage in database
         if (k.includes('Date') || k.includes('date')) {
-          console.log('got a date', v)
           if (typeof v === 'object') {
             return [k, (v as Date).toISOString().split('T')[0]]
           }
           return [k, (v as string).split('T')[0]]
         }
         // Convert numbers to numbers
-        if (Number.isInteger(Number(v))) {
+        if (Number.isInteger(Number(v)) && v !== true && v !== false) {
           return [k, parseInt(v as string)]
         }
 
         // Return value only for select fields
         if (k.includes('Id')) {
-          console.log('K', k)
           return [k, (v as any)?.['value']]
         }
         return [k, v]

@@ -62,21 +62,18 @@ export class ApiTransactionDataAccessAdminService {
   }
 
   async adminCreateTransaction(info: GraphQLResolveInfo, adminId: string, input: AdminCreateTransactionInput) {
-    console.log('Input', input)
     const select = new PrismaSelect(info).value
-    const transaction = await this.data.transaction.create({
-      data: input,
+    return this.data.transaction.create({
+      data: { ...input },
       ...select,
     })
-    console.log(transaction)
-    return transaction
   }
 
   adminUpdateTransaction(info: GraphQLResolveInfo, adminId: string, transactionId, input: AdminUpdateTransactionInput) {
     const select = new PrismaSelect(info).value
     return this.data.transaction.update({
       where: { id: transactionId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

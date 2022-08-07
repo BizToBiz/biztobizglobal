@@ -6,10 +6,22 @@ import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-ac
 import { UserCreateRegionInput } from './dto/user-create-region.input'
 import { UserListRegionInput } from './dto/user-list-region.input'
 import { UserUpdateRegionInput } from './dto/user-update-region.input'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiRegionDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = ['name']
+  private where(query = ''): Prisma.RegionWhereInput {
+    query = query?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+    return {
+      AND: terms.map((term) => ({
+        OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+      })),
+    }
+  }
 
   userRegions(info: GraphQLResolveInfo, userId: string, input?: UserListRegionInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +34,15 @@ export class ApiRegionDataAccessUserService {
 
   async userCountRegions(userId: string, input?: UserListRegionInput): Promise<CorePaging> {
     const total = await this.data.region.count()
+    const count = await this.data.region.count({ where: this.where(input?.search) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }

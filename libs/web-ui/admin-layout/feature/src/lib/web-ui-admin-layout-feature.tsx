@@ -1,6 +1,17 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { BellIcon, CashIcon, HomeIcon, MenuAlt2Icon, UserGroupIcon, UserIcon, XIcon } from '@heroicons/react/outline'
+import {
+  BellIcon,
+  CashIcon,
+  GlobeAltIcon,
+  GlobeIcon,
+  HomeIcon,
+  MenuAlt2Icon,
+  OfficeBuildingIcon,
+  UserGroupIcon,
+  UserIcon,
+  XIcon,
+} from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import { User } from '@biztobiz/shared/util-sdk'
 import fullLogo from './assets/full-logo.png'
@@ -39,6 +50,25 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
       icon: CashIcon,
       current: currentPath.name.includes('Transaction'),
     },
+    {
+      name: 'Companies',
+      href: '/admin/companies',
+      icon: OfficeBuildingIcon,
+      current: currentPath.name.includes('Compan'),
+    },
+    {
+      name: 'Territories',
+      href: '/admin/territories',
+      icon: GlobeAltIcon,
+      current: currentPath.name.includes('Territor'),
+    },
+    {
+      name: 'Regions',
+      href: '/admin/regions',
+      icon: GlobeIcon,
+      current: currentPath.name.includes('Region'),
+    },
+
     // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
     // { name: 'Documents', href: '#', icon: InboxIcon, current: false },
     // { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
