@@ -8,6 +8,7 @@ import {
   HomeIcon,
   MenuAlt2Icon,
   OfficeBuildingIcon,
+  UserAddIcon,
   UserGroupIcon,
   UserIcon,
   XIcon,
@@ -49,6 +50,12 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
       href: '/admin/transactions',
       icon: CashIcon,
       current: currentPath.name.includes('Transaction'),
+    },
+    {
+      name: 'Referrals',
+      href: '/admin/referrals',
+      icon: UserAddIcon,
+      current: currentPath.name.includes('Referral'),
     },
     {
       name: 'Companies',

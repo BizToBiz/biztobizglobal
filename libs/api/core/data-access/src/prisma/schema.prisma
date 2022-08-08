@@ -356,8 +356,8 @@ model Referral {
   notes         String?
   fromIndustry  String?
   toIndustry    String?
-  sentBy        User           @relation(name: "Referral_HasOne_SentByUser", fields: [sentById], references: [id])
-  sentById      String
+  sentBy        User?          @relation(name: "Referral_HasOne_SentByUser", fields: [sentById], references: [id])
+  sentById      String?
   from          User?          @relation(name: "Referral_HasOne_FromUser", fields: [fromId], references: [id])
   fromId        String?
   to            User?          @relation(name: "Referral_HasOne_ToUser", fields: [toId], references: [id])

@@ -37,10 +37,6 @@ export function cleanObject(obj: Record<string, unknown>) {
           }
           return [k, (v as string).split('T')[0]]
         }
-        // Convert numbers to numbers
-        if (Number.isInteger(Number(v)) && v !== true && v !== false) {
-          return [k, parseInt(v as string)]
-        }
 
         // Return value only for select fields
         if (k.includes('Id')) {

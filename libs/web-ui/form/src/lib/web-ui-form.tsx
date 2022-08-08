@@ -3,6 +3,7 @@ import { Controller, useForm, UseFormProps } from 'react-hook-form'
 import { WebUiFormField, WebUiFormFieldType } from './web-ui-form-fields'
 import { Switch } from '@headlessui/react'
 import { RelationSelect } from './field-types/relation-select'
+import { isPhoneNumber } from 'class-validator'
 
 export interface WebUiFormProps extends UseFormProps {
   fields: WebUiFormField[]
@@ -26,6 +27,10 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
+  }
+
+  function validatePhone(phone: string) {
+    return isPhoneNumber(phone, 'US')
   }
 
   function renderFieldWrapper(field: WebUiFormField) {
@@ -100,6 +105,23 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         )
+      case WebUiFormFieldType.Phone:
+        return (
+          <>
+            <input
+              id={field.key}
+              type="tel"
+              {...register(`${field.key}`, {
+                required: false,
+                validate: (v) => validatePhone(v),
+              })}
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+            {errors[field.key] && errors[field.key].type === 'validate' && (
+              <div className="error">Please enter a valid phone number</div>
+            )}
+          </>
+        )
       case WebUiFormFieldType.TextArea:
         return (
           <textarea
@@ -123,7 +145,7 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
           <input
             id={field.key}
             type="number"
-            {...register(`${field.key}`, { required: field?.options?.required })}
+            {...register(`${field.key}`, { required: field?.options?.required, valueAsNumber: true })}
             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         )

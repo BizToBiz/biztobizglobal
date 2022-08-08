@@ -1,0 +1,36 @@
+fragment AdminReferralDetails on Referral {
+  id
+  createdAt
+  updatedAt
+  firstName
+  lastName
+  email
+  rating
+  phone
+  notes
+  fromIndustry
+  toIndustry
+  from {
+    id
+    firstName
+    lastName
+  }
+  to {
+    id
+    firstName
+    lastName
+  }
+  fromChapter {
+    id
+    name
+  }
+  toChapter {
+    id
+    name
+  }
+  sentBy {
+    id
+    firstName
+    lastName
+  }
+}

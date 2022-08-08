@@ -24,6 +24,9 @@ import {
   WebAdminCompanyList,
   WebAdminCompanyUpdate,
   WebAdminDashboardFeature,
+  WebAdminReferralCreate,
+  WebAdminReferralList,
+  WebAdminReferralUpdate,
   WebAdminRegionCreate,
   WebAdminRegionList,
   WebAdminRegionUpdate,
@@ -103,6 +106,11 @@ export function WebShellFeature() {
             <Route path="region">
               <Route path="new" element={<WebAdminRegionCreate />} />
               <Route path=":id" element={<WebAdminRegionUpdate />} />
+            </Route>
+            <Route path="referrals" element={<WebAdminReferralList />} />
+            <Route path="referral">
+              <Route path="new" element={<WebAdminReferralCreate />} />
+              <Route path=":id" element={<WebAdminReferralUpdate />} />
             </Route>
           </Route>
           <Route path="/" element={<WebAboutFeature />} />

@@ -37,7 +37,7 @@ export class <%= apiClassName %><%= modelClassName %>DataAccessAdminService {
   adminCreate<%= modelClassName %>(info: GraphQLResolveInfo, adminId: string, input: AdminCreate<%= modelClassName %>Input) {
     const select = new PrismaSelect(info).value
     return this.data.<%= modelPropertyName %>.create({
-      data: { <%= primaryField %>: input.<%= primaryField %> },
+      data: { ...input },
       ...select,
     })
   }
@@ -46,7 +46,7 @@ export class <%= apiClassName %><%= modelClassName %>DataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.<%= modelPropertyName %>.update({
       where: { id: <%= modelPropertyName %>Id },
-      data: { <%= primaryField %>: input.<%= primaryField %> },
+      data: { ...input },
       ...select,
     })
   }

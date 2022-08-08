@@ -77,7 +77,19 @@ export type AdminCreatePowerHourInput = {
 }
 
 export type AdminCreateReferralInput = {
-  name: Scalars['String']
+  email?: InputMaybe<Scalars['String']>
+  firstName?: InputMaybe<Scalars['String']>
+  fromChapterId?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  fromIndustry?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
+  notes?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  rating?: InputMaybe<ReferralRating>
+  sentById?: InputMaybe<Scalars['String']>
+  toChapterId?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
+  toIndustry?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateRegionInput = {
@@ -2537,6 +2549,168 @@ export type AdminCompanyPaginationQuery = {
   } | null
 }
 
+export type AdminReferralDetailsFragment = {
+  __typename?: 'Referral'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  firstName?: string | null
+  lastName?: string | null
+  email?: string | null
+  rating?: ReferralRating | null
+  phone?: string | null
+  notes?: string | null
+  fromIndustry?: string | null
+  toIndustry?: string | null
+  from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+  toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+  sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+}
+
+export type AdminCreateReferralMutationVariables = Exact<{
+  input: AdminCreateReferralInput
+}>
+
+export type AdminCreateReferralMutation = {
+  __typename?: 'Mutation'
+  createReferral?: {
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    rating?: ReferralRating | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminDeleteReferralMutationVariables = Exact<{
+  referralId: Scalars['String']
+}>
+
+export type AdminDeleteReferralMutation = {
+  __typename?: 'Mutation'
+  deleteReferral?: { __typename?: 'Referral'; id?: string | null } | null
+}
+
+export type AdminUpdateReferralMutationVariables = Exact<{
+  referralId: Scalars['String']
+  input: AdminUpdateReferralInput
+}>
+
+export type AdminUpdateReferralMutation = {
+  __typename?: 'Mutation'
+  updateReferral?: {
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    rating?: ReferralRating | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminReferralQueryVariables = Exact<{
+  referralId: Scalars['String']
+}>
+
+export type AdminReferralQuery = {
+  __typename?: 'Query'
+  referral?: {
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    rating?: ReferralRating | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  } | null
+}
+
+export type AdminReferralsQueryVariables = Exact<{
+  input?: InputMaybe<AdminListReferralInput>
+}>
+
+export type AdminReferralsQuery = {
+  __typename?: 'Query'
+  referrals?: Array<{
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    rating?: ReferralRating | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminReferralPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListReferralInput>
+}>
+
+export type AdminReferralPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
 export type AdminRegionDetailsFragment = {
   __typename?: 'Region'
   id?: string | null
@@ -3537,6 +3711,44 @@ export const AdminCompanyDetailsFragmentDoc = gql`
     name
   }
 `
+export const AdminReferralDetailsFragmentDoc = gql`
+  fragment AdminReferralDetails on Referral {
+    id
+    createdAt
+    updatedAt
+    firstName
+    lastName
+    email
+    rating
+    phone
+    notes
+    fromIndustry
+    toIndustry
+    from {
+      id
+      firstName
+      lastName
+    }
+    to {
+      id
+      firstName
+      lastName
+    }
+    fromChapter {
+      id
+      name
+    }
+    toChapter {
+      id
+      name
+    }
+    sentBy {
+      id
+      firstName
+      lastName
+    }
+  }
+`
 export const AdminRegionDetailsFragmentDoc = gql`
   fragment AdminRegionDetails on Region {
     id
@@ -4197,6 +4409,274 @@ export type AdminCompanyPaginationLazyQueryHookResult = ReturnType<typeof useAdm
 export type AdminCompanyPaginationQueryResult = Apollo.QueryResult<
   AdminCompanyPaginationQuery,
   AdminCompanyPaginationQueryVariables
+>
+export const AdminCreateReferralDocument = gql`
+  mutation adminCreateReferral($input: AdminCreateReferralInput!) {
+    createReferral: adminCreateReferral(input: $input) {
+      ...AdminReferralDetails
+    }
+  }
+  ${AdminReferralDetailsFragmentDoc}
+`
+export type AdminCreateReferralMutationFn = Apollo.MutationFunction<
+  AdminCreateReferralMutation,
+  AdminCreateReferralMutationVariables
+>
+
+/**
+ * __useAdminCreateReferralMutation__
+ *
+ * To run a mutation, you first call `useAdminCreateReferralMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminCreateReferralMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminCreateReferralMutation, { data, loading, error }] = useAdminCreateReferralMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminCreateReferralMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminCreateReferralMutation, AdminCreateReferralMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminCreateReferralMutation, AdminCreateReferralMutationVariables>(
+    AdminCreateReferralDocument,
+    options,
+  )
+}
+export type AdminCreateReferralMutationHookResult = ReturnType<typeof useAdminCreateReferralMutation>
+export type AdminCreateReferralMutationResult = Apollo.MutationResult<AdminCreateReferralMutation>
+export type AdminCreateReferralMutationOptions = Apollo.BaseMutationOptions<
+  AdminCreateReferralMutation,
+  AdminCreateReferralMutationVariables
+>
+export const AdminDeleteReferralDocument = gql`
+  mutation adminDeleteReferral($referralId: String!) {
+    deleteReferral: adminDeleteReferral(referralId: $referralId) {
+      id
+    }
+  }
+`
+export type AdminDeleteReferralMutationFn = Apollo.MutationFunction<
+  AdminDeleteReferralMutation,
+  AdminDeleteReferralMutationVariables
+>
+
+/**
+ * __useAdminDeleteReferralMutation__
+ *
+ * To run a mutation, you first call `useAdminDeleteReferralMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminDeleteReferralMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminDeleteReferralMutation, { data, loading, error }] = useAdminDeleteReferralMutation({
+ *   variables: {
+ *      referralId: // value for 'referralId'
+ *   },
+ * });
+ */
+export function useAdminDeleteReferralMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminDeleteReferralMutation, AdminDeleteReferralMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminDeleteReferralMutation, AdminDeleteReferralMutationVariables>(
+    AdminDeleteReferralDocument,
+    options,
+  )
+}
+export type AdminDeleteReferralMutationHookResult = ReturnType<typeof useAdminDeleteReferralMutation>
+export type AdminDeleteReferralMutationResult = Apollo.MutationResult<AdminDeleteReferralMutation>
+export type AdminDeleteReferralMutationOptions = Apollo.BaseMutationOptions<
+  AdminDeleteReferralMutation,
+  AdminDeleteReferralMutationVariables
+>
+export const AdminUpdateReferralDocument = gql`
+  mutation adminUpdateReferral($referralId: String!, $input: AdminUpdateReferralInput!) {
+    updateReferral: adminUpdateReferral(referralId: $referralId, input: $input) {
+      ...AdminReferralDetails
+    }
+  }
+  ${AdminReferralDetailsFragmentDoc}
+`
+export type AdminUpdateReferralMutationFn = Apollo.MutationFunction<
+  AdminUpdateReferralMutation,
+  AdminUpdateReferralMutationVariables
+>
+
+/**
+ * __useAdminUpdateReferralMutation__
+ *
+ * To run a mutation, you first call `useAdminUpdateReferralMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminUpdateReferralMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminUpdateReferralMutation, { data, loading, error }] = useAdminUpdateReferralMutation({
+ *   variables: {
+ *      referralId: // value for 'referralId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminUpdateReferralMutation(
+  baseOptions?: Apollo.MutationHookOptions<AdminUpdateReferralMutation, AdminUpdateReferralMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<AdminUpdateReferralMutation, AdminUpdateReferralMutationVariables>(
+    AdminUpdateReferralDocument,
+    options,
+  )
+}
+export type AdminUpdateReferralMutationHookResult = ReturnType<typeof useAdminUpdateReferralMutation>
+export type AdminUpdateReferralMutationResult = Apollo.MutationResult<AdminUpdateReferralMutation>
+export type AdminUpdateReferralMutationOptions = Apollo.BaseMutationOptions<
+  AdminUpdateReferralMutation,
+  AdminUpdateReferralMutationVariables
+>
+export const AdminReferralDocument = gql`
+  query AdminReferral($referralId: String!) {
+    referral: adminReferral(referralId: $referralId) {
+      ...AdminReferralDetails
+    }
+  }
+  ${AdminReferralDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminReferralQuery__
+ *
+ * To run a query within a React component, call `useAdminReferralQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminReferralQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminReferralQuery({
+ *   variables: {
+ *      referralId: // value for 'referralId'
+ *   },
+ * });
+ */
+export function useAdminReferralQuery(
+  baseOptions: Apollo.QueryHookOptions<AdminReferralQuery, AdminReferralQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminReferralQuery, AdminReferralQueryVariables>(AdminReferralDocument, options)
+}
+export function useAdminReferralLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminReferralQuery, AdminReferralQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminReferralQuery, AdminReferralQueryVariables>(AdminReferralDocument, options)
+}
+export type AdminReferralQueryHookResult = ReturnType<typeof useAdminReferralQuery>
+export type AdminReferralLazyQueryHookResult = ReturnType<typeof useAdminReferralLazyQuery>
+export type AdminReferralQueryResult = Apollo.QueryResult<AdminReferralQuery, AdminReferralQueryVariables>
+export const AdminReferralsDocument = gql`
+  query AdminReferrals($input: AdminListReferralInput) {
+    referrals: adminReferrals(input: $input) {
+      ...AdminReferralDetails
+    }
+    counters: adminCountReferrals(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${AdminReferralDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminReferralsQuery__
+ *
+ * To run a query within a React component, call `useAdminReferralsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminReferralsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminReferralsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminReferralsQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminReferralsQuery, AdminReferralsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminReferralsQuery, AdminReferralsQueryVariables>(AdminReferralsDocument, options)
+}
+export function useAdminReferralsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminReferralsQuery, AdminReferralsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminReferralsQuery, AdminReferralsQueryVariables>(AdminReferralsDocument, options)
+}
+export type AdminReferralsQueryHookResult = ReturnType<typeof useAdminReferralsQuery>
+export type AdminReferralsLazyQueryHookResult = ReturnType<typeof useAdminReferralsLazyQuery>
+export type AdminReferralsQueryResult = Apollo.QueryResult<AdminReferralsQuery, AdminReferralsQueryVariables>
+export const AdminReferralPaginationDocument = gql`
+  query AdminReferralPagination($input: AdminListReferralInput) {
+    counters: adminCountReferrals(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminReferralPaginationQuery__
+ *
+ * To run a query within a React component, call `useAdminReferralPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminReferralPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminReferralPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminReferralPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminReferralPaginationQuery, AdminReferralPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminReferralPaginationQuery, AdminReferralPaginationQueryVariables>(
+    AdminReferralPaginationDocument,
+    options,
+  )
+}
+export function useAdminReferralPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminReferralPaginationQuery, AdminReferralPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminReferralPaginationQuery, AdminReferralPaginationQueryVariables>(
+    AdminReferralPaginationDocument,
+    options,
+  )
+}
+export type AdminReferralPaginationQueryHookResult = ReturnType<typeof useAdminReferralPaginationQuery>
+export type AdminReferralPaginationLazyQueryHookResult = ReturnType<typeof useAdminReferralPaginationLazyQuery>
+export type AdminReferralPaginationQueryResult = Apollo.QueryResult<
+  AdminReferralPaginationQuery,
+  AdminReferralPaginationQueryVariables
 >
 export const AdminCreateRegionDocument = gql`
   mutation adminCreateRegion($input: AdminCreateRegionInput!) {

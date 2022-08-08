@@ -4,6 +4,7 @@ import { OptionsOrGroups } from 'react-select'
 
 export enum WebUiFormFieldType {
   Email = 'Email',
+  Phone = 'Phone',
   Input = 'Input',
   Password = 'Password',
   CheckBox = 'CheckBox',
@@ -46,6 +47,10 @@ export class WebUiFormField {
 
   static email(key: string, options: WebUiFormFieldOptions = {}): WebUiFormField {
     return this.field(WebUiFormFieldType.Email, key, options)
+  }
+
+  static phone(key: string, options: WebUiFormFieldOptions = {}): WebUiFormField {
+    return this.field(WebUiFormFieldType.Phone, key, options)
   }
 
   static url(key: string, options: WebUiFormFieldOptions = {}): WebUiFormField {

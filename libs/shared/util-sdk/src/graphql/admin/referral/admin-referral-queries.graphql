@@ -1,0 +1,44 @@
+query AdminReferral($referralId: String!) {
+  referral: adminReferral(referralId: $referralId) {
+    ...AdminReferralDetails
+  }
+}
+
+#query AdminReferralMeetings($referralId: String!) {
+#  meetings: adminReferralMeetings(referralId: $referralId) {
+#    ...MeetingDetails
+#  }
+#}
+
+query AdminReferrals($input: AdminListReferralInput) {
+  referrals: adminReferrals(input: $input) {
+    ...AdminReferralDetails
+  }
+  counters: adminCountReferrals(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminReferralPagination($input: AdminListReferralInput) {
+  counters: adminCountReferrals(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+#query AdminSubstituteGroups {
+#  substituteGroups: adminSubstituteGroups {
+#    id
+#    createdAt
+#    updatedAt
+#    name
+#    referrals {
+#      ...AdminReferralDetails
+#    }
+#  }
+#}
+
+#query AdminMembersWithoutReferral {
+#  members: adminMembersWithoutReferral {
+#    ...UserBasics
+#  }
+#}
