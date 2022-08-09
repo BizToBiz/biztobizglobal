@@ -10,7 +10,7 @@ export function NativeDashboardFeature() {
   return (
     <SafeAreaView style={tailwind('flex-1 justify-between')}>
       <View style={tailwind('flex-grow bg-green-200 text-lg items-center justify-center')}>
-        <Text style={tailwind('my-3 text-green-800')}>React Native Dashboard</Text>
+        <Text style={tailwind('my-3 text-green-800')}>Biz to Biz Dashboard</Text>
       </View>
       <View style={tailwind('flex-grow bg-pink-100 items-center justify-center')}>
         <Text style={tailwind('my-3 text-pink-800')}>Logged in as: {me?.data?.me?.username}</Text>
