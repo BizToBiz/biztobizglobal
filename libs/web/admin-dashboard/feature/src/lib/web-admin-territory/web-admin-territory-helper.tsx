@@ -3,8 +3,14 @@ import React from 'react'
 import { AdminRegionsDocument, AdminUsersDocument, Region } from '@biztobiz/shared/util-sdk'
 import { mapRegions, mapUsers } from '../web-admin-helper/web-admin-helper'
 
-function filterFunction(regions: Region[]) {
-  return regions.filter((region) => !region.territory)
+function regionFilterFunction(regions: Region[]) {
+  return regions?.filter((region) => !region.territory?.id)
+}
+
+function managerFilterFunction(users: any[]) {
+  return users?.filter((user) => {
+    return !user.territoryManaged?.id
+  })
 }
 
 export const territoryFields: WebUiFormField[] = [
@@ -14,16 +20,17 @@ export const territoryFields: WebUiFormField[] = [
     document: AdminUsersDocument,
     selectOptionsFunction: mapUsers,
     dataType: 'users',
+    filter: managerFilterFunction,
   }),
 ]
 
 export const territoryUpdateFields: WebUiFormField[] = [
-  WebUiFormField.relationSelect('regionIds', {
+  WebUiFormField.relationSelect('regions', {
     label: 'Regions',
     document: AdminRegionsDocument,
     selectOptionsFunction: mapRegions,
     dataType: 'regions',
     multiselect: true,
-    filter: filterFunction,
+    filter: regionFilterFunction,
   }),
 ]

@@ -19,7 +19,7 @@ export function WebAdminTerritoryCreate() {
       document={AdminCreateTerritoryDocument}
       navigateTo={'/admin/territory'}
       mutationName={'createTerritory'}
-      buttonText={'Create Territory'}
+      buttonText={' Territory'}
       fields={territoryFields}
     />
   )

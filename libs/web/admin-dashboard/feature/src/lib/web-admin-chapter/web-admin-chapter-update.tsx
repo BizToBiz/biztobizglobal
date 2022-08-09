@@ -1,9 +1,9 @@
 import React from 'react'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
-import { AdminUpdateChapterDocument, useAdminChapterQuery } from '@biztobiz/shared/util-sdk'
+import { AdminDeleteChapterDocument, AdminUpdateChapterDocument, useAdminChapterQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
+import { cleanInput } from '@biztobiz/shared/utils/feature'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { chapterFields } from './web-admin-chapter-helper'
 
@@ -24,7 +24,7 @@ export function WebAdminChapterUpdate() {
 
   function defaultValues() {
     if (chapter?.chapter) {
-      return cleanObject(chapter.chapter)
+      return cleanInput(chapter.chapter)
     } else {
       return undefined
     }
@@ -44,7 +44,8 @@ export function WebAdminChapterUpdate() {
       id={params['id']}
       defaultValues={defaultValues()}
       document={AdminUpdateChapterDocument}
-      buttonText={'Update Chapter'}
+      deleteDocument={AdminDeleteChapterDocument}
+      buttonText={'Chapter'}
       fields={chapterFields}
       idName={'chapterId'}
     />

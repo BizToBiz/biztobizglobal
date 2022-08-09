@@ -1,31 +1,46 @@
 import { Chapter, Region, Territory, User } from '@biztobiz/shared/util-sdk'
+import { Maybe } from 'graphql/jsutils/Maybe'
 
-export function mapUsers(users: User[]): any {
+export function mapUsers(users: User[]): { value: string; label: string }[] {
   return users?.map((option) => ({ value: `${option.id}`, label: `${option.firstName} ${option.lastName}` }))
 }
 
-export function mapChapters(chapters: Chapter[]): any {
+export function mapChapters(chapters: Chapter[]): { value: string; label: string }[] {
   return chapters?.map((option) => ({ value: `${option.id}`, label: `${option.name}` }))
 }
 
-export function mapTerritories(territories: Territory[]): any {
+export function mapTerritories(territories: Territory[]): { value: string; label: string }[] {
   return territories?.map((option) => ({ value: `${option.id}`, label: `${option.name}` }))
 }
 
-export function mapRegions(regions: any): any {
-  return regions?.map((option: Region) => ({ value: `${option.id}`, label: `${option.name}` }))
+export function mapRegions(regions: any[]): { value: string; label: string }[] {
+  return regions?.map((option) => ({ value: `${option.id}`, label: `${option.name}` })) ?? []
 }
 
-export function mapUser(user?: User): any {
+export function mapUser(user: User): { value: Maybe<string> | undefined; label: string } {
   return {
-    value: user?.id,
+    value: user.id,
     label: `${user?.firstName} ${user?.lastName}`,
   }
 }
 
-export function mapChapter(chapter?: Chapter): any {
+export function mapChapter(chapter: Chapter): { value: Maybe<string> | undefined; label: string } {
   return {
-    value: chapter?.id,
+    value: chapter.id,
     label: `${chapter?.name}`,
+  }
+}
+
+export function mapTerritory(territory: Territory): { value: Maybe<string> | undefined; label: string } {
+  return {
+    value: territory.id,
+    label: `${territory?.name}`,
+  }
+}
+
+export function mapRegion(region: Region): { value: Maybe<string> | undefined; label: string } {
+  return {
+    value: region.id,
+    label: `${region?.name}`,
   }
 }

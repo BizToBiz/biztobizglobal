@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom } from '@biztobiz/web/global/data-access'
 import { RESET } from 'jotai/utils'
 import { WebUiForm } from '@biztobiz/web-ui/form'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
+import { cleanOutput } from '@biztobiz/shared/utils/feature'
 import { DocumentNode } from 'graphql'
 import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
@@ -33,7 +33,7 @@ export function WebAdminCreateForm(props: WebAdminCreateFormProps) {
 
   const submit = async (input: any) => {
     setLoading(true)
-    const cleanedInput = cleanObject(input)
+    const cleanedInput = cleanOutput(input)
     createMutation({
       variables: {
         input: { ...cleanedInput },

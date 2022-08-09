@@ -7,4 +7,7 @@ export class AdminCreateTerritoryInput {
 
   @Field({ nullable: true })
   managerId?: string
+
+  @Field(() => [String], { nullable: true })
+  regionIds?: string[]
 }

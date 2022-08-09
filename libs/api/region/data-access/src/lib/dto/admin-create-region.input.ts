@@ -7,4 +7,7 @@ export class AdminCreateRegionInput {
 
   @Field({ nullable: true })
   managerId?: string
+
+  @Field({ nullable: true })
+  territoryId?: string
 }

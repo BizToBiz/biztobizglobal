@@ -11,7 +11,7 @@ function isValidDate(d: any) {
   return d instanceof Date && !isNaN(d as any)
 }
 
-export function cleanObject(obj: Record<string, unknown>) {
+export function cleanInput(obj: Record<string, unknown>) {
   return Object.fromEntries(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
@@ -37,7 +37,52 @@ export function cleanObject(obj: Record<string, unknown>) {
           }
           return [k, (v as string).split('T')[0]]
         }
+        // Return array of values for multiselect fields
+        if (k.endsWith('s')) {
+          return [k, (v as any[]).map((v) => v.value)]
+        }
+        // Return value only for select fields
+        if (k.includes('Id')) {
+          return [k, (v as any)?.['value']]
+        }
+        return [k, v]
+      }),
+  )
+}
 
+export function cleanOutput(obj: Record<string, unknown>) {
+  return Object.fromEntries(
+    Object.entries(obj)
+      // Remove id, __typename, updatedAt, createdAt, and empty fields
+      .filter(([k, v]) => {
+        if (
+          v === undefined ||
+          !v ||
+          v === '' ||
+          k === 'createdAt' ||
+          k === 'updatedAt' ||
+          k == '__typename' ||
+          k === 'id' ||
+          (v instanceof Date && !isValidDate(v))
+        )
+          return false
+        return true
+      })
+      .map(([k, v]) => {
+        // Reformat date strings for storage in database
+        if (k.includes('Date') || k.includes('date')) {
+          if (typeof v === 'object') {
+            return [k, (v as Date).toISOString().split('T')[0]]
+          }
+          return [k, (v as string).split('T')[0]]
+        }
+        // Return array of values for multiselect fields
+        if (k.endsWith('s')) {
+          console.log(k)
+          console.log(v)
+          console.log((v as any[]).map((v) => v.value))
+          return [k, (v as any[]).map((v) => ({ id: v.value }))]
+        }
         // Return value only for select fields
         if (k.includes('Id')) {
           return [k, (v as any)?.['value']]

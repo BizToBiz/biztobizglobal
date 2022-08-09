@@ -1,12 +1,15 @@
 import React from 'react'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
-import { AdminUpdateTransactionDocument, useAdminReferralQuery } from '@biztobiz/shared/util-sdk'
+import {
+  AdminDeleteReferralDocument,
+  AdminUpdateReferralDocument,
+  useAdminReferralQuery,
+} from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
-import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
-import { transactionFields } from '../web-admin-transaction/web-admin-transaction-helper'
+import { referralFields } from './web-admin-referral-helper'
+import { cleanInput } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminReferralUpdate() {
   const params = useParams()
@@ -25,33 +28,31 @@ export function WebAdminReferralUpdate() {
 
   function defaultValues() {
     if (referral?.referral) {
-      return cleanObject(referral.referral)
+      return cleanInput(referral.referral)
     } else {
       return undefined
     }
   }
 
   const pathData = {
-    path: '/admin/users/:id',
+    path: '/admin/referrals/:id',
     name: 'Edit User',
-    description: 'Update the information for this user',
+    description: 'Update the information for this referral',
     showSearch: false,
     actionText: 'Back to User List',
-    actionLink: '/admin/users',
+    actionLink: '/admin/referrals',
   }
 
   return (
-    <>
-      <WebAdminUpdateForm
-        pathData={pathData}
-        id={params['id']}
-        defaultValues={defaultValues()}
-        document={AdminUpdateTransactionDocument}
-        buttonText={'Update Transaction'}
-        fields={transactionFields}
-        idName={'transactionId'}
-      />
-      {isDev ? <WebUiDevDataFeature data={defaultValues()} /> : null}
-    </>
+    <WebAdminUpdateForm
+      pathData={pathData}
+      id={params['id']}
+      defaultValues={defaultValues()}
+      document={AdminUpdateReferralDocument}
+      deleteDocument={AdminDeleteReferralDocument}
+      buttonText={'Referral'}
+      fields={referralFields}
+      idName={'referralId'}
+    />
   )
 }

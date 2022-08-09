@@ -19,7 +19,7 @@ export function WebAdminTransactionCreate() {
       document={AdminCreateTransactionDocument}
       navigateTo={'/admin/transaction'}
       mutationName={'createTransaction'}
-      buttonText={'Create Transaction'}
+      buttonText={' Transaction'}
       fields={transactionFields}
     />
   )

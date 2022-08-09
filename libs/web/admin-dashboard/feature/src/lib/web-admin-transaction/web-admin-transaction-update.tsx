@@ -1,13 +1,17 @@
 import React from 'react'
-import { AdminUpdateTransactionDocument, useAdminTransactionQuery } from '@biztobiz/shared/util-sdk'
+import {
+  AdminDeleteTransactionDocument,
+  AdminUpdateTransactionDocument,
+  useAdminTransactionQuery,
+} from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { transactionFields } from './web-admin-transaction-helper'
 import { mapChapter, mapUser } from '../web-admin-helper/web-admin-helper'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
+import { cleanInput } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminTransactionUpdate() {
   const params = useParams()
@@ -26,7 +30,7 @@ export function WebAdminTransactionUpdate() {
 
   function defaultValues() {
     if (transaction?.transaction) {
-      const transactionValue = cleanObject(transaction.transaction)
+      const transactionValue = cleanInput(transaction.transaction)
       if (transaction?.transaction?.user?.id) {
         transactionValue['userId'] = mapUser(transaction?.transaction?.user)
         delete transactionValue['user']
@@ -57,7 +61,8 @@ export function WebAdminTransactionUpdate() {
         id={params?.['id']}
         defaultValues={defaultValues()}
         document={AdminUpdateTransactionDocument}
-        buttonText={'Update Transaction'}
+        deleteDocument={AdminDeleteTransactionDocument}
+        buttonText={'Transaction'}
         fields={transactionFields}
         idName={'transactionId'}
       />

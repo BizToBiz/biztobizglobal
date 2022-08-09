@@ -1,11 +1,7 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { AdminChaptersDocument, AdminUsersDocument, ReferralRating, Territory } from '@biztobiz/shared/util-sdk'
+import { AdminChaptersDocument, AdminUsersDocument, ReferralRating } from '@biztobiz/shared/util-sdk'
 import { mapChapters, mapUsers } from '../web-admin-helper/web-admin-helper'
-
-export function mapTerritories(territories: Territory[]): any {
-  return territories?.map((option) => ({ value: `${option.id}`, label: `${option.name}` }))
-}
 
 export const referralFields: WebUiFormField[] = [
   WebUiFormField.input('firstName', { label: 'First Name', required: true }),

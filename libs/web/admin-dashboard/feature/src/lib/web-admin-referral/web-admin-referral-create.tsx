@@ -19,7 +19,7 @@ export function WebAdminReferralCreate() {
       document={AdminCreateReferralDocument}
       navigateTo={'/admin/referral'}
       mutationName={'createReferral'}
-      buttonText={'Create Referral'}
+      buttonText={' Referral'}
       fields={referralFields}
     />
   )

@@ -77,4 +77,10 @@ fragment AdminUserDetails on User {
   notifyBySMS
   notifyByWeb
   notifyByMobile
+  regionManaged {
+    id
+  }
+  territoryManaged {
+    id
+  }
 }

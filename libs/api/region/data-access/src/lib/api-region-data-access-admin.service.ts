@@ -71,7 +71,7 @@ export class ApiRegionDataAccessAdminService {
   adminCreateRegion(info: GraphQLResolveInfo, adminId: string, input: AdminCreateRegionInput) {
     const select = new PrismaSelect(info).value
     return this.data.region.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -80,7 +80,7 @@ export class ApiRegionDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.region.update({
       where: { id: regionId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

@@ -12,11 +12,11 @@ interface RelationSelectProps {
 }
 
 export function RelationSelect(props: RelationSelectProps) {
-  const { data, loading, refetch } = useQuery(props?.field?.options?.document ?? UptimeDocument)
+  const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
 
   let dataList = props?.field?.options?.dataType && !loading ? data?.[props.field.options.dataType] : []
   if (props?.field?.options?.filter && !loading) {
-    dataList = props.field.options.filter(dataList)
+    dataList = props?.field?.options?.filter?.(dataList)
   }
 
   const defaultOptions = props?.field?.options?.selectOptionsFunction

@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UseGuards } from '@nestjs/common'
 import { CorePaging, CorePagingInput } from '@biztobiz/api/core/data-access'
 import { CtxUser, GqlAuthAdminGuard } from '@biztobiz/api/auth/util'
@@ -8,6 +8,7 @@ import {
   ApiUserDataAccessService,
   User,
 } from '@biztobiz/api/user/data-access'
+import { GraphQLResolveInfo } from 'graphql'
 
 @Resolver()
 @UseGuards(GqlAuthAdminGuard)
@@ -17,9 +18,10 @@ export class ApiUserFeatureAdminResolver {
   @Query(() => [User], { nullable: true })
   adminUsers(
     @CtxUser() admin: User,
+    @Info() info: GraphQLResolveInfo,
     @Args({ name: 'input', type: () => CorePagingInput, nullable: true }) input?: CorePagingInput,
   ) {
-    return this.service.adminUsers(admin.id, input)
+    return this.service.adminUsers(info, admin.id, input)
   }
 
   @Query(() => CorePaging, { nullable: true })

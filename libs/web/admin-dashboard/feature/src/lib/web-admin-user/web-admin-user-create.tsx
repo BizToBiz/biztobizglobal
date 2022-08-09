@@ -16,7 +16,7 @@ export function WebAdminUserCreate() {
   return (
     <WebAdminCreateForm
       fields={userFields}
-      buttonText={'Create User'}
+      buttonText={' User'}
       document={AdminCreateUserDocument}
       navigateTo={'/admin/user'}
       pathData={pathData}

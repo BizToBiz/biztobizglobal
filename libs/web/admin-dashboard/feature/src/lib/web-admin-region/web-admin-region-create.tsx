@@ -17,9 +17,9 @@ export function WebAdminRegionCreate() {
     <WebAdminCreateForm
       pathData={pathData}
       document={AdminCreateRegionDocument}
-      navigateTo={'/admin/regino'}
+      navigateTo={'/admin/region'}
       mutationName={'createRegion'}
-      buttonText={'Create Region'}
+      buttonText={' Region'}
       fields={regionFields}
     />
   )

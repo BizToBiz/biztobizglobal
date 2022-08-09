@@ -4,6 +4,8 @@ import { getGravatarUrl, hashPassword, uniqueSuffix } from '@biztobiz/api/auth/d
 import { AdminCreateUserInput } from './dto/admin-create-user.input'
 import { AdminUpdateUserInput } from './dto/admin-update-user.input'
 import { Prisma } from '@prisma/client'
+import { PrismaSelect } from '@paljs/plugins'
+import { GraphQLResolveInfo } from 'graphql'
 
 @Injectable()
 export class ApiUserDataAccessService {
@@ -20,12 +22,14 @@ export class ApiUserDataAccessService {
     }
   }
 
-  async adminUsers(userId: string, input: CorePagingInput) {
+  async adminUsers(info: GraphQLResolveInfo, userId: string, input: CorePagingInput) {
     await this.data.ensureAdminUser(userId)
+    const select = new PrismaSelect(info).value
     return this.data.user.findMany({
       take: input?.take ?? 20,
       skip: input?.skip ?? 0,
       where: this.where(input?.search),
+      ...select,
     })
   }
 

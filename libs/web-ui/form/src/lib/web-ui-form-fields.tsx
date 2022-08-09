@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
 import { DocumentNode, TypedDocumentNode } from '@apollo/client'
-import { OptionsOrGroups } from 'react-select'
 
 export enum WebUiFormFieldType {
   Email = 'Email',
@@ -29,7 +28,7 @@ export interface WebUiFormFieldOptions {
   selectOptions?: { label: string; value: string }[]
   document?: DocumentNode | TypedDocumentNode
   dataType?: string
-  selectOptionsFunction?: (data: any[]) => OptionsOrGroups<any, any>[]
+  selectOptionsFunction?: (data: any[]) => { label: string; value: string }[]
   multiselect?: boolean
   filter?: (data: any) => void
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
-import { AdminUpdateCompanyDocument, useAdminCompanyQuery } from '@biztobiz/shared/util-sdk'
+import { AdminDeleteCompanyDocument, AdminUpdateCompanyDocument, useAdminCompanyQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { companyFields } from './web-admin-company-helper'
+import { cleanInput } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminCompanyUpdate() {
   const params = useParams()
@@ -24,7 +24,7 @@ export function WebAdminCompanyUpdate() {
 
   function defaultValues() {
     if (company?.company) {
-      return cleanObject(company.company)
+      return cleanInput(company.company)
     } else {
       return undefined
     }
@@ -45,7 +45,8 @@ export function WebAdminCompanyUpdate() {
       id={params['id']}
       defaultValues={defaultValues()}
       document={AdminUpdateCompanyDocument}
-      buttonText={'Update Company'}
+      deleteDocument={AdminDeleteCompanyDocument}
+      buttonText={'Company'}
       fields={companyFields}
       idName={'companyId'}
     />

@@ -1,12 +1,12 @@
 import React from 'react'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
-import { AdminUpdateTransactionDocument, useAdminRegionQuery } from '@biztobiz/shared/util-sdk'
+import { AdminDeleteRegionDocument, AdminUpdateRegionDocument, useAdminRegionQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
-import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
+import { cleanInput } from '@biztobiz/shared/utils/feature'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
-import { transactionFields } from '../web-admin-transaction/web-admin-transaction-helper'
+import { regionFields } from './web-admin-region-helper'
+import { mapTerritory, mapUser } from '../web-admin-helper/web-admin-helper'
 
 export function WebAdminRegionUpdate() {
   const params = useParams()
@@ -25,33 +25,40 @@ export function WebAdminRegionUpdate() {
 
   function defaultValues() {
     if (region?.region) {
-      return cleanObject(region.region)
+      const regionValue = cleanInput(region.region)
+      if (region?.region?.manager?.id) {
+        regionValue['managerId'] = mapUser(region.region.manager)
+        delete regionValue['manager']
+      }
+      if (region?.region?.territory?.id) {
+        regionValue['territoryId'] = mapTerritory(region.region.territory)
+        delete regionValue['territory']
+      }
+      return regionValue
     } else {
       return undefined
     }
   }
 
   const pathData = {
-    path: '/admin/users/:id',
-    name: 'Edit User',
-    description: 'Update the information for this user',
+    path: '/admin/regions/:id',
+    name: 'Edit Region',
+    description: 'Update the information for this region',
     showSearch: false,
-    actionText: 'Back to User List',
-    actionLink: '/admin/users',
+    actionText: 'Back to Region List',
+    actionLink: '/admin/regions',
   }
 
   return (
-    <>
-      <WebAdminUpdateForm
-        pathData={pathData}
-        id={params['id']}
-        defaultValues={defaultValues()}
-        document={AdminUpdateTransactionDocument}
-        buttonText={'Update Transaction'}
-        fields={transactionFields}
-        idName={'transactionId'}
-      />
-      {isDev ? <WebUiDevDataFeature data={defaultValues()} /> : null}
-    </>
+    <WebAdminUpdateForm
+      pathData={pathData}
+      id={params['id']}
+      defaultValues={defaultValues()}
+      document={AdminUpdateRegionDocument}
+      deleteDocument={AdminDeleteRegionDocument}
+      buttonText={'Region'}
+      fields={regionFields}
+      idName={'regionId'}
+    />
   )
 }

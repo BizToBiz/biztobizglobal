@@ -3,10 +3,13 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom } from '@biztobiz/web/global/data-access'
 import { RESET } from 'jotai/utils'
 import { WebUiForm } from '@biztobiz/web-ui/form'
-import { cleanObject } from '@biztobiz/shared/utils/feature'
+import { cleanOutput } from '@biztobiz/shared/utils/feature'
 import { DocumentNode } from 'graphql'
 import { useMutation } from '@apollo/client'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
+import { TrashIcon } from '@heroicons/react/solid'
+import { WebUiConfirmationModalFeature } from '@biztobiz/web-ui/confirmation-modal/feature'
+import { useNavigate } from 'react-router-dom'
 
 interface PathData {
   path: string
@@ -19,6 +22,7 @@ interface PathData {
 interface WebAdminCreateFormProps {
   pathData: PathData
   document: DocumentNode
+  deleteDocument: DocumentNode
   idName: string
   buttonText: string
   fields: any[]
@@ -27,14 +31,17 @@ interface WebAdminCreateFormProps {
 }
 
 export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
+  const navigate = useNavigate()
   const [isDev] = useAtom(isDevAtom)
   const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
   const [loading, setLoading] = useState(false)
+  const [cancelModalOpen, setCancelModalOpen] = useState(false)
   const [updateMutation] = useMutation(props.document)
+  const [deleteMutation] = useMutation(props.deleteDocument)
 
   const submit = async (input: any) => {
     setLoading(true)
-    const cleanedInput = cleanObject(input)
+    const cleanedInput = cleanOutput(input)
     updateMutation({
       variables: {
         [`${props.idName}`]: props.id,
@@ -44,6 +51,11 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
       setLoading(false)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     })
+  }
+
+  async function deleteItem() {
+    await deleteMutation({ variables: { [`${props.idName}`]: props.id } })
+    navigate(props.pathData.actionLink)
   }
 
   useLayoutEffect(() => {
@@ -59,8 +71,24 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
         fields={props.fields}
         submit={(values) => submit(values)}
         defaultValues={props.defaultValues}
-        buttonText={props.buttonText}
+        buttonText={`Update ${props.buttonText}`}
         loading={loading}
+      />
+      <button
+        type="button"
+        onClick={() => setCancelModalOpen(true)}
+        className="mt-8 inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-red-700  bg-white hover:bg-gray-50 focus:outline-none  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        <TrashIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />
+        Delete {props.buttonText}
+      </button>
+      <WebUiConfirmationModalFeature
+        open={cancelModalOpen}
+        setOpen={setCancelModalOpen}
+        actionText={'Delete'}
+        actionFunction={deleteItem}
+        title={`Delete ${props?.buttonText}`}
+        body={`Are you sure you want to delete this ${props?.buttonText}?  Data will be permanently lost.  You cannot undo this action.`}
       />
       {isDev ? <WebUiDevDataFeature data={props.defaultValues} /> : null}
     </>

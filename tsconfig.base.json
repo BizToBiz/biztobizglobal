@@ -80,6 +80,7 @@
       "@biztobiz/shared/utils/feature": ["libs/shared/utils/feature/src/index.ts"],
       "@biztobiz/web-ui/admin-layout/feature": ["libs/web-ui/admin-layout/feature/src/index.ts"],
       "@biztobiz/web-ui/alert": ["libs/web-ui/alert/src/index.ts"],
+      "@biztobiz/web-ui/confirmation-modal/feature": ["libs/web-ui/confirmation-modal/feature/src/index.ts"],
       "@biztobiz/web-ui/data-table/feature": ["libs/web-ui/data-table/feature/src/index.ts"],
       "@biztobiz/web-ui/dev-data/feature": ["libs/web-ui/dev-data/feature/src/index.ts"],
       "@biztobiz/web-ui/form": ["libs/web-ui/form/src/index.ts"],

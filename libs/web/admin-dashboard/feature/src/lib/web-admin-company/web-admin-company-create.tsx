@@ -19,7 +19,7 @@ export function WebAdminCompanyCreate() {
       document={AdminCreateCompanyDocument}
       navigateTo={'/admin/company'}
       mutationName={'createCompany'}
-      buttonText={'Create Company'}
+      buttonText={' Company'}
       fields={companyFields}
     />
   )

@@ -80,7 +80,10 @@ export class ApiTerritoryDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.territory.update({
       where: { id: territoryId },
-      data: { ...input },
+      data: {
+        ...input,
+        regions: { set: input.regions },
+      },
       ...select,
     })
   }

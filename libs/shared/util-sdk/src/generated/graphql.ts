@@ -95,6 +95,7 @@ export type AdminCreateReferralInput = {
 export type AdminCreateRegionInput = {
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  territoryId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateSubstituteGroupInput = {
@@ -108,6 +109,7 @@ export type AdminCreateSubstituteInput = {
 export type AdminCreateTerritoryInput = {
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  regionIds?: InputMaybe<Array<Scalars['String']>>
 }
 
 export type AdminCreateTestimonialInput = {
@@ -393,7 +395,9 @@ export type AdminUpdateReferralInput = {
 }
 
 export type AdminUpdateRegionInput = {
+  managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  territoryId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateSubstituteGroupInput = {
@@ -405,7 +409,9 @@ export type AdminUpdateSubstituteInput = {
 }
 
 export type AdminUpdateTerritoryInput = {
+  managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  regions?: InputMaybe<Array<RegionsInput>>
 }
 
 export type AdminUpdateTestimonialInput = {
@@ -1800,6 +1806,10 @@ export type Region = {
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
+export type RegionsInput = {
+  id?: InputMaybe<Scalars['String']>
+}
+
 export type RegisterInput = {
   avatarUrl?: InputMaybe<Scalars['String']>
   email: Scalars['String']
@@ -3152,6 +3162,8 @@ export type AdminUserDetailsFragment = {
   notifyBySMS?: boolean | null
   notifyByWeb?: boolean | null
   notifyByMobile?: boolean | null
+  regionManaged?: { __typename?: 'Region'; id?: string | null } | null
+  territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
 }
 
 export type AdminCreateUserMutationVariables = Exact<{
@@ -3240,6 +3252,8 @@ export type AdminCreateUserMutation = {
     notifyBySMS?: boolean | null
     notifyByWeb?: boolean | null
     notifyByMobile?: boolean | null
+    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
+    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
   } | null
 }
 
@@ -3339,6 +3353,8 @@ export type AdminUpdateUserMutation = {
     notifyBySMS?: boolean | null
     notifyByWeb?: boolean | null
     notifyByMobile?: boolean | null
+    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
+    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
   } | null
 }
 
@@ -3428,6 +3444,8 @@ export type AdminUserQuery = {
     notifyBySMS?: boolean | null
     notifyByWeb?: boolean | null
     notifyByMobile?: boolean | null
+    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
+    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
   } | null
 }
 
@@ -3517,6 +3535,8 @@ export type AdminUsersQuery = {
     notifyBySMS?: boolean | null
     notifyByWeb?: boolean | null
     notifyByMobile?: boolean | null
+    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
+    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -3885,6 +3905,12 @@ export const AdminUserDetailsFragmentDoc = gql`
     notifyBySMS
     notifyByWeb
     notifyByMobile
+    regionManaged {
+      id
+    }
+    territoryManaged {
+      id
+    }
   }
 `
 export const UserDetailsFragmentDoc = gql`
