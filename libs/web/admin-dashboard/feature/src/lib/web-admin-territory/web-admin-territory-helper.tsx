@@ -34,3 +34,5 @@ export const territoryUpdateFields: WebUiFormField[] = [
     filter: regionFilterFunction,
   }),
 ]
+
+export const territorySelectFields = ['regions']

@@ -9,7 +9,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { cleanInput } from '@biztobiz/shared/utils/feature'
 import { mapRegions, mapUser } from '../web-admin-helper/web-admin-helper'
-import { territoryFields, territoryUpdateFields } from './web-admin-territory-helper'
+import { territoryFields, territorySelectFields, territoryUpdateFields } from './web-admin-territory-helper'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 
 export function WebAdminTerritoryUpdate() {
@@ -28,7 +28,7 @@ export function WebAdminTerritoryUpdate() {
   console.log(territory?.territory)
   function defaultValues() {
     if (territory?.territory && !loading) {
-      const territoryValue = cleanInput(territory.territory)
+      const territoryValue = cleanInput(territory.territory, territorySelectFields)
       if (territory?.territory?.manager?.id) {
         territoryValue['managerId'] = mapUser(territory.territory.manager)
         delete territoryValue['manager']

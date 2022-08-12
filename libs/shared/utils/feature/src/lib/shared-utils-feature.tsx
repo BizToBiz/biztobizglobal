@@ -11,7 +11,8 @@ function isValidDate(d: any) {
   return d instanceof Date && !isNaN(d as any)
 }
 
-export function cleanInput(obj: Record<string, unknown>) {
+export function cleanInput(obj: Record<string, unknown>, multiSelectFields?: string[]) {
+  console.log(obj)
   return Object.fromEntries(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
@@ -38,7 +39,8 @@ export function cleanInput(obj: Record<string, unknown>) {
           return [k, (v as string).split('T')[0]]
         }
         // Return array of values for multiselect fields
-        if (k.endsWith('s')) {
+        if (multiSelectFields?.includes(k)) {
+          console.log(k, v)
           return [k, (v as any[]).map((v) => v.value)]
         }
         // Return value only for select fields
