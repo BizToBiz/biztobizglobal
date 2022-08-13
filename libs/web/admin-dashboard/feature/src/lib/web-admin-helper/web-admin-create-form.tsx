@@ -34,6 +34,7 @@ export function WebAdminCreateForm(props: WebAdminCreateFormProps) {
   const submit = async (input: any) => {
     setLoading(true)
     const cleanedInput = cleanOutput(input)
+    console.log(cleanedInput)
     createMutation({
       variables: {
         input: { ...cleanedInput },
@@ -57,7 +58,7 @@ export function WebAdminCreateForm(props: WebAdminCreateFormProps) {
       fields={props.fields}
       submit={(values) => submit(values)}
       defaultValues={undefined}
-      buttonText={props.buttonText}
+      buttonText={`Add ${props.buttonText}`}
       loading={loading}
     />
   )

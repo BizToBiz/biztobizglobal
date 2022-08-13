@@ -25,7 +25,6 @@ export function WebAdminTerritoryUpdate() {
 
   if (!params?.['id']) return <div>No Id</div>
 
-  console.log(territory?.territory)
   function defaultValues() {
     if (territory?.territory && !loading) {
       const territoryValue = cleanInput(territory.territory, territorySelectFields)

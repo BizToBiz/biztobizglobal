@@ -61,14 +61,7 @@ export class ApiUserDataAccessService {
     await this.ensureUsernameAvailable(username)
 
     return this.data.user.create({
-      data: {
-        email: input.email,
-        role: input.role,
-        firstName: input.firstName,
-        lastName: input.lastName,
-        avatarUrl,
-        username,
-      },
+      data: { ...input, email, avatarUrl, username },
     })
   }
 

@@ -17,11 +17,11 @@ export class AdminCreateUserInput {
   @Field({ nullable: true })
   developer?: boolean
 
-  @Field(() => Role, { nullable: true })
-  role?: Role
+  @Field(() => Role)
+  role: Role
 
-  @Field({ nullable: true })
-  email?: string
+  @Field()
+  email: string
 
   @Field({ nullable: true })
   emailConfirmed?: boolean

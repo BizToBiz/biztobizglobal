@@ -1,7 +1,7 @@
 import React from 'react'
-import { AdminCreateCompanyDocument } from '@biztobiz/shared/util-sdk'
+import { AdminCreateChapterDocument } from '@biztobiz/shared/util-sdk'
 import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
-import { companyFields } from '../web-admin-company/web-admin-company-helper'
+import { chapterFields } from './web-admin-chapter-helper'
 
 export function WebAdminChapterCreate() {
   const pathData = {
@@ -16,11 +16,11 @@ export function WebAdminChapterCreate() {
   return (
     <WebAdminCreateForm
       pathData={pathData}
-      document={AdminCreateCompanyDocument}
-      navigateTo={'/admin/company'}
+      document={AdminCreateChapterDocument}
+      navigateTo={'/admin/chapter'}
       mutationName={'createChapter'}
       buttonText={' Chapter'}
-      fields={companyFields}
+      fields={chapterFields}
     />
   )
 }

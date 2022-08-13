@@ -1,5 +1,6 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
-import { ChapterStatus } from '@biztobiz/shared/util-sdk'
+import { AdminRegionsDocument, ChapterStatus } from '@biztobiz/shared/util-sdk'
+import { mapRegions } from '../web-admin-helper/web-admin-helper'
 
 export const chapterFields: WebUiFormField[] = [
   WebUiFormField.datePicker('establishedDate', { label: 'Date Established' }),
@@ -18,4 +19,10 @@ export const chapterFields: WebUiFormField[] = [
   WebUiFormField.input('city', { label: 'City' }),
   WebUiFormField.input('state', { label: 'State' }),
   WebUiFormField.url('facebook', { label: 'Facebook URL' }),
+  WebUiFormField.relationSelect('regionId', {
+    label: 'Region',
+    document: AdminRegionsDocument,
+    selectOptionsFunction: mapRegions,
+    dataType: 'regions',
+  }),
 ]

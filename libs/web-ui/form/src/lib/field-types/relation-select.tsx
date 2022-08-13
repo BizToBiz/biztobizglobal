@@ -14,6 +14,8 @@ interface RelationSelectProps {
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
 
+  console.log(data)
+
   let dataList = props?.field?.options?.dataType && !loading ? data?.[props.field.options.dataType] : []
   if (props?.field?.options?.filter && !loading) {
     dataList = props?.field?.options?.filter?.(dataList)

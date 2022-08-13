@@ -10,7 +10,7 @@ export class AdminCreateChapterInput {
   description?: string
 
   @Field({ nullable: true })
-  establishedDate?: string
+  establishedDate?: Date
 
   @Field(() => DayOfWeek, { nullable: true })
   meetingDay?: DayOfWeek
@@ -44,4 +44,7 @@ export class AdminCreateChapterInput {
 
   @Field({ nullable: true })
   longitude?: string
+
+  @Field({ nullable: true })
+  regionId?: string
 }

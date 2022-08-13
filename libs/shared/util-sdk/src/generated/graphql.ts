@@ -44,7 +44,7 @@ export type AdminCreateChapterInput = {
   avatarUrl?: InputMaybe<Scalars['String']>
   city?: InputMaybe<Scalars['String']>
   description?: InputMaybe<Scalars['String']>
-  establishedDate?: InputMaybe<Scalars['String']>
+  establishedDate?: InputMaybe<Scalars['DateTime']>
   facebook?: InputMaybe<Scalars['String']>
   latitude?: InputMaybe<Scalars['String']>
   longitude?: InputMaybe<Scalars['String']>
@@ -52,6 +52,7 @@ export type AdminCreateChapterInput = {
   meetingDetails?: InputMaybe<Scalars['String']>
   meetingTime?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  regionId?: InputMaybe<Scalars['String']>
   state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<ChapterStatus>
 }
@@ -146,7 +147,7 @@ export type AdminCreateUserInput = {
   confirmEmailExpires?: InputMaybe<Scalars['DateTime']>
   confirmEmailToken?: InputMaybe<Scalars['String']>
   developer?: InputMaybe<Scalars['Boolean']>
-  email?: InputMaybe<Scalars['String']>
+  email: Scalars['String']
   emailConfirmed?: InputMaybe<Scalars['Boolean']>
   facebook?: InputMaybe<Scalars['String']>
   fax?: InputMaybe<Scalars['String']>
@@ -186,7 +187,7 @@ export type AdminCreateUserInput = {
   promoter?: InputMaybe<Scalars['Int']>
   recognized?: InputMaybe<Scalars['Int']>
   renewalDate?: InputMaybe<Scalars['DateTime']>
-  role?: InputMaybe<Role>
+  role: Role
   salesAgentName?: InputMaybe<Scalars['String']>
   showGravatar?: InputMaybe<Scalars['Boolean']>
   state?: InputMaybe<Scalars['String']>

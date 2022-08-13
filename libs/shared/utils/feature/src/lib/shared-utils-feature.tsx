@@ -43,6 +43,7 @@ export function cleanInput(obj: Record<string, unknown>, multiSelectFields?: str
           console.log(k, v)
           return [k, (v as any[]).map((v) => v.value)]
         }
+
         // Return value only for select fields
         if (k.includes('Id')) {
           return [k, (v as any)?.['value']]
@@ -52,7 +53,7 @@ export function cleanInput(obj: Record<string, unknown>, multiSelectFields?: str
   )
 }
 
-export function cleanOutput(obj: Record<string, unknown>) {
+export function cleanOutput(obj: Record<string, unknown>, multiSelectFields?: string[]) {
   return Object.fromEntries(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
@@ -79,12 +80,10 @@ export function cleanOutput(obj: Record<string, unknown>) {
           return [k, (v as string).split('T')[0]]
         }
         // Return array of values for multiselect fields
-        if (k.endsWith('s')) {
-          console.log(k)
-          console.log(v)
-          console.log((v as any[]).map((v) => v.value))
-          return [k, (v as any[]).map((v) => ({ id: v.value }))]
-        }
+        // if (multiSelectFields?.includes(k)) {
+        //   console.log(k, v)
+        //   return [k, (v as any[]).map((v) => v.value)]
+        // }
         // Return value only for select fields
         if (k.includes('Id')) {
           return [k, (v as any)?.['value']]
