@@ -110,7 +110,7 @@ export type AdminCreateSubstituteInput = {
 export type AdminCreateTerritoryInput = {
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
-  regionIds?: InputMaybe<Array<Scalars['String']>>
+  regions?: InputMaybe<Array<RegionsInput>>
 }
 
 export type AdminCreateTestimonialInput = {
@@ -359,7 +359,7 @@ export type AdminUpdateChapterInput = {
   avatarUrl?: InputMaybe<Scalars['String']>
   city?: InputMaybe<Scalars['String']>
   description?: InputMaybe<Scalars['String']>
-  establishedDate?: InputMaybe<Scalars['String']>
+  establishedDate?: InputMaybe<Scalars['DateTime']>
   facebook?: InputMaybe<Scalars['String']>
   latitude?: InputMaybe<Scalars['String']>
   longitude?: InputMaybe<Scalars['String']>
@@ -367,6 +367,7 @@ export type AdminUpdateChapterInput = {
   meetingDetails?: InputMaybe<Scalars['String']>
   meetingTime?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  regionId?: InputMaybe<Scalars['String']>
   state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<ChapterStatus>
 }
@@ -2326,6 +2327,7 @@ export type AdminChapterDetailsFragment = {
   meetingDetails?: string | null
   meetingTime?: string | null
   facebook?: string | null
+  region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
 }
 
 export type AdminCreateChapterMutationVariables = Exact<{
@@ -2353,6 +2355,7 @@ export type AdminCreateChapterMutation = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2391,6 +2394,7 @@ export type AdminUpdateChapterMutation = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2419,6 +2423,7 @@ export type AdminChapterQuery = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2447,6 +2452,7 @@ export type AdminChaptersQuery = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -3722,6 +3728,10 @@ export const AdminChapterDetailsFragmentDoc = gql`
     meetingDetails
     meetingTime
     facebook
+    region {
+      id
+      name
+    }
   }
 `
 export const AdminCompanyDetailsFragmentDoc = gql`

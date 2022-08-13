@@ -1,3 +1,5 @@
+import { SelectFieldOptions } from '../../../../../web/admin-dashboard/feature/src/lib/web-admin-helper/web-admin-helper'
+
 export function capitalizeFirstLetter(string: string | undefined) {
   return string && string[0].toUpperCase() + string.slice(1)
 }
@@ -11,8 +13,11 @@ function isValidDate(d: any) {
   return d instanceof Date && !isNaN(d as any)
 }
 
-export function cleanInput(obj: Record<string, unknown>, multiSelectFields?: string[]) {
-  console.log(obj)
+export function cleanFormInput(obj: Record<string, unknown>, selectFieldOptions?: SelectFieldOptions[]) {
+  // console.log(obj)
+  const selectFields = selectFieldOptions?.filter((field) => field.type === 'single').map((field) => field.idName)
+  const multiSelectFields = selectFieldOptions?.filter((field) => field.type === 'multi').map((field) => field.name)
+
   return Object.fromEntries(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
@@ -40,12 +45,10 @@ export function cleanInput(obj: Record<string, unknown>, multiSelectFields?: str
         }
         // Return array of values for multiselect fields
         if (multiSelectFields?.includes(k)) {
-          console.log(k, v)
-          return [k, (v as any[]).map((v) => v.value)]
+          return [k, (v as any)?.map((item: any) => ({ id: item?.value }))]
         }
-
         // Return value only for select fields
-        if (k.includes('Id')) {
+        if (selectFields?.includes(k)) {
           return [k, (v as any)?.['value']]
         }
         return [k, v]
@@ -53,7 +56,10 @@ export function cleanInput(obj: Record<string, unknown>, multiSelectFields?: str
   )
 }
 
-export function cleanOutput(obj: Record<string, unknown>, multiSelectFields?: string[]) {
+export function cleanDatabaseOutput(obj: Record<string, unknown>, selectFieldOptions?: SelectFieldOptions[]) {
+  const selectFields = selectFieldOptions?.filter((field) => field.type === 'single').map((field) => field.name)
+  const multiSelectFields = selectFieldOptions?.filter((field) => field.type === 'multi').map((field) => field.name)
+
   return Object.fromEntries(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
@@ -80,13 +86,14 @@ export function cleanOutput(obj: Record<string, unknown>, multiSelectFields?: st
           return [k, (v as string).split('T')[0]]
         }
         // Return array of values for multiselect fields
-        // if (multiSelectFields?.includes(k)) {
-        //   console.log(k, v)
-        //   return [k, (v as any[]).map((v) => v.value)]
-        // }
-        // Return value only for select fields
-        if (k.includes('Id')) {
-          return [k, (v as any)?.['value']]
+        if (multiSelectFields?.includes(k)) {
+          const field = selectFieldOptions?.find((f) => f.name === k)
+          return [k, field?.mapFunction(v as any)]
+        }
+        // Return value for single select fields
+        if (selectFields?.includes(k)) {
+          const field = selectFieldOptions?.find((f) => f.name === k)
+          return [field?.idName, field?.mapFunction(v as any)]
         }
         return [k, v]
       }),

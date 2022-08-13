@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteRegionDocument, AdminUpdateRegionDocument, useAdminRegionQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanInput } from '@biztobiz/shared/utils/feature'
+import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { regionFields } from './web-admin-region-helper'
 import { mapTerritory, mapUser } from '../web-admin-helper/web-admin-helper'
@@ -25,7 +25,7 @@ export function WebAdminRegionUpdate() {
 
   function defaultValues() {
     if (region?.region) {
-      const regionValue = cleanInput(region.region)
+      const regionValue = cleanFormInput(region.region)
       if (region?.region?.manager?.id) {
         regionValue['managerId'] = mapUser(region.region.manager)
         delete regionValue['manager']

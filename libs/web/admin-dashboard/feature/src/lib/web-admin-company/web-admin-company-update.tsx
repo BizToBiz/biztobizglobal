@@ -5,7 +5,7 @@ import { AdminDeleteCompanyDocument, AdminUpdateCompanyDocument, useAdminCompany
 import { useParams } from 'react-router-dom'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { companyFields } from './web-admin-company-helper'
-import { cleanInput } from '@biztobiz/shared/utils/feature'
+import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminCompanyUpdate() {
   const params = useParams()
@@ -24,7 +24,7 @@ export function WebAdminCompanyUpdate() {
 
   function defaultValues() {
     if (company?.company) {
-      return cleanInput(company.company)
+      return cleanFormInput(company.company)
     } else {
       return undefined
     }

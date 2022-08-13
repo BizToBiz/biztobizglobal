@@ -9,7 +9,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { referralFields } from './web-admin-referral-helper'
-import { cleanInput } from '@biztobiz/shared/utils/feature'
+import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminReferralUpdate() {
   const params = useParams()
@@ -28,7 +28,7 @@ export function WebAdminReferralUpdate() {
 
   function defaultValues() {
     if (referral?.referral) {
-      return cleanInput(referral.referral)
+      return cleanFormInput(referral.referral)
     } else {
       return undefined
     }

@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
+import { RegionsInput } from './admin-update-territory.input'
 
 @InputType()
 export class AdminCreateTerritoryInput {
@@ -8,6 +9,6 @@ export class AdminCreateTerritoryInput {
   @Field({ nullable: true })
   managerId?: string
 
-  @Field(() => [String], { nullable: true })
-  regionIds?: string[]
+  @Field(() => [RegionsInput], { nullable: true })
+  regions?: RegionsInput[]
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { AdminDeleteUserDocument, AdminUpdateUserDocument, useAdminUserQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanInput } from '@biztobiz/shared/utils/feature'
+import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { userFields } from './web-admin-user-helper'
 
@@ -21,7 +21,7 @@ export function WebAdminUserUpdate() {
 
   function defaultValues() {
     if (user?.user) {
-      return cleanInput({
+      return cleanFormInput({
         ...user.user,
       })
     } else {
