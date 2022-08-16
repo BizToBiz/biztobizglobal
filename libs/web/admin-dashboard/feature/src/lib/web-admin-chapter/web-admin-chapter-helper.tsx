@@ -1,6 +1,6 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import { AdminRegionsDocument, ChapterStatus } from '@biztobiz/shared/util-sdk'
-import { mapRegions } from '../web-admin-helper/web-admin-helper'
+import { mapRegion, mapRegions, SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 
 export const chapterFields: WebUiFormField[] = [
   WebUiFormField.datePicker('establishedDate', { label: 'Date Established' }),
@@ -25,4 +25,8 @@ export const chapterFields: WebUiFormField[] = [
     selectOptionsFunction: mapRegions,
     dataType: 'regions',
   }),
+]
+
+export const chapterSelectFields: SelectFieldOptions[] = [
+  { name: 'region', type: 'single', idName: 'regionId', mapFunction: mapRegion },
 ]

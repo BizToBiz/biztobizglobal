@@ -1,7 +1,7 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
 import { AdminRegionsDocument, AdminUsersDocument, Region } from '@biztobiz/shared/util-sdk'
-import { mapRegions, mapUser, mapUsers, SelectFieldOptions } from '../web-admin-helper/web-admin-helper'
+import { mapRegions, mapUser, mapUsers, SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 
 function regionFilterFunction(regions: Region[]) {
   return regions?.filter((region) => !region.territory?.id)

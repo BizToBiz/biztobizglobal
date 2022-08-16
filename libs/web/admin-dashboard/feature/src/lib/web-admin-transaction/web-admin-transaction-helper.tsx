@@ -1,7 +1,7 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import { AdminChaptersDocument, AdminUsersDocument, Chapter, User } from '@biztobiz/shared/util-sdk'
 import React from 'react'
-import { mapChapter, mapChapters, mapUser, mapUsers, SelectFieldOptions } from '../web-admin-helper/web-admin-helper'
+import { mapChapter, mapChapters, mapUser, mapUsers, SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 
 export const transactionFields: WebUiFormField[] = [
   WebUiFormField.number('amount', { label: 'Amount', required: true }),

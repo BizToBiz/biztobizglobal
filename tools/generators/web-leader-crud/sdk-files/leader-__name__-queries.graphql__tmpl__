@@ -1,0 +1,20 @@
+query Leader<%= className %>($<%= propertyName %>Id: String!) {
+  <%= propertyName %>: leader<%= className %>(<%= propertyName %>Id: $<%= propertyName %>Id) {
+    ...Leader<%= className %>Details
+  }
+}
+
+query Leader<%= pluralClassName %>($input: LeaderList<%= className %>Input) {
+  <%= pluralPropertyName %>: leader<%= pluralClassName %>(input: $input) {
+    ...Leader<%= className %>Details
+  }
+  counters: leaderCount<%= pluralClassName %>(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query Leader<%= className %>Pagination($input: LeaderList<%= className %>Input) {
+  counters: leaderCount<%= pluralClassName %>(input: $input) {
+    ...CorePagingDetails
+  }
+}

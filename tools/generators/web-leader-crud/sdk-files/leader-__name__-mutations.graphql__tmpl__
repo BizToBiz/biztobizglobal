@@ -1,0 +1,17 @@
+mutation leaderCreate<%= className %>($input: LeaderCreate<%= className %>Input!) {
+  create<%= className %>: leaderCreate<%= className %>(input: $input) {
+    ...Leader<%= className %>Details
+  }
+}
+
+mutation leaderDelete<%= className %>($<%= propertyName %>Id: String!) {
+  delete<%= className %>: leaderDelete<%= className %>(<%= propertyName %>Id: $<%= propertyName %>Id) {
+    id
+  }
+}
+
+mutation leaderUpdate<%= className %>($<%= propertyName %>Id: String!, $input: LeaderUpdate<%= className %>Input!) {
+  update<%= className %>: leaderUpdate<%= className %>(<%= propertyName %>Id: $<%= propertyName %>Id, input: $input) {
+    ...Leader<%= className %>Details
+  }
+}

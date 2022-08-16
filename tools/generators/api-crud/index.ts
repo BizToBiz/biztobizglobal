@@ -20,6 +20,7 @@ interface ApiCrud {
   webAppName?: string
   tags?: string
   directory?: string
+  searchFields?: string
 }
 
 async function apiCrudGenerator(tree: Tree, schema: ApiCrud, type: string) {
@@ -34,6 +35,8 @@ async function apiCrudGenerator(tree: Tree, schema: ApiCrud, type: string) {
   const modelName = schema.model || schema.name
   const projectName = `${schema.directory}-${schema.name}-${type}`
   const pluralName = schema.plural || `${modelName}s`
+  const formattedSearchFields = "'" + schema?.searchFields.split(',').join("','") + "'"
+  console.log(formattedSearchFields)
   // @ts-ignore
   const npmScope = workspace.getNpmScope(tree)
   const variables = {
@@ -54,6 +57,7 @@ async function apiCrudGenerator(tree: Tree, schema: ApiCrud, type: string) {
     filePath,
     type,
     typeClassName: names(type).className,
+    searchFields: formattedSearchFields,
   }
 
   generateFiles(

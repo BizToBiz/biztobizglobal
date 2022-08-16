@@ -5,12 +5,12 @@ import {
   useAdminTransactionQuery,
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { transactionFields, transactionSelectFields } from './web-admin-transaction-helper'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { cleanFormInput } from '@biztobiz/shared/utils/feature'
+import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTransactionUpdate() {
   const params = useParams()

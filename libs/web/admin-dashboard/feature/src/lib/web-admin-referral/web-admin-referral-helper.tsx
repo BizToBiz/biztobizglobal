@@ -1,7 +1,7 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
 import { AdminChaptersDocument, AdminUsersDocument, ReferralRating } from '@biztobiz/shared/util-sdk'
-import { mapChapters, mapUsers } from '../web-admin-helper/web-admin-helper'
+import { mapChapters, mapUsers } from '@biztobiz/web-admin/crud-helper'
 
 export const referralFields: WebUiFormField[] = [
   WebUiFormField.input('firstName', { label: 'First Name', required: true }),

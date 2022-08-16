@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateReferralDocument } from '@biztobiz/shared/util-sdk'
-import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 import { referralFields } from './web-admin-referral-helper'
 
 export function WebAdminReferralCreate() {

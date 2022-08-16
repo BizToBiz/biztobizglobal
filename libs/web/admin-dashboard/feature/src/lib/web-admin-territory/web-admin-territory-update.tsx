@@ -9,7 +9,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
 import { territoryFields, territorySelectFields } from './web-admin-territory-helper'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
+import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTerritoryUpdate() {
   const params = useParams()
@@ -26,6 +26,7 @@ export function WebAdminTerritoryUpdate() {
 
   function defaultValues() {
     if (territory?.territory && !loading) {
+      console.log('Territory', territory?.territory)
       return cleanDatabaseOutput(territory.territory, territorySelectFields)
     } else {
       return undefined

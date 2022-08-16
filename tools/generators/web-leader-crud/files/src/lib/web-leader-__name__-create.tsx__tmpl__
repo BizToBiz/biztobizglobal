@@ -1,0 +1,27 @@
+import React from 'react'
+import { LeaderCreate<%= className %>Document } from '@<%= npmScope %>/shared/util-sdk'
+import { <%= propertyName %>Fields, <%= propertyName %>SelectFields } from './web-leader/<%= name %>-helper'
+import { WebAdminCreateForm } from '@<%= npmScope %>/web-admin/crud-helper'
+
+export function WebLeader<%= className %>Create() {
+  const pathData = {
+    path: '/leader/<%= pluralName %>/new',
+    name: 'Create a <%= className %>',
+    description: 'Use the form below to add a new <%= name %>',
+    showSearch: false,
+    actionText: 'Back to <%= className %> List',
+    actionLink: '/leader/<%= pluralName %>',
+  }
+
+  return (
+    <WebAdminCreateForm
+      pathData={pathData}
+      document={LeaderCreate<%= className %>Document}
+      navigateTo={'/leader/<%= name %>'}
+      mutationName={'create<%= className %>'}
+      buttonText={' <%= className %>'}
+      fields={<%= propertyName %>Fields}
+      selectFields={<%= propertyName %>SelectFields}
+    />
+  )
+}

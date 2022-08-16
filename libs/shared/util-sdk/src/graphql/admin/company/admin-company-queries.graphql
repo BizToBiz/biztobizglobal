@@ -4,12 +4,6 @@ query AdminCompany($companyId: String!) {
   }
 }
 
-#query AdminCompanyMeetings($companyId: String!) {
-#  meetings: adminCompanyMeetings(companyId: $companyId) {
-#    ...MeetingDetails
-#  }
-#}
-
 query AdminCompanies($input: AdminListCompanyInput) {
   companies: adminCompanies(input: $input) {
     ...AdminCompanyDetails
@@ -24,21 +18,3 @@ query AdminCompanyPagination($input: AdminListCompanyInput) {
     ...CorePagingDetails
   }
 }
-
-#query AdminSubstituteGroups {
-#  substituteGroups: adminSubstituteGroups {
-#    id
-#    createdAt
-#    updatedAt
-#    name
-#    companies {
-#      ...AdminCompanyDetails
-#    }
-#  }
-#}
-
-#query AdminMembersWithoutCompany {
-#  members: adminMembersWithoutCompany {
-#    ...UserBasics
-#  }
-#}

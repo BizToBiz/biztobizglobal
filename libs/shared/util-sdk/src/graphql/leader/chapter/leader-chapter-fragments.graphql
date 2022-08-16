@@ -1,0 +1,6 @@
+fragment LeaderChapterDetails on Chapter {
+  id
+  createdAt
+  updatedAt
+  name
+}

@@ -1,4 +1,5 @@
-import { SelectFieldOptions } from '../../../../../web/admin-dashboard/feature/src/lib/web-admin-helper/web-admin-helper'
+import { SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
+import { SVGProps } from 'react'
 
 export function capitalizeFirstLetter(string: string | undefined) {
   return string && string[0].toUpperCase() + string.slice(1)
@@ -7,6 +8,13 @@ export function capitalizeFirstLetter(string: string | undefined) {
 interface SelectReturn {
   value: string
   label: string
+}
+
+export interface NavigationInterface {
+  name: string
+  href: string
+  icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
+  current: boolean
 }
 
 function isValidDate(d: any) {

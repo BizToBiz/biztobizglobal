@@ -1,0 +1,20 @@
+query LeaderCompany($companyId: String!) {
+  company: leaderCompany(companyId: $companyId) {
+    ...LeaderCompanyDetails
+  }
+}
+
+query LeaderCompanies($input: LeaderListCompanyInput) {
+  companies: leaderCompanies(input: $input) {
+    ...LeaderCompanyDetails
+  }
+  counters: leaderCountCompanies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query LeaderCompanyPagination($input: LeaderListCompanyInput) {
+  counters: leaderCountCompanies(input: $input) {
+    ...CorePagingDetails
+  }
+}

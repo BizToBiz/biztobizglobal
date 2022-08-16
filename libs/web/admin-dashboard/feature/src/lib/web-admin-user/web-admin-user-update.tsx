@@ -2,8 +2,8 @@ import React from 'react'
 import { AdminDeleteUserDocument, AdminUpdateUserDocument, useAdminUserQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanFormInput } from '@biztobiz/shared/utils/feature'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
 import { userFields } from './web-admin-user-helper'
+import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminUserUpdate() {
   const params = useParams()

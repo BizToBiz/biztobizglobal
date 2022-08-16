@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateRegionDocument } from '@biztobiz/shared/util-sdk'
-import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 import { regionFields } from './web-admin-region-helper'
 
 export function WebAdminRegionCreate() {

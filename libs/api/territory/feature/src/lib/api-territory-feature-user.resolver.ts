@@ -1,5 +1,4 @@
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
-import { UseGuards } from '@nestjs/common'
 import { GraphQLResolveInfo } from 'graphql'
 import {
   ApiTerritoryDataAccessUserService,
@@ -9,11 +8,10 @@ import {
   UserUpdateTerritoryInput,
 } from '@biztobiz/api/territory/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
-import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
+import { CtxUser } from '@biztobiz/api/auth/util'
 import { User } from '@biztobiz/api/user/data-access'
 
 @Resolver()
-@UseGuards(GqlAuthGuard)
 export class ApiTerritoryFeatureUserResolver {
   constructor(private readonly service: ApiTerritoryDataAccessUserService) {}
 

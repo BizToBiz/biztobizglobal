@@ -3,11 +3,6 @@ mutation adminCreateTransaction($input: AdminCreateTransactionInput!) {
     ...AdminTransactionDetails
   }
 }
-#mutation adminCreateTransactionMember($input: AdminCreateTransactionMemberInput!) {
-#  adminCreateTransactionMember(input: $input) {
-#    ...AdminTransactionDetails
-#  }
-#}
 
 mutation adminDeleteTransaction($transactionId: String!) {
   deleteTransaction: adminDeleteTransaction(transactionId: $transactionId) {
@@ -15,18 +10,8 @@ mutation adminDeleteTransaction($transactionId: String!) {
   }
 }
 
-#mutation adminDeleteTransactionMember($transactionId: String!, $memberId: String!) {
-#  adminDeleteTransactionMember(transactionId: $transactionId, memberId: $memberId)
-#}
-
 mutation adminUpdateTransaction($transactionId: String!, $input: AdminUpdateTransactionInput!) {
   updateTransaction: adminUpdateTransaction(transactionId: $transactionId, input: $input) {
     ...AdminTransactionDetails
   }
 }
-
-#mutation adminUpdateTransactionMember($transactionId: String!, $input: AdminUpdateTransactionMemberInput!) {
-#  updateTransactionMember: adminUpdateTransactionMember(transactionId: $transactionId, input: $input) {
-#    ...AdminTransactionDetails
-#  }
-#}

@@ -3,8 +3,8 @@ import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteCompanyDocument, AdminUpdateCompanyDocument, useAdminCompanyQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
-import { companyFields } from './web-admin-company-helper'
+import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
+import { companyFields, companySelectFields } from './web-admin-company-helper'
 import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 
 export function WebAdminCompanyUpdate() {
@@ -43,12 +43,13 @@ export function WebAdminCompanyUpdate() {
     <WebAdminUpdateForm
       pathData={pathData}
       id={params['id']}
+      idName={'companyId'}
       defaultValues={defaultValues()}
       document={AdminUpdateCompanyDocument}
       deleteDocument={AdminDeleteCompanyDocument}
       buttonText={'Company'}
       fields={companyFields}
-      idName={'companyId'}
+      selectFields={companySelectFields}
     />
   )
 }

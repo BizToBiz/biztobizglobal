@@ -17,7 +17,6 @@ export function WebFeatureLogin() {
 
   const processLogin = async (input: LoginInput) => {
     const loginInfo = await login(input)
-    setIdentity(loginInfo.user)
 
     if (loginInfo?.user?.role === Role.Admin) {
       navigate('/admin/dashboard')

@@ -1,7 +1,7 @@
 import React from 'react'
 import { AdminCreateCompanyDocument } from '@biztobiz/shared/util-sdk'
-import { companyFields } from './web-admin-company-helper'
-import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
+import { companyFields, companySelectFields } from './web-admin-company-helper'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminCompanyCreate() {
   const pathData = {
@@ -21,6 +21,7 @@ export function WebAdminCompanyCreate() {
       mutationName={'createCompany'}
       buttonText={' Company'}
       fields={companyFields}
+      selectFields={companySelectFields}
     />
   )
 }

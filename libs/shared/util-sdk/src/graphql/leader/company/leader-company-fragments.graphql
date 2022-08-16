@@ -1,0 +1,6 @@
+fragment LeaderCompanyDetails on Company {
+  id
+  createdAt
+  updatedAt
+  name
+}

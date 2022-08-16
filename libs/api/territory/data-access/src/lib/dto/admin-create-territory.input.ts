@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { RegionsInput } from './admin-update-territory.input'
+import { MultiSelectInput } from '@biztobiz/api/core/data-access'
 
 @InputType()
 export class AdminCreateTerritoryInput {
@@ -9,6 +9,6 @@ export class AdminCreateTerritoryInput {
   @Field({ nullable: true })
   managerId?: string
 
-  @Field(() => [RegionsInput], { nullable: true })
-  regions?: RegionsInput[]
+  @Field(() => [MultiSelectInput], { nullable: true })
+  regions?: MultiSelectInput[]
 }

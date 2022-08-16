@@ -110,7 +110,7 @@ export type AdminCreateSubstituteInput = {
 export type AdminCreateTerritoryInput = {
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
-  regions?: InputMaybe<Array<RegionsInput>>
+  regions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateTestimonialInput = {
@@ -670,6 +670,10 @@ export type MeetingPresence = {
   id?: Maybe<Scalars['String']>
   member?: Maybe<User>
   updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type MultiSelectInput = {
+  id?: InputMaybe<Scalars['String']>
 }
 
 export type Mutation = {
@@ -2464,6 +2468,22 @@ export type AdminChaptersQuery = {
   } | null
 }
 
+export type AdminChapterPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListChapterInput>
+}>
+
+export type AdminChapterPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
 export type AdminCompanyDetailsFragment = {
   __typename?: 'Company'
   id?: string | null
@@ -4179,6 +4199,55 @@ export function useAdminChaptersLazyQuery(
 export type AdminChaptersQueryHookResult = ReturnType<typeof useAdminChaptersQuery>
 export type AdminChaptersLazyQueryHookResult = ReturnType<typeof useAdminChaptersLazyQuery>
 export type AdminChaptersQueryResult = Apollo.QueryResult<AdminChaptersQuery, AdminChaptersQueryVariables>
+export const AdminChapterPaginationDocument = gql`
+  query AdminChapterPagination($input: AdminListChapterInput) {
+    counters: adminCountChapters(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminChapterPaginationQuery__
+ *
+ * To run a query within a React component, call `useAdminChapterPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminChapterPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminChapterPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminChapterPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>(
+    AdminChapterPaginationDocument,
+    options,
+  )
+}
+export function useAdminChapterPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>(
+    AdminChapterPaginationDocument,
+    options,
+  )
+}
+export type AdminChapterPaginationQueryHookResult = ReturnType<typeof useAdminChapterPaginationQuery>
+export type AdminChapterPaginationLazyQueryHookResult = ReturnType<typeof useAdminChapterPaginationLazyQuery>
+export type AdminChapterPaginationQueryResult = Apollo.QueryResult<
+  AdminChapterPaginationQuery,
+  AdminChapterPaginationQueryVariables
+>
 export const AdminCreateCompanyDocument = gql`
   mutation adminCreateCompany($input: AdminCreateCompanyInput!) {
     createCompany: adminCreateCompany(input: $input) {

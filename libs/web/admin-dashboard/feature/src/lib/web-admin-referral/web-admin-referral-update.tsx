@@ -7,7 +7,7 @@ import {
   useAdminReferralQuery,
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
+import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 import { referralFields } from './web-admin-referral-helper'
 import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 

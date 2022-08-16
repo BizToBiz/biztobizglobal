@@ -4,9 +4,8 @@ import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteRegionDocument, AdminUpdateRegionDocument, useAdminRegionQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanFormInput } from '@biztobiz/shared/utils/feature'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
+import { mapTerritory, mapUser, WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 import { regionFields } from './web-admin-region-helper'
-import { mapTerritory, mapUser } from '../web-admin-helper/web-admin-helper'
 
 export function WebAdminRegionUpdate() {
   const params = useParams()

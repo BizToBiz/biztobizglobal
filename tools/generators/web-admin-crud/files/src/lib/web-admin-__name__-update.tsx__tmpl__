@@ -1,0 +1,57 @@
+import React from 'react'
+import { useAtom } from 'jotai'
+import { isDevAtom } from '@<%= npmScope %>/web/global/data-access'
+import {
+  AdminDelete<%= className %>Document,
+  AdminUpdate<%= className %>Document,
+  useAdmin<%= className %>Query,
+} from '@<%= npmScope %>/shared/util-sdk'
+import { useParams } from 'react-router-dom'
+import { cleanDatabaseOutput } from '@<%= npmScope %>/shared/utils/feature'
+import { <%= propertyName %>Fields, <%= propertyName %>SelectFields } from './web-admin-<%= name %>-helper'
+import { WebAdminUpdateForm } from '@<%= npmScope %>/web-admin/crud-helper'
+
+export function WebAdmin<%= className %>Update() {
+  const params = useParams()
+  const [isDev] = useAtom(isDevAtom)
+
+  const { data: <%= propertyName %>, loading } = useAdmin<%= className %>Query({
+    skip: !params?.['id'],
+    variables: {
+      <%= propertyName %>Id: params?.['id'] ?? 'NoId',
+    },
+  })
+
+  if (!params?.['id']) return <div>No Id</div>
+
+  function defaultValues() {
+    if (<%= propertyName %>?.<%= propertyName %> && !loading) {
+      return cleanDatabaseOutput(<%= propertyName %>.<%= propertyName %>, <%= propertyName %>SelectFields)
+    } else {
+      return undefined
+    }
+  }
+
+  const pathData = {
+    path: '/admin/<%= name %>/:id',
+    name: 'Edit <%= className %>',
+    description: 'Update the information for this <%= name %>',
+    showSearch: false,
+    actionText: 'Back to <%= className %> List',
+    actionLink: '/admin/<%= pluralName %>',
+  }
+
+  return (
+    <WebAdminUpdateForm
+      pathData={pathData}
+      id={params['id']}
+      defaultValues={defaultValues()}
+      document={AdminUpdate<%= className %>Document}
+      deleteDocument={AdminDelete<%= className %>Document}
+      buttonText={'<%= className %>'}
+      fields={<%= name %>Fields}
+      idName={'<%= propertyName %>Id'}
+      selectFields={<%= propertyName %>SelectFields}
+    />
+  )
+}

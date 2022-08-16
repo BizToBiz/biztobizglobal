@@ -3,11 +3,6 @@ mutation adminCreateUser($input: AdminCreateUserInput!) {
     ...AdminUserDetails
   }
 }
-#mutation adminCreateUserMember($input: AdminCreateUserMemberInput!) {
-#  adminCreateUserMember(input: $input) {
-#    ...AdminUserDetails
-#  }
-#}
 
 mutation adminDeleteUser($userId: String!) {
   deleteUser: adminDeleteUser(userId: $userId) {
@@ -15,18 +10,8 @@ mutation adminDeleteUser($userId: String!) {
   }
 }
 
-#mutation adminDeleteUserMember($userId: String!, $memberId: String!) {
-#  adminDeleteUserMember(userId: $userId, memberId: $memberId)
-#}
-
 mutation adminUpdateUser($userId: String!, $input: AdminUpdateUserInput!) {
   updateUser: adminUpdateUser(userId: $userId, input: $input) {
     ...AdminUserDetails
   }
 }
-
-#mutation adminUpdateUserMember($userId: String!, $input: AdminUpdateUserMemberInput!) {
-#  updateUserMember: adminUpdateUserMember(userId: $userId, input: $input) {
-#    ...AdminUserDetails
-#  }
-#}

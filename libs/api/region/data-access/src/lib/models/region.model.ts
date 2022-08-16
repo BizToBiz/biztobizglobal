@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { Territory } from '@biztobiz/api/territory/data-access'
 import { Chapter } from '@biztobiz/api/chapter/data-access'
 import { User } from '@biztobiz/api/user/data-access'
+import { Territory } from '@biztobiz/api/territory/data-access'
 
 @ObjectType()
 export class Region {

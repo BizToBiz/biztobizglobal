@@ -1,0 +1,67 @@
+import React, { useLayoutEffect, useState } from 'react'
+import { useAtom } from 'jotai'
+import { currentPathAtom, isDevAtom, searchAtom } from '@<%= npmScope %>/web/global/data-access'
+import { WebUiDataTableFeature } from '@<%= npmScope %>/web-ui/data-table/feature'
+import { WebUiDevDataFeature } from '@<%= npmScope %>/web-ui/dev-data/feature'
+import { useAdmin<%= pluralClassName %>Query, useAdmin<%= className %>PaginationQuery } from '@<%= npmScope %>/shared/util-sdk'
+import { RESET } from 'jotai/utils'
+
+interface WebAdmin<%= className %>ListProps {
+  userId?: string
+  chapterId?: string
+  referralId?: string
+}
+
+export function WebAdmin<%= className %>List(props: WebAdmin<%= className %>ListProps) {
+  const [, setCurrentPath] = useAtom(currentPathAtom)
+  const [search] = useAtom(searchAtom)
+  const [isDev] = useAtom(isDevAtom)
+  const [skip, setSkip] = useState(0)
+
+  const variables = {
+    input: {
+      take: 20,
+      userId: props?.userId,
+      chapterId: props?.chapterId,
+      referralId: props?.referralId,
+      skip,
+      search,
+    },
+  }
+
+  const { data: <%= pluralName %> } = useAdmin<%= pluralClassName %>Query({
+    variables,
+  })
+
+  const { data: pagination } = useAdmin<%= className %>PaginationQuery({
+    variables,
+  })
+
+  useLayoutEffect(() => {
+    setCurrentPath({
+      path: '/admin/<%= pluralName %>',
+      name: '<%= pluralClassName %>',
+      description: 'View and manage all <%= pluralName %> in your organization',
+      showSearch: true,
+      actionText: 'Add <%= className %>',
+      actionLink: '/admin/<%= name %>/new',
+    })
+
+    return () => {
+      setCurrentPath(RESET)
+    }
+  }, [])
+
+  return (
+    <>
+      <WebUiDataTableFeature
+        data={<%= pluralName %>?.<%= pluralName %>}
+        path={'/admin/<%= name %>'}
+        fields={['name']}
+        pagination={pagination?.counters}
+        setSkip={setSkip}
+      />
+      {isDev && <%= pluralName %>?.<%= pluralName %> ? <WebUiDevDataFeature data={<%= pluralName %>} /> : null}
+    </>
+  )
+}

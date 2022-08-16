@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateTransactionDocument } from '@biztobiz/shared/util-sdk'
-import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 import { transactionFields } from './web-admin-transaction-helper'
 
 export function WebAdminTransactionCreate() {

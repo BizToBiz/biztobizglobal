@@ -1,0 +1,6 @@
+fragment Admin<%= className %>Details on <%= className %> {
+  id
+  createdAt
+  updatedAt
+  <%= primaryField %>
+}
