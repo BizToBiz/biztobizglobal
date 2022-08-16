@@ -1,7 +1,7 @@
 import React from 'react'
 import { AdminCreateUserDocument } from '@biztobiz/shared/util-sdk'
 import { userFields } from './web-admin-user-helper'
-import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminUserCreate() {
   const pathData = {

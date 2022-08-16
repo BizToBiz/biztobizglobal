@@ -1,24 +1,13 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import {
-  BellIcon,
-  CashIcon,
-  GlobeAltIcon,
-  GlobeIcon,
-  HomeIcon,
-  MenuAlt2Icon,
-  OfficeBuildingIcon,
-  UserAddIcon,
-  UserGroupIcon,
-  UserIcon,
-  XIcon,
-} from '@heroicons/react/outline'
+import { BellIcon, MenuAlt2Icon, XIcon } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import { User } from '@biztobiz/shared/util-sdk'
 import fullLogo from './assets/full-logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { currentPathAtom, searchAtom } from '@biztobiz/web/global/data-access'
+import { NavigationInterface } from '@biztobiz/shared/utils/feature'
 
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -33,6 +22,7 @@ function classNames(...classes: string[]) {
 export interface WebAdminDashboardFeatureProps {
   children: React.ReactNode
   user: User
+  navigation: NavigationInterface[]
 }
 
 export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
@@ -40,46 +30,6 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
   const [currentPath] = useAtom(currentPathAtom)
   const [search, setSearch] = useAtom(searchAtom)
   const navigate = useNavigate()
-
-  const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: currentPath.name.includes('Dashboard') },
-    { name: 'Chapters', href: '/admin/chapters', icon: UserGroupIcon, current: currentPath.name.includes('Chapter') },
-    { name: 'Users', href: '/admin/users', icon: UserIcon, current: currentPath.name.includes('User') },
-    {
-      name: 'Transactions',
-      href: '/admin/transactions',
-      icon: CashIcon,
-      current: currentPath.name.includes('Transaction'),
-    },
-    {
-      name: 'Referrals',
-      href: '/admin/referrals',
-      icon: UserAddIcon,
-      current: currentPath.name.includes('Referral'),
-    },
-    {
-      name: 'Companies',
-      href: '/admin/companies',
-      icon: OfficeBuildingIcon,
-      current: currentPath.name.includes('Compan'),
-    },
-    {
-      name: 'Territories',
-      href: '/admin/territories',
-      icon: GlobeAltIcon,
-      current: currentPath.name.includes('Territor'),
-    },
-    {
-      name: 'Regions',
-      href: '/admin/regions',
-      icon: GlobeIcon,
-      current: currentPath.name.includes('Region'),
-    },
-
-    // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    // { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-    // { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-  ]
 
   return (
     <div>
@@ -133,7 +83,7 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
-                    {navigation.map((item) => (
+                    {props.navigation.map((item) => (
                       <Link
                         key={item.name}
                         to={item.href}
@@ -174,7 +124,7 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
           </div>
           <div className="mt-3 flex-grow flex flex-col">
             <nav className="flex-1 px-2 pb-4 space-y-1">
-              {navigation.map((item) => (
+              {props.navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}

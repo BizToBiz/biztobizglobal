@@ -1,0 +1,4 @@
+export * from './lib/web-admin-<%= name %>-list'
+export * from './lib/web-admin-<%= name %>-create'
+export * from './lib/web-admin-<%= name %>-update'
+export * from './lib/web-admin-<%= name %>-helper'

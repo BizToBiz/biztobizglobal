@@ -7,6 +7,7 @@ import { AdminCreateChapterInput } from './dto/admin-create-chapter.input'
 import { AdminListChapterInput } from './dto/admin-list-chapter.input'
 import { AdminUpdateChapterInput } from './dto/admin-update-chapter.input'
 import { Prisma } from '@prisma/client'
+import { ChapterMemberRole } from '@biztobiz/api/chapter-member/data-access'
 
 @Injectable()
 export class ApiChapterDataAccessAdminService {
@@ -37,6 +38,29 @@ export class ApiChapterDataAccessAdminService {
         })),
       ],
     }
+  }
+
+  async getLeaderChapters(userId: string) {
+    const chapterList = await this.data.chapter.findMany({
+      where: {
+        OR: [
+          { region: { managerId: userId } },
+          { region: { territory: { managerId: userId } } },
+          {
+            members: {
+              some: {
+                OR: [
+                  { AND: [{ memberId: userId }, { role: ChapterMemberRole.Chairman }] },
+                  { AND: [{ memberId: userId }, { role: ChapterMemberRole.VicePresident }] },
+                  { AND: [{ memberId: userId }, { role: ChapterMemberRole.President }] },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    })
+    return chapterList.map((chapter) => chapter.id)
   }
 
   adminChapters(info: GraphQLResolveInfo, adminId: string, input?: AdminListChapterInput) {

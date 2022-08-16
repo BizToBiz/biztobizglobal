@@ -1,7 +1,7 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
 import { AdminTerritoriesDocument, AdminUsersDocument, Territory } from '@biztobiz/shared/util-sdk'
-import { mapUsers } from '../web-admin-helper/web-admin-helper'
+import { mapUsers } from '@biztobiz/web-admin/crud-helper'
 
 export function mapTerritories(territories: Territory[]): any {
   return territories?.map((option) => ({ value: `${option.id}`, label: `${option.name}` }))

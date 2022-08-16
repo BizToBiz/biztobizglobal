@@ -1,0 +1,18 @@
+import { WebUiFormField } from '@<%= npmScope %>/web-ui/form'
+import React from 'react'
+import { SelectFieldOptions } from '@<%= npmScope %>/web-admin-crud-helper'
+
+// TODO: Create custom filter functions
+// function regionFilterFunction(regions: Region[]) {
+//   return regions?.filter((region) => !region.<%= className %>?.id)
+// }
+
+
+export const <%= propertyName %>Fields: WebUiFormField[] = [
+  WebUiFormField.input('<%= primaryField %>', { label: '<%= primaryField %>' }),
+]
+
+// TODO: Populate Select Fields
+export const <%= propertyName %>SelectFields: SelectFieldOptions[] = [
+  // { name: 'manager', type: 'single', idName: 'managerId', mapFunction: mapUser },
+]

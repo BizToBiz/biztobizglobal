@@ -1,7 +1,7 @@
 import React from 'react'
 import { AdminCreateChapterDocument } from '@biztobiz/shared/util-sdk'
-import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
-import { chapterFields } from './web-admin-chapter-helper'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
+import { chapterFields, chapterSelectFields } from './web-admin-chapter-helper'
 
 export function WebAdminChapterCreate() {
   const pathData = {
@@ -21,6 +21,7 @@ export function WebAdminChapterCreate() {
       mutationName={'createChapter'}
       buttonText={' Chapter'}
       fields={chapterFields}
+      selectFields={chapterSelectFields}
     />
   )
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { <%= apiClassName %>CoreDataAccessService, CorePaging, CorePagingInput } from '@<%= npmScope %>/<%= directory %>/core/data-access'
+import { <%= apiClassName %>CoreDataAccessService, CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
 
 import { UserCreate<%= modelClassName %>Input } from './dto/user-create-<%= modelName %>.input'
 import { UserList<%= modelClassName %>Input } from './dto/user-list-<%= modelName %>.input'
@@ -11,10 +11,38 @@ import { UserUpdate<%= modelClassName %>Input } from './dto/user-update-<%= mode
 export class <%= apiClassName %><%= modelClassName %>DataAccessUserService {
   constructor(private readonly data: <%= apiClassName %>CoreDataAccessService) {}
 
+    private readonly searchFields = [<%- searchFields %>]
+    private where(input: AdminList<%= modelClassName %>Input): Prisma.<%= modelClassName %>WhereInput {
+      const query = input?.search?.trim()
+      const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+      // TODO: implement leader search query
+      // function leaderSearch() {}
+
+      function relationalSearch() {
+       // TODO: implement relational search for <%= modelName %>
+       // if (input?.regionId) {
+       //   return { regionId: input.regionId }
+       // }
+       // if (input?.memberId) {
+       //   return { members: { some: { id: input.memberId } } }
+       // }
+        return null
+      }
+      return {
+        AND: [
+          relationalSearch(),
+          ...terms.map((term) => ({
+            OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          })),
+        ],
+      }
+    }
+
   user<%= pluralClassName %>(info: GraphQLResolveInfo, userId: string, input?: UserList<%= modelClassName %>Input) {
     const select = new PrismaSelect(info).value
     return this.data.<%= modelPropertyName %>.findMany({
-      take: input?.limit,
+      take: input?.take,
       skip: input?.skip,
       ...select,
     })
@@ -22,9 +50,15 @@ export class <%= apiClassName %><%= modelClassName %>DataAccessUserService {
 
   async userCount<%= pluralClassName %>(userId: string, input?: UserList<%= modelClassName %>Input): Promise<CorePaging> {
     const total = await this.data.<%= modelPropertyName %>.count()
+    const count = await this.data.<%= modelPropertyName %>.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      limit: input?.limit,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +71,7 @@ export class <%= apiClassName %><%= modelClassName %>DataAccessUserService {
   userCreate<%= modelClassName %>(info: GraphQLResolveInfo, userId: string, input: UserCreate<%= modelClassName %>Input) {
     const select = new PrismaSelect(info).value
     return this.data.<%= modelPropertyName %>.create({
-      data: { <%= primaryField %>: input.<%= primaryField %> },
+      data: { ...input },
       ...select,
     })
   }
@@ -46,7 +80,7 @@ export class <%= apiClassName %><%= modelClassName %>DataAccessUserService {
     const select = new PrismaSelect(info).value
     return this.data.<%= modelPropertyName %>.update({
       where: { id: <%= modelPropertyName %>Id },
-      data: { <%= primaryField %>: input.<%= primaryField %> },
+      data: { ...input },
       ...select,
     })
   }

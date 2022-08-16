@@ -4,12 +4,6 @@ query AdminRegion($regionId: String!) {
   }
 }
 
-#query AdminRegionMeetings($regionId: String!) {
-#  meetings: adminRegionMeetings(regionId: $regionId) {
-#    ...MeetingDetails
-#  }
-#}
-
 query AdminRegions($input: AdminListRegionInput) {
   regions: adminRegions(input: $input) {
     ...AdminRegionDetails
@@ -24,21 +18,3 @@ query AdminRegionPagination($input: AdminListRegionInput) {
     ...CorePagingDetails
   }
 }
-
-#query AdminSubstituteGroups {
-#  substituteGroups: adminSubstituteGroups {
-#    id
-#    createdAt
-#    updatedAt
-#    name
-#    regions {
-#      ...AdminRegionDetails
-#    }
-#  }
-#}
-
-#query AdminMembersWithoutRegion {
-#  members: adminMembersWithoutRegion {
-#    ...UserBasics
-#  }
-#}

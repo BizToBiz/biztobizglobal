@@ -5,13 +5,12 @@ import {
   useAdminTransactionQuery,
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
-import { transactionFields } from './web-admin-transaction-helper'
-import { mapChapter, mapUser } from '../web-admin-helper/web-admin-helper'
+import { transactionFields, transactionSelectFields } from './web-admin-transaction-helper'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
-import { cleanInput } from '@biztobiz/shared/utils/feature'
+import { cleanFormInput } from '@biztobiz/shared/utils/feature'
+import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTransactionUpdate() {
   const params = useParams()
@@ -30,16 +29,7 @@ export function WebAdminTransactionUpdate() {
 
   function defaultValues() {
     if (transaction?.transaction) {
-      const transactionValue = cleanInput(transaction.transaction)
-      if (transaction?.transaction?.user?.id) {
-        transactionValue['userId'] = mapUser(transaction?.transaction?.user)
-        delete transactionValue['user']
-      }
-      if (transaction?.transaction?.chapter?.id) {
-        transactionValue['chapterId'] = mapChapter(transaction?.transaction?.chapter)
-        delete transactionValue['chapter']
-      }
-      return transactionValue
+      return cleanFormInput(transaction.transaction, transactionSelectFields)
     } else {
       return undefined
     }

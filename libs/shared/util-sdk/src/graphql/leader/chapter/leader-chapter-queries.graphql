@@ -1,0 +1,20 @@
+query LeaderChapter($chapterId: String!) {
+  chapter: leaderChapter(chapterId: $chapterId) {
+    ...LeaderChapterDetails
+  }
+}
+
+query LeaderChapters($input: LeaderListChapterInput) {
+  chapters: leaderChapters(input: $input) {
+    ...LeaderChapterDetails
+  }
+  counters: leaderCountChapters(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query LeaderChapterPagination($input: LeaderListChapterInput) {
+  counters: leaderCountChapters(input: $input) {
+    ...CorePagingDetails
+  }
+}

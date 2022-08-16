@@ -110,7 +110,7 @@ export type AdminCreateSubstituteInput = {
 export type AdminCreateTerritoryInput = {
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
-  regionIds?: InputMaybe<Array<Scalars['String']>>
+  regions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateTestimonialInput = {
@@ -359,7 +359,7 @@ export type AdminUpdateChapterInput = {
   avatarUrl?: InputMaybe<Scalars['String']>
   city?: InputMaybe<Scalars['String']>
   description?: InputMaybe<Scalars['String']>
-  establishedDate?: InputMaybe<Scalars['String']>
+  establishedDate?: InputMaybe<Scalars['DateTime']>
   facebook?: InputMaybe<Scalars['String']>
   latitude?: InputMaybe<Scalars['String']>
   longitude?: InputMaybe<Scalars['String']>
@@ -367,6 +367,7 @@ export type AdminUpdateChapterInput = {
   meetingDetails?: InputMaybe<Scalars['String']>
   meetingTime?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
+  regionId?: InputMaybe<Scalars['String']>
   state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<ChapterStatus>
 }
@@ -669,6 +670,10 @@ export type MeetingPresence = {
   id?: Maybe<Scalars['String']>
   member?: Maybe<User>
   updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type MultiSelectInput = {
+  id?: InputMaybe<Scalars['String']>
 }
 
 export type Mutation = {
@@ -2326,6 +2331,7 @@ export type AdminChapterDetailsFragment = {
   meetingDetails?: string | null
   meetingTime?: string | null
   facebook?: string | null
+  region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
 }
 
 export type AdminCreateChapterMutationVariables = Exact<{
@@ -2353,6 +2359,7 @@ export type AdminCreateChapterMutation = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2391,6 +2398,7 @@ export type AdminUpdateChapterMutation = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2419,6 +2427,7 @@ export type AdminChapterQuery = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2447,7 +2456,24 @@ export type AdminChaptersQuery = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type AdminChapterPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListChapterInput>
+}>
+
+export type AdminChapterPaginationQuery = {
+  __typename?: 'Query'
   counters?: {
     __typename?: 'CorePaging'
     count?: number | null
@@ -3722,6 +3748,10 @@ export const AdminChapterDetailsFragmentDoc = gql`
     meetingDetails
     meetingTime
     facebook
+    region {
+      id
+      name
+    }
   }
 `
 export const AdminCompanyDetailsFragmentDoc = gql`
@@ -4169,6 +4199,55 @@ export function useAdminChaptersLazyQuery(
 export type AdminChaptersQueryHookResult = ReturnType<typeof useAdminChaptersQuery>
 export type AdminChaptersLazyQueryHookResult = ReturnType<typeof useAdminChaptersLazyQuery>
 export type AdminChaptersQueryResult = Apollo.QueryResult<AdminChaptersQuery, AdminChaptersQueryVariables>
+export const AdminChapterPaginationDocument = gql`
+  query AdminChapterPagination($input: AdminListChapterInput) {
+    counters: adminCountChapters(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useAdminChapterPaginationQuery__
+ *
+ * To run a query within a React component, call `useAdminChapterPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminChapterPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminChapterPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAdminChapterPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>(
+    AdminChapterPaginationDocument,
+    options,
+  )
+}
+export function useAdminChapterPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AdminChapterPaginationQuery, AdminChapterPaginationQueryVariables>(
+    AdminChapterPaginationDocument,
+    options,
+  )
+}
+export type AdminChapterPaginationQueryHookResult = ReturnType<typeof useAdminChapterPaginationQuery>
+export type AdminChapterPaginationLazyQueryHookResult = ReturnType<typeof useAdminChapterPaginationLazyQuery>
+export type AdminChapterPaginationQueryResult = Apollo.QueryResult<
+  AdminChapterPaginationQuery,
+  AdminChapterPaginationQueryVariables
+>
 export const AdminCreateCompanyDocument = gql`
   mutation adminCreateCompany($input: AdminCreateCompanyInput!) {
     createCompany: adminCreateCompany(input: $input) {

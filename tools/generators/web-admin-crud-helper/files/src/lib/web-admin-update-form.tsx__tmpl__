@@ -1,15 +1,16 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { useAtom } from 'jotai'
-import { currentPathAtom, isDevAtom } from '@biztobiz/web/global/data-access'
+import { currentPathAtom, isDevAtom } from '@<%= npmScope %>/web/global/data-access'
 import { RESET } from 'jotai/utils'
-import { WebUiForm } from '@biztobiz/web-ui/form'
-import { cleanOutput } from '@biztobiz/shared/utils/feature'
+import { WebUiForm } from '@<%= npmScope %>/web-ui/form'
 import { DocumentNode } from 'graphql'
 import { useMutation } from '@apollo/client'
-import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
+import { WebUiDevDataFeature } from '@<%= npmScope %>/web-ui/dev-data/feature'
 import { TrashIcon } from '@heroicons/react/solid'
-import { WebUiConfirmationModalFeature } from '@biztobiz/web-ui/confirmation-modal/feature'
+import { WebUiConfirmationModalFeature } from '@<%= npmScope %>/web-ui/confirmation-modal/feature'
 import { useNavigate } from 'react-router-dom'
+import { cleanFormInput } from '@<%= npmScope %>/shared/utils/feature'
+import { SelectFieldOptions } from './web-admin-helper'
 
 interface PathData {
   path: string
@@ -28,6 +29,7 @@ interface WebAdminCreateFormProps {
   fields: any[]
   id: string
   defaultValues: any
+  selectFields?: SelectFieldOptions[]
 }
 
 export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
@@ -41,7 +43,7 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
 
   const submit = async (input: any) => {
     setLoading(true)
-    const cleanedInput = cleanOutput(input)
+    const cleanedInput = cleanFormInput(input, props?.selectFields)
     updateMutation({
       variables: {
         [`${props.idName}`]: props.id,

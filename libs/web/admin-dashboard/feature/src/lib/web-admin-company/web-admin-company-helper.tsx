@@ -1,6 +1,6 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import { AdminUsersDocument } from '@biztobiz/shared/util-sdk'
-import { mapUsers } from '../web-admin-helper/web-admin-helper'
+import { mapUsers, SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 
 export const companyFields: WebUiFormField[] = [
   WebUiFormField.input('name', { label: 'Company Name', required: true }),
@@ -10,4 +10,8 @@ export const companyFields: WebUiFormField[] = [
     selectOptionsFunction: mapUsers,
     dataType: 'users',
   }),
+]
+
+export const companySelectFields: SelectFieldOptions[] = [
+  { name: 'members', type: 'multi', idName: 'members', mapFunction: mapUsers },
 ]

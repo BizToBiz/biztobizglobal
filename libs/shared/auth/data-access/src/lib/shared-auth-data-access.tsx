@@ -63,7 +63,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
       } else {
         return { user: null, error: 'Unable to retrieve user.' }
       }
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message)
       return { user: null, error: e.message }
     }
@@ -73,7 +73,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
     try {
       await logoutMutation()
       setIdentity(RESET)
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message)
     }
   }
@@ -88,7 +88,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
       } else {
         return { user: null, error: 'Unable to retrieve registered user.' }
       }
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message)
       return { user: null, error: e.message }
     }
@@ -98,7 +98,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
     try {
       await forgotPasswordMutation({ variables: { input } })
       return { success: true, error: null }
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message)
       return { success: false, error: e.message }
     }
@@ -108,7 +108,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
     try {
       await resetPasswordMutation({ variables: { input } })
       return { success: true, error: null }
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message)
       return { success: false, error: e.message }
     }

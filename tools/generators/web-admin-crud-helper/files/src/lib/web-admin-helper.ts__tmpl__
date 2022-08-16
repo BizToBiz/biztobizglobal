@@ -1,5 +1,12 @@
-import { Chapter, Region, Territory, User } from '@biztobiz/shared/util-sdk'
+import { Chapter, Region, Territory, User } from '@<%= npmScope %>/shared/util-sdk'
 import { Maybe } from 'graphql/jsutils/Maybe'
+
+export interface SelectFieldOptions {
+  name: string
+  type: 'single' | 'multi'
+  idName: string
+  mapFunction: (v: any) => { value: Maybe<string>; label: string } | { value: Maybe<string>; label: string }[]
+}
 
 export function mapUsers(users: User[]): { value: string; label: string }[] {
   return users?.map((option) => ({ value: `${option.id}`, label: `${option.firstName} ${option.lastName}` }))

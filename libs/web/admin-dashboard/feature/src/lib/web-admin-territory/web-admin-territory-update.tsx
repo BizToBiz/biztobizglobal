@@ -7,10 +7,9 @@ import {
   useAdminTerritoryQuery,
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
-import { cleanInput } from '@biztobiz/shared/utils/feature'
-import { mapRegions, mapUser } from '../web-admin-helper/web-admin-helper'
-import { territoryFields, territorySelectFields, territoryUpdateFields } from './web-admin-territory-helper'
-import { WebAdminUpdateForm } from '../web-admin-helper/web-admin-update-form'
+import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
+import { territoryFields, territorySelectFields } from './web-admin-territory-helper'
+import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTerritoryUpdate() {
   const params = useParams()
@@ -27,15 +26,8 @@ export function WebAdminTerritoryUpdate() {
 
   function defaultValues() {
     if (territory?.territory && !loading) {
-      const territoryValue = cleanInput(territory.territory, territorySelectFields)
-      if (territory?.territory?.manager?.id) {
-        territoryValue['managerId'] = mapUser(territory.territory.manager)
-        delete territoryValue['manager']
-      }
-      if (territory?.territory?.regions && territory.territory.regions.length > 0) {
-        territoryValue['regions'] = mapRegions(territory.territory.regions)
-      }
-      return territoryValue
+      console.log('Territory', territory?.territory)
+      return cleanDatabaseOutput(territory.territory, territorySelectFields)
     } else {
       return undefined
     }
@@ -58,8 +50,9 @@ export function WebAdminTerritoryUpdate() {
       document={AdminUpdateTerritoryDocument}
       deleteDocument={AdminDeleteTerritoryDocument}
       buttonText={'Territory'}
-      fields={[...territoryFields, ...territoryUpdateFields]}
+      fields={territoryFields}
       idName={'territoryId'}
+      selectFields={territorySelectFields}
     />
   )
 }

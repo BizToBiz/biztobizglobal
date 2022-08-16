@@ -12,6 +12,7 @@ export class ApiUserDataAccessService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
   private readonly searchFields = ['firstName', 'lastName', 'email']
+
   private where(query = ''): Prisma.UserWhereInput {
     query = query?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
@@ -57,7 +58,7 @@ export class ApiUserDataAccessService {
     await this.data.ensureAdminUser(adminId)
     const email = input.email.trim()
     const avatarUrl = getGravatarUrl(email)
-    const username = this.formatUsername(email, input.username)
+    const username = this.formatUsername(email, input?.username)
     await this.ensureUsernameAvailable(username)
 
     return this.data.user.create({

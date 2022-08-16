@@ -3,10 +3,11 @@ import { useAtom } from 'jotai'
 import { currentPathAtom } from '@biztobiz/web/global/data-access'
 import { RESET } from 'jotai/utils'
 import { WebUiForm } from '@biztobiz/web-ui/form'
-import { cleanOutput } from '@biztobiz/shared/utils/feature'
+import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 import { DocumentNode } from 'graphql'
 import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
+import { SelectFieldOptions } from './web-admin-helper'
 
 interface PathData {
   path: string
@@ -23,6 +24,7 @@ interface WebAdminCreateFormProps {
   mutationName: string
   buttonText: string
   fields: any[]
+  selectFields?: SelectFieldOptions[]
 }
 
 export function WebAdminCreateForm(props: WebAdminCreateFormProps) {
@@ -33,7 +35,7 @@ export function WebAdminCreateForm(props: WebAdminCreateFormProps) {
 
   const submit = async (input: any) => {
     setLoading(true)
-    const cleanedInput = cleanOutput(input)
+    const cleanedInput = cleanFormInput(input, props?.selectFields)
     console.log(cleanedInput)
     createMutation({
       variables: {

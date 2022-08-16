@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateTerritoryInput } from './dto/admin-create-territory.input'
 import { AdminListTerritoryInput } from './dto/admin-list-territory.input'
 import { AdminUpdateTerritoryInput } from './dto/admin-update-territory.input'
-import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiTerritoryDataAccessAdminService {
@@ -17,21 +17,19 @@ export class ApiTerritoryDataAccessAdminService {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
 
-    // function relationalSearch() {
-    //   if (input?.regionId) {
-    //     return { regionId: input.regionId }
-    //   }
-    //   if (input?.substituteGroupId) {
-    //     return { substituteGroupId: input.substituteGroupId }
-    //   }
-    //   if (input?.memberId) {
-    //     return { members: { some: { id: input.memberId } } }
-    //   }
-    //   return null
-    // }
+    function relationalSearch() {
+      // TODO: implement relational search for territory
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
     return {
       AND: [
-        // relationalSearch(),
+        relationalSearch(),
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),
@@ -71,7 +69,7 @@ export class ApiTerritoryDataAccessAdminService {
   adminCreateTerritory(info: GraphQLResolveInfo, adminId: string, input: AdminCreateTerritoryInput) {
     const select = new PrismaSelect(info).value
     return this.data.territory.create({
-      data: { ...input },
+      data: { ...input, regions: { connect: input.regions } },
       ...select,
     })
   }

@@ -1,0 +1,59 @@
+import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
+import { GraphQLResolveInfo } from 'graphql'
+import {
+  AdminCreate<%= modelClassName %>Input,
+  AdminList<%= modelClassName %>Input,
+  AdminUpdate<%= modelClassName %>Input,
+  <%= apiClassName %><%= modelClassName %>DataAccessLeaderService,
+  <%= modelClassName %>,
+} from '@<%= npmScope %>/<%= directory %>/<%= modelName %>/data-access'
+import { CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
+import {  CtxUser } from '@<%= npmScope %>/<%= directory %>/auth/util'
+import { User } from '@<%= npmScope %>/<%= directory %>/user/data-access'
+
+@Resolver()
+export class <%= projectClassName %>LeaderResolver {
+  constructor(private readonly service: <%= apiClassName %><%= modelClassName %>DataAccessLeaderService) {}
+
+  @Query(() => [<%= modelClassName %>], { nullable: true })
+  leader<%= pluralClassName %>(
+    @CtxUser() leader: User,
+    @Info() info: GraphQLResolveInfo,
+    @Args({ name: 'input', type: () => AdminList<%= modelClassName %>Input, nullable: true }) input?: AdminList<%= modelClassName %>Input,
+  ) {
+    return this.service.leader<%= pluralClassName %>(info, leader.id, input)
+  }
+
+  @Query(() => CorePaging, { nullable: true })
+  leaderCount<%= pluralClassName %>(
+    @CtxUser() leader: User,
+    @Args({ name: 'input', type: () => AdminList<%= modelClassName %>Input, nullable: true }) input?: AdminList<%= modelClassName %>Input,
+  ) {
+    return this.service.leaderCount<%= pluralClassName %>(leader.id, input)
+  }
+
+  @Query(() => <%= modelClassName %>, { nullable: true })
+  leader<%= modelClassName %>(@CtxUser() leader: User, @Info() info: GraphQLResolveInfo, @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string) {
+    return this.service.leader<%= modelClassName %>(info, leader.id, <%= modelPropertyName %>Id)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  leaderCreate<%= modelClassName %>(@CtxUser() leader: User, @Info() info: GraphQLResolveInfo,@Args('input') input: AdminCreate<%= modelClassName %>Input,) {
+    return this.service.leaderCreate<%= modelClassName %>(info, leader.id, input)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  leaderUpdate<%= modelClassName %>(
+    @CtxUser() leader: User,
+     @Info() info: GraphQLResolveInfo,
+    @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string,
+    @Args('input') input: AdminUpdate<%= modelClassName %>Input,
+  ) {
+    return this.service.leaderUpdate<%= modelClassName %>(info, leader.id, <%= modelPropertyName %>Id, input)
+  }
+
+  @Mutation(() => <%= modelClassName %>, { nullable: true })
+  leaderDelete<%= modelClassName %>(@CtxUser() leader: User, @Info() info: GraphQLResolveInfo, @Args('<%= modelPropertyName %>Id') <%= modelPropertyName %>Id: string) {
+    return this.service.leaderDelete<%= modelClassName %>(info, leader.id, <%= modelPropertyName %>Id)
+  }
+}

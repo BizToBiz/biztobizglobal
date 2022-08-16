@@ -1,0 +1,17 @@
+mutation leaderCreateCompany($input: LeaderCreateCompanyInput!) {
+  createCompany: leaderCreateCompany(input: $input) {
+    ...LeaderCompanyDetails
+  }
+}
+
+mutation leaderDeleteCompany($companyId: String!) {
+  deleteCompany: leaderDeleteCompany(companyId: $companyId) {
+    id
+  }
+}
+
+mutation leaderUpdateCompany($companyId: String!, $input: LeaderUpdateCompanyInput!) {
+  updateCompany: leaderUpdateCompany(companyId: $companyId, input: $input) {
+    ...LeaderCompanyDetails
+  }
+}

@@ -14,33 +14,9 @@ import {
   WebFeatureResetPassword,
 } from '@biztobiz/web/auth/feature'
 import { useAtom } from 'jotai'
-import { identityAtom, isAdminAtom, isAuthenticatedAtom, isRememberedAtom } from '@biztobiz/web/global/data-access'
+import { identityAtom, isAuthenticatedAtom, isRememberedAtom } from '@biztobiz/web/global/data-access'
 import { SharedAuthProvider } from '@biztobiz/shared/auth/data-access'
-import {
-  WebAdminChapterCreate,
-  WebAdminChapterList,
-  WebAdminChapterUpdate,
-  WebAdminCompanyCreate,
-  WebAdminCompanyList,
-  WebAdminCompanyUpdate,
-  WebAdminDashboardFeature,
-  WebAdminReferralCreate,
-  WebAdminReferralList,
-  WebAdminReferralUpdate,
-  WebAdminRegionCreate,
-  WebAdminRegionList,
-  WebAdminRegionUpdate,
-  WebAdminTerritoryCreate,
-  WebAdminTerritoryList,
-  WebAdminTerritoryUpdate,
-  WebAdminTransactionCreate,
-  WebAdminTransactionList,
-  WebAdminTransactionUpdate,
-  WebAdminUserCreate,
-  WebAdminUserList,
-  WebAdminUserUpdate,
-} from '@biztobiz/web/admin-dashboard/feature'
-import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
+import { WebAdminRouter } from '@biztobiz/web-admin/router'
 
 function PrivateOutlet(props) {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom)
@@ -53,16 +29,6 @@ function PrivateOutlet(props) {
   )
 }
 
-function AdminOutlet(props) {
-  const [isAdmin] = useAtom(isAdminAtom)
-  return isAdmin ? (
-    <WebUiAdminLayoutFeature user={props.user}>
-      <Outlet />
-    </WebUiAdminLayoutFeature>
-  ) : (
-    <Navigate to="/login" />
-  )
-}
 export function WebShellFeature() {
   const client = createApolloClient(environment.graphql)
   const [user] = useAtom(identityAtom)
@@ -75,44 +41,7 @@ export function WebShellFeature() {
             <Route path="dashboard" element={<WebDashboardFeature />} />
             <Route path="about" element={<WebAboutFeature />} />
           </Route>
-          <Route path="admin" element={<AdminOutlet user={user} />}>
-            <Route path="dashboard" element={<WebAdminDashboardFeature />} />
-            <Route path="chapters" element={<WebAdminChapterList />} />
-            <Route path="chapter">
-              <Route path="new" element={<WebAdminChapterCreate />} />
-              <Route path=":id" element={<WebAdminChapterUpdate />} />
-            </Route>
-            <Route path="users" element={<WebAdminUserList />} />
-            <Route path="user">
-              <Route path="new" element={<WebAdminUserCreate />} />
-              <Route path=":id" element={<WebAdminUserUpdate />} />
-            </Route>
-            <Route path="transactions" element={<WebAdminTransactionList />} />
-            <Route path="transaction">
-              <Route path="new" element={<WebAdminTransactionCreate />} />
-              <Route path=":id" element={<WebAdminTransactionUpdate />} />
-            </Route>
-            <Route path="companies" element={<WebAdminCompanyList />} />
-            <Route path="company">
-              <Route path="new" element={<WebAdminCompanyCreate />} />
-              <Route path=":id" element={<WebAdminCompanyUpdate />} />
-            </Route>
-            <Route path="territories" element={<WebAdminTerritoryList />} />
-            <Route path="territory">
-              <Route path="new" element={<WebAdminTerritoryCreate />} />
-              <Route path=":id" element={<WebAdminTerritoryUpdate />} />
-            </Route>{' '}
-            <Route path="regions" element={<WebAdminRegionList />} />
-            <Route path="region">
-              <Route path="new" element={<WebAdminRegionCreate />} />
-              <Route path=":id" element={<WebAdminRegionUpdate />} />
-            </Route>
-            <Route path="referrals" element={<WebAdminReferralList />} />
-            <Route path="referral">
-              <Route path="new" element={<WebAdminReferralCreate />} />
-              <Route path=":id" element={<WebAdminReferralUpdate />} />
-            </Route>
-          </Route>
+          <Route path="admin/*" element={<WebAdminRouter user={user} />}></Route>
           <Route path="/" element={<WebAboutFeature />} />
           <Route path="about" element={<WebAboutFeature />} />
           <Route path="dashboard" element={<WebDashboardFeature />} />

@@ -24,6 +24,11 @@
       "alias": "n",
       "default": "name"
     },
+    "searchFields": {
+      "type": "string",
+      "description": "Comma-separated double-quoted list of fields to search by default surrounded by an extra pair of quotes. (i.e. \"\"name\", \"title\"\")",
+      "alias": "s"
+    },
     "plural": {
       "type": "string",
       "description": "Plural of name (default just adds s)",

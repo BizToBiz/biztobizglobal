@@ -1,7 +1,7 @@
 import React from 'react'
 import { AdminCreateTerritoryDocument } from '@biztobiz/shared/util-sdk'
-import { territoryFields } from './web-admin-territory-helper'
-import { WebAdminCreateForm } from '../web-admin-helper/web-admin-create-form'
+import { territoryFields, territorySelectFields } from './web-admin-territory-helper'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTerritoryCreate() {
   const pathData = {
@@ -21,6 +21,7 @@ export function WebAdminTerritoryCreate() {
       mutationName={'createTerritory'}
       buttonText={' Territory'}
       fields={territoryFields}
+      selectFields={territorySelectFields}
     />
   )
 }

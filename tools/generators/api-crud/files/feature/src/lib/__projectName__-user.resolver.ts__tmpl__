@@ -1,5 +1,4 @@
 import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
-import { UseGuards } from '@nestjs/common'
 import { GraphQLResolveInfo } from 'graphql'
 import {
   UserCreate<%= modelClassName %>Input,
@@ -9,14 +8,10 @@ import {
   <%= modelClassName %>,
 } from '@<%= npmScope %>/<%= directory %>/<%= modelName %>/data-access'
 import { CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
-import {
-  CtxUser,
-  GqlAuthGuard,
-} from '@<%= npmScope %>/<%= directory %>/auth/util'
+import { CtxUser } from '@<%= npmScope %>/<%= directory %>/auth/util'
 import { User } from '@<%= npmScope %>/<%= directory %>/user/data-access'
 
 @Resolver()
-@UseGuards(GqlAuthGuard)
 export class <%= projectClassName %>UserResolver {
   constructor(private readonly service: <%= apiClassName %><%= modelClassName %>DataAccessUserService) {}
 
