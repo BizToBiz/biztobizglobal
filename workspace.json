@@ -22,6 +22,8 @@
     "api-core-util": "libs/api/core/util",
     "api-e2e": "apps/api-e2e",
     "api-enums-data-access": "libs/api/enums/data-access",
+    "api-industry-data-access": "libs/api/industry/data-access",
+    "api-industry-feature": "libs/api/industry/feature",
     "api-mailer-data-access": "libs/api/mailer/data-access",
     "api-meeting-data-access": "libs/api/meeting/data-access",
     "api-meeting-feature": "libs/api/meeting/feature",

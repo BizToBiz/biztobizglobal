@@ -16,6 +16,7 @@ import { ApiTerritoryFeatureModule } from '@biztobiz/api/territory/feature'
 import { ApiRegionFeatureModule } from '@biztobiz/api/region/feature'
 import { ApiCompanyFeatureModule } from '@biztobiz/api/company/feature'
 import { ApiCompanyMemberFeatureModule } from '@biztobiz/api/company-member/feature'
+import { ApiIndustryFeatureModule } from '@biztobiz/api/industry/feature'
 // Add Imports Here
 
 @Module({
@@ -36,6 +37,7 @@ import { ApiCompanyMemberFeatureModule } from '@biztobiz/api/company-member/feat
     ApiRegionFeatureModule,
     ApiCompanyFeatureModule,
     ApiCompanyMemberFeatureModule,
+    ApiIndustryFeatureModule,
     // Add Modules Here
   ],
 })

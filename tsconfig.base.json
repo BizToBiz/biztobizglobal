@@ -36,6 +36,8 @@
       "@biztobiz/api/core/feature": ["libs/api/core/feature/src/index.ts"],
       "@biztobiz/api/core/util": ["libs/api/core/util/src/index.ts"],
       "@biztobiz/api/enums/data-access": ["libs/api/enums/data-access/src/index.ts"],
+      "@biztobiz/api/industry/data-access": ["libs/api/industry/data-access/src/index.ts"],
+      "@biztobiz/api/industry/feature": ["libs/api/industry/feature/src/index.ts"],
       "@biztobiz/api/mailer/data-access": ["libs/api/mailer/data-access/src/index.ts"],
       "@biztobiz/api/meeting-presence/data-access": ["libs/api/meeting-presence/data-access/src/index.ts"],
       "@biztobiz/api/meeting-presence/feature": ["libs/api/meeting-presence/feature/src/index.ts"],
