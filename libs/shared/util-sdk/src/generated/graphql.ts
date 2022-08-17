@@ -123,6 +123,14 @@ export type AdminCreateTerritoryInput = {
   regions?: InputMaybe<Array<MultiSelectInput>>
 }
 
+export type AdminCreateTestimonialInput = {
+  text: Scalars['String']
+}
+
+export type AdminCreateTransactionInput = {
+  text: Scalars['String']
+}
+
 export type AdminCreateUploadInput = {
   originalFilename: Scalars['String']
 }
@@ -263,6 +271,24 @@ export type AdminListTerritoryInput = {
   take?: InputMaybe<Scalars['Float']>
 }
 
+export type AdminListTestimonialInput = {
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+  text?: InputMaybe<Scalars['String']>
+}
+
+export type AdminListTransactionInput = {
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+  text?: InputMaybe<Scalars['String']>
+}
+
 export type AdminListUploadInput = {
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
@@ -355,6 +381,14 @@ export type AdminUpdateTerritoryInput = {
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   regions?: InputMaybe<Array<MultiSelectInput>>
+}
+
+export type AdminUpdateTestimonialInput = {
+  text?: InputMaybe<Scalars['String']>
+}
+
+export type AdminUpdateTransactionInput = {
+  text?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateUploadInput = {
@@ -556,6 +590,8 @@ export type Mutation = {
   adminCreateSubstitute?: Maybe<Substitute>
   adminCreateSubstituteGroup?: Maybe<SubstituteGroup>
   adminCreateTerritory?: Maybe<Territory>
+  adminCreateTestimonial?: Maybe<Testimonial>
+  adminCreateTransaction?: Maybe<Transaction>
   adminCreateUpload?: Maybe<Upload>
   adminCreateUser?: Maybe<User>
   adminDeleteAttendanceReminder?: Maybe<AttendanceReminder>
@@ -572,6 +608,8 @@ export type Mutation = {
   adminDeleteSubstitute?: Maybe<Substitute>
   adminDeleteSubstituteGroup?: Maybe<SubstituteGroup>
   adminDeleteTerritory?: Maybe<Territory>
+  adminDeleteTestimonial?: Maybe<Testimonial>
+  adminDeleteTransaction?: Maybe<Transaction>
   adminDeleteUpload?: Maybe<Upload>
   adminDeleteUser?: Maybe<User>
   adminUpdateAttendanceReminder?: Maybe<AttendanceReminder>
@@ -588,6 +626,8 @@ export type Mutation = {
   adminUpdateSubstitute?: Maybe<Substitute>
   adminUpdateSubstituteGroup?: Maybe<SubstituteGroup>
   adminUpdateTerritory?: Maybe<Territory>
+  adminUpdateTestimonial?: Maybe<Testimonial>
+  adminUpdateTransaction?: Maybe<Transaction>
   adminUpdateUpload?: Maybe<Upload>
   adminUpdateUser?: Maybe<User>
   forgotPassword?: Maybe<Scalars['Boolean']>
@@ -606,6 +646,8 @@ export type Mutation = {
   leaderCreateSubstitute?: Maybe<Substitute>
   leaderCreateSubstituteGroup?: Maybe<SubstituteGroup>
   leaderCreateTerritory?: Maybe<Territory>
+  leaderCreateTestimonial?: Maybe<Testimonial>
+  leaderCreateTransaction?: Maybe<Transaction>
   leaderCreateUpload?: Maybe<Upload>
   leaderCreateUser?: Maybe<User>
   leaderDeleteAttendanceReminder?: Maybe<AttendanceReminder>
@@ -622,6 +664,8 @@ export type Mutation = {
   leaderDeleteSubstitute?: Maybe<Substitute>
   leaderDeleteSubstituteGroup?: Maybe<SubstituteGroup>
   leaderDeleteTerritory?: Maybe<Territory>
+  leaderDeleteTestimonial?: Maybe<Testimonial>
+  leaderDeleteTransaction?: Maybe<Transaction>
   leaderDeleteUpload?: Maybe<Upload>
   leaderDeleteUser?: Maybe<User>
   leaderUpdateAttendanceReminder?: Maybe<AttendanceReminder>
@@ -638,6 +682,8 @@ export type Mutation = {
   leaderUpdateSubstitute?: Maybe<Substitute>
   leaderUpdateSubstituteGroup?: Maybe<SubstituteGroup>
   leaderUpdateTerritory?: Maybe<Territory>
+  leaderUpdateTestimonial?: Maybe<Testimonial>
+  leaderUpdateTransaction?: Maybe<Transaction>
   leaderUpdateUpload?: Maybe<Upload>
   leaderUpdateUser?: Maybe<User>
   login?: Maybe<UserToken>
@@ -658,6 +704,8 @@ export type Mutation = {
   userCreateSubstitute?: Maybe<Substitute>
   userCreateSubstituteGroup?: Maybe<SubstituteGroup>
   userCreateTerritory?: Maybe<Territory>
+  userCreateTestimonial?: Maybe<Testimonial>
+  userCreateTransaction?: Maybe<Transaction>
   userCreateUpload?: Maybe<Upload>
   userCreateUser?: Maybe<User>
   userDeleteAttendanceReminder?: Maybe<AttendanceReminder>
@@ -674,6 +722,8 @@ export type Mutation = {
   userDeleteSubstitute?: Maybe<Substitute>
   userDeleteSubstituteGroup?: Maybe<SubstituteGroup>
   userDeleteTerritory?: Maybe<Territory>
+  userDeleteTestimonial?: Maybe<Testimonial>
+  userDeleteTransaction?: Maybe<Transaction>
   userDeleteUpload?: Maybe<Upload>
   userDeleteUser?: Maybe<User>
   userUpdateAttendanceReminder?: Maybe<AttendanceReminder>
@@ -690,6 +740,8 @@ export type Mutation = {
   userUpdateSubstitute?: Maybe<Substitute>
   userUpdateSubstituteGroup?: Maybe<SubstituteGroup>
   userUpdateTerritory?: Maybe<Territory>
+  userUpdateTestimonial?: Maybe<Testimonial>
+  userUpdateTransaction?: Maybe<Transaction>
   userUpdateUpload?: Maybe<Upload>
   userUpdateUser?: Maybe<User>
 }
@@ -758,6 +810,14 @@ export type MutationAdminCreateTerritoryArgs = {
   input: AdminCreateTerritoryInput
 }
 
+export type MutationAdminCreateTestimonialArgs = {
+  input: AdminCreateTestimonialInput
+}
+
+export type MutationAdminCreateTransactionArgs = {
+  input: AdminCreateTransactionInput
+}
+
 export type MutationAdminCreateUploadArgs = {
   input: AdminCreateUploadInput
 }
@@ -820,6 +880,14 @@ export type MutationAdminDeleteSubstituteGroupArgs = {
 
 export type MutationAdminDeleteTerritoryArgs = {
   territoryId: Scalars['String']
+}
+
+export type MutationAdminDeleteTestimonialArgs = {
+  testimonialId: Scalars['String']
+}
+
+export type MutationAdminDeleteTransactionArgs = {
+  transactionId: Scalars['String']
 }
 
 export type MutationAdminDeleteUploadArgs = {
@@ -900,6 +968,16 @@ export type MutationAdminUpdateTerritoryArgs = {
   territoryId: Scalars['String']
 }
 
+export type MutationAdminUpdateTestimonialArgs = {
+  input: AdminUpdateTestimonialInput
+  testimonialId: Scalars['String']
+}
+
+export type MutationAdminUpdateTransactionArgs = {
+  input: AdminUpdateTransactionInput
+  transactionId: Scalars['String']
+}
+
 export type MutationAdminUpdateUploadArgs = {
   input: AdminUpdateUploadInput
   uploadId: Scalars['String']
@@ -976,6 +1054,14 @@ export type MutationLeaderCreateTerritoryArgs = {
   input: AdminCreateTerritoryInput
 }
 
+export type MutationLeaderCreateTestimonialArgs = {
+  input: AdminCreateTestimonialInput
+}
+
+export type MutationLeaderCreateTransactionArgs = {
+  input: AdminCreateTransactionInput
+}
+
 export type MutationLeaderCreateUploadArgs = {
   input: AdminCreateUploadInput
 }
@@ -1038,6 +1124,14 @@ export type MutationLeaderDeleteSubstituteGroupArgs = {
 
 export type MutationLeaderDeleteTerritoryArgs = {
   territoryId: Scalars['String']
+}
+
+export type MutationLeaderDeleteTestimonialArgs = {
+  testimonialId: Scalars['String']
+}
+
+export type MutationLeaderDeleteTransactionArgs = {
+  transactionId: Scalars['String']
 }
 
 export type MutationLeaderDeleteUploadArgs = {
@@ -1118,6 +1212,16 @@ export type MutationLeaderUpdateTerritoryArgs = {
   territoryId: Scalars['String']
 }
 
+export type MutationLeaderUpdateTestimonialArgs = {
+  input: AdminUpdateTestimonialInput
+  testimonialId: Scalars['String']
+}
+
+export type MutationLeaderUpdateTransactionArgs = {
+  input: AdminUpdateTransactionInput
+  transactionId: Scalars['String']
+}
+
 export type MutationLeaderUpdateUploadArgs = {
   input: AdminUpdateUploadInput
   uploadId: Scalars['String']
@@ -1196,6 +1300,14 @@ export type MutationUserCreateTerritoryArgs = {
   input: UserCreateTerritoryInput
 }
 
+export type MutationUserCreateTestimonialArgs = {
+  input: UserCreateTestimonialInput
+}
+
+export type MutationUserCreateTransactionArgs = {
+  input: UserCreateTransactionInput
+}
+
 export type MutationUserCreateUploadArgs = {
   input: UserCreateUploadInput
 }
@@ -1258,6 +1370,14 @@ export type MutationUserDeleteSubstituteGroupArgs = {
 
 export type MutationUserDeleteTerritoryArgs = {
   territoryId: Scalars['String']
+}
+
+export type MutationUserDeleteTestimonialArgs = {
+  testimonialId: Scalars['String']
+}
+
+export type MutationUserDeleteTransactionArgs = {
+  transactionId: Scalars['String']
 }
 
 export type MutationUserDeleteUploadArgs = {
@@ -1338,6 +1458,16 @@ export type MutationUserUpdateTerritoryArgs = {
   territoryId: Scalars['String']
 }
 
+export type MutationUserUpdateTestimonialArgs = {
+  input: UserUpdateTestimonialInput
+  testimonialId: Scalars['String']
+}
+
+export type MutationUserUpdateTransactionArgs = {
+  input: UserUpdateTransactionInput
+  transactionId: Scalars['String']
+}
+
 export type MutationUserUpdateUploadArgs = {
   input: UserUpdateUploadInput
   uploadId: Scalars['String']
@@ -1412,6 +1542,8 @@ export type Query = {
   adminCountSubstituteGroups?: Maybe<CorePaging>
   adminCountSubstitutes?: Maybe<CorePaging>
   adminCountTerritories?: Maybe<CorePaging>
+  adminCountTestimonials?: Maybe<CorePaging>
+  adminCountTransactions?: Maybe<CorePaging>
   adminCountUploads?: Maybe<CorePaging>
   adminCountUsers?: Maybe<CorePaging>
   adminIndustries?: Maybe<Array<Industry>>
@@ -1432,6 +1564,10 @@ export type Query = {
   adminSubstitutes?: Maybe<Array<Substitute>>
   adminTerritories?: Maybe<Array<Territory>>
   adminTerritory?: Maybe<Territory>
+  adminTestimonial?: Maybe<Testimonial>
+  adminTestimonials?: Maybe<Array<Testimonial>>
+  adminTransaction?: Maybe<Transaction>
+  adminTransactions?: Maybe<Array<Transaction>>
   adminUpload?: Maybe<Upload>
   adminUploads?: Maybe<Array<Upload>>
   adminUser?: Maybe<User>
@@ -1460,6 +1596,8 @@ export type Query = {
   leaderCountSubstituteGroups?: Maybe<CorePaging>
   leaderCountSubstitutes?: Maybe<CorePaging>
   leaderCountTerritories?: Maybe<CorePaging>
+  leaderCountTestimonials?: Maybe<CorePaging>
+  leaderCountTransactions?: Maybe<CorePaging>
   leaderCountUploads?: Maybe<CorePaging>
   leaderCountUsers?: Maybe<CorePaging>
   leaderIndustries?: Maybe<Array<Industry>>
@@ -1480,6 +1618,10 @@ export type Query = {
   leaderSubstitutes?: Maybe<Array<Substitute>>
   leaderTerritories?: Maybe<Array<Territory>>
   leaderTerritory?: Maybe<Territory>
+  leaderTestimonial?: Maybe<Testimonial>
+  leaderTestimonials?: Maybe<Array<Testimonial>>
+  leaderTransaction?: Maybe<Transaction>
+  leaderTransactions?: Maybe<Array<Transaction>>
   leaderUpload?: Maybe<Upload>
   leaderUploads?: Maybe<Array<Upload>>
   leaderUser?: Maybe<User>
@@ -1510,6 +1652,8 @@ export type Query = {
   userCountSubstituteGroups?: Maybe<CorePaging>
   userCountSubstitutes?: Maybe<CorePaging>
   userCountTerritories?: Maybe<CorePaging>
+  userCountTestimonials?: Maybe<CorePaging>
+  userCountTransactions?: Maybe<CorePaging>
   userCountUploads?: Maybe<CorePaging>
   userCountUsers?: Maybe<CorePaging>
   userIndustries?: Maybe<Array<Industry>>
@@ -1530,6 +1674,10 @@ export type Query = {
   userSubstitutes?: Maybe<Array<Substitute>>
   userTerritories?: Maybe<Array<Territory>>
   userTerritory?: Maybe<Territory>
+  userTestimonial?: Maybe<Testimonial>
+  userTestimonials?: Maybe<Array<Testimonial>>
+  userTransaction?: Maybe<Transaction>
+  userTransactions?: Maybe<Array<Transaction>>
   userUpload?: Maybe<Upload>
   userUploads?: Maybe<Array<Upload>>
   userUser?: Maybe<User>
@@ -1636,6 +1784,14 @@ export type QueryAdminCountTerritoriesArgs = {
   input?: InputMaybe<AdminListTerritoryInput>
 }
 
+export type QueryAdminCountTestimonialsArgs = {
+  input?: InputMaybe<AdminListTestimonialInput>
+}
+
+export type QueryAdminCountTransactionsArgs = {
+  input?: InputMaybe<AdminListTransactionInput>
+}
+
 export type QueryAdminCountUploadsArgs = {
   input?: InputMaybe<AdminListUploadInput>
 }
@@ -1714,6 +1870,22 @@ export type QueryAdminTerritoriesArgs = {
 
 export type QueryAdminTerritoryArgs = {
   territoryId: Scalars['String']
+}
+
+export type QueryAdminTestimonialArgs = {
+  testimonialId: Scalars['String']
+}
+
+export type QueryAdminTestimonialsArgs = {
+  input?: InputMaybe<AdminListTestimonialInput>
+}
+
+export type QueryAdminTransactionArgs = {
+  transactionId: Scalars['String']
+}
+
+export type QueryAdminTransactionsArgs = {
+  input?: InputMaybe<AdminListTransactionInput>
 }
 
 export type QueryAdminUploadArgs = {
@@ -1828,6 +2000,14 @@ export type QueryLeaderCountTerritoriesArgs = {
   input?: InputMaybe<AdminListTerritoryInput>
 }
 
+export type QueryLeaderCountTestimonialsArgs = {
+  input?: InputMaybe<AdminListTestimonialInput>
+}
+
+export type QueryLeaderCountTransactionsArgs = {
+  input?: InputMaybe<AdminListTransactionInput>
+}
+
 export type QueryLeaderCountUploadsArgs = {
   input?: InputMaybe<AdminListUploadInput>
 }
@@ -1906,6 +2086,22 @@ export type QueryLeaderTerritoriesArgs = {
 
 export type QueryLeaderTerritoryArgs = {
   territoryId: Scalars['String']
+}
+
+export type QueryLeaderTestimonialArgs = {
+  testimonialId: Scalars['String']
+}
+
+export type QueryLeaderTestimonialsArgs = {
+  input?: InputMaybe<AdminListTestimonialInput>
+}
+
+export type QueryLeaderTransactionArgs = {
+  transactionId: Scalars['String']
+}
+
+export type QueryLeaderTransactionsArgs = {
+  input?: InputMaybe<AdminListTransactionInput>
 }
 
 export type QueryLeaderUploadArgs = {
@@ -2020,6 +2216,14 @@ export type QueryUserCountTerritoriesArgs = {
   input?: InputMaybe<UserListTerritoryInput>
 }
 
+export type QueryUserCountTestimonialsArgs = {
+  input?: InputMaybe<UserListTestimonialInput>
+}
+
+export type QueryUserCountTransactionsArgs = {
+  input?: InputMaybe<UserListTransactionInput>
+}
+
 export type QueryUserCountUploadsArgs = {
   input?: InputMaybe<UserListUploadInput>
 }
@@ -2098,6 +2302,22 @@ export type QueryUserTerritoriesArgs = {
 
 export type QueryUserTerritoryArgs = {
   territoryId: Scalars['String']
+}
+
+export type QueryUserTestimonialArgs = {
+  testimonialId: Scalars['String']
+}
+
+export type QueryUserTestimonialsArgs = {
+  input?: InputMaybe<UserListTestimonialInput>
+}
+
+export type QueryUserTransactionArgs = {
+  transactionId: Scalars['String']
+}
+
+export type QueryUserTransactionsArgs = {
+  input?: InputMaybe<UserListTransactionInput>
 }
 
 export type QueryUserUploadArgs = {
@@ -2214,6 +2434,32 @@ export type Territory = {
   manager?: Maybe<User>
   name?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type Testimonial = {
+  __typename?: 'Testimonial'
+  createdAt?: Maybe<Scalars['DateTime']>
+  from?: Maybe<User>
+  id?: Maybe<Scalars['String']>
+  text?: Maybe<Scalars['String']>
+  to?: Maybe<User>
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type Transaction = {
+  __typename?: 'Transaction'
+  amount?: Maybe<Scalars['Float']>
+  chapter?: Maybe<Chapter>
+  createdAt?: Maybe<Scalars['DateTime']>
+  date?: Maybe<Scalars['DateTime']>
+  enteredBy?: Maybe<Scalars['String']>
+  enteredOn?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['String']>
+  industry?: Maybe<Scalars['String']>
+  referral?: Maybe<Referral>
+  state?: Maybe<Scalars['String']>
+  updatedAt?: Maybe<Scalars['DateTime']>
+  user?: Maybe<User>
 }
 
 export type Upload = {
@@ -2383,6 +2629,14 @@ export type UserCreateTerritoryInput = {
   name: Scalars['String']
 }
 
+export type UserCreateTestimonialInput = {
+  text: Scalars['String']
+}
+
+export type UserCreateTransactionInput = {
+  text: Scalars['String']
+}
+
 export type UserCreateUploadInput = {
   originalFilename: Scalars['String']
 }
@@ -2516,6 +2770,24 @@ export type UserListTerritoryInput = {
   take?: InputMaybe<Scalars['Float']>
 }
 
+export type UserListTestimonialInput = {
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+  text?: InputMaybe<Scalars['String']>
+}
+
+export type UserListTransactionInput = {
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+  text?: InputMaybe<Scalars['String']>
+}
+
 export type UserListUploadInput = {
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
@@ -2616,6 +2888,14 @@ export type UserUpdateSubstituteInput = {
 
 export type UserUpdateTerritoryInput = {
   name?: InputMaybe<Scalars['String']>
+}
+
+export type UserUpdateTestimonialInput = {
+  text?: InputMaybe<Scalars['String']>
+}
+
+export type UserUpdateTransactionInput = {
+  text?: InputMaybe<Scalars['String']>
 }
 
 export type UserUpdateUploadInput = {

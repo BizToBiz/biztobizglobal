@@ -56,6 +56,8 @@
       "@biztobiz/api/substitute/feature": ["libs/api/substitute/feature/src/index.ts"],
       "@biztobiz/api/territory/data-access": ["libs/api/territory/data-access/src/index.ts"],
       "@biztobiz/api/territory/feature": ["libs/api/territory/feature/src/index.ts"],
+      "@biztobiz/api/testimonial/data-access": ["libs/api/testimonial/data-access/src/index.ts"],
+      "@biztobiz/api/testimonial/feature": ["libs/api/testimonial/feature/src/index.ts"],
       "@biztobiz/api/transaction/data-access": ["libs/api/transaction/data-access/src/index.ts"],
       "@biztobiz/api/transaction/feature": ["libs/api/transaction/feature/src/index.ts"],
       "@biztobiz/api/upload/data-access": ["libs/api/upload/data-access/src/index.ts"],

@@ -1,0 +1,39 @@
+{
+  "root": "libs/api/testimonial/feature",
+  "sourceRoot": "libs/api/testimonial/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/testimonial/feature/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/testimonial/feature"],
+      "options": {
+        "jestConfig": "libs/api/testimonial/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/testimonial/feature"],
+      "options": {
+        "jestConfig": "libs/api/testimonial/feature/jest.e2e.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "load-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/testimonial/feature"],
+      "options": {
+        "jestConfig": "libs/api/testimonial/feature/jest.load.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "type:feature"]
+}
