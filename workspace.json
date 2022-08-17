@@ -42,6 +42,8 @@
     "api-substitute-group-feature": "libs/api/substitute-group/feature",
     "api-territory-data-access": "libs/api/territory/data-access",
     "api-territory-feature": "libs/api/territory/feature",
+    "api-transaction-data-access": "libs/api/transaction/data-access",
+    "api-transaction-feature": "libs/api/transaction/feature",
     "api-upload-data-access": "libs/api/upload/data-access",
     "api-upload-feature": "libs/api/upload/feature",
     "api-user-data-access": "libs/api/user/data-access",
