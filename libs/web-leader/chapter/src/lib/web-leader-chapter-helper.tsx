@@ -1,6 +1,6 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { SelectFieldOptions } from '@biztobiz/web-admin-crud-helper'
+import { SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {

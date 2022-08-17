@@ -17,8 +17,8 @@ fragment AdminChapterDetails on Chapter {
   meetingDetails
   meetingTime
   facebook
-  region {
-    id
-    name
-  }
+  #  region {
+  #    id
+  #    name
+  #  }
 }

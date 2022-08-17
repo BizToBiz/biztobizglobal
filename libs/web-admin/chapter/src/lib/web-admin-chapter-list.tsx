@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminChapterPaginationQuery, useAdminChaptersQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminChaptersQuery, useAdminChapterPaginationQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminChapterListProps {

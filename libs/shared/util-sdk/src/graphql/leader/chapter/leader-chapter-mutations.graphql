@@ -1,4 +1,4 @@
-mutation leaderCreateChapter($input: LeaderCreateChapterInput!) {
+mutation leaderCreateChapter($input: AdminCreateChapterInput!) {
   createChapter: leaderCreateChapter(input: $input) {
     ...LeaderChapterDetails
   }
@@ -10,7 +10,7 @@ mutation leaderDeleteChapter($chapterId: String!) {
   }
 }
 
-mutation leaderUpdateChapter($chapterId: String!, $input: LeaderUpdateChapterInput!) {
+mutation leaderUpdateChapter($chapterId: String!, $input: AdminUpdateChapterInput!) {
   updateChapter: leaderUpdateChapter(chapterId: $chapterId, input: $input) {
     ...LeaderChapterDetails
   }

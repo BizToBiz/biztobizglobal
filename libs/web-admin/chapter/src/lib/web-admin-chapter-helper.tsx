@@ -1,14 +1,13 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { mapRegion, mapRegions, SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
-import { AdminRegionsDocument, ChapterStatus } from '@biztobiz/shared/util-sdk'
+import { SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
+import { ChapterStatus } from '@biztobiz/shared/util-sdk'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {
 //   return regions?.filter((region) => !region.Chapter?.id)
 // }
 
-// TODO: Add all other relation types once all data types exist
 export const chapterFields: WebUiFormField[] = [
   WebUiFormField.datePicker('establishedDate', { label: 'Date Established' }),
   WebUiFormField.input('name', { label: 'Chapter Name', required: true }),
@@ -26,14 +25,15 @@ export const chapterFields: WebUiFormField[] = [
   WebUiFormField.input('city', { label: 'City' }),
   WebUiFormField.input('state', { label: 'State' }),
   WebUiFormField.url('facebook', { label: 'Facebook URL' }),
-  WebUiFormField.relationSelect('regionId', {
-    label: 'Region',
-    document: AdminRegionsDocument,
-    selectOptionsFunction: mapRegions,
-    dataType: 'regions',
-  }),
+  // WebUiFormField.relationSelect('regionId', {
+  //   label: 'Region',
+  //   document: AdminRegionsDocument,
+  //   selectOptionsFunction: mapRegions,
+  //   dataType: 'regions',
+  // }),
 ]
 
+// TODO: Populate Select Fields
 export const chapterSelectFields: SelectFieldOptions[] = [
-  { name: 'region', type: 'single', idName: 'regionId', mapFunction: mapRegion },
+  // { name: 'region', type: 'single', idName: 'regionId', mapFunction: mapRegion },
 ]

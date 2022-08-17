@@ -25,14 +25,23 @@ function addNavigation(tree, options) {
   if (contents) {
     const importEndpoint = '// Add New Imports Here'
     const newImports = `import { WebAdmin${options.className}Create, WebAdmin${options.className}List, WebAdmin${options.className}Update } from '@${options.npmScope}/web-admin/${options.name}'`
+    const navEndpoint = '// Add New Nav Objects Here'
+    const newNav = `{
+      name: '${options.pluralClassName}',
+      href: '/admin/${options.pluralName}',
+      icon: HomeIcon,
+      current: currentPath.path.includes('/admin/${options.pluralName}'),
+    },`
     const routeEndpoint = `{/*Add New Routes Here*/}`
     const newRoute = `<Route path="${options.pluralName}" element={<WebAdmin${options.className}List />} />
         <Route path="${options.propertyName}">
           <Route path="new" element={<WebAdmin${options.className}Create />} />
           <Route path=":id" element={<WebAdmin${options.className}Update />} />
         </Route>`
+
     const replacedModule = contents
       .replace(importEndpoint, [newImports, importEndpoint].join('\n'))
+      .replace(navEndpoint, [newNav, navEndpoint].join('\n'))
       .replace(routeEndpoint, [newRoute, routeEndpoint].join('\n'))
 
     tree.overwrite(routerPath, replacedModule)
@@ -72,12 +81,14 @@ export default async function (tree: Tree, schema: any) {
   generateFiles(
     tree, // the virtual file system
     joinPathFragments(__dirname, `./sdk-files`), // path to the file templates
-    `libs/shared/util-sdk/src/graphql/leader/${schema.name}`, // destination path of the files
+    `libs/shared/util-sdk/src/graphql/admin/${schema.name}`, // destination path of the files
     variables, // config object to replace variable in file templates
   )
+
   addNavigation(tree, variables)
   await formatFiles(tree)
   return () => {
     installPackagesTask(tree)
+    console.warn(`Restart the API and Web Server to see changes`)
   }
 }

@@ -526,7 +526,6 @@ export type AttendanceReminder = {
 
 export type Chapter = {
   __typename?: 'Chapter'
-  avatar?: Maybe<Upload>
   avatarEmail?: Maybe<Scalars['String']>
   avatarUrl?: Maybe<Scalars['String']>
   city?: Maybe<Scalars['String']>
@@ -540,12 +539,9 @@ export type Chapter = {
   meetingDay?: Maybe<DayOfWeek>
   meetingDetails?: Maybe<Scalars['String']>
   meetingTime?: Maybe<Scalars['String']>
-  members?: Maybe<Array<ChapterMember>>
   name?: Maybe<Scalars['String']>
-  region?: Maybe<Region>
   state?: Maybe<Scalars['String']>
   status?: Maybe<ChapterStatus>
-  substituteGroup?: Maybe<SubstituteGroup>
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
@@ -732,6 +728,9 @@ export type Mutation = {
   adminUpdateUser?: Maybe<User>
   forgotPassword?: Maybe<Scalars['Boolean']>
   intercomPub?: Maybe<IntercomMessage>
+  leaderCreateChapter?: Maybe<Chapter>
+  leaderDeleteChapter?: Maybe<Chapter>
+  leaderUpdateChapter?: Maybe<Chapter>
   login?: Maybe<UserToken>
   logout?: Maybe<Scalars['Boolean']>
   register?: Maybe<UserToken>
@@ -1012,6 +1011,19 @@ export type MutationIntercomPubArgs = {
   payload?: InputMaybe<Scalars['JSON']>
   scope?: InputMaybe<Scalars['String']>
   type: Scalars['String']
+}
+
+export type MutationLeaderCreateChapterArgs = {
+  input: AdminCreateChapterInput
+}
+
+export type MutationLeaderDeleteChapterArgs = {
+  chapterId: Scalars['String']
+}
+
+export type MutationLeaderUpdateChapterArgs = {
+  chapterId: Scalars['String']
+  input: AdminUpdateChapterInput
 }
 
 export type MutationLoginArgs = {
@@ -1330,6 +1342,9 @@ export type Query = {
   adminUploads?: Maybe<Array<Upload>>
   adminUser?: Maybe<User>
   adminUsers?: Maybe<Array<User>>
+  leaderChapter?: Maybe<Chapter>
+  leaderChapters?: Maybe<Array<Chapter>>
+  leaderCountChapters?: Maybe<CorePaging>
   me?: Maybe<User>
   reportReferralsFromChapter: Scalars['Int']
   reportReferralsFromUser: Scalars['Int']
@@ -1582,6 +1597,18 @@ export type QueryAdminUsersArgs = {
   input?: InputMaybe<CorePagingInput>
 }
 
+export type QueryLeaderChapterArgs = {
+  chapterId: Scalars['String']
+}
+
+export type QueryLeaderChaptersArgs = {
+  input?: InputMaybe<AdminListChapterInput>
+}
+
+export type QueryLeaderCountChaptersArgs = {
+  input?: InputMaybe<AdminListChapterInput>
+}
+
 export type QueryReportReferralsFromChapterArgs = {
   chapterId: Scalars['String']
 }
@@ -1787,6 +1814,7 @@ export type Referral = {
   notes?: Maybe<Scalars['String']>
   phone?: Maybe<Scalars['String']>
   rating?: Maybe<ReferralRating>
+  referralDate?: Maybe<Scalars['DateTime']>
   sentBy?: Maybe<User>
   to?: Maybe<User>
   toChapter?: Maybe<Chapter>
@@ -1952,6 +1980,7 @@ export type User = {
   inquiryDate?: Maybe<Scalars['DateTime']>
   instagram?: Maybe<Scalars['String']>
   internalComments?: Maybe<Scalars['String']>
+  isLeader?: Maybe<Scalars['Boolean']>
   lastName?: Maybe<Scalars['String']>
   lastSeen?: Maybe<Scalars['DateTime']>
   launchComplete?: Maybe<Scalars['Boolean']>
@@ -2331,7 +2360,6 @@ export type AdminChapterDetailsFragment = {
   meetingDetails?: string | null
   meetingTime?: string | null
   facebook?: string | null
-  region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
 }
 
 export type AdminCreateChapterMutationVariables = Exact<{
@@ -2359,7 +2387,6 @@ export type AdminCreateChapterMutation = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
-    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2398,7 +2425,6 @@ export type AdminUpdateChapterMutation = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
-    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2427,7 +2453,6 @@ export type AdminChapterQuery = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
-    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -2456,7 +2481,6 @@ export type AdminChaptersQuery = {
     meetingDetails?: string | null
     meetingTime?: string | null
     facebook?: string | null
-    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -2591,19 +2615,15 @@ export type AdminReferralDetailsFragment = {
   id?: string | null
   createdAt?: any | null
   updatedAt?: any | null
+  referralDate?: any | null
+  rating?: ReferralRating | null
   firstName?: string | null
   lastName?: string | null
   email?: string | null
-  rating?: ReferralRating | null
   phone?: string | null
   notes?: string | null
   fromIndustry?: string | null
   toIndustry?: string | null
-  from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
 }
 
 export type AdminCreateReferralMutationVariables = Exact<{
@@ -2617,19 +2637,15 @@ export type AdminCreateReferralMutation = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
-    rating?: ReferralRating | null
     phone?: string | null
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
   } | null
 }
 
@@ -2654,19 +2670,15 @@ export type AdminUpdateReferralMutation = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
-    rating?: ReferralRating | null
     phone?: string | null
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
   } | null
 }
 
@@ -2681,19 +2693,15 @@ export type AdminReferralQuery = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
-    rating?: ReferralRating | null
     phone?: string | null
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
   } | null
 }
 
@@ -2708,19 +2716,15 @@ export type AdminReferralsQuery = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
-    rating?: ReferralRating | null
     phone?: string | null
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    from?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    to?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -2748,833 +2752,6 @@ export type AdminReferralPaginationQuery = {
   } | null
 }
 
-export type AdminRegionDetailsFragment = {
-  __typename?: 'Region'
-  id?: string | null
-  createdAt?: any | null
-  updatedAt?: any | null
-  name?: string | null
-  territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
-  manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-}
-
-export type AdminCreateRegionMutationVariables = Exact<{
-  input: AdminCreateRegionInput
-}>
-
-export type AdminCreateRegionMutation = {
-  __typename?: 'Mutation'
-  createRegion?: {
-    __typename?: 'Region'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  } | null
-}
-
-export type AdminDeleteRegionMutationVariables = Exact<{
-  regionId: Scalars['String']
-}>
-
-export type AdminDeleteRegionMutation = {
-  __typename?: 'Mutation'
-  deleteRegion?: { __typename?: 'Region'; id?: string | null } | null
-}
-
-export type AdminUpdateRegionMutationVariables = Exact<{
-  regionId: Scalars['String']
-  input: AdminUpdateRegionInput
-}>
-
-export type AdminUpdateRegionMutation = {
-  __typename?: 'Mutation'
-  updateRegion?: {
-    __typename?: 'Region'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  } | null
-}
-
-export type AdminRegionQueryVariables = Exact<{
-  regionId: Scalars['String']
-}>
-
-export type AdminRegionQuery = {
-  __typename?: 'Query'
-  region?: {
-    __typename?: 'Region'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  } | null
-}
-
-export type AdminRegionsQueryVariables = Exact<{
-  input?: InputMaybe<AdminListRegionInput>
-}>
-
-export type AdminRegionsQuery = {
-  __typename?: 'Query'
-  regions?: Array<{
-    __typename?: 'Region'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    territory?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  }> | null
-  counters?: {
-    __typename?: 'CorePaging'
-    count?: number | null
-    take?: number | null
-    page?: number | null
-    skip?: number | null
-    total?: number | null
-  } | null
-}
-
-export type AdminRegionPaginationQueryVariables = Exact<{
-  input?: InputMaybe<AdminListRegionInput>
-}>
-
-export type AdminRegionPaginationQuery = {
-  __typename?: 'Query'
-  counters?: {
-    __typename?: 'CorePaging'
-    count?: number | null
-    take?: number | null
-    page?: number | null
-    skip?: number | null
-    total?: number | null
-  } | null
-}
-
-export type AdminTerritoryDetailsFragment = {
-  __typename?: 'Territory'
-  id?: string | null
-  createdAt?: any | null
-  updatedAt?: any | null
-  name?: string | null
-  regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
-  manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-}
-
-export type AdminCreateTerritoryMutationVariables = Exact<{
-  input: AdminCreateTerritoryInput
-}>
-
-export type AdminCreateTerritoryMutation = {
-  __typename?: 'Mutation'
-  createTerritory?: {
-    __typename?: 'Territory'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  } | null
-}
-
-export type AdminDeleteTerritoryMutationVariables = Exact<{
-  territoryId: Scalars['String']
-}>
-
-export type AdminDeleteTerritoryMutation = {
-  __typename?: 'Mutation'
-  deleteTerritory?: { __typename?: 'Territory'; id?: string | null } | null
-}
-
-export type AdminUpdateTerritoryMutationVariables = Exact<{
-  territoryId: Scalars['String']
-  input: AdminUpdateTerritoryInput
-}>
-
-export type AdminUpdateTerritoryMutation = {
-  __typename?: 'Mutation'
-  updateTerritory?: {
-    __typename?: 'Territory'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  } | null
-}
-
-export type AdminTerritoryQueryVariables = Exact<{
-  territoryId: Scalars['String']
-}>
-
-export type AdminTerritoryQuery = {
-  __typename?: 'Query'
-  territory?: {
-    __typename?: 'Territory'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  } | null
-}
-
-export type AdminTerritoriesQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTerritoryInput>
-}>
-
-export type AdminTerritoriesQuery = {
-  __typename?: 'Query'
-  territories?: Array<{
-    __typename?: 'Territory'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    name?: string | null
-    regions?: Array<{ __typename?: 'Region'; id?: string | null; name?: string | null } | null> | null
-    manager?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  }> | null
-  counters?: {
-    __typename?: 'CorePaging'
-    count?: number | null
-    take?: number | null
-    page?: number | null
-    skip?: number | null
-    total?: number | null
-  } | null
-}
-
-export type AdminTerritoryPaginationQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTerritoryInput>
-}>
-
-export type AdminTerritoryPaginationQuery = {
-  __typename?: 'Query'
-  counters?: {
-    __typename?: 'CorePaging'
-    count?: number | null
-    take?: number | null
-    page?: number | null
-    skip?: number | null
-    total?: number | null
-  } | null
-}
-
-export type AdminTransactionDetailsFragment = {
-  __typename?: 'Transaction'
-  id?: string | null
-  createdAt?: any | null
-  updatedAt?: any | null
-  date?: any | null
-  amount?: number | null
-  enteredBy?: string | null
-  enteredOn?: string | null
-  industry?: string | null
-  state?: string | null
-  user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-  chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-}
-
-export type AdminCreateTransactionMutationVariables = Exact<{
-  input: AdminCreateTransactionInput
-}>
-
-export type AdminCreateTransactionMutation = {
-  __typename?: 'Mutation'
-  createTransaction?: {
-    __typename?: 'Transaction'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    date?: any | null
-    amount?: number | null
-    enteredBy?: string | null
-    enteredOn?: string | null
-    industry?: string | null
-    state?: string | null
-    user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  } | null
-}
-
-export type AdminDeleteTransactionMutationVariables = Exact<{
-  transactionId: Scalars['String']
-}>
-
-export type AdminDeleteTransactionMutation = {
-  __typename?: 'Mutation'
-  deleteTransaction?: { __typename?: 'Transaction'; id?: string | null } | null
-}
-
-export type AdminUpdateTransactionMutationVariables = Exact<{
-  transactionId: Scalars['String']
-  input: AdminUpdateTransactionInput
-}>
-
-export type AdminUpdateTransactionMutation = {
-  __typename?: 'Mutation'
-  updateTransaction?: {
-    __typename?: 'Transaction'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    date?: any | null
-    amount?: number | null
-    enteredBy?: string | null
-    enteredOn?: string | null
-    industry?: string | null
-    state?: string | null
-    user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  } | null
-}
-
-export type AdminTransactionQueryVariables = Exact<{
-  transactionId: Scalars['String']
-}>
-
-export type AdminTransactionQuery = {
-  __typename?: 'Query'
-  transaction?: {
-    __typename?: 'Transaction'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    date?: any | null
-    amount?: number | null
-    enteredBy?: string | null
-    enteredOn?: string | null
-    industry?: string | null
-    state?: string | null
-    user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  } | null
-}
-
-export type AdminTransactionsQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTransactionInput>
-}>
-
-export type AdminTransactionsQuery = {
-  __typename?: 'Query'
-  transactions?: Array<{
-    __typename?: 'Transaction'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    date?: any | null
-    amount?: number | null
-    enteredBy?: string | null
-    enteredOn?: string | null
-    industry?: string | null
-    state?: string | null
-    user?: { __typename?: 'User'; id?: string | null; firstName?: string | null; lastName?: string | null } | null
-    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  }> | null
-  counters?: {
-    __typename?: 'CorePaging'
-    count?: number | null
-    take?: number | null
-    page?: number | null
-    skip?: number | null
-    total?: number | null
-  } | null
-}
-
-export type AdminTransactionPaginationQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTransactionInput>
-}>
-
-export type AdminTransactionPaginationQuery = {
-  __typename?: 'Query'
-  counters?: {
-    __typename?: 'CorePaging'
-    count?: number | null
-    take?: number | null
-    page?: number | null
-    skip?: number | null
-    total?: number | null
-  } | null
-}
-
-export type AdminUserDetailsFragment = {
-  __typename?: 'User'
-  id?: string | null
-  createdAt?: any | null
-  updatedAt?: any | null
-  lastSeen?: any | null
-  onlineStatus?: UserOnlineStatus | null
-  status?: UserStatus | null
-  developer?: boolean | null
-  role?: Role | null
-  email?: string | null
-  emailConfirmed?: boolean | null
-  username?: string | null
-  infusionsoftId?: number | null
-  firstName?: string | null
-  lastName?: string | null
-  password?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: any | null
-  confirmEmailToken?: string | null
-  confirmEmailExpires?: any | null
-  showGravatar?: boolean | null
-  avatarUrl?: string | null
-  applicationDate?: any | null
-  inactiveDate?: any | null
-  inquiryDate?: any | null
-  membershipDate?: any | null
-  renewalDate?: any | null
-  terminationDate?: any | null
-  transferDate?: any | null
-  location?: string | null
-  phone?: string | null
-  bio?: string | null
-  facebook?: string | null
-  twitter?: string | null
-  youtube?: string | null
-  linkedin?: string | null
-  instagram?: string | null
-  website?: string | null
-  industry?: string | null
-  timeInIndustry?: string | null
-  address?: string | null
-  address2?: string | null
-  cell?: string | null
-  chapterTitle?: string | null
-  city?: string | null
-  comments?: string | null
-  company?: string | null
-  fax?: string | null
-  hear?: string | null
-  hearOther?: string | null
-  internalComments?: string | null
-  launchComplete?: boolean | null
-  mentorName?: string | null
-  merchantCircle?: string | null
-  multipleBusinesses?: boolean | null
-  multipleLocations?: boolean | null
-  numberOfEmployees?: number | null
-  organizer?: number | null
-  otherBusinesses?: string | null
-  otherLocations?: string | null
-  postcode?: string | null
-  promoter?: number | null
-  recognized?: number | null
-  salesAgentName?: string | null
-  state?: string | null
-  strategizer?: number | null
-  substitute?: boolean | null
-  tagline?: string | null
-  terminatedByName?: string | null
-  terminationComments?: string | null
-  terminationReason?: string | null
-  thinker?: number | null
-  title?: string | null
-  type?: string | null
-  vet?: boolean | null
-  notifyByEmail?: boolean | null
-  notifyBySMS?: boolean | null
-  notifyByWeb?: boolean | null
-  notifyByMobile?: boolean | null
-  regionManaged?: { __typename?: 'Region'; id?: string | null } | null
-  territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
-}
-
-export type AdminCreateUserMutationVariables = Exact<{
-  input: AdminCreateUserInput
-}>
-
-export type AdminCreateUserMutation = {
-  __typename?: 'Mutation'
-  createUser?: {
-    __typename?: 'User'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    lastSeen?: any | null
-    onlineStatus?: UserOnlineStatus | null
-    status?: UserStatus | null
-    developer?: boolean | null
-    role?: Role | null
-    email?: string | null
-    emailConfirmed?: boolean | null
-    username?: string | null
-    infusionsoftId?: number | null
-    firstName?: string | null
-    lastName?: string | null
-    password?: string | null
-    passwordResetToken?: string | null
-    passwordResetExpires?: any | null
-    confirmEmailToken?: string | null
-    confirmEmailExpires?: any | null
-    showGravatar?: boolean | null
-    avatarUrl?: string | null
-    applicationDate?: any | null
-    inactiveDate?: any | null
-    inquiryDate?: any | null
-    membershipDate?: any | null
-    renewalDate?: any | null
-    terminationDate?: any | null
-    transferDate?: any | null
-    location?: string | null
-    phone?: string | null
-    bio?: string | null
-    facebook?: string | null
-    twitter?: string | null
-    youtube?: string | null
-    linkedin?: string | null
-    instagram?: string | null
-    website?: string | null
-    industry?: string | null
-    timeInIndustry?: string | null
-    address?: string | null
-    address2?: string | null
-    cell?: string | null
-    chapterTitle?: string | null
-    city?: string | null
-    comments?: string | null
-    company?: string | null
-    fax?: string | null
-    hear?: string | null
-    hearOther?: string | null
-    internalComments?: string | null
-    launchComplete?: boolean | null
-    mentorName?: string | null
-    merchantCircle?: string | null
-    multipleBusinesses?: boolean | null
-    multipleLocations?: boolean | null
-    numberOfEmployees?: number | null
-    organizer?: number | null
-    otherBusinesses?: string | null
-    otherLocations?: string | null
-    postcode?: string | null
-    promoter?: number | null
-    recognized?: number | null
-    salesAgentName?: string | null
-    state?: string | null
-    strategizer?: number | null
-    substitute?: boolean | null
-    tagline?: string | null
-    terminatedByName?: string | null
-    terminationComments?: string | null
-    terminationReason?: string | null
-    thinker?: number | null
-    title?: string | null
-    type?: string | null
-    vet?: boolean | null
-    notifyByEmail?: boolean | null
-    notifyBySMS?: boolean | null
-    notifyByWeb?: boolean | null
-    notifyByMobile?: boolean | null
-    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
-    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
-  } | null
-}
-
-export type AdminDeleteUserMutationVariables = Exact<{
-  userId: Scalars['String']
-}>
-
-export type AdminDeleteUserMutation = {
-  __typename?: 'Mutation'
-  deleteUser?: { __typename?: 'User'; id?: string | null } | null
-}
-
-export type AdminUpdateUserMutationVariables = Exact<{
-  userId: Scalars['String']
-  input: AdminUpdateUserInput
-}>
-
-export type AdminUpdateUserMutation = {
-  __typename?: 'Mutation'
-  updateUser?: {
-    __typename?: 'User'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    lastSeen?: any | null
-    onlineStatus?: UserOnlineStatus | null
-    status?: UserStatus | null
-    developer?: boolean | null
-    role?: Role | null
-    email?: string | null
-    emailConfirmed?: boolean | null
-    username?: string | null
-    infusionsoftId?: number | null
-    firstName?: string | null
-    lastName?: string | null
-    password?: string | null
-    passwordResetToken?: string | null
-    passwordResetExpires?: any | null
-    confirmEmailToken?: string | null
-    confirmEmailExpires?: any | null
-    showGravatar?: boolean | null
-    avatarUrl?: string | null
-    applicationDate?: any | null
-    inactiveDate?: any | null
-    inquiryDate?: any | null
-    membershipDate?: any | null
-    renewalDate?: any | null
-    terminationDate?: any | null
-    transferDate?: any | null
-    location?: string | null
-    phone?: string | null
-    bio?: string | null
-    facebook?: string | null
-    twitter?: string | null
-    youtube?: string | null
-    linkedin?: string | null
-    instagram?: string | null
-    website?: string | null
-    industry?: string | null
-    timeInIndustry?: string | null
-    address?: string | null
-    address2?: string | null
-    cell?: string | null
-    chapterTitle?: string | null
-    city?: string | null
-    comments?: string | null
-    company?: string | null
-    fax?: string | null
-    hear?: string | null
-    hearOther?: string | null
-    internalComments?: string | null
-    launchComplete?: boolean | null
-    mentorName?: string | null
-    merchantCircle?: string | null
-    multipleBusinesses?: boolean | null
-    multipleLocations?: boolean | null
-    numberOfEmployees?: number | null
-    organizer?: number | null
-    otherBusinesses?: string | null
-    otherLocations?: string | null
-    postcode?: string | null
-    promoter?: number | null
-    recognized?: number | null
-    salesAgentName?: string | null
-    state?: string | null
-    strategizer?: number | null
-    substitute?: boolean | null
-    tagline?: string | null
-    terminatedByName?: string | null
-    terminationComments?: string | null
-    terminationReason?: string | null
-    thinker?: number | null
-    title?: string | null
-    type?: string | null
-    vet?: boolean | null
-    notifyByEmail?: boolean | null
-    notifyBySMS?: boolean | null
-    notifyByWeb?: boolean | null
-    notifyByMobile?: boolean | null
-    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
-    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
-  } | null
-}
-
-export type AdminUserQueryVariables = Exact<{
-  userId: Scalars['String']
-}>
-
-export type AdminUserQuery = {
-  __typename?: 'Query'
-  user?: {
-    __typename?: 'User'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    lastSeen?: any | null
-    onlineStatus?: UserOnlineStatus | null
-    status?: UserStatus | null
-    developer?: boolean | null
-    role?: Role | null
-    email?: string | null
-    emailConfirmed?: boolean | null
-    username?: string | null
-    infusionsoftId?: number | null
-    firstName?: string | null
-    lastName?: string | null
-    password?: string | null
-    passwordResetToken?: string | null
-    passwordResetExpires?: any | null
-    confirmEmailToken?: string | null
-    confirmEmailExpires?: any | null
-    showGravatar?: boolean | null
-    avatarUrl?: string | null
-    applicationDate?: any | null
-    inactiveDate?: any | null
-    inquiryDate?: any | null
-    membershipDate?: any | null
-    renewalDate?: any | null
-    terminationDate?: any | null
-    transferDate?: any | null
-    location?: string | null
-    phone?: string | null
-    bio?: string | null
-    facebook?: string | null
-    twitter?: string | null
-    youtube?: string | null
-    linkedin?: string | null
-    instagram?: string | null
-    website?: string | null
-    industry?: string | null
-    timeInIndustry?: string | null
-    address?: string | null
-    address2?: string | null
-    cell?: string | null
-    chapterTitle?: string | null
-    city?: string | null
-    comments?: string | null
-    company?: string | null
-    fax?: string | null
-    hear?: string | null
-    hearOther?: string | null
-    internalComments?: string | null
-    launchComplete?: boolean | null
-    mentorName?: string | null
-    merchantCircle?: string | null
-    multipleBusinesses?: boolean | null
-    multipleLocations?: boolean | null
-    numberOfEmployees?: number | null
-    organizer?: number | null
-    otherBusinesses?: string | null
-    otherLocations?: string | null
-    postcode?: string | null
-    promoter?: number | null
-    recognized?: number | null
-    salesAgentName?: string | null
-    state?: string | null
-    strategizer?: number | null
-    substitute?: boolean | null
-    tagline?: string | null
-    terminatedByName?: string | null
-    terminationComments?: string | null
-    terminationReason?: string | null
-    thinker?: number | null
-    title?: string | null
-    type?: string | null
-    vet?: boolean | null
-    notifyByEmail?: boolean | null
-    notifyBySMS?: boolean | null
-    notifyByWeb?: boolean | null
-    notifyByMobile?: boolean | null
-    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
-    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
-  } | null
-}
-
-export type AdminUsersQueryVariables = Exact<{
-  input?: InputMaybe<CorePagingInput>
-}>
-
-export type AdminUsersQuery = {
-  __typename?: 'Query'
-  users?: Array<{
-    __typename?: 'User'
-    id?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    lastSeen?: any | null
-    onlineStatus?: UserOnlineStatus | null
-    status?: UserStatus | null
-    developer?: boolean | null
-    role?: Role | null
-    email?: string | null
-    emailConfirmed?: boolean | null
-    username?: string | null
-    infusionsoftId?: number | null
-    firstName?: string | null
-    lastName?: string | null
-    password?: string | null
-    passwordResetToken?: string | null
-    passwordResetExpires?: any | null
-    confirmEmailToken?: string | null
-    confirmEmailExpires?: any | null
-    showGravatar?: boolean | null
-    avatarUrl?: string | null
-    applicationDate?: any | null
-    inactiveDate?: any | null
-    inquiryDate?: any | null
-    membershipDate?: any | null
-    renewalDate?: any | null
-    terminationDate?: any | null
-    transferDate?: any | null
-    location?: string | null
-    phone?: string | null
-    bio?: string | null
-    facebook?: string | null
-    twitter?: string | null
-    youtube?: string | null
-    linkedin?: string | null
-    instagram?: string | null
-    website?: string | null
-    industry?: string | null
-    timeInIndustry?: string | null
-    address?: string | null
-    address2?: string | null
-    cell?: string | null
-    chapterTitle?: string | null
-    city?: string | null
-    comments?: string | null
-    company?: string | null
-    fax?: string | null
-    hear?: string | null
-    hearOther?: string | null
-    internalComments?: string | null
-    launchComplete?: boolean | null
-    mentorName?: string | null
-    merchantCircle?: string | null
-    multipleBusinesses?: boolean | null
-    multipleLocations?: boolean | null
-    numberOfEmployees?: number | null
-    organizer?: number | null
-    otherBusinesses?: string | null
-    otherLocations?: string | null
-    postcode?: string | null
-    promoter?: number | null
-    recognized?: number | null
-    salesAgentName?: string | null
-    state?: string | null
-    strategizer?: number | null
-    substitute?: boolean | null
-    tagline?: string | null
-    terminatedByName?: string | null
-    terminationComments?: string | null
-    terminationReason?: string | null
-    thinker?: number | null
-    title?: string | null
-    type?: string | null
-    vet?: boolean | null
-    notifyByEmail?: boolean | null
-    notifyBySMS?: boolean | null
-    notifyByWeb?: boolean | null
-    notifyByMobile?: boolean | null
-    regionManaged?: { __typename?: 'Region'; id?: string | null } | null
-    territoryManaged?: { __typename?: 'Territory'; id?: string | null } | null
-  }> | null
-  counters?: {
-    __typename?: 'CorePaging'
-    count?: number | null
-    take?: number | null
-    page?: number | null
-    skip?: number | null
-    total?: number | null
-  } | null
-}
-
 export type UserTokenDetailsFragment = {
   __typename?: 'UserToken'
   token: string
@@ -3587,6 +2764,7 @@ export type UserTokenDetailsFragment = {
     email?: string | null
     role?: Role | null
     developer?: boolean | null
+    isLeader?: boolean | null
   }
 }
 
@@ -3599,6 +2777,7 @@ export type UserDetailsFragment = {
   email?: string | null
   role?: Role | null
   developer?: boolean | null
+  isLeader?: boolean | null
 }
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>
@@ -3614,6 +2793,7 @@ export type MeQuery = {
     email?: string | null
     role?: Role | null
     developer?: boolean | null
+    isLeader?: boolean | null
   } | null
 }
 
@@ -3639,6 +2819,7 @@ export type LoginMutation = {
       email?: string | null
       role?: Role | null
       developer?: boolean | null
+      isLeader?: boolean | null
     }
   } | null
 }
@@ -3661,6 +2842,7 @@ export type RegisterMutation = {
       email?: string | null
       role?: Role | null
       developer?: boolean | null
+      isLeader?: boolean | null
     }
   } | null
 }
@@ -3728,6 +2910,108 @@ export type IntercomSubSubscription = {
   } | null
 }
 
+export type LeaderChapterDetailsFragment = {
+  __typename?: 'Chapter'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  name?: string | null
+}
+
+export type LeaderCreateChapterMutationVariables = Exact<{
+  input: AdminCreateChapterInput
+}>
+
+export type LeaderCreateChapterMutation = {
+  __typename?: 'Mutation'
+  createChapter?: {
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  } | null
+}
+
+export type LeaderDeleteChapterMutationVariables = Exact<{
+  chapterId: Scalars['String']
+}>
+
+export type LeaderDeleteChapterMutation = {
+  __typename?: 'Mutation'
+  deleteChapter?: { __typename?: 'Chapter'; id?: string | null } | null
+}
+
+export type LeaderUpdateChapterMutationVariables = Exact<{
+  chapterId: Scalars['String']
+  input: AdminUpdateChapterInput
+}>
+
+export type LeaderUpdateChapterMutation = {
+  __typename?: 'Mutation'
+  updateChapter?: {
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  } | null
+}
+
+export type LeaderChapterQueryVariables = Exact<{
+  chapterId: Scalars['String']
+}>
+
+export type LeaderChapterQuery = {
+  __typename?: 'Query'
+  chapter?: {
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  } | null
+}
+
+export type LeaderChaptersQueryVariables = Exact<{
+  input?: InputMaybe<AdminListChapterInput>
+}>
+
+export type LeaderChaptersQuery = {
+  __typename?: 'Query'
+  chapters?: Array<{
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    name?: string | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type LeaderChapterPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListChapterInput>
+}>
+
+export type LeaderChapterPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
 export const AdminChapterDetailsFragmentDoc = gql`
   fragment AdminChapterDetails on Chapter {
     id
@@ -3748,10 +3032,6 @@ export const AdminChapterDetailsFragmentDoc = gql`
     meetingDetails
     meetingTime
     facebook
-    region {
-      id
-      name
-    }
   }
 `
 export const AdminCompanyDetailsFragmentDoc = gql`
@@ -3767,181 +3047,15 @@ export const AdminReferralDetailsFragmentDoc = gql`
     id
     createdAt
     updatedAt
+    referralDate
+    rating
     firstName
     lastName
     email
-    rating
     phone
     notes
     fromIndustry
     toIndustry
-    from {
-      id
-      firstName
-      lastName
-    }
-    to {
-      id
-      firstName
-      lastName
-    }
-    fromChapter {
-      id
-      name
-    }
-    toChapter {
-      id
-      name
-    }
-    sentBy {
-      id
-      firstName
-      lastName
-    }
-  }
-`
-export const AdminRegionDetailsFragmentDoc = gql`
-  fragment AdminRegionDetails on Region {
-    id
-    createdAt
-    updatedAt
-    name
-    territory {
-      id
-      name
-    }
-    manager {
-      id
-      firstName
-      lastName
-    }
-  }
-`
-export const AdminTerritoryDetailsFragmentDoc = gql`
-  fragment AdminTerritoryDetails on Territory {
-    id
-    createdAt
-    updatedAt
-    name
-    regions {
-      id
-      name
-    }
-    manager {
-      id
-      firstName
-      lastName
-    }
-  }
-`
-export const AdminTransactionDetailsFragmentDoc = gql`
-  fragment AdminTransactionDetails on Transaction {
-    id
-    createdAt
-    updatedAt
-    date
-    amount
-    enteredBy
-    enteredOn
-    industry
-    state
-    user {
-      id
-      firstName
-      lastName
-    }
-    chapter {
-      id
-      name
-    }
-  }
-`
-export const AdminUserDetailsFragmentDoc = gql`
-  fragment AdminUserDetails on User {
-    id
-    createdAt
-    updatedAt
-    lastSeen
-    onlineStatus
-    status
-    developer
-    role
-    email
-    emailConfirmed
-    username
-    infusionsoftId
-    firstName
-    lastName
-    password
-    passwordResetToken
-    passwordResetExpires
-    confirmEmailToken
-    confirmEmailExpires
-    showGravatar
-    avatarUrl
-    applicationDate
-    inactiveDate
-    inquiryDate
-    membershipDate
-    renewalDate
-    terminationDate
-    transferDate
-    location
-    phone
-    bio
-    facebook
-    twitter
-    youtube
-    linkedin
-    instagram
-    website
-    industry
-    timeInIndustry
-    address
-    address2
-    cell
-    chapterTitle
-    city
-    comments
-    company
-    fax
-    hear
-    hearOther
-    internalComments
-    launchComplete
-    mentorName
-    merchantCircle
-    multipleBusinesses
-    multipleLocations
-    numberOfEmployees
-    organizer
-    otherBusinesses
-    otherLocations
-    postcode
-    promoter
-    recognized
-    salesAgentName
-    state
-    strategizer
-    substitute
-    tagline
-    terminatedByName
-    terminationComments
-    terminationReason
-    thinker
-    title
-    type
-    vet
-    notifyByEmail
-    notifyBySMS
-    notifyByWeb
-    notifyByMobile
-    regionManaged {
-      id
-    }
-    territoryManaged {
-      id
-    }
   }
 `
 export const UserDetailsFragmentDoc = gql`
@@ -3953,6 +3067,7 @@ export const UserDetailsFragmentDoc = gql`
     email
     role
     developer
+    isLeader
   }
 `
 export const UserTokenDetailsFragmentDoc = gql`
@@ -3978,6 +3093,14 @@ export const IntercomDetailsFragmentDoc = gql`
     type
     scope
     payload
+  }
+`
+export const LeaderChapterDetailsFragmentDoc = gql`
+  fragment LeaderChapterDetails on Chapter {
+    id
+    createdAt
+    updatedAt
+    name
   }
 `
 export const AdminCreateChapterDocument = gql`
@@ -4784,1017 +3907,6 @@ export type AdminReferralPaginationQueryResult = Apollo.QueryResult<
   AdminReferralPaginationQuery,
   AdminReferralPaginationQueryVariables
 >
-export const AdminCreateRegionDocument = gql`
-  mutation adminCreateRegion($input: AdminCreateRegionInput!) {
-    createRegion: adminCreateRegion(input: $input) {
-      ...AdminRegionDetails
-    }
-  }
-  ${AdminRegionDetailsFragmentDoc}
-`
-export type AdminCreateRegionMutationFn = Apollo.MutationFunction<
-  AdminCreateRegionMutation,
-  AdminCreateRegionMutationVariables
->
-
-/**
- * __useAdminCreateRegionMutation__
- *
- * To run a mutation, you first call `useAdminCreateRegionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminCreateRegionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminCreateRegionMutation, { data, loading, error }] = useAdminCreateRegionMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminCreateRegionMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminCreateRegionMutation, AdminCreateRegionMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminCreateRegionMutation, AdminCreateRegionMutationVariables>(
-    AdminCreateRegionDocument,
-    options,
-  )
-}
-export type AdminCreateRegionMutationHookResult = ReturnType<typeof useAdminCreateRegionMutation>
-export type AdminCreateRegionMutationResult = Apollo.MutationResult<AdminCreateRegionMutation>
-export type AdminCreateRegionMutationOptions = Apollo.BaseMutationOptions<
-  AdminCreateRegionMutation,
-  AdminCreateRegionMutationVariables
->
-export const AdminDeleteRegionDocument = gql`
-  mutation adminDeleteRegion($regionId: String!) {
-    deleteRegion: adminDeleteRegion(regionId: $regionId) {
-      id
-    }
-  }
-`
-export type AdminDeleteRegionMutationFn = Apollo.MutationFunction<
-  AdminDeleteRegionMutation,
-  AdminDeleteRegionMutationVariables
->
-
-/**
- * __useAdminDeleteRegionMutation__
- *
- * To run a mutation, you first call `useAdminDeleteRegionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminDeleteRegionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminDeleteRegionMutation, { data, loading, error }] = useAdminDeleteRegionMutation({
- *   variables: {
- *      regionId: // value for 'regionId'
- *   },
- * });
- */
-export function useAdminDeleteRegionMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminDeleteRegionMutation, AdminDeleteRegionMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminDeleteRegionMutation, AdminDeleteRegionMutationVariables>(
-    AdminDeleteRegionDocument,
-    options,
-  )
-}
-export type AdminDeleteRegionMutationHookResult = ReturnType<typeof useAdminDeleteRegionMutation>
-export type AdminDeleteRegionMutationResult = Apollo.MutationResult<AdminDeleteRegionMutation>
-export type AdminDeleteRegionMutationOptions = Apollo.BaseMutationOptions<
-  AdminDeleteRegionMutation,
-  AdminDeleteRegionMutationVariables
->
-export const AdminUpdateRegionDocument = gql`
-  mutation adminUpdateRegion($regionId: String!, $input: AdminUpdateRegionInput!) {
-    updateRegion: adminUpdateRegion(regionId: $regionId, input: $input) {
-      ...AdminRegionDetails
-    }
-  }
-  ${AdminRegionDetailsFragmentDoc}
-`
-export type AdminUpdateRegionMutationFn = Apollo.MutationFunction<
-  AdminUpdateRegionMutation,
-  AdminUpdateRegionMutationVariables
->
-
-/**
- * __useAdminUpdateRegionMutation__
- *
- * To run a mutation, you first call `useAdminUpdateRegionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminUpdateRegionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminUpdateRegionMutation, { data, loading, error }] = useAdminUpdateRegionMutation({
- *   variables: {
- *      regionId: // value for 'regionId'
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminUpdateRegionMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminUpdateRegionMutation, AdminUpdateRegionMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminUpdateRegionMutation, AdminUpdateRegionMutationVariables>(
-    AdminUpdateRegionDocument,
-    options,
-  )
-}
-export type AdminUpdateRegionMutationHookResult = ReturnType<typeof useAdminUpdateRegionMutation>
-export type AdminUpdateRegionMutationResult = Apollo.MutationResult<AdminUpdateRegionMutation>
-export type AdminUpdateRegionMutationOptions = Apollo.BaseMutationOptions<
-  AdminUpdateRegionMutation,
-  AdminUpdateRegionMutationVariables
->
-export const AdminRegionDocument = gql`
-  query AdminRegion($regionId: String!) {
-    region: adminRegion(regionId: $regionId) {
-      ...AdminRegionDetails
-    }
-  }
-  ${AdminRegionDetailsFragmentDoc}
-`
-
-/**
- * __useAdminRegionQuery__
- *
- * To run a query within a React component, call `useAdminRegionQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminRegionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminRegionQuery({
- *   variables: {
- *      regionId: // value for 'regionId'
- *   },
- * });
- */
-export function useAdminRegionQuery(baseOptions: Apollo.QueryHookOptions<AdminRegionQuery, AdminRegionQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminRegionQuery, AdminRegionQueryVariables>(AdminRegionDocument, options)
-}
-export function useAdminRegionLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminRegionQuery, AdminRegionQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminRegionQuery, AdminRegionQueryVariables>(AdminRegionDocument, options)
-}
-export type AdminRegionQueryHookResult = ReturnType<typeof useAdminRegionQuery>
-export type AdminRegionLazyQueryHookResult = ReturnType<typeof useAdminRegionLazyQuery>
-export type AdminRegionQueryResult = Apollo.QueryResult<AdminRegionQuery, AdminRegionQueryVariables>
-export const AdminRegionsDocument = gql`
-  query AdminRegions($input: AdminListRegionInput) {
-    regions: adminRegions(input: $input) {
-      ...AdminRegionDetails
-    }
-    counters: adminCountRegions(input: $input) {
-      ...CorePagingDetails
-    }
-  }
-  ${AdminRegionDetailsFragmentDoc}
-  ${CorePagingDetailsFragmentDoc}
-`
-
-/**
- * __useAdminRegionsQuery__
- *
- * To run a query within a React component, call `useAdminRegionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminRegionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminRegionsQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminRegionsQuery(
-  baseOptions?: Apollo.QueryHookOptions<AdminRegionsQuery, AdminRegionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminRegionsQuery, AdminRegionsQueryVariables>(AdminRegionsDocument, options)
-}
-export function useAdminRegionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminRegionsQuery, AdminRegionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminRegionsQuery, AdminRegionsQueryVariables>(AdminRegionsDocument, options)
-}
-export type AdminRegionsQueryHookResult = ReturnType<typeof useAdminRegionsQuery>
-export type AdminRegionsLazyQueryHookResult = ReturnType<typeof useAdminRegionsLazyQuery>
-export type AdminRegionsQueryResult = Apollo.QueryResult<AdminRegionsQuery, AdminRegionsQueryVariables>
-export const AdminRegionPaginationDocument = gql`
-  query AdminRegionPagination($input: AdminListRegionInput) {
-    counters: adminCountRegions(input: $input) {
-      ...CorePagingDetails
-    }
-  }
-  ${CorePagingDetailsFragmentDoc}
-`
-
-/**
- * __useAdminRegionPaginationQuery__
- *
- * To run a query within a React component, call `useAdminRegionPaginationQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminRegionPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminRegionPaginationQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminRegionPaginationQuery(
-  baseOptions?: Apollo.QueryHookOptions<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>(
-    AdminRegionPaginationDocument,
-    options,
-  )
-}
-export function useAdminRegionPaginationLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminRegionPaginationQuery, AdminRegionPaginationQueryVariables>(
-    AdminRegionPaginationDocument,
-    options,
-  )
-}
-export type AdminRegionPaginationQueryHookResult = ReturnType<typeof useAdminRegionPaginationQuery>
-export type AdminRegionPaginationLazyQueryHookResult = ReturnType<typeof useAdminRegionPaginationLazyQuery>
-export type AdminRegionPaginationQueryResult = Apollo.QueryResult<
-  AdminRegionPaginationQuery,
-  AdminRegionPaginationQueryVariables
->
-export const AdminCreateTerritoryDocument = gql`
-  mutation adminCreateTerritory($input: AdminCreateTerritoryInput!) {
-    createTerritory: adminCreateTerritory(input: $input) {
-      ...AdminTerritoryDetails
-    }
-  }
-  ${AdminTerritoryDetailsFragmentDoc}
-`
-export type AdminCreateTerritoryMutationFn = Apollo.MutationFunction<
-  AdminCreateTerritoryMutation,
-  AdminCreateTerritoryMutationVariables
->
-
-/**
- * __useAdminCreateTerritoryMutation__
- *
- * To run a mutation, you first call `useAdminCreateTerritoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminCreateTerritoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminCreateTerritoryMutation, { data, loading, error }] = useAdminCreateTerritoryMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminCreateTerritoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminCreateTerritoryMutation, AdminCreateTerritoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminCreateTerritoryMutation, AdminCreateTerritoryMutationVariables>(
-    AdminCreateTerritoryDocument,
-    options,
-  )
-}
-export type AdminCreateTerritoryMutationHookResult = ReturnType<typeof useAdminCreateTerritoryMutation>
-export type AdminCreateTerritoryMutationResult = Apollo.MutationResult<AdminCreateTerritoryMutation>
-export type AdminCreateTerritoryMutationOptions = Apollo.BaseMutationOptions<
-  AdminCreateTerritoryMutation,
-  AdminCreateTerritoryMutationVariables
->
-export const AdminDeleteTerritoryDocument = gql`
-  mutation adminDeleteTerritory($territoryId: String!) {
-    deleteTerritory: adminDeleteTerritory(territoryId: $territoryId) {
-      id
-    }
-  }
-`
-export type AdminDeleteTerritoryMutationFn = Apollo.MutationFunction<
-  AdminDeleteTerritoryMutation,
-  AdminDeleteTerritoryMutationVariables
->
-
-/**
- * __useAdminDeleteTerritoryMutation__
- *
- * To run a mutation, you first call `useAdminDeleteTerritoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminDeleteTerritoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminDeleteTerritoryMutation, { data, loading, error }] = useAdminDeleteTerritoryMutation({
- *   variables: {
- *      territoryId: // value for 'territoryId'
- *   },
- * });
- */
-export function useAdminDeleteTerritoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminDeleteTerritoryMutation, AdminDeleteTerritoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminDeleteTerritoryMutation, AdminDeleteTerritoryMutationVariables>(
-    AdminDeleteTerritoryDocument,
-    options,
-  )
-}
-export type AdminDeleteTerritoryMutationHookResult = ReturnType<typeof useAdminDeleteTerritoryMutation>
-export type AdminDeleteTerritoryMutationResult = Apollo.MutationResult<AdminDeleteTerritoryMutation>
-export type AdminDeleteTerritoryMutationOptions = Apollo.BaseMutationOptions<
-  AdminDeleteTerritoryMutation,
-  AdminDeleteTerritoryMutationVariables
->
-export const AdminUpdateTerritoryDocument = gql`
-  mutation adminUpdateTerritory($territoryId: String!, $input: AdminUpdateTerritoryInput!) {
-    updateTerritory: adminUpdateTerritory(territoryId: $territoryId, input: $input) {
-      ...AdminTerritoryDetails
-    }
-  }
-  ${AdminTerritoryDetailsFragmentDoc}
-`
-export type AdminUpdateTerritoryMutationFn = Apollo.MutationFunction<
-  AdminUpdateTerritoryMutation,
-  AdminUpdateTerritoryMutationVariables
->
-
-/**
- * __useAdminUpdateTerritoryMutation__
- *
- * To run a mutation, you first call `useAdminUpdateTerritoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminUpdateTerritoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminUpdateTerritoryMutation, { data, loading, error }] = useAdminUpdateTerritoryMutation({
- *   variables: {
- *      territoryId: // value for 'territoryId'
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminUpdateTerritoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminUpdateTerritoryMutation, AdminUpdateTerritoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminUpdateTerritoryMutation, AdminUpdateTerritoryMutationVariables>(
-    AdminUpdateTerritoryDocument,
-    options,
-  )
-}
-export type AdminUpdateTerritoryMutationHookResult = ReturnType<typeof useAdminUpdateTerritoryMutation>
-export type AdminUpdateTerritoryMutationResult = Apollo.MutationResult<AdminUpdateTerritoryMutation>
-export type AdminUpdateTerritoryMutationOptions = Apollo.BaseMutationOptions<
-  AdminUpdateTerritoryMutation,
-  AdminUpdateTerritoryMutationVariables
->
-export const AdminTerritoryDocument = gql`
-  query AdminTerritory($territoryId: String!) {
-    territory: adminTerritory(territoryId: $territoryId) {
-      ...AdminTerritoryDetails
-    }
-  }
-  ${AdminTerritoryDetailsFragmentDoc}
-`
-
-/**
- * __useAdminTerritoryQuery__
- *
- * To run a query within a React component, call `useAdminTerritoryQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTerritoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTerritoryQuery({
- *   variables: {
- *      territoryId: // value for 'territoryId'
- *   },
- * });
- */
-export function useAdminTerritoryQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminTerritoryQuery, AdminTerritoryQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminTerritoryQuery, AdminTerritoryQueryVariables>(AdminTerritoryDocument, options)
-}
-export function useAdminTerritoryLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminTerritoryQuery, AdminTerritoryQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminTerritoryQuery, AdminTerritoryQueryVariables>(AdminTerritoryDocument, options)
-}
-export type AdminTerritoryQueryHookResult = ReturnType<typeof useAdminTerritoryQuery>
-export type AdminTerritoryLazyQueryHookResult = ReturnType<typeof useAdminTerritoryLazyQuery>
-export type AdminTerritoryQueryResult = Apollo.QueryResult<AdminTerritoryQuery, AdminTerritoryQueryVariables>
-export const AdminTerritoriesDocument = gql`
-  query AdminTerritories($input: AdminListTerritoryInput) {
-    territories: adminTerritories(input: $input) {
-      ...AdminTerritoryDetails
-    }
-    counters: adminCountTerritories(input: $input) {
-      ...CorePagingDetails
-    }
-  }
-  ${AdminTerritoryDetailsFragmentDoc}
-  ${CorePagingDetailsFragmentDoc}
-`
-
-/**
- * __useAdminTerritoriesQuery__
- *
- * To run a query within a React component, call `useAdminTerritoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTerritoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTerritoriesQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminTerritoriesQuery(
-  baseOptions?: Apollo.QueryHookOptions<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>(AdminTerritoriesDocument, options)
-}
-export function useAdminTerritoriesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>(AdminTerritoriesDocument, options)
-}
-export type AdminTerritoriesQueryHookResult = ReturnType<typeof useAdminTerritoriesQuery>
-export type AdminTerritoriesLazyQueryHookResult = ReturnType<typeof useAdminTerritoriesLazyQuery>
-export type AdminTerritoriesQueryResult = Apollo.QueryResult<AdminTerritoriesQuery, AdminTerritoriesQueryVariables>
-export const AdminTerritoryPaginationDocument = gql`
-  query AdminTerritoryPagination($input: AdminListTerritoryInput) {
-    counters: adminCountTerritories(input: $input) {
-      ...CorePagingDetails
-    }
-  }
-  ${CorePagingDetailsFragmentDoc}
-`
-
-/**
- * __useAdminTerritoryPaginationQuery__
- *
- * To run a query within a React component, call `useAdminTerritoryPaginationQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTerritoryPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTerritoryPaginationQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminTerritoryPaginationQuery(
-  baseOptions?: Apollo.QueryHookOptions<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>(
-    AdminTerritoryPaginationDocument,
-    options,
-  )
-}
-export function useAdminTerritoryPaginationLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminTerritoryPaginationQuery, AdminTerritoryPaginationQueryVariables>(
-    AdminTerritoryPaginationDocument,
-    options,
-  )
-}
-export type AdminTerritoryPaginationQueryHookResult = ReturnType<typeof useAdminTerritoryPaginationQuery>
-export type AdminTerritoryPaginationLazyQueryHookResult = ReturnType<typeof useAdminTerritoryPaginationLazyQuery>
-export type AdminTerritoryPaginationQueryResult = Apollo.QueryResult<
-  AdminTerritoryPaginationQuery,
-  AdminTerritoryPaginationQueryVariables
->
-export const AdminCreateTransactionDocument = gql`
-  mutation adminCreateTransaction($input: AdminCreateTransactionInput!) {
-    createTransaction: adminCreateTransaction(input: $input) {
-      ...AdminTransactionDetails
-    }
-  }
-  ${AdminTransactionDetailsFragmentDoc}
-`
-export type AdminCreateTransactionMutationFn = Apollo.MutationFunction<
-  AdminCreateTransactionMutation,
-  AdminCreateTransactionMutationVariables
->
-
-/**
- * __useAdminCreateTransactionMutation__
- *
- * To run a mutation, you first call `useAdminCreateTransactionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminCreateTransactionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminCreateTransactionMutation, { data, loading, error }] = useAdminCreateTransactionMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminCreateTransactionMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminCreateTransactionMutation, AdminCreateTransactionMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminCreateTransactionMutation, AdminCreateTransactionMutationVariables>(
-    AdminCreateTransactionDocument,
-    options,
-  )
-}
-export type AdminCreateTransactionMutationHookResult = ReturnType<typeof useAdminCreateTransactionMutation>
-export type AdminCreateTransactionMutationResult = Apollo.MutationResult<AdminCreateTransactionMutation>
-export type AdminCreateTransactionMutationOptions = Apollo.BaseMutationOptions<
-  AdminCreateTransactionMutation,
-  AdminCreateTransactionMutationVariables
->
-export const AdminDeleteTransactionDocument = gql`
-  mutation adminDeleteTransaction($transactionId: String!) {
-    deleteTransaction: adminDeleteTransaction(transactionId: $transactionId) {
-      id
-    }
-  }
-`
-export type AdminDeleteTransactionMutationFn = Apollo.MutationFunction<
-  AdminDeleteTransactionMutation,
-  AdminDeleteTransactionMutationVariables
->
-
-/**
- * __useAdminDeleteTransactionMutation__
- *
- * To run a mutation, you first call `useAdminDeleteTransactionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminDeleteTransactionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminDeleteTransactionMutation, { data, loading, error }] = useAdminDeleteTransactionMutation({
- *   variables: {
- *      transactionId: // value for 'transactionId'
- *   },
- * });
- */
-export function useAdminDeleteTransactionMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminDeleteTransactionMutation, AdminDeleteTransactionMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminDeleteTransactionMutation, AdminDeleteTransactionMutationVariables>(
-    AdminDeleteTransactionDocument,
-    options,
-  )
-}
-export type AdminDeleteTransactionMutationHookResult = ReturnType<typeof useAdminDeleteTransactionMutation>
-export type AdminDeleteTransactionMutationResult = Apollo.MutationResult<AdminDeleteTransactionMutation>
-export type AdminDeleteTransactionMutationOptions = Apollo.BaseMutationOptions<
-  AdminDeleteTransactionMutation,
-  AdminDeleteTransactionMutationVariables
->
-export const AdminUpdateTransactionDocument = gql`
-  mutation adminUpdateTransaction($transactionId: String!, $input: AdminUpdateTransactionInput!) {
-    updateTransaction: adminUpdateTransaction(transactionId: $transactionId, input: $input) {
-      ...AdminTransactionDetails
-    }
-  }
-  ${AdminTransactionDetailsFragmentDoc}
-`
-export type AdminUpdateTransactionMutationFn = Apollo.MutationFunction<
-  AdminUpdateTransactionMutation,
-  AdminUpdateTransactionMutationVariables
->
-
-/**
- * __useAdminUpdateTransactionMutation__
- *
- * To run a mutation, you first call `useAdminUpdateTransactionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminUpdateTransactionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminUpdateTransactionMutation, { data, loading, error }] = useAdminUpdateTransactionMutation({
- *   variables: {
- *      transactionId: // value for 'transactionId'
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminUpdateTransactionMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminUpdateTransactionMutation, AdminUpdateTransactionMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminUpdateTransactionMutation, AdminUpdateTransactionMutationVariables>(
-    AdminUpdateTransactionDocument,
-    options,
-  )
-}
-export type AdminUpdateTransactionMutationHookResult = ReturnType<typeof useAdminUpdateTransactionMutation>
-export type AdminUpdateTransactionMutationResult = Apollo.MutationResult<AdminUpdateTransactionMutation>
-export type AdminUpdateTransactionMutationOptions = Apollo.BaseMutationOptions<
-  AdminUpdateTransactionMutation,
-  AdminUpdateTransactionMutationVariables
->
-export const AdminTransactionDocument = gql`
-  query AdminTransaction($transactionId: String!) {
-    transaction: adminTransaction(transactionId: $transactionId) {
-      ...AdminTransactionDetails
-    }
-  }
-  ${AdminTransactionDetailsFragmentDoc}
-`
-
-/**
- * __useAdminTransactionQuery__
- *
- * To run a query within a React component, call `useAdminTransactionQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTransactionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTransactionQuery({
- *   variables: {
- *      transactionId: // value for 'transactionId'
- *   },
- * });
- */
-export function useAdminTransactionQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminTransactionQuery, AdminTransactionQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminTransactionQuery, AdminTransactionQueryVariables>(AdminTransactionDocument, options)
-}
-export function useAdminTransactionLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminTransactionQuery, AdminTransactionQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminTransactionQuery, AdminTransactionQueryVariables>(AdminTransactionDocument, options)
-}
-export type AdminTransactionQueryHookResult = ReturnType<typeof useAdminTransactionQuery>
-export type AdminTransactionLazyQueryHookResult = ReturnType<typeof useAdminTransactionLazyQuery>
-export type AdminTransactionQueryResult = Apollo.QueryResult<AdminTransactionQuery, AdminTransactionQueryVariables>
-export const AdminTransactionsDocument = gql`
-  query AdminTransactions($input: AdminListTransactionInput) {
-    transactions: adminTransactions(input: $input) {
-      ...AdminTransactionDetails
-    }
-    counters: adminCountTransactions(input: $input) {
-      ...CorePagingDetails
-    }
-  }
-  ${AdminTransactionDetailsFragmentDoc}
-  ${CorePagingDetailsFragmentDoc}
-`
-
-/**
- * __useAdminTransactionsQuery__
- *
- * To run a query within a React component, call `useAdminTransactionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTransactionsQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminTransactionsQuery(
-  baseOptions?: Apollo.QueryHookOptions<AdminTransactionsQuery, AdminTransactionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminTransactionsQuery, AdminTransactionsQueryVariables>(AdminTransactionsDocument, options)
-}
-export function useAdminTransactionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminTransactionsQuery, AdminTransactionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminTransactionsQuery, AdminTransactionsQueryVariables>(
-    AdminTransactionsDocument,
-    options,
-  )
-}
-export type AdminTransactionsQueryHookResult = ReturnType<typeof useAdminTransactionsQuery>
-export type AdminTransactionsLazyQueryHookResult = ReturnType<typeof useAdminTransactionsLazyQuery>
-export type AdminTransactionsQueryResult = Apollo.QueryResult<AdminTransactionsQuery, AdminTransactionsQueryVariables>
-export const AdminTransactionPaginationDocument = gql`
-  query AdminTransactionPagination($input: AdminListTransactionInput) {
-    counters: adminCountTransactions(input: $input) {
-      ...CorePagingDetails
-    }
-  }
-  ${CorePagingDetailsFragmentDoc}
-`
-
-/**
- * __useAdminTransactionPaginationQuery__
- *
- * To run a query within a React component, call `useAdminTransactionPaginationQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTransactionPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTransactionPaginationQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminTransactionPaginationQuery(
-  baseOptions?: Apollo.QueryHookOptions<AdminTransactionPaginationQuery, AdminTransactionPaginationQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminTransactionPaginationQuery, AdminTransactionPaginationQueryVariables>(
-    AdminTransactionPaginationDocument,
-    options,
-  )
-}
-export function useAdminTransactionPaginationLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminTransactionPaginationQuery, AdminTransactionPaginationQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminTransactionPaginationQuery, AdminTransactionPaginationQueryVariables>(
-    AdminTransactionPaginationDocument,
-    options,
-  )
-}
-export type AdminTransactionPaginationQueryHookResult = ReturnType<typeof useAdminTransactionPaginationQuery>
-export type AdminTransactionPaginationLazyQueryHookResult = ReturnType<typeof useAdminTransactionPaginationLazyQuery>
-export type AdminTransactionPaginationQueryResult = Apollo.QueryResult<
-  AdminTransactionPaginationQuery,
-  AdminTransactionPaginationQueryVariables
->
-export const AdminCreateUserDocument = gql`
-  mutation adminCreateUser($input: AdminCreateUserInput!) {
-    createUser: adminCreateUser(input: $input) {
-      ...AdminUserDetails
-    }
-  }
-  ${AdminUserDetailsFragmentDoc}
-`
-export type AdminCreateUserMutationFn = Apollo.MutationFunction<
-  AdminCreateUserMutation,
-  AdminCreateUserMutationVariables
->
-
-/**
- * __useAdminCreateUserMutation__
- *
- * To run a mutation, you first call `useAdminCreateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminCreateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminCreateUserMutation, { data, loading, error }] = useAdminCreateUserMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminCreateUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminCreateUserMutation, AdminCreateUserMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminCreateUserMutation, AdminCreateUserMutationVariables>(AdminCreateUserDocument, options)
-}
-export type AdminCreateUserMutationHookResult = ReturnType<typeof useAdminCreateUserMutation>
-export type AdminCreateUserMutationResult = Apollo.MutationResult<AdminCreateUserMutation>
-export type AdminCreateUserMutationOptions = Apollo.BaseMutationOptions<
-  AdminCreateUserMutation,
-  AdminCreateUserMutationVariables
->
-export const AdminDeleteUserDocument = gql`
-  mutation adminDeleteUser($userId: String!) {
-    deleteUser: adminDeleteUser(userId: $userId) {
-      id
-    }
-  }
-`
-export type AdminDeleteUserMutationFn = Apollo.MutationFunction<
-  AdminDeleteUserMutation,
-  AdminDeleteUserMutationVariables
->
-
-/**
- * __useAdminDeleteUserMutation__
- *
- * To run a mutation, you first call `useAdminDeleteUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminDeleteUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminDeleteUserMutation, { data, loading, error }] = useAdminDeleteUserMutation({
- *   variables: {
- *      userId: // value for 'userId'
- *   },
- * });
- */
-export function useAdminDeleteUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminDeleteUserMutation, AdminDeleteUserMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminDeleteUserMutation, AdminDeleteUserMutationVariables>(AdminDeleteUserDocument, options)
-}
-export type AdminDeleteUserMutationHookResult = ReturnType<typeof useAdminDeleteUserMutation>
-export type AdminDeleteUserMutationResult = Apollo.MutationResult<AdminDeleteUserMutation>
-export type AdminDeleteUserMutationOptions = Apollo.BaseMutationOptions<
-  AdminDeleteUserMutation,
-  AdminDeleteUserMutationVariables
->
-export const AdminUpdateUserDocument = gql`
-  mutation adminUpdateUser($userId: String!, $input: AdminUpdateUserInput!) {
-    updateUser: adminUpdateUser(userId: $userId, input: $input) {
-      ...AdminUserDetails
-    }
-  }
-  ${AdminUserDetailsFragmentDoc}
-`
-export type AdminUpdateUserMutationFn = Apollo.MutationFunction<
-  AdminUpdateUserMutation,
-  AdminUpdateUserMutationVariables
->
-
-/**
- * __useAdminUpdateUserMutation__
- *
- * To run a mutation, you first call `useAdminUpdateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminUpdateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminUpdateUserMutation, { data, loading, error }] = useAdminUpdateUserMutation({
- *   variables: {
- *      userId: // value for 'userId'
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminUpdateUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<AdminUpdateUserMutation, AdminUpdateUserMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<AdminUpdateUserMutation, AdminUpdateUserMutationVariables>(AdminUpdateUserDocument, options)
-}
-export type AdminUpdateUserMutationHookResult = ReturnType<typeof useAdminUpdateUserMutation>
-export type AdminUpdateUserMutationResult = Apollo.MutationResult<AdminUpdateUserMutation>
-export type AdminUpdateUserMutationOptions = Apollo.BaseMutationOptions<
-  AdminUpdateUserMutation,
-  AdminUpdateUserMutationVariables
->
-export const AdminUserDocument = gql`
-  query AdminUser($userId: String!) {
-    user: adminUser(userId: $userId) {
-      ...AdminUserDetails
-    }
-  }
-  ${AdminUserDetailsFragmentDoc}
-`
-
-/**
- * __useAdminUserQuery__
- *
- * To run a query within a React component, call `useAdminUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminUserQuery({
- *   variables: {
- *      userId: // value for 'userId'
- *   },
- * });
- */
-export function useAdminUserQuery(baseOptions: Apollo.QueryHookOptions<AdminUserQuery, AdminUserQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminUserQuery, AdminUserQueryVariables>(AdminUserDocument, options)
-}
-export function useAdminUserLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminUserQuery, AdminUserQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminUserQuery, AdminUserQueryVariables>(AdminUserDocument, options)
-}
-export type AdminUserQueryHookResult = ReturnType<typeof useAdminUserQuery>
-export type AdminUserLazyQueryHookResult = ReturnType<typeof useAdminUserLazyQuery>
-export type AdminUserQueryResult = Apollo.QueryResult<AdminUserQuery, AdminUserQueryVariables>
-export const AdminUsersDocument = gql`
-  query AdminUsers($input: CorePagingInput) {
-    users: adminUsers(input: $input) {
-      ...AdminUserDetails
-    }
-    counters: adminCountUsers(input: $input) {
-      ...CorePagingDetails
-    }
-  }
-  ${AdminUserDetailsFragmentDoc}
-  ${CorePagingDetailsFragmentDoc}
-`
-
-/**
- * __useAdminUsersQuery__
- *
- * To run a query within a React component, call `useAdminUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminUsersQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAdminUsersQuery(baseOptions?: Apollo.QueryHookOptions<AdminUsersQuery, AdminUsersQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AdminUsersQuery, AdminUsersQueryVariables>(AdminUsersDocument, options)
-}
-export function useAdminUsersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminUsersQuery, AdminUsersQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AdminUsersQuery, AdminUsersQueryVariables>(AdminUsersDocument, options)
-}
-export type AdminUsersQueryHookResult = ReturnType<typeof useAdminUsersQuery>
-export type AdminUsersLazyQueryHookResult = ReturnType<typeof useAdminUsersLazyQuery>
-export type AdminUsersQueryResult = Apollo.QueryResult<AdminUsersQuery, AdminUsersQueryVariables>
 export const MeDocument = gql`
   query me {
     me {
@@ -6106,3 +4218,271 @@ export function useIntercomSubSubscription(
 }
 export type IntercomSubSubscriptionHookResult = ReturnType<typeof useIntercomSubSubscription>
 export type IntercomSubSubscriptionResult = Apollo.SubscriptionResult<IntercomSubSubscription>
+export const LeaderCreateChapterDocument = gql`
+  mutation leaderCreateChapter($input: AdminCreateChapterInput!) {
+    createChapter: leaderCreateChapter(input: $input) {
+      ...LeaderChapterDetails
+    }
+  }
+  ${LeaderChapterDetailsFragmentDoc}
+`
+export type LeaderCreateChapterMutationFn = Apollo.MutationFunction<
+  LeaderCreateChapterMutation,
+  LeaderCreateChapterMutationVariables
+>
+
+/**
+ * __useLeaderCreateChapterMutation__
+ *
+ * To run a mutation, you first call `useLeaderCreateChapterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderCreateChapterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderCreateChapterMutation, { data, loading, error }] = useLeaderCreateChapterMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderCreateChapterMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderCreateChapterMutation, LeaderCreateChapterMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderCreateChapterMutation, LeaderCreateChapterMutationVariables>(
+    LeaderCreateChapterDocument,
+    options,
+  )
+}
+export type LeaderCreateChapterMutationHookResult = ReturnType<typeof useLeaderCreateChapterMutation>
+export type LeaderCreateChapterMutationResult = Apollo.MutationResult<LeaderCreateChapterMutation>
+export type LeaderCreateChapterMutationOptions = Apollo.BaseMutationOptions<
+  LeaderCreateChapterMutation,
+  LeaderCreateChapterMutationVariables
+>
+export const LeaderDeleteChapterDocument = gql`
+  mutation leaderDeleteChapter($chapterId: String!) {
+    deleteChapter: leaderDeleteChapter(chapterId: $chapterId) {
+      id
+    }
+  }
+`
+export type LeaderDeleteChapterMutationFn = Apollo.MutationFunction<
+  LeaderDeleteChapterMutation,
+  LeaderDeleteChapterMutationVariables
+>
+
+/**
+ * __useLeaderDeleteChapterMutation__
+ *
+ * To run a mutation, you first call `useLeaderDeleteChapterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderDeleteChapterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderDeleteChapterMutation, { data, loading, error }] = useLeaderDeleteChapterMutation({
+ *   variables: {
+ *      chapterId: // value for 'chapterId'
+ *   },
+ * });
+ */
+export function useLeaderDeleteChapterMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderDeleteChapterMutation, LeaderDeleteChapterMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderDeleteChapterMutation, LeaderDeleteChapterMutationVariables>(
+    LeaderDeleteChapterDocument,
+    options,
+  )
+}
+export type LeaderDeleteChapterMutationHookResult = ReturnType<typeof useLeaderDeleteChapterMutation>
+export type LeaderDeleteChapterMutationResult = Apollo.MutationResult<LeaderDeleteChapterMutation>
+export type LeaderDeleteChapterMutationOptions = Apollo.BaseMutationOptions<
+  LeaderDeleteChapterMutation,
+  LeaderDeleteChapterMutationVariables
+>
+export const LeaderUpdateChapterDocument = gql`
+  mutation leaderUpdateChapter($chapterId: String!, $input: AdminUpdateChapterInput!) {
+    updateChapter: leaderUpdateChapter(chapterId: $chapterId, input: $input) {
+      ...LeaderChapterDetails
+    }
+  }
+  ${LeaderChapterDetailsFragmentDoc}
+`
+export type LeaderUpdateChapterMutationFn = Apollo.MutationFunction<
+  LeaderUpdateChapterMutation,
+  LeaderUpdateChapterMutationVariables
+>
+
+/**
+ * __useLeaderUpdateChapterMutation__
+ *
+ * To run a mutation, you first call `useLeaderUpdateChapterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderUpdateChapterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderUpdateChapterMutation, { data, loading, error }] = useLeaderUpdateChapterMutation({
+ *   variables: {
+ *      chapterId: // value for 'chapterId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderUpdateChapterMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderUpdateChapterMutation, LeaderUpdateChapterMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderUpdateChapterMutation, LeaderUpdateChapterMutationVariables>(
+    LeaderUpdateChapterDocument,
+    options,
+  )
+}
+export type LeaderUpdateChapterMutationHookResult = ReturnType<typeof useLeaderUpdateChapterMutation>
+export type LeaderUpdateChapterMutationResult = Apollo.MutationResult<LeaderUpdateChapterMutation>
+export type LeaderUpdateChapterMutationOptions = Apollo.BaseMutationOptions<
+  LeaderUpdateChapterMutation,
+  LeaderUpdateChapterMutationVariables
+>
+export const LeaderChapterDocument = gql`
+  query LeaderChapter($chapterId: String!) {
+    chapter: leaderChapter(chapterId: $chapterId) {
+      ...LeaderChapterDetails
+    }
+  }
+  ${LeaderChapterDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderChapterQuery__
+ *
+ * To run a query within a React component, call `useLeaderChapterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderChapterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderChapterQuery({
+ *   variables: {
+ *      chapterId: // value for 'chapterId'
+ *   },
+ * });
+ */
+export function useLeaderChapterQuery(
+  baseOptions: Apollo.QueryHookOptions<LeaderChapterQuery, LeaderChapterQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderChapterQuery, LeaderChapterQueryVariables>(LeaderChapterDocument, options)
+}
+export function useLeaderChapterLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderChapterQuery, LeaderChapterQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderChapterQuery, LeaderChapterQueryVariables>(LeaderChapterDocument, options)
+}
+export type LeaderChapterQueryHookResult = ReturnType<typeof useLeaderChapterQuery>
+export type LeaderChapterLazyQueryHookResult = ReturnType<typeof useLeaderChapterLazyQuery>
+export type LeaderChapterQueryResult = Apollo.QueryResult<LeaderChapterQuery, LeaderChapterQueryVariables>
+export const LeaderChaptersDocument = gql`
+  query LeaderChapters($input: AdminListChapterInput) {
+    chapters: leaderChapters(input: $input) {
+      ...LeaderChapterDetails
+    }
+    counters: leaderCountChapters(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${LeaderChapterDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderChaptersQuery__
+ *
+ * To run a query within a React component, call `useLeaderChaptersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderChaptersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderChaptersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderChaptersQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderChaptersQuery, LeaderChaptersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderChaptersQuery, LeaderChaptersQueryVariables>(LeaderChaptersDocument, options)
+}
+export function useLeaderChaptersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderChaptersQuery, LeaderChaptersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderChaptersQuery, LeaderChaptersQueryVariables>(LeaderChaptersDocument, options)
+}
+export type LeaderChaptersQueryHookResult = ReturnType<typeof useLeaderChaptersQuery>
+export type LeaderChaptersLazyQueryHookResult = ReturnType<typeof useLeaderChaptersLazyQuery>
+export type LeaderChaptersQueryResult = Apollo.QueryResult<LeaderChaptersQuery, LeaderChaptersQueryVariables>
+export const LeaderChapterPaginationDocument = gql`
+  query LeaderChapterPagination($input: AdminListChapterInput) {
+    counters: leaderCountChapters(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderChapterPaginationQuery__
+ *
+ * To run a query within a React component, call `useLeaderChapterPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderChapterPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderChapterPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderChapterPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderChapterPaginationQuery, LeaderChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderChapterPaginationQuery, LeaderChapterPaginationQueryVariables>(
+    LeaderChapterPaginationDocument,
+    options,
+  )
+}
+export function useLeaderChapterPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderChapterPaginationQuery, LeaderChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderChapterPaginationQuery, LeaderChapterPaginationQueryVariables>(
+    LeaderChapterPaginationDocument,
+    options,
+  )
+}
+export type LeaderChapterPaginationQueryHookResult = ReturnType<typeof useLeaderChapterPaginationQuery>
+export type LeaderChapterPaginationLazyQueryHookResult = ReturnType<typeof useLeaderChapterPaginationLazyQuery>
+export type LeaderChapterPaginationQueryResult = Apollo.QueryResult<
+  LeaderChapterPaginationQuery,
+  LeaderChapterPaginationQueryVariables
+>

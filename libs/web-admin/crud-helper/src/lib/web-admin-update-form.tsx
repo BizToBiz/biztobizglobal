@@ -50,6 +50,7 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
         input: { ...cleanedInput },
       },
     }).then((data) => {
+      console.log(data)
       setLoading(false)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     })

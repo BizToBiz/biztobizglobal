@@ -4,7 +4,7 @@ query Leader<%= className %>($<%= propertyName %>Id: String!) {
   }
 }
 
-query Leader<%= pluralClassName %>($input: LeaderList<%= className %>Input) {
+query Leader<%= pluralClassName %>($input: AdminList<%= className %>Input) {
   <%= pluralPropertyName %>: leader<%= pluralClassName %>(input: $input) {
     ...Leader<%= className %>Details
   }
@@ -13,7 +13,7 @@ query Leader<%= pluralClassName %>($input: LeaderList<%= className %>Input) {
   }
 }
 
-query Leader<%= className %>Pagination($input: LeaderList<%= className %>Input) {
+query Leader<%= className %>Pagination($input: AdminList<%= className %>Input) {
   counters: leaderCount<%= pluralClassName %>(input: $input) {
     ...CorePagingDetails
   }

@@ -25,6 +25,13 @@ function addNavigation(tree, options) {
   if (contents) {
     const importEndpoint = '// Add New Imports Here'
     const newImports = `import { WebLeader${options.className}Create, WebLeader${options.className}List, WebLeader${options.className}Update } from '@${options.npmScope}/web-leader/${options.name}'`
+    const navEndpoint = '// Add New Nav Objects Here'
+    const newNav = `{
+      name: '${options.pluralClassName}',
+      href: '/leader/${options.pluralName}',
+      icon: HomeIcon,
+      current: currentPath.path.includes('/leader/${options.pluralName}'),
+    },`
     const routeEndpoint = `{/*Add New Routes Here*/}`
     const newRoute = `<Route path="${options.pluralName}" element={<WebLeader${options.className}List />} />
         <Route path="${options.propertyName}">
@@ -33,6 +40,7 @@ function addNavigation(tree, options) {
         </Route>`
     const replacedModule = contents
       .replace(importEndpoint, [newImports, importEndpoint].join('\n'))
+      .replace(navEndpoint, [newNav, navEndpoint].join('\n'))
       .replace(routeEndpoint, [newRoute, routeEndpoint].join('\n'))
 
     tree.overwrite(routerPath, replacedModule)
@@ -80,5 +88,6 @@ export default async function (tree: Tree, schema: any) {
   await formatFiles(tree)
   return () => {
     installPackagesTask(tree)
+    console.warn(`Restart the API and Web Server to see changes`)
   }
 }

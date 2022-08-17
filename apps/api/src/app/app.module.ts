@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common'
 import { ApiAuthFeatureModule } from '@biztobiz/api/auth/feature'
 import { ApiUserFeatureModule } from '@biztobiz/api/user/feature'
 import { ApiCoreFeatureModule } from '@biztobiz/api/core/feature'
+import { ApiUserFeatureModule } from '@biztobiz/api/user/feature'
+import { ApiChapterFeatureModule } from '@biztobiz/api/chapter/feature'
 import { ApiSubstituteFeatureModule } from '@biztobiz/api/substitute/feature'
 import { ApiAttendanceReminderFeatureModule } from '@biztobiz/api/attendance-reminder/feature'
 import { ApiChapterMemberFeatureModule } from '@biztobiz/api/chapter-member/feature'
@@ -17,7 +19,6 @@ import { ApiPowerHourFeatureModule } from '@biztobiz/api/power-hour/feature'
 import { ApiNotificationFeatureModule } from '@biztobiz/api/notification/feature'
 import { ApiMeetingFeatureModule } from '@biztobiz/api/meeting/feature'
 import { ApiCompanyFeatureModule } from '@biztobiz/api/company/feature'
-import { ApiChapterFeatureModule } from '@biztobiz/api/chapter/feature'
 import { ApiAccountFeatureModule } from '@biztobiz/api/account/feature'
 
 @Module({
@@ -25,6 +26,8 @@ import { ApiAccountFeatureModule } from '@biztobiz/api/account/feature'
     ApiAuthFeatureModule,
     ApiUserFeatureModule,
     ApiCoreFeatureModule,
+    ApiUserFeatureModule,
+    ApiChapterFeatureModule,
     ApiTerritoryFeatureModule,
     ApiTerritoryFeatureModule,
     ApiTerritoryFeatureModule,

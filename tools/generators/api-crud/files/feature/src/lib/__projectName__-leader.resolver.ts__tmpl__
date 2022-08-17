@@ -8,10 +8,11 @@ import {
   <%= modelClassName %>,
 } from '@<%= npmScope %>/<%= directory %>/<%= modelName %>/data-access'
 import { CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
-import {  CtxUser } from '@<%= npmScope %>/<%= directory %>/auth/util'
+import {  CtxUser, GqlAuthGuard } from '@<%= npmScope %>/<%= directory %>/auth/util'
 import { User } from '@<%= npmScope %>/<%= directory %>/user/data-access'
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class <%= projectClassName %>LeaderResolver {
   constructor(private readonly service: <%= apiClassName %><%= modelClassName %>DataAccessLeaderService) {}
 

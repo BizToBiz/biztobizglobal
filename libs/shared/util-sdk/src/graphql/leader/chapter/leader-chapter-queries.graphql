@@ -4,7 +4,7 @@ query LeaderChapter($chapterId: String!) {
   }
 }
 
-query LeaderChapters($input: LeaderListChapterInput) {
+query LeaderChapters($input: AdminListChapterInput) {
   chapters: leaderChapters(input: $input) {
     ...LeaderChapterDetails
   }
@@ -13,7 +13,7 @@ query LeaderChapters($input: LeaderListChapterInput) {
   }
 }
 
-query LeaderChapterPagination($input: LeaderListChapterInput) {
+query LeaderChapterPagination($input: AdminListChapterInput) {
   counters: leaderCountChapters(input: $input) {
     ...CorePagingDetails
   }

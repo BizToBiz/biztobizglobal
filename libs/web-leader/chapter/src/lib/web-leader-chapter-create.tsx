@@ -1,6 +1,6 @@
 import React from 'react'
 import { LeaderCreateChapterDocument } from '@biztobiz/shared/util-sdk'
-import { chapterFields, chapterSelectFields } from './web-leader/chapter-helper'
+import { chapterFields, chapterSelectFields } from './web-leader-chapter-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebLeaderChapterCreate() {
