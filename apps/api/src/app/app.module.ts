@@ -13,6 +13,9 @@ import { ApiUploadFeatureModule } from '@biztobiz/api/upload/feature'
 import { ApiSubstituteGroupFeatureModule } from '@biztobiz/api/substitute-group/feature'
 
 import { ApiTerritoryFeatureModule } from '@biztobiz/api/territory/feature'
+import { ApiRegionFeatureModule } from '@biztobiz/api/region/feature'
+import { ApiCompanyFeatureModule } from '@biztobiz/api/company/feature'
+import { ApiCompanyMemberFeatureModule } from '@biztobiz/api/company-member/feature'
 // Add Imports Here
 
 @Module({
@@ -30,6 +33,9 @@ import { ApiTerritoryFeatureModule } from '@biztobiz/api/territory/feature'
     ApiUploadFeatureModule,
     ApiSubstituteGroupFeatureModule,
     ApiTerritoryFeatureModule,
+    ApiRegionFeatureModule,
+    ApiCompanyFeatureModule,
+    ApiCompanyMemberFeatureModule,
     // Add Modules Here
   ],
 })
