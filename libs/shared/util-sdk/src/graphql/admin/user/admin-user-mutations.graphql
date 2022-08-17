@@ -1,0 +1,17 @@
+mutation adminCreateUser($input: AdminCreateUserInput!) {
+  createUser: adminCreateUser(input: $input) {
+    ...AdminUserDetails
+  }
+}
+
+mutation adminDeleteUser($userId: String!) {
+  deleteUser: adminDeleteUser(userId: $userId) {
+    id
+  }
+}
+
+mutation adminUpdateUser($userId: String!, $input: AdminUpdateUserInput!) {
+  updateUser: adminUpdateUser(userId: $userId, input: $input) {
+    ...AdminUserDetails
+  }
+}

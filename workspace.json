@@ -76,6 +76,7 @@
     "web-admin-crud-helper": "libs/web-admin/crud-helper",
     "web-admin-dashboard": "libs/web-admin/dashboard",
     "web-admin-router": "libs/web-admin/router",
+    "web-admin-user": "libs/web-admin/user",
     "web-assets": "libs/web/assets",
     "web-auth-feature": "libs/web/auth/feature",
     "web-auth-ui": "libs/web/auth/ui",

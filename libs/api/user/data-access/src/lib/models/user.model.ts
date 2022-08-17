@@ -5,18 +5,16 @@ import { AttendanceReminder } from '@biztobiz/api/attendance-reminder/data-acces
 import { Substitute } from '@biztobiz/api/substitute/data-access'
 import { Upload } from '@biztobiz/api/upload/data-access'
 import { MeetingPresence } from '@biztobiz/api/meeting-presence/data-access'
-// import { Company } from '@biztobiz/api/company/data-access'
-// import { Territory } from '@biztobiz/api/territory/data-access'
-// import { Region } from '@biztobiz/api/region/data-access'
-// import { Upload } from '@biztobiz/api/upload/data-access'
-// import { PowerHour } from '@biztobiz/api/power-hour/data-access'
-// import { Referral } from '@biztobiz/api/referral/data-access'
-// import { Testimonial } from '@biztobiz/api/testimonial/data-access'
-// import { Transaction } from '@biztobiz/api/transaction/data-access'
-// import { MeetingPresence } from '@biztobiz/api/meeting/data-access'
-// import { AttendanceReminder } from '@biztobiz/api/attendance-reminder/data-access'
-// import { Substitute } from '@biztobiz/api/substitute/data-access'
-// import { Notification } from '@biztobiz/api/notification/data-access'
+import { Company } from '@biztobiz/api/company/data-access'
+import { Territory } from '@biztobiz/api/territory/data-access'
+import { Region } from '@biztobiz/api/region/data-access'
+
+import { PowerHour } from '@biztobiz/api/power-hour/data-access'
+import { Referral } from '@biztobiz/api/referral/data-access'
+import { Testimonial } from '@biztobiz/api/testimonial/data-access'
+import { Transaction } from '@biztobiz/api/transaction/data-access'
+
+import { Notification } from '@biztobiz/api/notification/data-access'
 
 @ObjectType()
 export class User {
@@ -257,30 +255,30 @@ export class User {
   @Field(() => ChapterMember, { nullable: true })
   chapter?: ChapterMember
 
-  // @Field(() => [Company], { nullable: 'itemsAndList' })
-  // companies?: Company[]
-  //
-  // @Field(() => [Notification], { nullable: 'itemsAndList' })
-  // notificationsSent?: Notification[]
-  //
-  // @Field(() => [Notification], { nullable: 'itemsAndList' })
-  // notificationsReceived?: Notification[]
-  //
-  // @Field(() => [PowerHour], { nullable: 'itemsAndList' })
-  // powerHoursFrom?: PowerHour[]
-  //
-  // @Field(() => [PowerHour], { nullable: 'itemsAndList' })
-  // powerHoursTo?: PowerHour[]
-  //
-  // @Field(() => [Referral], { nullable: 'itemsAndList' })
-  // referralsSent?: Referral[]
-  //
-  // @Field(() => [Referral], { nullable: 'itemsAndList' })
-  // referralsFrom?: Referral[]
-  //
-  // @Field(() => [Referral], { nullable: 'itemsAndList' })
-  // referralsTo?: Referral[]
-  //
+  @Field(() => [Company], { nullable: 'itemsAndList' })
+  companies?: Company[]
+
+  @Field(() => [Notification], { nullable: 'itemsAndList' })
+  notificationsSent?: Notification[]
+
+  @Field(() => [Notification], { nullable: 'itemsAndList' })
+  notificationsReceived?: Notification[]
+
+  @Field(() => [PowerHour], { nullable: 'itemsAndList' })
+  powerHoursFrom?: PowerHour[]
+
+  @Field(() => [PowerHour], { nullable: 'itemsAndList' })
+  powerHoursTo?: PowerHour[]
+
+  @Field(() => [Referral], { nullable: 'itemsAndList' })
+  referralsSent?: Referral[]
+
+  @Field(() => [Referral], { nullable: 'itemsAndList' })
+  referralsFrom?: Referral[]
+
+  @Field(() => [Referral], { nullable: 'itemsAndList' })
+  referralsTo?: Referral[]
+
   @Field(() => [AttendanceReminder], { nullable: 'itemsAndList' })
   reminderSentBy?: AttendanceReminder[]
 
@@ -296,21 +294,21 @@ export class User {
   @Field(() => [Substitute], { nullable: 'itemsAndList' })
   substitutesSentBy?: Substitute[]
 
-  // @Field(() => [Testimonial], { nullable: 'itemsAndList' })
-  // testimonialsFrom?: Testimonial[]
-  //
-  // @Field(() => [Testimonial], { nullable: 'itemsAndList' })
-  // testimonialsto?: Testimonial[]
-  //
-  // @Field(() => [Transaction], { nullable: true })
-  // transactions?: Transaction[]
-  //
-  // @Field(() => Territory, { nullable: true })
-  // territoryManaged?: Territory
-  //
-  // @Field(() => Region, { nullable: true })
-  // regionManaged?: Region
-  //
+  @Field(() => [Testimonial], { nullable: 'itemsAndList' })
+  testimonialsFrom?: Testimonial[]
+
+  @Field(() => [Testimonial], { nullable: 'itemsAndList' })
+  testimonialsto?: Testimonial[]
+
+  @Field(() => [Transaction], { nullable: true })
+  transactions?: Transaction[]
+
+  @Field(() => Territory, { nullable: true })
+  territoryManaged?: Territory
+
+  @Field(() => Region, { nullable: true })
+  regionManaged?: Region
+
   @Field(() => Upload, { nullable: true })
   avatar?: Upload
 

@@ -1,5 +1,7 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
+import { SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
+import { Role } from '@biztobiz/shared/util-sdk'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {
@@ -72,4 +74,14 @@ export const userFields: WebUiFormField[] = [
   WebUiFormField.checkbox('notifyBySMS', { label: 'Notify by SMS' }),
   WebUiFormField.checkbox('notifyByWeb', { label: 'Notify by Web' }),
   WebUiFormField.checkbox('notifyByMobile', { label: 'Notify by Mobile' }),
+  // WebUiFormField.relationSelect('chapterId', {
+  //   label: 'Chapter',
+  //   document: AdminChaptersDocument,
+  //   selectOptionsFunction: mapChapters,
+  //   dataType: 'chapters',
+  // }),
+]
+
+export const userSelectFields: SelectFieldOptions[] = [
+  // { name: 'chapter', type: 'single', idName: 'chapterId', mapFunction: mapChapter },
 ]
