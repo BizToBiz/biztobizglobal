@@ -71,12 +71,36 @@ export type AdminCreateCompanyMemberInput = {
   location: Scalars['String']
 }
 
+export type AdminCreateIndustryInput = {
+  name: Scalars['String']
+}
+
 export type AdminCreateMeetingInput = {
   date: Scalars['DateTime']
 }
 
 export type AdminCreateMeetingPresenceInput = {
   date: Scalars['String']
+}
+
+export type AdminCreateNotificationInput = {
+  message: Scalars['String']
+}
+
+export type AdminCreateReferralInput = {
+  email?: InputMaybe<Scalars['String']>
+  firstName?: InputMaybe<Scalars['String']>
+  fromChapterId?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  fromIndustry?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
+  notes?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  rating?: InputMaybe<ReferralRating>
+  sentById?: InputMaybe<Scalars['String']>
+  toChapterId?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
+  toIndustry?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateRegionInput = {
@@ -158,6 +182,15 @@ export type AdminListCompanyMemberInput = {
   take?: InputMaybe<Scalars['Float']>
 }
 
+export type AdminListIndustryInput = {
+  name?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
 export type AdminListMeetingInput = {
   date?: InputMaybe<Scalars['DateTime']>
   orderBy?: InputMaybe<Scalars['String']>
@@ -169,6 +202,24 @@ export type AdminListMeetingInput = {
 
 export type AdminListMeetingPresenceInput = {
   date?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
+export type AdminListNotificationInput = {
+  message?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
+export type AdminListReferralInput = {
+  firstName?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
@@ -266,12 +317,24 @@ export type AdminUpdateCompanyMemberInput = {
   location?: InputMaybe<Scalars['String']>
 }
 
+export type AdminUpdateIndustryInput = {
+  name?: InputMaybe<Scalars['String']>
+}
+
 export type AdminUpdateMeetingInput = {
   date?: InputMaybe<Scalars['DateTime']>
 }
 
 export type AdminUpdateMeetingPresenceInput = {
   date?: InputMaybe<Scalars['String']>
+}
+
+export type AdminUpdateNotificationInput = {
+  message?: InputMaybe<Scalars['String']>
+}
+
+export type AdminUpdateReferralInput = {
+  firstName?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateRegionInput = {
@@ -417,6 +480,14 @@ export type ForgotPasswordInput = {
   email: Scalars['String']
 }
 
+export type Industry = {
+  __typename?: 'Industry'
+  createdAt?: Maybe<Scalars['DateTime']>
+  id?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
 export type IntercomMessage = {
   __typename?: 'IntercomMessage'
   payload?: Maybe<Scalars['JSON']>
@@ -476,8 +547,11 @@ export type Mutation = {
   adminCreateChapterMember?: Maybe<ChapterMember>
   adminCreateCompany?: Maybe<Company>
   adminCreateCompanyMember?: Maybe<CompanyMember>
+  adminCreateIndustry?: Maybe<Industry>
   adminCreateMeeting?: Maybe<Meeting>
   adminCreateMeetingPresence?: Maybe<MeetingPresence>
+  adminCreateNotification?: Maybe<Notification>
+  adminCreateReferral?: Maybe<Referral>
   adminCreateRegion?: Maybe<Region>
   adminCreateSubstitute?: Maybe<Substitute>
   adminCreateSubstituteGroup?: Maybe<SubstituteGroup>
@@ -489,8 +563,11 @@ export type Mutation = {
   adminDeleteChapterMember?: Maybe<ChapterMember>
   adminDeleteCompany?: Maybe<Company>
   adminDeleteCompanyMember?: Maybe<CompanyMember>
+  adminDeleteIndustry?: Maybe<Industry>
   adminDeleteMeeting?: Maybe<Meeting>
   adminDeleteMeetingPresence?: Maybe<MeetingPresence>
+  adminDeleteNotification?: Maybe<Notification>
+  adminDeleteReferral?: Maybe<Referral>
   adminDeleteRegion?: Maybe<Region>
   adminDeleteSubstitute?: Maybe<Substitute>
   adminDeleteSubstituteGroup?: Maybe<SubstituteGroup>
@@ -502,8 +579,11 @@ export type Mutation = {
   adminUpdateChapterMember?: Maybe<ChapterMember>
   adminUpdateCompany?: Maybe<Company>
   adminUpdateCompanyMember?: Maybe<CompanyMember>
+  adminUpdateIndustry?: Maybe<Industry>
   adminUpdateMeeting?: Maybe<Meeting>
   adminUpdateMeetingPresence?: Maybe<MeetingPresence>
+  adminUpdateNotification?: Maybe<Notification>
+  adminUpdateReferral?: Maybe<Referral>
   adminUpdateRegion?: Maybe<Region>
   adminUpdateSubstitute?: Maybe<Substitute>
   adminUpdateSubstituteGroup?: Maybe<SubstituteGroup>
@@ -517,8 +597,11 @@ export type Mutation = {
   leaderCreateChapterMember?: Maybe<ChapterMember>
   leaderCreateCompany?: Maybe<Company>
   leaderCreateCompanyMember?: Maybe<CompanyMember>
+  leaderCreateIndustry?: Maybe<Industry>
   leaderCreateMeeting?: Maybe<Meeting>
   leaderCreateMeetingPresence?: Maybe<MeetingPresence>
+  leaderCreateNotification?: Maybe<Notification>
+  leaderCreateReferral?: Maybe<Referral>
   leaderCreateRegion?: Maybe<Region>
   leaderCreateSubstitute?: Maybe<Substitute>
   leaderCreateSubstituteGroup?: Maybe<SubstituteGroup>
@@ -530,8 +613,11 @@ export type Mutation = {
   leaderDeleteChapterMember?: Maybe<ChapterMember>
   leaderDeleteCompany?: Maybe<Company>
   leaderDeleteCompanyMember?: Maybe<CompanyMember>
+  leaderDeleteIndustry?: Maybe<Industry>
   leaderDeleteMeeting?: Maybe<Meeting>
   leaderDeleteMeetingPresence?: Maybe<MeetingPresence>
+  leaderDeleteNotification?: Maybe<Notification>
+  leaderDeleteReferral?: Maybe<Referral>
   leaderDeleteRegion?: Maybe<Region>
   leaderDeleteSubstitute?: Maybe<Substitute>
   leaderDeleteSubstituteGroup?: Maybe<SubstituteGroup>
@@ -543,8 +629,11 @@ export type Mutation = {
   leaderUpdateChapterMember?: Maybe<ChapterMember>
   leaderUpdateCompany?: Maybe<Company>
   leaderUpdateCompanyMember?: Maybe<CompanyMember>
+  leaderUpdateIndustry?: Maybe<Industry>
   leaderUpdateMeeting?: Maybe<Meeting>
   leaderUpdateMeetingPresence?: Maybe<MeetingPresence>
+  leaderUpdateNotification?: Maybe<Notification>
+  leaderUpdateReferral?: Maybe<Referral>
   leaderUpdateRegion?: Maybe<Region>
   leaderUpdateSubstitute?: Maybe<Substitute>
   leaderUpdateSubstituteGroup?: Maybe<SubstituteGroup>
@@ -560,8 +649,11 @@ export type Mutation = {
   userCreateChapterMember?: Maybe<ChapterMember>
   userCreateCompany?: Maybe<Company>
   userCreateCompanyMember?: Maybe<CompanyMember>
+  userCreateIndustry?: Maybe<Industry>
   userCreateMeeting?: Maybe<Meeting>
   userCreateMeetingPresence?: Maybe<MeetingPresence>
+  userCreateNotification?: Maybe<Notification>
+  userCreateReferral?: Maybe<Referral>
   userCreateRegion?: Maybe<Region>
   userCreateSubstitute?: Maybe<Substitute>
   userCreateSubstituteGroup?: Maybe<SubstituteGroup>
@@ -573,8 +665,11 @@ export type Mutation = {
   userDeleteChapterMember?: Maybe<ChapterMember>
   userDeleteCompany?: Maybe<Company>
   userDeleteCompanyMember?: Maybe<CompanyMember>
+  userDeleteIndustry?: Maybe<Industry>
   userDeleteMeeting?: Maybe<Meeting>
   userDeleteMeetingPresence?: Maybe<MeetingPresence>
+  userDeleteNotification?: Maybe<Notification>
+  userDeleteReferral?: Maybe<Referral>
   userDeleteRegion?: Maybe<Region>
   userDeleteSubstitute?: Maybe<Substitute>
   userDeleteSubstituteGroup?: Maybe<SubstituteGroup>
@@ -586,8 +681,11 @@ export type Mutation = {
   userUpdateChapterMember?: Maybe<ChapterMember>
   userUpdateCompany?: Maybe<Company>
   userUpdateCompanyMember?: Maybe<CompanyMember>
+  userUpdateIndustry?: Maybe<Industry>
   userUpdateMeeting?: Maybe<Meeting>
   userUpdateMeetingPresence?: Maybe<MeetingPresence>
+  userUpdateNotification?: Maybe<Notification>
+  userUpdateReferral?: Maybe<Referral>
   userUpdateRegion?: Maybe<Region>
   userUpdateSubstitute?: Maybe<Substitute>
   userUpdateSubstituteGroup?: Maybe<SubstituteGroup>
@@ -624,12 +722,24 @@ export type MutationAdminCreateCompanyMemberArgs = {
   input: AdminCreateCompanyMemberInput
 }
 
+export type MutationAdminCreateIndustryArgs = {
+  input: AdminCreateIndustryInput
+}
+
 export type MutationAdminCreateMeetingArgs = {
   input: AdminCreateMeetingInput
 }
 
 export type MutationAdminCreateMeetingPresenceArgs = {
   input: AdminCreateMeetingPresenceInput
+}
+
+export type MutationAdminCreateNotificationArgs = {
+  input: AdminCreateNotificationInput
+}
+
+export type MutationAdminCreateReferralArgs = {
+  input: AdminCreateReferralInput
 }
 
 export type MutationAdminCreateRegionArgs = {
@@ -676,12 +786,24 @@ export type MutationAdminDeleteCompanyMemberArgs = {
   companyMemberId: Scalars['String']
 }
 
+export type MutationAdminDeleteIndustryArgs = {
+  industryId: Scalars['String']
+}
+
 export type MutationAdminDeleteMeetingArgs = {
   meetingId: Scalars['String']
 }
 
 export type MutationAdminDeleteMeetingPresenceArgs = {
   meetingPresenceId: Scalars['String']
+}
+
+export type MutationAdminDeleteNotificationArgs = {
+  notificationId: Scalars['String']
+}
+
+export type MutationAdminDeleteReferralArgs = {
+  referralId: Scalars['String']
 }
 
 export type MutationAdminDeleteRegionArgs = {
@@ -733,6 +855,11 @@ export type MutationAdminUpdateCompanyMemberArgs = {
   input: AdminUpdateCompanyMemberInput
 }
 
+export type MutationAdminUpdateIndustryArgs = {
+  industryId: Scalars['String']
+  input: AdminUpdateIndustryInput
+}
+
 export type MutationAdminUpdateMeetingArgs = {
   input: AdminUpdateMeetingInput
   meetingId: Scalars['String']
@@ -741,6 +868,16 @@ export type MutationAdminUpdateMeetingArgs = {
 export type MutationAdminUpdateMeetingPresenceArgs = {
   input: AdminUpdateMeetingPresenceInput
   meetingPresenceId: Scalars['String']
+}
+
+export type MutationAdminUpdateNotificationArgs = {
+  input: AdminUpdateNotificationInput
+  notificationId: Scalars['String']
+}
+
+export type MutationAdminUpdateReferralArgs = {
+  input: AdminUpdateReferralInput
+  referralId: Scalars['String']
 }
 
 export type MutationAdminUpdateRegionArgs = {
@@ -803,12 +940,24 @@ export type MutationLeaderCreateCompanyMemberArgs = {
   input: AdminCreateCompanyMemberInput
 }
 
+export type MutationLeaderCreateIndustryArgs = {
+  input: AdminCreateIndustryInput
+}
+
 export type MutationLeaderCreateMeetingArgs = {
   input: AdminCreateMeetingInput
 }
 
 export type MutationLeaderCreateMeetingPresenceArgs = {
   input: AdminCreateMeetingPresenceInput
+}
+
+export type MutationLeaderCreateNotificationArgs = {
+  input: AdminCreateNotificationInput
+}
+
+export type MutationLeaderCreateReferralArgs = {
+  input: AdminCreateReferralInput
 }
 
 export type MutationLeaderCreateRegionArgs = {
@@ -855,12 +1004,24 @@ export type MutationLeaderDeleteCompanyMemberArgs = {
   companyMemberId: Scalars['String']
 }
 
+export type MutationLeaderDeleteIndustryArgs = {
+  industryId: Scalars['String']
+}
+
 export type MutationLeaderDeleteMeetingArgs = {
   meetingId: Scalars['String']
 }
 
 export type MutationLeaderDeleteMeetingPresenceArgs = {
   meetingPresenceId: Scalars['String']
+}
+
+export type MutationLeaderDeleteNotificationArgs = {
+  notificationId: Scalars['String']
+}
+
+export type MutationLeaderDeleteReferralArgs = {
+  referralId: Scalars['String']
 }
 
 export type MutationLeaderDeleteRegionArgs = {
@@ -912,6 +1073,11 @@ export type MutationLeaderUpdateCompanyMemberArgs = {
   input: AdminUpdateCompanyMemberInput
 }
 
+export type MutationLeaderUpdateIndustryArgs = {
+  industryId: Scalars['String']
+  input: AdminUpdateIndustryInput
+}
+
 export type MutationLeaderUpdateMeetingArgs = {
   input: AdminUpdateMeetingInput
   meetingId: Scalars['String']
@@ -920,6 +1086,16 @@ export type MutationLeaderUpdateMeetingArgs = {
 export type MutationLeaderUpdateMeetingPresenceArgs = {
   input: AdminUpdateMeetingPresenceInput
   meetingPresenceId: Scalars['String']
+}
+
+export type MutationLeaderUpdateNotificationArgs = {
+  input: AdminUpdateNotificationInput
+  notificationId: Scalars['String']
+}
+
+export type MutationLeaderUpdateReferralArgs = {
+  input: AdminUpdateReferralInput
+  referralId: Scalars['String']
 }
 
 export type MutationLeaderUpdateRegionArgs = {
@@ -984,12 +1160,24 @@ export type MutationUserCreateCompanyMemberArgs = {
   input: UserCreateCompanyMemberInput
 }
 
+export type MutationUserCreateIndustryArgs = {
+  input: UserCreateIndustryInput
+}
+
 export type MutationUserCreateMeetingArgs = {
   input: UserCreateMeetingInput
 }
 
 export type MutationUserCreateMeetingPresenceArgs = {
   input: UserCreateMeetingPresenceInput
+}
+
+export type MutationUserCreateNotificationArgs = {
+  input: UserCreateNotificationInput
+}
+
+export type MutationUserCreateReferralArgs = {
+  input: UserCreateReferralInput
 }
 
 export type MutationUserCreateRegionArgs = {
@@ -1036,12 +1224,24 @@ export type MutationUserDeleteCompanyMemberArgs = {
   companyMemberId: Scalars['String']
 }
 
+export type MutationUserDeleteIndustryArgs = {
+  industryId: Scalars['String']
+}
+
 export type MutationUserDeleteMeetingArgs = {
   meetingId: Scalars['String']
 }
 
 export type MutationUserDeleteMeetingPresenceArgs = {
   meetingPresenceId: Scalars['String']
+}
+
+export type MutationUserDeleteNotificationArgs = {
+  notificationId: Scalars['String']
+}
+
+export type MutationUserDeleteReferralArgs = {
+  referralId: Scalars['String']
 }
 
 export type MutationUserDeleteRegionArgs = {
@@ -1093,6 +1293,11 @@ export type MutationUserUpdateCompanyMemberArgs = {
   input: UserUpdateCompanyMemberInput
 }
 
+export type MutationUserUpdateIndustryArgs = {
+  industryId: Scalars['String']
+  input: UserUpdateIndustryInput
+}
+
 export type MutationUserUpdateMeetingArgs = {
   input: UserUpdateMeetingInput
   meetingId: Scalars['String']
@@ -1101,6 +1306,16 @@ export type MutationUserUpdateMeetingArgs = {
 export type MutationUserUpdateMeetingPresenceArgs = {
   input: UserUpdateMeetingPresenceInput
   meetingPresenceId: Scalars['String']
+}
+
+export type MutationUserUpdateNotificationArgs = {
+  input: UserUpdateNotificationInput
+  notificationId: Scalars['String']
+}
+
+export type MutationUserUpdateReferralArgs = {
+  input: UserUpdateReferralInput
+  referralId: Scalars['String']
 }
 
 export type MutationUserUpdateRegionArgs = {
@@ -1133,6 +1348,42 @@ export type MutationUserUpdateUserArgs = {
   userId: Scalars['String']
 }
 
+export type Notification = {
+  __typename?: 'Notification'
+  actor?: Maybe<User>
+  createdAt?: Maybe<Scalars['DateTime']>
+  id?: Maybe<Scalars['String']>
+  message?: Maybe<Scalars['String']>
+  read?: Maybe<Scalars['Boolean']>
+  referenceId?: Maybe<Scalars['String']>
+  referenceType?: Maybe<NotificationReferenceType>
+  to?: Maybe<User>
+  type?: Maybe<NotificationType>
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+/** Notification reference type */
+export enum NotificationReferenceType {
+  PowerHour = 'PowerHour',
+  Referral = 'Referral',
+  SharedContact = 'SharedContact',
+  Substitute = 'Substitute',
+  Testimonial = 'Testimonial',
+}
+
+/** Notification type */
+export enum NotificationType {
+  ContactInfoShared = 'ContactInfoShared',
+  PowerHourAccepted = 'PowerHourAccepted',
+  PowerHourCountered = 'PowerHourCountered',
+  PowerHourDeclined = 'PowerHourDeclined',
+  PowerHourReceived = 'PowerHourReceived',
+  ReferralReceived = 'ReferralReceived',
+  SubstituteAccepted = 'SubstituteAccepted',
+  SubstituteRequested = 'SubstituteRequested',
+  TestimonialReceived = 'TestimonialReceived',
+}
+
 export type Query = {
   __typename?: 'Query'
   accountProfile?: Maybe<User>
@@ -1152,18 +1403,27 @@ export type Query = {
   adminCountChapters?: Maybe<CorePaging>
   adminCountCompanies?: Maybe<CorePaging>
   adminCountCompanyMembers?: Maybe<CorePaging>
+  adminCountIndustries?: Maybe<CorePaging>
   adminCountMeetingPresences?: Maybe<CorePaging>
   adminCountMeetings?: Maybe<CorePaging>
+  adminCountNotifications?: Maybe<CorePaging>
+  adminCountReferrals?: Maybe<CorePaging>
   adminCountRegions?: Maybe<CorePaging>
   adminCountSubstituteGroups?: Maybe<CorePaging>
   adminCountSubstitutes?: Maybe<CorePaging>
   adminCountTerritories?: Maybe<CorePaging>
   adminCountUploads?: Maybe<CorePaging>
   adminCountUsers?: Maybe<CorePaging>
+  adminIndustries?: Maybe<Array<Industry>>
+  adminIndustry?: Maybe<Industry>
   adminMeeting?: Maybe<Meeting>
   adminMeetingPresence?: Maybe<MeetingPresence>
   adminMeetingPresences?: Maybe<Array<MeetingPresence>>
   adminMeetings?: Maybe<Array<Meeting>>
+  adminNotification?: Maybe<Notification>
+  adminNotifications?: Maybe<Array<Notification>>
+  adminReferral?: Maybe<Referral>
+  adminReferrals?: Maybe<Array<Referral>>
   adminRegion?: Maybe<Region>
   adminRegions?: Maybe<Array<Region>>
   adminSubstitute?: Maybe<Substitute>
@@ -1191,18 +1451,27 @@ export type Query = {
   leaderCountChapters?: Maybe<CorePaging>
   leaderCountCompanies?: Maybe<CorePaging>
   leaderCountCompanyMembers?: Maybe<CorePaging>
+  leaderCountIndustries?: Maybe<CorePaging>
   leaderCountMeetingPresences?: Maybe<CorePaging>
   leaderCountMeetings?: Maybe<CorePaging>
+  leaderCountNotifications?: Maybe<CorePaging>
+  leaderCountReferrals?: Maybe<CorePaging>
   leaderCountRegions?: Maybe<CorePaging>
   leaderCountSubstituteGroups?: Maybe<CorePaging>
   leaderCountSubstitutes?: Maybe<CorePaging>
   leaderCountTerritories?: Maybe<CorePaging>
   leaderCountUploads?: Maybe<CorePaging>
   leaderCountUsers?: Maybe<CorePaging>
+  leaderIndustries?: Maybe<Array<Industry>>
+  leaderIndustry?: Maybe<Industry>
   leaderMeeting?: Maybe<Meeting>
   leaderMeetingPresence?: Maybe<MeetingPresence>
   leaderMeetingPresences?: Maybe<Array<MeetingPresence>>
   leaderMeetings?: Maybe<Array<Meeting>>
+  leaderNotification?: Maybe<Notification>
+  leaderNotifications?: Maybe<Array<Notification>>
+  leaderReferral?: Maybe<Referral>
+  leaderReferrals?: Maybe<Array<Referral>>
   leaderRegion?: Maybe<Region>
   leaderRegions?: Maybe<Array<Region>>
   leaderSubstitute?: Maybe<Substitute>
@@ -1232,18 +1501,27 @@ export type Query = {
   userCountChapters?: Maybe<CorePaging>
   userCountCompanies?: Maybe<CorePaging>
   userCountCompanyMembers?: Maybe<CorePaging>
+  userCountIndustries?: Maybe<CorePaging>
   userCountMeetingPresences?: Maybe<CorePaging>
   userCountMeetings?: Maybe<CorePaging>
+  userCountNotifications?: Maybe<CorePaging>
+  userCountReferrals?: Maybe<CorePaging>
   userCountRegions?: Maybe<CorePaging>
   userCountSubstituteGroups?: Maybe<CorePaging>
   userCountSubstitutes?: Maybe<CorePaging>
   userCountTerritories?: Maybe<CorePaging>
   userCountUploads?: Maybe<CorePaging>
   userCountUsers?: Maybe<CorePaging>
+  userIndustries?: Maybe<Array<Industry>>
+  userIndustry?: Maybe<Industry>
   userMeeting?: Maybe<Meeting>
   userMeetingPresence?: Maybe<MeetingPresence>
   userMeetingPresences?: Maybe<Array<MeetingPresence>>
   userMeetings?: Maybe<Array<Meeting>>
+  userNotification?: Maybe<Notification>
+  userNotifications?: Maybe<Array<Notification>>
+  userReferral?: Maybe<Referral>
+  userReferrals?: Maybe<Array<Referral>>
   userRegion?: Maybe<Region>
   userRegions?: Maybe<Array<Region>>
   userSubstitute?: Maybe<Substitute>
@@ -1322,12 +1600,24 @@ export type QueryAdminCountCompanyMembersArgs = {
   input?: InputMaybe<AdminListCompanyMemberInput>
 }
 
+export type QueryAdminCountIndustriesArgs = {
+  input?: InputMaybe<AdminListIndustryInput>
+}
+
 export type QueryAdminCountMeetingPresencesArgs = {
   input?: InputMaybe<AdminListMeetingPresenceInput>
 }
 
 export type QueryAdminCountMeetingsArgs = {
   input?: InputMaybe<AdminListMeetingInput>
+}
+
+export type QueryAdminCountNotificationsArgs = {
+  input?: InputMaybe<AdminListNotificationInput>
+}
+
+export type QueryAdminCountReferralsArgs = {
+  input?: InputMaybe<AdminListReferralInput>
 }
 
 export type QueryAdminCountRegionsArgs = {
@@ -1354,6 +1644,14 @@ export type QueryAdminCountUsersArgs = {
   input?: InputMaybe<AdminListUserInput>
 }
 
+export type QueryAdminIndustriesArgs = {
+  input?: InputMaybe<AdminListIndustryInput>
+}
+
+export type QueryAdminIndustryArgs = {
+  industryId: Scalars['String']
+}
+
 export type QueryAdminMeetingArgs = {
   meetingId: Scalars['String']
 }
@@ -1368,6 +1666,22 @@ export type QueryAdminMeetingPresencesArgs = {
 
 export type QueryAdminMeetingsArgs = {
   input?: InputMaybe<AdminListMeetingInput>
+}
+
+export type QueryAdminNotificationArgs = {
+  notificationId: Scalars['String']
+}
+
+export type QueryAdminNotificationsArgs = {
+  input?: InputMaybe<AdminListNotificationInput>
+}
+
+export type QueryAdminReferralArgs = {
+  referralId: Scalars['String']
+}
+
+export type QueryAdminReferralsArgs = {
+  input?: InputMaybe<AdminListReferralInput>
 }
 
 export type QueryAdminRegionArgs = {
@@ -1478,12 +1792,24 @@ export type QueryLeaderCountCompanyMembersArgs = {
   input?: InputMaybe<AdminListCompanyMemberInput>
 }
 
+export type QueryLeaderCountIndustriesArgs = {
+  input?: InputMaybe<AdminListIndustryInput>
+}
+
 export type QueryLeaderCountMeetingPresencesArgs = {
   input?: InputMaybe<AdminListMeetingPresenceInput>
 }
 
 export type QueryLeaderCountMeetingsArgs = {
   input?: InputMaybe<AdminListMeetingInput>
+}
+
+export type QueryLeaderCountNotificationsArgs = {
+  input?: InputMaybe<AdminListNotificationInput>
+}
+
+export type QueryLeaderCountReferralsArgs = {
+  input?: InputMaybe<AdminListReferralInput>
 }
 
 export type QueryLeaderCountRegionsArgs = {
@@ -1510,6 +1836,14 @@ export type QueryLeaderCountUsersArgs = {
   input?: InputMaybe<AdminListUserInput>
 }
 
+export type QueryLeaderIndustriesArgs = {
+  input?: InputMaybe<AdminListIndustryInput>
+}
+
+export type QueryLeaderIndustryArgs = {
+  industryId: Scalars['String']
+}
+
 export type QueryLeaderMeetingArgs = {
   meetingId: Scalars['String']
 }
@@ -1524,6 +1858,22 @@ export type QueryLeaderMeetingPresencesArgs = {
 
 export type QueryLeaderMeetingsArgs = {
   input?: InputMaybe<AdminListMeetingInput>
+}
+
+export type QueryLeaderNotificationArgs = {
+  notificationId: Scalars['String']
+}
+
+export type QueryLeaderNotificationsArgs = {
+  input?: InputMaybe<AdminListNotificationInput>
+}
+
+export type QueryLeaderReferralArgs = {
+  referralId: Scalars['String']
+}
+
+export type QueryLeaderReferralsArgs = {
+  input?: InputMaybe<AdminListReferralInput>
 }
 
 export type QueryLeaderRegionArgs = {
@@ -1634,12 +1984,24 @@ export type QueryUserCountCompanyMembersArgs = {
   input?: InputMaybe<UserListCompanyMemberInput>
 }
 
+export type QueryUserCountIndustriesArgs = {
+  input?: InputMaybe<UserListIndustryInput>
+}
+
 export type QueryUserCountMeetingPresencesArgs = {
   input?: InputMaybe<UserListMeetingPresenceInput>
 }
 
 export type QueryUserCountMeetingsArgs = {
   input?: InputMaybe<UserListMeetingInput>
+}
+
+export type QueryUserCountNotificationsArgs = {
+  input?: InputMaybe<UserListNotificationInput>
+}
+
+export type QueryUserCountReferralsArgs = {
+  input?: InputMaybe<UserListReferralInput>
 }
 
 export type QueryUserCountRegionsArgs = {
@@ -1666,6 +2028,14 @@ export type QueryUserCountUsersArgs = {
   input?: InputMaybe<UserListUserInput>
 }
 
+export type QueryUserIndustriesArgs = {
+  input?: InputMaybe<UserListIndustryInput>
+}
+
+export type QueryUserIndustryArgs = {
+  industryId: Scalars['String']
+}
+
 export type QueryUserMeetingArgs = {
   meetingId: Scalars['String']
 }
@@ -1680,6 +2050,22 @@ export type QueryUserMeetingPresencesArgs = {
 
 export type QueryUserMeetingsArgs = {
   input?: InputMaybe<UserListMeetingInput>
+}
+
+export type QueryUserNotificationArgs = {
+  notificationId: Scalars['String']
+}
+
+export type QueryUserNotificationsArgs = {
+  input?: InputMaybe<UserListNotificationInput>
+}
+
+export type QueryUserReferralArgs = {
+  referralId: Scalars['String']
+}
+
+export type QueryUserReferralsArgs = {
+  input?: InputMaybe<UserListReferralInput>
 }
 
 export type QueryUserRegionArgs = {
@@ -1728,6 +2114,34 @@ export type QueryUserUserArgs = {
 
 export type QueryUserUsersArgs = {
   input?: InputMaybe<UserListUserInput>
+}
+
+export type Referral = {
+  __typename?: 'Referral'
+  createdAt?: Maybe<Scalars['DateTime']>
+  email?: Maybe<Scalars['String']>
+  firstName?: Maybe<Scalars['String']>
+  from?: Maybe<User>
+  fromChapter?: Maybe<Chapter>
+  fromIndustry?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['String']>
+  lastName?: Maybe<Scalars['String']>
+  notes?: Maybe<Scalars['String']>
+  phone?: Maybe<Scalars['String']>
+  rating?: Maybe<ReferralRating>
+  referralDate?: Maybe<Scalars['DateTime']>
+  sentBy?: Maybe<User>
+  to?: Maybe<User>
+  toChapter?: Maybe<Chapter>
+  toIndustry?: Maybe<Scalars['String']>
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+/** Referral rating */
+export enum ReferralRating {
+  Cold = 'Cold',
+  Hot = 'Hot',
+  Warm = 'Warm',
 }
 
 export type Region = {
@@ -1933,12 +2347,24 @@ export type UserCreateCompanyMemberInput = {
   location: Scalars['String']
 }
 
+export type UserCreateIndustryInput = {
+  name: Scalars['String']
+}
+
 export type UserCreateMeetingInput = {
   date: Scalars['DateTime']
 }
 
 export type UserCreateMeetingPresenceInput = {
   date: Scalars['String']
+}
+
+export type UserCreateNotificationInput = {
+  message: Scalars['String']
+}
+
+export type UserCreateReferralInput = {
+  firstName: Scalars['String']
 }
 
 export type UserCreateRegionInput = {
@@ -2009,6 +2435,15 @@ export type UserListCompanyMemberInput = {
   take?: InputMaybe<Scalars['Float']>
 }
 
+export type UserListIndustryInput = {
+  name?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
 export type UserListMeetingInput = {
   date?: InputMaybe<Scalars['DateTime']>
   orderBy?: InputMaybe<Scalars['String']>
@@ -2020,6 +2455,24 @@ export type UserListMeetingInput = {
 
 export type UserListMeetingPresenceInput = {
   date?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
+export type UserListNotificationInput = {
+  message?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
+export type UserListReferralInput = {
+  firstName?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
@@ -2129,12 +2582,24 @@ export type UserUpdateCompanyMemberInput = {
   location?: InputMaybe<Scalars['String']>
 }
 
+export type UserUpdateIndustryInput = {
+  name?: InputMaybe<Scalars['String']>
+}
+
 export type UserUpdateMeetingInput = {
   date?: InputMaybe<Scalars['DateTime']>
 }
 
 export type UserUpdateMeetingPresenceInput = {
   date?: InputMaybe<Scalars['String']>
+}
+
+export type UserUpdateNotificationInput = {
+  message?: InputMaybe<Scalars['String']>
+}
+
+export type UserUpdateReferralInput = {
+  firstName?: InputMaybe<Scalars['String']>
 }
 
 export type UserUpdateRegionInput = {

@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { User } from '@biztobiz/api/user/data-access'
 import { Chapter } from '@biztobiz/api/chapter/data-access'
-import { ReferralRating } from '../../../../../../libs/api/enums/data-access/src/lib/models/referral-rating.enum'
+import { User } from '@biztobiz/api/user/data-access'
+import { ReferralRating } from '@biztobiz/api/enums/data-access'
 
 @ObjectType()
 export class Referral {
@@ -55,4 +55,7 @@ export class Referral {
 
   @Field(() => Chapter, { nullable: true })
   toChapter?: Omit<[Chapter], ''>
+
+  // @Field(() => [Transactions], { nullable: true })
+  // transactions?: Transactions[]
 }
