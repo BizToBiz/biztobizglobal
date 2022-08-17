@@ -31,6 +31,8 @@
     "api-meeting-presence-feature": "libs/api/meeting-presence/feature",
     "api-notification-data-access": "libs/api/notification/data-access",
     "api-notification-feature": "libs/api/notification/feature",
+    "api-power-hour-data-access": "libs/api/power-hour/data-access",
+    "api-power-hour-feature": "libs/api/power-hour/feature",
     "api-referral-data-access": "libs/api/referral/data-access",
     "api-referral-feature": "libs/api/referral/feature",
     "api-region-data-access": "libs/api/region/data-access",

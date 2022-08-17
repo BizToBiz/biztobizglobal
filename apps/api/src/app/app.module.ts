@@ -21,6 +21,7 @@ import { ApiReferralFeatureModule } from '@biztobiz/api/referral/feature'
 import { ApiNotificationFeatureModule } from '@biztobiz/api/notification/feature'
 import { ApiTransactionFeatureModule } from '@biztobiz/api/transaction/feature'
 import { ApiTestimonialFeatureModule } from '@biztobiz/api/testimonial/feature'
+import { ApiPowerHourFeatureModule } from '@biztobiz/api/power-hour/feature'
 // Add Imports Here
 
 @Module({
@@ -46,6 +47,7 @@ import { ApiTestimonialFeatureModule } from '@biztobiz/api/testimonial/feature'
     ApiNotificationFeatureModule,
     ApiTransactionFeatureModule,
     ApiTestimonialFeatureModule,
+    ApiPowerHourFeatureModule,
     // Add Modules Here
   ],
 })
