@@ -35,7 +35,7 @@ async function apiCrudGenerator(tree: Tree, schema: ApiCrud, type: string) {
   const modelName = schema.model || schema.name
   const projectName = `${schema.directory}-${schema.name}-${type}`
   const pluralName = schema.plural || `${modelName}s`
-  const formattedSearchFields = "'" + schema?.searchFields.split(',').join("','") + "'"
+  const formattedSearchFields = schema?.searchFields ? "'" + schema?.searchFields?.split(',').join("','") + "'" : ''
   console.log(formattedSearchFields)
   // @ts-ignore
   const npmScope = workspace.getNpmScope(tree)
@@ -123,13 +123,13 @@ function addImport(tree, options) {
   if (contents) {
     const app = core.strings.classify(normalizedOptions.directory)
     const name = core.strings.classify(normalizedOptions.name)
-    const searchImport = `import { ${app}CoreFeatureModule } from '@${normalizedOptions.npmScope}/${normalizedOptions.directory}/core/feature'`
+    const searchImport = `// Add Imports Here`
     const featureImport = `import { ${app}${name}FeatureModule } from '@${normalizedOptions.npmScope}/${normalizedOptions.directory}/${normalizedOptions.name}/feature'`
-    const searchModule = `${app}CoreFeatureModule,`
+    const searchModule = `// Add Modules Here`
     const featureModule = `    ${app}${name}FeatureModule,`
     const replacedModule = contents
-      .replace(searchImport, [searchImport, featureImport].join('\n'))
-      .replace(searchModule, [searchModule, featureModule].join('\n'))
+      .replace(searchImport, [featureImport, searchImport].join('\n'))
+      .replace(searchModule, [featureModule, searchModule].join('\n'))
     tree.overwrite(coreFeaturePath, replacedModule)
   }
 }

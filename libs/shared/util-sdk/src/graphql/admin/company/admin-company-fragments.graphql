@@ -1,6 +1,0 @@
-fragment AdminCompanyDetails on Company {
-  id
-  createdAt
-  updatedAt
-  name
-}

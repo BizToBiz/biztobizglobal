@@ -6,13 +6,14 @@ import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-ac
 import { UserCreateUserInput } from './dto/user-create-user.input'
 import { UserListUserInput } from './dto/user-list-user.input'
 import { UserUpdateUserInput } from './dto/user-update-user.input'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiUserDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
   private readonly searchFields = ['firstName', 'lastName', 'email']
-  private where(input: AdminListUserInput): Prisma.UserWhereInput {
+  private where(input: UserListUserInput): Prisma.UserWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
 
@@ -48,7 +49,7 @@ export class ApiUserDataAccessUserService {
     })
   }
 
-  async userCountUsers(userId: string, input?: UserListUserInput): Promise<CorePaging> {
+  async userCountUsers(input?: UserListUserInput): Promise<CorePaging> {
     const total = await this.data.user.count()
     const count = await this.data.user.count({ where: this.where(input) })
     const take = input?.take || 10
@@ -63,12 +64,12 @@ export class ApiUserDataAccessUserService {
     }
   }
 
-  userUser(info: GraphQLResolveInfo, userId: string, userId) {
+  userUser(info: GraphQLResolveInfo, userId: string) {
     const select = new PrismaSelect(info).value
     return this.data.user.findUnique({ where: { id: userId }, ...select })
   }
 
-  userCreateUser(info: GraphQLResolveInfo, userId: string, input: UserCreateUserInput) {
+  userCreateUser(info: GraphQLResolveInfo, input: UserCreateUserInput) {
     const select = new PrismaSelect(info).value
     return this.data.user.create({
       data: { ...input },
@@ -76,7 +77,7 @@ export class ApiUserDataAccessUserService {
     })
   }
 
-  userUpdateUser(info: GraphQLResolveInfo, userId: string, userId, input: UserUpdateUserInput) {
+  userUpdateUser(info: GraphQLResolveInfo, userId: string, input: UserUpdateUserInput) {
     const select = new PrismaSelect(info).value
     return this.data.user.update({
       where: { id: userId },
@@ -85,7 +86,7 @@ export class ApiUserDataAccessUserService {
     })
   }
 
-  userDeleteUser(info: GraphQLResolveInfo, userId: string, userId) {
+  userDeleteUser(info: GraphQLResolveInfo, userId: string) {
     return this.data.user.delete({ where: { id: userId } })
   }
 }

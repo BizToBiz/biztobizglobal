@@ -17,8 +17,8 @@ import { UserCreateInput } from './dto/user-create.input'
 import { Prisma } from '@prisma/client'
 import { ApiMailerDataAccessService } from '@biztobiz/api/mailer/data-access'
 import { passwordResetEmail } from './templates/password-reset-email.template'
-import { Role, User } from '@biztobiz/api/user/data-access'
-import { ChapterMemberRole } from '@biztobiz/api/chapter-member/data-access'
+import { User } from '@biztobiz/api/user/data-access'
+import { ChapterMemberRole, Role } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
 export class ApiAuthDataAccessService {

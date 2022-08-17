@@ -7,7 +7,6 @@ import { WebLeaderDashboard } from '@biztobiz/web-leader/dashboard'
 import { HomeIcon } from '@heroicons/react/outline'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 
-import { WebLeaderChapterCreate, WebLeaderChapterList, WebLeaderChapterUpdate } from '@biztobiz/web-leader/chapter'
 // Add New Imports Here
 
 export interface WebLeaderRouterProps {
@@ -24,12 +23,6 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
       icon: HomeIcon,
       current: currentPath.path.includes('/leader/dashboard'),
     },
-    {
-      name: 'Chapters',
-      href: '/leader/chapters',
-      icon: HomeIcon,
-      current: currentPath.path.includes('/leader/chapters'),
-    },
     // Add New Nav Objects Here
   ]
 
@@ -37,11 +30,6 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
     <WebUiAdminLayoutFeature user={props.user} navigation={navigation}>
       <Routes>
         <Route path="dashboard" element={<WebLeaderDashboard />} />
-        <Route path="chapters" element={<WebLeaderChapterList />} />
-        <Route path="chapter">
-          <Route path="new" element={<WebLeaderChapterCreate />} />
-          <Route path=":id" element={<WebLeaderChapterUpdate />} />
-        </Route>
         {/*Add New Routes Here*/}
       </Routes>
     </WebUiAdminLayoutFeature>
