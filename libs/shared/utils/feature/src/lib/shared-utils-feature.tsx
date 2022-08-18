@@ -45,6 +45,7 @@ export function cleanFormInput(obj: Record<string, unknown>, fields?: WebUiFormF
           v === undefined ||
           !v ||
           v === '' ||
+          (v instanceof Array && !v.length) ||
           k === 'createdAt' ||
           k === 'updatedAt' ||
           k == '__typename' ||
@@ -92,6 +93,7 @@ export function cleanDatabaseOutput(obj: Record<string, unknown>, fields?: WebUi
           v === undefined ||
           !v ||
           v === '' ||
+          (v instanceof Array && !v.length) ||
           k === 'createdAt' ||
           k === 'updatedAt' ||
           k == '__typename' ||

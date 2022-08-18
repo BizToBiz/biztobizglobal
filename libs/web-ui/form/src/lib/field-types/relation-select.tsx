@@ -11,12 +11,20 @@ interface RelationSelectProps {
   control: Control<FieldValues, any>
 }
 
-function defaultOptionsMap(item: { id: string; name?: string }): { value: string; label: string } {
-  return {
-    value: `${item.id}`,
-    label: `${item?.name ?? item.id}`,
-  }
+function defaultOptionsMap(items: { id: string; name?: string }[]): { value: string; label: string }[] {
+  return items?.map((option) => ({ value: `${option.id}`, label: `${option?.name ?? option.id}` })) ?? []
 }
+
+// export function mapRegions(regions: any[]): { value: string; label: string }[] {
+//   return regions?.map((option) => ({ value: `${option.id}`, label: `${option.name}` })) ?? []
+// }
+//
+// export function mapUser(user: User): { value: Maybe<string> | undefined; label: string } {
+//   return {
+//     value: user.id,
+//     label: `${user?.firstName} ${user?.lastName}`,
+//   }
+// }
 
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
@@ -26,10 +34,12 @@ export function RelationSelect(props: RelationSelectProps) {
     dataList = props?.field?.options?.filter?.(dataList)
   }
 
-  const defaultOptions = props?.field?.options?.selectOptionsFunction
-    ? props?.field?.options?.selectOptionsFunction(dataList)
-    : defaultOptionsMap(dataList)
-  // : [{ value: '', label: 'Loading...' }]
+  const defaultOptions =
+    dataList?.length > 0
+      ? props?.field?.options?.selectOptionsFunction
+        ? props?.field?.options?.selectOptionsFunction(dataList)
+        : defaultOptionsMap(dataList)
+      : [{ value: '', label: 'Loading...' }]
 
   async function getStorageOptions(inputText: string): Promise<OptionsOrGroups<any, GroupBase<any>>> {
     return refetch({ input: { search: inputText } }).then((res) => {
