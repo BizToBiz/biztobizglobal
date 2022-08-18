@@ -1,5 +1,6 @@
 import { SVGProps } from 'react'
 import { WebUiFormField } from '@biztobiz/web-ui/form'
+import { Maybe } from 'graphql/jsutils/Maybe'
 
 export function capitalizeFirstLetter(string: string | undefined) {
   return string && string[0].toUpperCase() + string.slice(1)
@@ -21,11 +22,21 @@ function isValidDate(d: any) {
   return d instanceof Date && !isNaN(d as any)
 }
 
-function defaultMap(items: { id: string; name?: string }[]): { value: string; label: string }[] {
+function defaultMultiMap(items: { id: string; name?: string }[]): { value: string; label: string }[] {
   return items?.map((option: { id: string; name?: string }) => ({
     value: `${option.id}`,
     label: `${option?.name ?? option.id}`,
   }))
+}
+
+export function defaultSingleMap(item: { id: string; name?: string }): {
+  value: Maybe<string> | undefined
+  label: string
+} {
+  return {
+    value: item.id,
+    label: `${item?.name ?? item.id}`,
+  }
 }
 
 export function cleanFormInput(obj: Record<string, unknown>, fields?: WebUiFormField[]) {
@@ -116,12 +127,12 @@ export function cleanDatabaseOutput(obj: Record<string, unknown>, fields?: WebUi
           console.log(k)
           const field = fields?.find((f) => f.key === k)
           console.log(field)
-          return [k, field?.options?.mapFunction?.(v as any) ?? defaultMap(v as any)]
+          return [k, field?.options?.mapFunction?.(v as any) ?? defaultMultiMap(v as any)]
         }
         // Return value for single select fields
         if (selectFields?.includes(k)) {
           const field = fields?.find((f) => f.key === k)
-          return [field?.key, field?.options?.mapFunction?.(v as any) ?? defaultMap(v as any)]
+          return [field?.key, field?.options?.mapFunction?.(v as any) ?? defaultSingleMap(v as any)]
         }
         return [k, v]
       }),
