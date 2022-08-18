@@ -1,0 +1,20 @@
+query AdminTestimonial($testimonialId: String!) {
+  testimonial: adminTestimonial(testimonialId: $testimonialId) {
+    ...AdminTestimonialDetails
+  }
+}
+
+query AdminTestimonials($input: AdminListTestimonialInput) {
+  testimonials: adminTestimonials(input: $input) {
+    ...AdminTestimonialDetails
+  }
+  counters: adminCountTestimonials(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminTestimonialPagination($input: AdminListTestimonialInput) {
+  counters: adminCountTestimonials(input: $input) {
+    ...CorePagingDetails
+  }
+}

@@ -14,18 +14,18 @@ export class ChapterMember {
   @Field({ nullable: true })
   updatedAt?: Date
 
-  @Field(() => ChapterMemberRole, { nullable: true })
-  role?: ChapterMemberRole
-
   @Field({ nullable: true })
   isMentor?: boolean
 
   @Field({ nullable: true })
   isTrainer?: boolean
 
-  @Field(() => User, { nullable: true })
-  member?: Omit<[User], ''>
+  @Field(() => ChapterMemberRole, { nullable: true })
+  role?: ChapterMemberRole
 
   @Field(() => Chapter, { nullable: true })
   chapter?: Omit<[Chapter], ''>
+
+  @Field(() => User, { nullable: true })
+  member?: Omit<[User], ''>
 }

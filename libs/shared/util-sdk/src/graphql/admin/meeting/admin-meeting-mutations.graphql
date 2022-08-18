@@ -1,0 +1,17 @@
+mutation adminCreateMeeting($input: AdminCreateMeetingInput!) {
+  createMeeting: adminCreateMeeting(input: $input) {
+    ...AdminMeetingDetails
+  }
+}
+
+mutation adminDeleteMeeting($meetingId: String!) {
+  deleteMeeting: adminDeleteMeeting(meetingId: $meetingId) {
+    id
+  }
+}
+
+mutation adminUpdateMeeting($meetingId: String!, $input: AdminUpdateMeetingInput!) {
+  updateMeeting: adminUpdateMeeting(meetingId: $meetingId, input: $input) {
+    ...AdminMeetingDetails
+  }
+}

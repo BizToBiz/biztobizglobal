@@ -1,0 +1,17 @@
+mutation adminCreateChapterMember($input: AdminCreateChapterMemberInput!) {
+  createChapterMember: adminCreateChapterMember(input: $input) {
+    ...AdminChapterMemberDetails
+  }
+}
+
+mutation adminDeleteChapterMember($chapterMemberId: String!) {
+  deleteChapterMember: adminDeleteChapterMember(chapterMemberId: $chapterMemberId) {
+    id
+  }
+}
+
+mutation adminUpdateChapterMember($chapterMemberId: String!, $input: AdminUpdateChapterMemberInput!) {
+  updateChapterMember: adminUpdateChapterMember(chapterMemberId: $chapterMemberId, input: $input) {
+    ...AdminChapterMemberDetails
+  }
+}

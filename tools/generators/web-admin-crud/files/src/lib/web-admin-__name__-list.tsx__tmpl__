@@ -29,7 +29,7 @@ export function WebAdmin<%= className %>List(props: WebAdmin<%= className %>List
     },
   }
 
-  const { data: <%= pluralName %> } = useAdmin<%= pluralClassName %>Query({
+  const { data: <%= pluralPropertyName %> } = useAdmin<%= pluralClassName %>Query({
     variables,
   })
 
@@ -55,13 +55,13 @@ export function WebAdmin<%= className %>List(props: WebAdmin<%= className %>List
   return (
     <>
       <WebUiDataTableFeature
-        data={<%= pluralName %>?.<%= pluralName %>}
+        data={<%= pluralPropertyName %>?.<%= pluralPropertyName %>}
         path={'/admin/<%= name %>'}
         fields={['name']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />
-      {isDev && <%= pluralName %>?.<%= pluralName %> ? <WebUiDevDataFeature data={<%= pluralName %>} /> : null}
+      {isDev && <%= pluralPropertyName %>?.<%= pluralPropertyName %> ? <WebUiDevDataFeature data={<%= pluralPropertyName %>} /> : null}
     </>
   )
 }

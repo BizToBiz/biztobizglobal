@@ -29,5 +29,5 @@ export class CompanyMember {
   company?: Omit<[Company], ''>
 
   @Field(() => User, { nullable: true })
-  member?: User
+  member?: Omit<[User], ''>
 }

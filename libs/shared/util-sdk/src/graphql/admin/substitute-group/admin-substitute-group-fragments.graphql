@@ -1,0 +1,10 @@
+fragment AdminSubstituteGroupDetails on SubstituteGroup {
+  id
+  createdAt
+  updatedAt
+  name
+  chapters {
+    id
+    name
+  }
+}

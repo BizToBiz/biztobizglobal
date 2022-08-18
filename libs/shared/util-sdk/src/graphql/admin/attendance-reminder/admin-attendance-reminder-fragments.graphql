@@ -1,0 +1,17 @@
+fragment AdminAttendanceReminderDetails on AttendanceReminder {
+  id
+  createdAt
+  updatedAt
+  chapter {
+    id
+    name
+  }
+  sentBy {
+    id
+    name
+  }
+  sentTo {
+    id
+    name
+  }
+}

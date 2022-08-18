@@ -15,10 +15,10 @@ export class Transaction {
   updatedAt?: Date
 
   @Field({ nullable: true })
-  amount?: number
+  date?: Date
 
   @Field({ nullable: true })
-  date?: Date
+  amount?: number
 
   @Field({ nullable: true })
   enteredBy?: string
@@ -33,7 +33,7 @@ export class Transaction {
   state?: string
 
   @Field(() => Chapter, { nullable: true })
-  chapter?: Chapter
+  chapter?: Omit<[Chapter], ''>
 
   @Field(() => User, { nullable: true })
   user?: Omit<[User], ''>

@@ -1,0 +1,20 @@
+query AdminMeeting($meetingId: String!) {
+  meeting: adminMeeting(meetingId: $meetingId) {
+    ...AdminMeetingDetails
+  }
+}
+
+query AdminMeetings($input: AdminListMeetingInput) {
+  meetings: adminMeetings(input: $input) {
+    ...AdminMeetingDetails
+  }
+  counters: adminCountMeetings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminMeetingPagination($input: AdminListMeetingInput) {
+  counters: adminCountMeetings(input: $input) {
+    ...CorePagingDetails
+  }
+}

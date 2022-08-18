@@ -1,7 +1,13 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
-import { Role } from '@biztobiz/shared/util-sdk'
+import { mapChapter, mapChapters, SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
+import {
+  AdminChaptersDocument,
+  AdminCompaniesDocument,
+  Role,
+  UserOnlineStatus,
+  UserStatus,
+} from '@biztobiz/shared/util-sdk'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {
@@ -9,12 +15,32 @@ import { Role } from '@biztobiz/shared/util-sdk'
 // }
 
 export const userFields: WebUiFormField[] = [
+  WebUiFormField.datePicker('lastSeen', { label: 'Last Seen' }),
+  WebUiFormField.enumSelect('onlineStatus', {
+    label: 'Online Status',
+    required: true,
+    defaultValue: UserOnlineStatus.Offline,
+    enum: UserOnlineStatus,
+  }),
+  WebUiFormField.enumSelect('status', {
+    label: 'User Status',
+    required: true,
+    defaultValue: UserStatus.Pending,
+    enum: UserStatus,
+  }),
   WebUiFormField.checkbox('developer', { label: 'Is the user a Developer?' }),
   WebUiFormField.enumSelect('role', { label: 'User Role', required: true, defaultValue: Role.User, enum: Role }),
   WebUiFormField.email('email', { label: 'Email' }),
+  WebUiFormField.checkbox('emailConfirmed', { label: 'Email Confirmed?' }),
+  WebUiFormField.input('username', { label: 'Username' }),
   WebUiFormField.number('infusionsoftId', { label: 'Infusionsoft Id' }),
   WebUiFormField.input('firstName', { label: 'First Name' }),
   WebUiFormField.input('lastName', { label: 'Last Name' }),
+  WebUiFormField.input('password', { label: 'Password' }),
+  WebUiFormField.input('passwordResetToken', { label: 'Password Reset Token' }),
+  WebUiFormField.datePicker('passwordResetExpires', { label: 'Password Reset Expires' }),
+  WebUiFormField.input('confirmEmailToken', { label: 'Confirm Email Token' }),
+  WebUiFormField.datePicker('confirmEmailExpires', { label: 'Confirm Email Expires' }),
   WebUiFormField.switch('showGravatar', { label: 'Show Gravatar' }),
   WebUiFormField.input('avatarUrl', { label: 'Avatar Url' }),
   WebUiFormField.datePicker('applicationDate', { label: 'Application Date' }),
@@ -74,14 +100,19 @@ export const userFields: WebUiFormField[] = [
   WebUiFormField.checkbox('notifyBySMS', { label: 'Notify by SMS' }),
   WebUiFormField.checkbox('notifyByWeb', { label: 'Notify by Web' }),
   WebUiFormField.checkbox('notifyByMobile', { label: 'Notify by Mobile' }),
-  // WebUiFormField.relationSelect('chapterId', {
-  //   label: 'Chapter',
-  //   document: AdminChaptersDocument,
-  //   selectOptionsFunction: mapChapters,
-  //   dataType: 'chapters',
-  // }),
+  WebUiFormField.relationSelect('chapterId', {
+    label: 'Chapter',
+    document: AdminChaptersDocument,
+    selectOptionsFunction: mapChapters,
+    dataType: 'chapters',
+  }),
+  WebUiFormField.relationSelect('companies', {
+    label: 'Companies',
+    document: AdminCompaniesDocument,
+    type: 'multi',
+  }),
 ]
 
 export const userSelectFields: SelectFieldOptions[] = [
-  // { name: 'chapter', type: 'single', idName: 'chapterId', mapFunction: mapChapter },
+  { name: 'chapter', type: 'single', idName: 'chapterId', mapFunction: mapChapter },
 ]

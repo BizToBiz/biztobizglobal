@@ -2,10 +2,6 @@ fragment AdminUserDetails on User {
   id
   createdAt
   updatedAt
-  firstName
-  id
-  createdAt
-  updatedAt
   lastSeen
   onlineStatus
   status
@@ -81,10 +77,68 @@ fragment AdminUserDetails on User {
   notifyBySMS
   notifyByWeb
   notifyByMobile
+  chapter {
+    id
+  }
+  companies {
+    id
+    name
+  }
+  notificationsReceived {
+    id
+  }
+  notificationsReceived {
+    id
+  }
+  powerHoursFrom {
+    id
+  }
+  powerHoursTo {
+    id
+  }
+  referralsSent {
+    id
+  }
+  referralsFrom {
+    id
+  }
+  referralsTo {
+    id
+  }
+  reminderSentBy {
+    id
+  }
+  reminderSentTo {
+    id
+  }
+  substituteAccepted {
+    id
+  }
+  substituteInvited {
+    id
+  }
+  substitutesSentBy {
+    id
+  }
+  testimonialsFrom {
+    id
+  }
+  testimonialsto {
+    id
+  }
+  transactions {
+    id
+  }
   regionManaged {
     id
   }
   territoryManaged {
+    id
+  }
+  avatar {
+    id
+  }
+  presence {
     id
   }
 }

@@ -43,7 +43,7 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
 
   const submit = async (input: any) => {
     setLoading(true)
-    const cleanedInput = cleanFormInput(input, props?.selectFields)
+    const cleanedInput = cleanFormInput(input, props?.fields)
     updateMutation({
       variables: {
         [`${props.idName}`]: props.id,

@@ -11,6 +11,8 @@ export function WebAdminUserUpdate() {
   const params = useParams()
   const [isDev] = useAtom(isDevAtom)
 
+  console.log(userFields)
+
   const { data: user, loading } = useAdminUserQuery({
     skip: !params?.['id'],
     variables: {

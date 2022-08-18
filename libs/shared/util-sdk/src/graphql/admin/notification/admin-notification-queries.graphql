@@ -1,0 +1,20 @@
+query AdminNotification($notificationId: String!) {
+  notification: adminNotification(notificationId: $notificationId) {
+    ...AdminNotificationDetails
+  }
+}
+
+query AdminNotifications($input: AdminListNotificationInput) {
+  notifications: adminNotifications(input: $input) {
+    ...AdminNotificationDetails
+  }
+  counters: adminCountNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminNotificationPagination($input: AdminListNotificationInput) {
+  counters: adminCountNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}

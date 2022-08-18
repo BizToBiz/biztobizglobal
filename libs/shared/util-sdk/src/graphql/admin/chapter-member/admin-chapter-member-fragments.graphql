@@ -1,0 +1,16 @@
+fragment AdminChapterMemberDetails on ChapterMember {
+  id
+  createdAt
+  updatedAt
+  isMentor
+  isTrainer
+  role
+  chapter {
+    id
+    name
+  }
+  member {
+    id
+    name
+  }
+}

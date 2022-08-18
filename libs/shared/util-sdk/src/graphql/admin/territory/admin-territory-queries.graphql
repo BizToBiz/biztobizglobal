@@ -1,0 +1,20 @@
+query AdminTerritory($territoryId: String!) {
+  territory: adminTerritory(territoryId: $territoryId) {
+    ...AdminTerritoryDetails
+  }
+}
+
+query AdminTerritories($input: AdminListTerritoryInput) {
+  territories: adminTerritories(input: $input) {
+    ...AdminTerritoryDetails
+  }
+  counters: adminCountTerritories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminTerritoryPagination($input: AdminListTerritoryInput) {
+  counters: adminCountTerritories(input: $input) {
+    ...CorePagingDetails
+  }
+}

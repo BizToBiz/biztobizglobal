@@ -1,0 +1,20 @@
+query AdminUpload($uploadId: String!) {
+  upload: adminUpload(uploadId: $uploadId) {
+    ...AdminUploadDetails
+  }
+}
+
+query AdminUploads($input: AdminListUploadInput) {
+  uploads: adminUploads(input: $input) {
+    ...AdminUploadDetails
+  }
+  counters: adminCountUploads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminUploadPagination($input: AdminListUploadInput) {
+  counters: adminCountUploads(input: $input) {
+    ...CorePagingDetails
+  }
+}

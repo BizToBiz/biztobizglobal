@@ -1,0 +1,20 @@
+query AdminCompany($companyId: String!) {
+  company: adminCompany(companyId: $companyId) {
+    ...AdminCompanyDetails
+  }
+}
+
+query AdminCompanies($input: AdminListCompanyInput) {
+  companies: adminCompanies(input: $input) {
+    ...AdminCompanyDetails
+  }
+  counters: adminCountCompanies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminCompanyPagination($input: AdminListCompanyInput) {
+  counters: adminCountCompanies(input: $input) {
+    ...CorePagingDetails
+  }
+}

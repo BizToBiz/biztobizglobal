@@ -49,7 +49,7 @@ export function WebAdmin<%= className %>Update() {
       document={AdminUpdate<%= className %>Document}
       deleteDocument={AdminDelete<%= className %>Document}
       buttonText={'<%= className %>'}
-      fields={<%= name %>Fields}
+      fields={<%= propertyName %>Fields}
       idName={'<%= propertyName %>Id'}
       selectFields={<%= propertyName %>SelectFields}
     />

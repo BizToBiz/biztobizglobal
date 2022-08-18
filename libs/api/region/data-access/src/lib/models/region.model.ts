@@ -17,12 +17,12 @@ export class Region {
   @Field({ nullable: true })
   name?: string
 
-  @Field(() => [Chapter], { nullable: true })
-  chapters?: Chapter[]
+  @Field(() => User, { nullable: true })
+  manager?: Omit<[User], ''>
 
   @Field(() => Territory, { nullable: true })
   territory?: Omit<[Territory], ''>
 
-  @Field(() => User, { nullable: true })
-  manager?: Omit<[User], ''>
+  @Field(() => [Chapter], { nullable: true })
+  chapters?: Chapter[]
 }

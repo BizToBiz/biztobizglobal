@@ -1,0 +1,20 @@
+query AdminPowerHour($powerHourId: String!) {
+  powerHour: adminPowerHour(powerHourId: $powerHourId) {
+    ...AdminPowerHourDetails
+  }
+}
+
+query AdminPowerHours($input: AdminListPowerHourInput) {
+  powerHours: adminPowerHours(input: $input) {
+    ...AdminPowerHourDetails
+  }
+  counters: adminCountPowerHours(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminPowerHourPagination($input: AdminListPowerHourInput) {
+  counters: adminCountPowerHours(input: $input) {
+    ...CorePagingDetails
+  }
+}

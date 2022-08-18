@@ -1,0 +1,18 @@
+fragment AdminNotificationDetails on Notification {
+  id
+  createdAt
+  updatedAt
+  read
+  type
+  message
+  referenceId
+  referenceType
+  actor {
+    id
+    name
+  }
+  to {
+    id
+    name
+  }
+}

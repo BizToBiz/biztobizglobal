@@ -1,0 +1,17 @@
+mutation adminCreatePowerHour($input: AdminCreatePowerHourInput!) {
+  createPowerHour: adminCreatePowerHour(input: $input) {
+    ...AdminPowerHourDetails
+  }
+}
+
+mutation adminDeletePowerHour($powerHourId: String!) {
+  deletePowerHour: adminDeletePowerHour(powerHourId: $powerHourId) {
+    id
+  }
+}
+
+mutation adminUpdatePowerHour($powerHourId: String!, $input: AdminUpdatePowerHourInput!) {
+  updatePowerHour: adminUpdatePowerHour(powerHourId: $powerHourId, input: $input) {
+    ...AdminPowerHourDetails
+  }
+}

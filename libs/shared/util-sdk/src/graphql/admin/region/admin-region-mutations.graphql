@@ -1,0 +1,17 @@
+mutation adminCreateRegion($input: AdminCreateRegionInput!) {
+  createRegion: adminCreateRegion(input: $input) {
+    ...AdminRegionDetails
+  }
+}
+
+mutation adminDeleteRegion($regionId: String!) {
+  deleteRegion: adminDeleteRegion(regionId: $regionId) {
+    id
+  }
+}
+
+mutation adminUpdateRegion($regionId: String!, $input: AdminUpdateRegionInput!) {
+  updateRegion: adminUpdateRegion(regionId: $regionId, input: $input) {
+    ...AdminRegionDetails
+  }
+}

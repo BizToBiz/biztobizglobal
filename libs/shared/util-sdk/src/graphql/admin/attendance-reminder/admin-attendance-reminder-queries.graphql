@@ -1,0 +1,20 @@
+query AdminAttendanceReminder($attendanceReminderId: String!) {
+  attendanceReminder: adminAttendanceReminder(attendanceReminderId: $attendanceReminderId) {
+    ...AdminAttendanceReminderDetails
+  }
+}
+
+query AdminAttendanceReminders($input: AdminListAttendanceReminderInput) {
+  attendanceReminders: adminAttendanceReminders(input: $input) {
+    ...AdminAttendanceReminderDetails
+  }
+  counters: adminCountAttendanceReminders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminAttendanceReminderPagination($input: AdminListAttendanceReminderInput) {
+  counters: adminCountAttendanceReminders(input: $input) {
+    ...CorePagingDetails
+  }
+}

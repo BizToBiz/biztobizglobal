@@ -1,0 +1,43 @@
+fragment AdminChapterDetails on Chapter {
+  id
+  createdAt
+  updatedAt
+  establishedDate
+  name
+  description
+  avatarEmail
+  avatarUrl
+  latitude
+  longitude
+  city
+  state
+  facebook
+  meetingDay
+  meetingTime
+  meetingDetails
+  status
+  meetings {
+    id
+  }
+  members {
+    id
+  }
+  transactions {
+    id
+  }
+  referralsFrom {
+    id
+  }
+  referralsTo {
+    id
+  }
+  substituteGroup {
+    id
+  }
+  region {
+    id
+  }
+  AttendanceReminder {
+    id
+  }
+}

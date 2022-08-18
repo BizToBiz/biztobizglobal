@@ -15,7 +15,7 @@ export class MeetingPresence {
   updatedAt?: Date
 
   @Field(() => MeetingAttendance, { nullable: true })
-  meetingAttendance?: Omit<[MeetingAttendance], ''>
+  attendance?: MeetingAttendance
 
   @Field(() => Meeting, { nullable: true })
   meeting?: Omit<[Meeting], ''>

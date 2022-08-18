@@ -1,0 +1,17 @@
+mutation adminCreateTestimonial($input: AdminCreateTestimonialInput!) {
+  createTestimonial: adminCreateTestimonial(input: $input) {
+    ...AdminTestimonialDetails
+  }
+}
+
+mutation adminDeleteTestimonial($testimonialId: String!) {
+  deleteTestimonial: adminDeleteTestimonial(testimonialId: $testimonialId) {
+    id
+  }
+}
+
+mutation adminUpdateTestimonial($testimonialId: String!, $input: AdminUpdateTestimonialInput!) {
+  updateTestimonial: adminUpdateTestimonial(testimonialId: $testimonialId, input: $input) {
+    ...AdminTestimonialDetails
+  }
+}
