@@ -13,6 +13,7 @@ fragment AdminUserDetails on User {
   infusionsoftId
   firstName
   lastName
+  name
   password
   passwordResetToken
   passwordResetExpires
@@ -131,9 +132,11 @@ fragment AdminUserDetails on User {
   }
   regionManaged {
     id
+    name
   }
   territoryManaged {
     id
+    name
   }
   avatar {
     id

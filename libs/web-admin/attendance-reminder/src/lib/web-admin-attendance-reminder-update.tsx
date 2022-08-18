@@ -25,6 +25,7 @@ export function WebAdminAttendanceReminderUpdate() {
   if (!params?.['id']) return <div>No Id</div>
 
   function defaultValues() {
+    console.log(attendanceReminder?.attendanceReminder)
     if (attendanceReminder?.attendanceReminder && !loading) {
       return cleanDatabaseOutput(attendanceReminder.attendanceReminder, attendanceReminderFields)
     } else {
@@ -34,10 +35,10 @@ export function WebAdminAttendanceReminderUpdate() {
 
   const pathData = {
     path: '/admin/attendance-reminder/:id',
-    name: 'Edit AttendanceReminder',
-    description: 'Update the information for this attendance-reminder',
+    name: 'Edit Attendance Reminder',
+    description: 'Update the information for this attendance reminder',
     showSearch: false,
-    actionText: 'Back to AttendanceReminder List',
+    actionText: 'Back to Attendance Reminder List',
     actionLink: '/admin/attendance-reminders',
   }
 
@@ -48,7 +49,7 @@ export function WebAdminAttendanceReminderUpdate() {
       defaultValues={defaultValues()}
       document={AdminUpdateAttendanceReminderDocument}
       deleteDocument={AdminDeleteAttendanceReminderDocument}
-      buttonText={'AttendanceReminder'}
+      buttonText={'Attendance Reminder'}
       fields={attendanceReminderFields}
       idName={'attendanceReminderId'}
     />

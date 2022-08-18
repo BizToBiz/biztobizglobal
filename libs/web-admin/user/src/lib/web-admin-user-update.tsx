@@ -28,8 +28,6 @@ export function WebAdminUserUpdate() {
     }
   }
 
-  console.log(defaultValues())
-
   const pathData = {
     path: '/admin/user/:id',
     name: 'Edit User',

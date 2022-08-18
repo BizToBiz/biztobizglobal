@@ -11,20 +11,24 @@ interface RelationSelectProps {
   control: Control<FieldValues, any>
 }
 
-function defaultOptionsMap(items: { id: string; name?: string }[]): { value: string; label: string }[] {
-  return items?.map((option) => ({ value: `${option.id}`, label: `${option?.name ?? option.id}` })) ?? []
+function label(item: { id: string; name?: string; firstName?: string; lastName?: string }) {
+  if (item?.name) {
+    return item.name
+  }
+  if (item?.firstName && item?.lastName) {
+    return `${item.firstName} ${item.lastName}`
+  }
+  if (item?.firstName && !item?.lastName) {
+    return `${item.firstName}`
+  }
+  return item.id
 }
 
-// export function mapRegions(regions: any[]): { value: string; label: string }[] {
-//   return regions?.map((option) => ({ value: `${option.id}`, label: `${option.name}` })) ?? []
-// }
-//
-// export function mapUser(user: User): { value: Maybe<string> | undefined; label: string } {
-//   return {
-//     value: user.id,
-//     label: `${user?.firstName} ${user?.lastName}`,
-//   }
-// }
+function defaultOptionsMap(
+  items: { id: string; name?: string; firstName?: string; lastName?: string }[],
+): (any | { value?: string; label?: string })[] {
+  return items?.map?.((option) => ({ value: `${option.id}`, label: label(option) } || []))
+}
 
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
@@ -66,7 +70,7 @@ export function RelationSelect(props: RelationSelectProps) {
           loadOptions={getStorageOptions}
           onChange={onChange}
           isLoading={loading}
-          isMulti={props.field.options.multiselect}
+          isMulti={props.field.options.multi}
         />
       )}
     />

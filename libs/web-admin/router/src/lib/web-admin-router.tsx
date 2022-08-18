@@ -207,7 +207,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminUserUpdate />} />
         </Route>
         <Route path="attendance-reminders" element={<WebAdminAttendanceReminderList />} />
-        <Route path="attendanceReminder">
+        <Route path="attendance-reminder">
           <Route path="new" element={<WebAdminAttendanceReminderCreate />} />
           <Route path=":id" element={<WebAdminAttendanceReminderUpdate />} />
         </Route>

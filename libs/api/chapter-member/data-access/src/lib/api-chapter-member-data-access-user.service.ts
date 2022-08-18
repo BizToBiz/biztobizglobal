@@ -13,7 +13,7 @@ import { Prisma } from '@prisma/client'
 export class ApiChapterMemberDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  private readonly searchFields = ['name']
+  private readonly searchFields = []
   private where(input: AdminListChapterMemberInput): Prisma.ChapterMemberWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]

@@ -3,6 +3,10 @@ import React from 'react'
 import {
   AdminChaptersDocument,
   AdminCompaniesDocument,
+  AdminMeetingPresencesDocument,
+  AdminRegionsDocument,
+  AdminTerritoriesDocument,
+  AdminTransactionsDocument,
   Role,
   UserOnlineStatus,
   UserStatus,
@@ -108,6 +112,28 @@ export const userFields: WebUiFormField[] = [
     label: 'Companies',
     document: AdminCompaniesDocument,
     dataType: 'companies',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('territoryManagedId', {
+    label: 'Territory Managed',
+    document: AdminTerritoriesDocument,
+    dataType: 'territories',
+  }),
+  WebUiFormField.relationSelect('regionManagedId', {
+    label: 'Region Managed',
+    document: AdminRegionsDocument,
+    dataType: 'regions',
+  }),
+  WebUiFormField.relationSelect('transactions', {
+    label: 'Transactions',
+    document: AdminTransactionsDocument,
+    dataType: 'transactions',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('presence', {
+    label: 'Meeting Presence',
+    document: AdminMeetingPresencesDocument,
+    dataType: 'meetingPresence',
     multi: true,
   }),
 ]

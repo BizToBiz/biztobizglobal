@@ -40,10 +40,10 @@ export function WebAdminAttendanceReminderList(props: WebAdminAttendanceReminder
   useLayoutEffect(() => {
     setCurrentPath({
       path: '/admin/attendance-reminders',
-      name: 'AttendanceReminders',
+      name: 'Attendance Reminders',
       description: 'View and manage all attendance reminders in your organization',
       showSearch: true,
-      actionText: 'Add AttendanceReminder',
+      actionText: 'Add Attendance Reminder',
       actionLink: '/admin/attendance-reminder/new',
     })
 

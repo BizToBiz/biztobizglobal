@@ -1,15 +1,15 @@
 import React from 'react'
+import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 import { AdminCreateAttendanceReminderDocument } from '@biztobiz/shared/util-sdk'
 import { attendanceReminderFields } from './web-admin-attendance-reminder-helper'
-import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminAttendanceReminderCreate() {
   const pathData = {
     path: '/admin/attendance-reminders/new',
-    name: 'Create a AttendanceReminder',
-    description: 'Use the form below to add a new AttendanceReminder',
+    name: 'Create an Attendance Reminder',
+    description: 'Use the form below to add a new Attendance Reminder',
     showSearch: false,
-    actionText: 'Back to AttendanceReminder List',
+    actionText: 'Back to Attendance Reminder List',
     actionLink: '/admin/attendance-reminders',
   }
 
@@ -19,7 +19,7 @@ export function WebAdminAttendanceReminderCreate() {
       document={AdminCreateAttendanceReminderDocument}
       navigateTo={'/admin/attendance-reminder'}
       mutationName={'createAttendanceReminder'}
-      buttonText={' AttendanceReminder'}
+      buttonText={' Attendance Reminder'}
       fields={attendanceReminderFields}
     />
   )

@@ -76,6 +76,10 @@ export class ApiUserDataAccessAdminService {
 
   adminUpdateUser(info: GraphQLResolveInfo, adminId: string, userId, input: AdminUpdateUserInput) {
     const select = new PrismaSelect(info).value
+
+    delete input.chapterId
+    delete input.companies
+
     return this.data.user.update({
       where: { id: userId },
       data: { ...input },
