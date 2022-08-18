@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateMeetingDocument } from '@biztobiz/shared/util-sdk'
-import { meetingFields, meetingSelectFields } from './web-admin-meeting-helper'
+import { meetingFields } from './web-admin-meeting-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminMeetingCreate() {
@@ -21,7 +21,6 @@ export function WebAdminMeetingCreate() {
       mutationName={'createMeeting'}
       buttonText={' Meeting'}
       fields={meetingFields}
-      selectFields={meetingSelectFields}
     />
   )
 }

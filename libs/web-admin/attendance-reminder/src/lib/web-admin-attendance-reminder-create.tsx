@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateAttendanceReminderDocument } from '@biztobiz/shared/util-sdk'
-import { attendanceReminderFields, attendanceReminderSelectFields } from './web-admin-attendance-reminder-helper'
+import { attendanceReminderFields } from './web-admin-attendance-reminder-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminAttendanceReminderCreate() {
@@ -21,7 +21,6 @@ export function WebAdminAttendanceReminderCreate() {
       mutationName={'createAttendanceReminder'}
       buttonText={' AttendanceReminder'}
       fields={attendanceReminderFields}
-      selectFields={attendanceReminderSelectFields}
     />
   )
 }

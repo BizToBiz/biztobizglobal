@@ -4,14 +4,12 @@ import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteUserDocument, AdminUpdateUserDocument, useAdminUserQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { userFields, userSelectFields } from './web-admin-user-helper'
+import { userFields } from './web-admin-user-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminUserUpdate() {
   const params = useParams()
   const [isDev] = useAtom(isDevAtom)
-
-  console.log(userFields)
 
   const { data: user, loading } = useAdminUserQuery({
     skip: !params?.['id'],
@@ -24,7 +22,7 @@ export function WebAdminUserUpdate() {
 
   function defaultValues() {
     if (user?.user && !loading) {
-      return cleanDatabaseOutput(user.user, userSelectFields)
+      return cleanDatabaseOutput(user.user, userFields)
     } else {
       return undefined
     }
@@ -49,7 +47,6 @@ export function WebAdminUserUpdate() {
       buttonText={'User'}
       fields={userFields}
       idName={'userId'}
-      selectFields={userSelectFields}
     />
   )
 }

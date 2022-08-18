@@ -1,5 +1,5 @@
-import { SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 import { SVGProps } from 'react'
+import { WebUiFormField } from '@biztobiz/web-ui/form'
 
 export function capitalizeFirstLetter(string: string | undefined) {
   return string && string[0].toUpperCase() + string.slice(1)
@@ -21,10 +21,21 @@ function isValidDate(d: any) {
   return d instanceof Date && !isNaN(d as any)
 }
 
-export function cleanFormInput(obj: Record<string, unknown>, selectFieldOptions?: SelectFieldOptions[]) {
+function defaultMap(items: { id: string; name?: string }[]): { value: string; label: string }[] {
+  return items?.map((option: { id: string; name?: string }) => ({
+    value: `${option.id}`,
+    label: `${option?.name ?? option.id}`,
+  }))
+}
+
+export function cleanFormInput(obj: Record<string, unknown>, fields?: WebUiFormField[]) {
   // console.log(obj)
-  const selectFields = selectFieldOptions?.filter((field) => field.type === 'single').map((field) => field.idName)
-  const multiSelectFields = selectFieldOptions?.filter((field) => field.type === 'multi').map((field) => field.name)
+  const selectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && !field.options.multi)
+    .map((field) => field.key)
+  const multiSelectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && field.options.multi)
+    .map((field) => field.key)
 
   return Object.fromEntries(
     Object.entries(obj)
@@ -64,10 +75,15 @@ export function cleanFormInput(obj: Record<string, unknown>, selectFieldOptions?
   )
 }
 
-export function cleanDatabaseOutput(obj: Record<string, unknown>, selectFieldOptions?: SelectFieldOptions[]) {
-  const selectFields = selectFieldOptions?.filter((field) => field.type === 'single').map((field) => field.name)
-  const multiSelectFields = selectFieldOptions?.filter((field) => field.type === 'multi').map((field) => field.name)
+export function cleanDatabaseOutput(obj: Record<string, unknown>, fields?: WebUiFormField[]) {
+  const selectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && !field.options.multi)
+    .map((field) => field.key)
+  const multiSelectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && field.options.multi)
+    .map((field) => field.key)
 
+  console.log(fields)
   return Object.fromEntries(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
@@ -95,13 +111,15 @@ export function cleanDatabaseOutput(obj: Record<string, unknown>, selectFieldOpt
         }
         // Return array of values for multiselect fields
         if (multiSelectFields?.includes(k)) {
-          const field = selectFieldOptions?.find((f) => f.name === k)
-          return [k, field?.mapFunction(v as any)]
+          console.log(k)
+          const field = fields?.find((f) => f.key === k)
+          console.log(field)
+          return [k, field?.options?.mapFunction?.(v as any) ?? defaultMap(v as any)]
         }
         // Return value for single select fields
         if (selectFields?.includes(k)) {
-          const field = selectFieldOptions?.find((f) => f.name === k)
-          return [field?.idName, field?.mapFunction(v as any)]
+          const field = fields?.find((f) => f.key === k)
+          return [field?.key, field?.options?.mapFunction?.(v as any) ?? defaultMap(v as any)]
         }
         return [k, v]
       }),

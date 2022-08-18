@@ -10,7 +10,6 @@ import { TrashIcon } from '@heroicons/react/solid'
 import { WebUiConfirmationModalFeature } from '@biztobiz/web-ui/confirmation-modal/feature'
 import { useNavigate } from 'react-router-dom'
 import { cleanFormInput } from '@biztobiz/shared/utils/feature'
-import { SelectFieldOptions } from './web-admin-helper'
 
 interface PathData {
   path: string
@@ -29,7 +28,6 @@ interface WebAdminCreateFormProps {
   fields: any[]
   id: string
   defaultValues: any
-  selectFields?: SelectFieldOptions[]
 }
 
 export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
@@ -41,6 +39,7 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
   const [updateMutation] = useMutation(props.document)
   const [deleteMutation] = useMutation(props.deleteDocument)
 
+  console.log(props.fields)
   const submit = async (input: any) => {
     setLoading(true)
     const cleanedInput = cleanFormInput(input, props?.fields)

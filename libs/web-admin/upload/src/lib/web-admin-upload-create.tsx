@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateUploadDocument } from '@biztobiz/shared/util-sdk'
-import { uploadFields, uploadSelectFields } from './web-admin-upload-helper'
+import { uploadFields } from './web-admin-upload-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminUploadCreate() {
@@ -21,7 +21,6 @@ export function WebAdminUploadCreate() {
       mutationName={'createUpload'}
       buttonText={' Upload'}
       fields={uploadFields}
-      selectFields={uploadSelectFields}
     />
   )
 }

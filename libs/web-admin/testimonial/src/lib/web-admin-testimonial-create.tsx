@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateTestimonialDocument } from '@biztobiz/shared/util-sdk'
-import { testimonialFields, testimonialSelectFields } from './web-admin-testimonial-helper'
+import { testimonialFields } from './web-admin-testimonial-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTestimonialCreate() {
@@ -21,7 +21,6 @@ export function WebAdminTestimonialCreate() {
       mutationName={'createTestimonial'}
       buttonText={' Testimonial'}
       fields={testimonialFields}
-      selectFields={testimonialSelectFields}
     />
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateSubstituteGroupDocument } from '@biztobiz/shared/util-sdk'
-import { substituteGroupFields, substituteGroupSelectFields } from './web-admin-substitute-group-helper'
+import { substituteGroupFields } from './web-admin-substitute-group-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminSubstituteGroupCreate() {
@@ -21,7 +21,6 @@ export function WebAdminSubstituteGroupCreate() {
       mutationName={'createSubstituteGroup'}
       buttonText={' SubstituteGroup'}
       fields={substituteGroupFields}
-      selectFields={substituteGroupSelectFields}
     />
   )
 }

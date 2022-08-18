@@ -4,7 +4,7 @@ import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteMeetingDocument, AdminUpdateMeetingDocument, useAdminMeetingQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { meetingFields, meetingSelectFields } from './web-admin-meeting-helper'
+import { meetingFields } from './web-admin-meeting-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminMeetingUpdate() {
@@ -22,7 +22,7 @@ export function WebAdminMeetingUpdate() {
 
   function defaultValues() {
     if (meeting?.meeting && !loading) {
-      return cleanDatabaseOutput(meeting.meeting, meetingSelectFields)
+      return cleanDatabaseOutput(meeting.meeting, meetingFields)
     } else {
       return undefined
     }
@@ -47,7 +47,6 @@ export function WebAdminMeetingUpdate() {
       buttonText={'Meeting'}
       fields={meetingFields}
       idName={'meetingId'}
-      selectFields={meetingSelectFields}
     />
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateMeetingPresenceDocument } from '@biztobiz/shared/util-sdk'
-import { meetingPresenceFields, meetingPresenceSelectFields } from './web-admin-meeting-presence-helper'
+import { meetingPresenceFields } from './web-admin-meeting-presence-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminMeetingPresenceCreate() {
@@ -21,7 +21,6 @@ export function WebAdminMeetingPresenceCreate() {
       mutationName={'createMeetingPresence'}
       buttonText={' MeetingPresence'}
       fields={meetingPresenceFields}
-      selectFields={meetingPresenceSelectFields}
     />
   )
 }

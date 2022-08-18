@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { testimonialFields, testimonialSelectFields } from './web-admin-testimonial-helper'
+import { testimonialFields } from './web-admin-testimonial-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTestimonialUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminTestimonialUpdate() {
 
   function defaultValues() {
     if (testimonial?.testimonial && !loading) {
-      return cleanDatabaseOutput(testimonial.testimonial, testimonialSelectFields)
+      return cleanDatabaseOutput(testimonial.testimonial, testimonialFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminTestimonialUpdate() {
       buttonText={'Testimonial'}
       fields={testimonialFields}
       idName={'testimonialId'}
-      selectFields={testimonialSelectFields}
     />
   )
 }

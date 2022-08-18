@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { chapterMemberFields, chapterMemberSelectFields } from './web-admin-chapter-member-helper'
+import { chapterMemberFields } from './web-admin-chapter-member-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminChapterMemberUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminChapterMemberUpdate() {
 
   function defaultValues() {
     if (chapterMember?.chapterMember && !loading) {
-      return cleanDatabaseOutput(chapterMember.chapterMember, chapterMemberSelectFields)
+      return cleanDatabaseOutput(chapterMember.chapterMember, chapterMemberFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminChapterMemberUpdate() {
       buttonText={'ChapterMember'}
       fields={chapterMemberFields}
       idName={'chapterMemberId'}
-      selectFields={chapterMemberSelectFields}
     />
   )
 }

@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { companyMemberFields, companyMemberSelectFields } from './web-admin-company-member-helper'
+import { companyMemberFields } from './web-admin-company-member-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminCompanyMemberUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminCompanyMemberUpdate() {
 
   function defaultValues() {
     if (companyMember?.companyMember && !loading) {
-      return cleanDatabaseOutput(companyMember.companyMember, companyMemberSelectFields)
+      return cleanDatabaseOutput(companyMember.companyMember, companyMemberFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminCompanyMemberUpdate() {
       buttonText={'CompanyMember'}
       fields={companyMemberFields}
       idName={'companyMemberId'}
-      selectFields={companyMemberSelectFields}
     />
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateReferralDocument } from '@biztobiz/shared/util-sdk'
-import { referralFields, referralSelectFields } from './web-admin-referral-helper'
+import { referralFields } from './web-admin-referral-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminReferralCreate() {
@@ -21,7 +21,6 @@ export function WebAdminReferralCreate() {
       mutationName={'createReferral'}
       buttonText={' Referral'}
       fields={referralFields}
-      selectFields={referralSelectFields}
     />
   )
 }

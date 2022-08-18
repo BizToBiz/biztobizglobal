@@ -32,9 +32,10 @@ export interface WebUiFormFieldOptions {
   selectOptionsFunction?: (data: any[]) => { label: string; value: string }[]
   multiselect?: boolean
   filter?: (data: any) => void
-  type?: 'single' | 'multi'
+  multi?: boolean
   mapFunction?: (v: any) => { value: Maybe<string>; label: string } | { value: Maybe<string>; label: string }[]
   dataName?: string
+  altPlural?: boolean
 }
 
 export interface WebUiFormField {

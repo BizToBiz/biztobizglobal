@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { powerHourFields, powerHourSelectFields } from './web-admin-power-hour-helper'
+import { powerHourFields } from './web-admin-power-hour-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminPowerHourUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminPowerHourUpdate() {
 
   function defaultValues() {
     if (powerHour?.powerHour && !loading) {
-      return cleanDatabaseOutput(powerHour.powerHour, powerHourSelectFields)
+      return cleanDatabaseOutput(powerHour.powerHour, powerHourFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminPowerHourUpdate() {
       buttonText={'PowerHour'}
       fields={powerHourFields}
       idName={'powerHourId'}
-      selectFields={powerHourSelectFields}
     />
   )
 }

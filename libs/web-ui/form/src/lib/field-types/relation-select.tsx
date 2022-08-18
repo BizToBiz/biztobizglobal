@@ -11,6 +11,13 @@ interface RelationSelectProps {
   control: Control<FieldValues, any>
 }
 
+function defaultOptionsMap(item: { id: string; name?: string }): { value: string; label: string } {
+  return {
+    value: `${item.id}`,
+    label: `${item?.name ?? item.id}`,
+  }
+}
+
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
 
@@ -21,7 +28,8 @@ export function RelationSelect(props: RelationSelectProps) {
 
   const defaultOptions = props?.field?.options?.selectOptionsFunction
     ? props?.field?.options?.selectOptionsFunction(dataList)
-    : [{ value: '', label: 'Loading...' }]
+    : defaultOptionsMap(dataList)
+  // : [{ value: '', label: 'Loading...' }]
 
   async function getStorageOptions(inputText: string): Promise<OptionsOrGroups<any, GroupBase<any>>> {
     return refetch({ input: { search: inputText } }).then((res) => {

@@ -1,6 +1,5 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { mapChapter, mapChapters, SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 import {
   AdminChaptersDocument,
   AdminCompaniesDocument,
@@ -103,16 +102,12 @@ export const userFields: WebUiFormField[] = [
   WebUiFormField.relationSelect('chapterId', {
     label: 'Chapter',
     document: AdminChaptersDocument,
-    selectOptionsFunction: mapChapters,
     dataType: 'chapters',
   }),
   WebUiFormField.relationSelect('companies', {
     label: 'Companies',
     document: AdminCompaniesDocument,
-    type: 'multi',
+    dataType: 'companies',
+    multi: true,
   }),
-]
-
-export const userSelectFields: SelectFieldOptions[] = [
-  { name: 'chapter', type: 'single', idName: 'chapterId', mapFunction: mapChapter },
 ]

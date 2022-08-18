@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateSubstituteDocument } from '@biztobiz/shared/util-sdk'
-import { substituteFields, substituteSelectFields } from './web-admin-substitute-helper'
+import { substituteFields } from './web-admin-substitute-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminSubstituteCreate() {
@@ -21,7 +21,6 @@ export function WebAdminSubstituteCreate() {
       mutationName={'createSubstitute'}
       buttonText={' Substitute'}
       fields={substituteFields}
-      selectFields={substituteSelectFields}
     />
   )
 }

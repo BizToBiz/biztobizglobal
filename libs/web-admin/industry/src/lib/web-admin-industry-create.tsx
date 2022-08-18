@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateIndustryDocument } from '@biztobiz/shared/util-sdk'
-import { industryFields, industrySelectFields } from './web-admin-industry-helper'
+import { industryFields } from './web-admin-industry-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminIndustryCreate() {
@@ -21,7 +21,6 @@ export function WebAdminIndustryCreate() {
       mutationName={'createIndustry'}
       buttonText={' Industry'}
       fields={industryFields}
-      selectFields={industrySelectFields}
     />
   )
 }

@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { industryFields, industrySelectFields } from './web-admin-industry-helper'
+import { industryFields } from './web-admin-industry-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminIndustryUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminIndustryUpdate() {
 
   function defaultValues() {
     if (industry?.industry && !loading) {
-      return cleanDatabaseOutput(industry.industry, industrySelectFields)
+      return cleanDatabaseOutput(industry.industry, industryFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminIndustryUpdate() {
       buttonText={'Industry'}
       fields={industryFields}
       idName={'industryId'}
-      selectFields={industrySelectFields}
     />
   )
 }

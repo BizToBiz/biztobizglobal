@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateTransactionDocument } from '@biztobiz/shared/util-sdk'
-import { transactionFields, transactionSelectFields } from './web-admin-transaction-helper'
+import { transactionFields } from './web-admin-transaction-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTransactionCreate() {
@@ -21,7 +21,6 @@ export function WebAdminTransactionCreate() {
       mutationName={'createTransaction'}
       buttonText={' Transaction'}
       fields={transactionFields}
-      selectFields={transactionSelectFields}
     />
   )
 }

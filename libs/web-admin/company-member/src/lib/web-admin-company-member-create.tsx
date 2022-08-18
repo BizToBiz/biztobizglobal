@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateCompanyMemberDocument } from '@biztobiz/shared/util-sdk'
-import { companyMemberFields, companyMemberSelectFields } from './web-admin-company-member-helper'
+import { companyMemberFields } from './web-admin-company-member-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminCompanyMemberCreate() {
@@ -21,7 +21,6 @@ export function WebAdminCompanyMemberCreate() {
       mutationName={'createCompanyMember'}
       buttonText={' CompanyMember'}
       fields={companyMemberFields}
-      selectFields={companyMemberSelectFields}
     />
   )
 }

@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { transactionFields, transactionSelectFields } from './web-admin-transaction-helper'
+import { transactionFields } from './web-admin-transaction-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTransactionUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminTransactionUpdate() {
 
   function defaultValues() {
     if (transaction?.transaction && !loading) {
-      return cleanDatabaseOutput(transaction.transaction, transactionSelectFields)
+      return cleanDatabaseOutput(transaction.transaction, transactionFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminTransactionUpdate() {
       buttonText={'Transaction'}
       fields={transactionFields}
       idName={'transactionId'}
-      selectFields={transactionSelectFields}
     />
   )
 }

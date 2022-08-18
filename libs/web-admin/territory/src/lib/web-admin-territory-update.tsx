@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { territoryFields, territorySelectFields } from './web-admin-territory-helper'
+import { territoryFields } from './web-admin-territory-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminTerritoryUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminTerritoryUpdate() {
 
   function defaultValues() {
     if (territory?.territory && !loading) {
-      return cleanDatabaseOutput(territory.territory, territorySelectFields)
+      return cleanDatabaseOutput(territory.territory, territoryFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminTerritoryUpdate() {
       buttonText={'Territory'}
       fields={territoryFields}
       idName={'territoryId'}
-      selectFields={territorySelectFields}
     />
   )
 }

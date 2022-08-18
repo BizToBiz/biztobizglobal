@@ -4,7 +4,7 @@ import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteUploadDocument, AdminUpdateUploadDocument, useAdminUploadQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { uploadFields, uploadSelectFields } from './web-admin-upload-helper'
+import { uploadFields } from './web-admin-upload-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminUploadUpdate() {
@@ -22,7 +22,7 @@ export function WebAdminUploadUpdate() {
 
   function defaultValues() {
     if (upload?.upload && !loading) {
-      return cleanDatabaseOutput(upload.upload, uploadSelectFields)
+      return cleanDatabaseOutput(upload.upload, uploadFields)
     } else {
       return undefined
     }
@@ -47,7 +47,6 @@ export function WebAdminUploadUpdate() {
       buttonText={'Upload'}
       fields={uploadFields}
       idName={'uploadId'}
-      selectFields={uploadSelectFields}
     />
   )
 }

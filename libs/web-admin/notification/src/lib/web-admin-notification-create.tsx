@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateNotificationDocument } from '@biztobiz/shared/util-sdk'
-import { notificationFields, notificationSelectFields } from './web-admin-notification-helper'
+import { notificationFields } from './web-admin-notification-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminNotificationCreate() {
@@ -21,7 +21,6 @@ export function WebAdminNotificationCreate() {
       mutationName={'createNotification'}
       buttonText={' Notification'}
       fields={notificationFields}
-      selectFields={notificationSelectFields}
     />
   )
 }

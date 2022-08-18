@@ -4,7 +4,7 @@ import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteRegionDocument, AdminUpdateRegionDocument, useAdminRegionQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { regionFields, regionSelectFields } from './web-admin-region-helper'
+import { regionFields } from './web-admin-region-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminRegionUpdate() {
@@ -22,7 +22,7 @@ export function WebAdminRegionUpdate() {
 
   function defaultValues() {
     if (region?.region && !loading) {
-      return cleanDatabaseOutput(region.region, regionSelectFields)
+      return cleanDatabaseOutput(region.region, regionFields)
     } else {
       return undefined
     }
@@ -47,7 +47,6 @@ export function WebAdminRegionUpdate() {
       buttonText={'Region'}
       fields={regionFields}
       idName={'regionId'}
-      selectFields={regionSelectFields}
     />
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateRegionDocument } from '@biztobiz/shared/util-sdk'
-import { regionFields, regionSelectFields } from './web-admin-region-helper'
+import { regionFields } from './web-admin-region-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminRegionCreate() {
@@ -21,7 +21,6 @@ export function WebAdminRegionCreate() {
       mutationName={'createRegion'}
       buttonText={' Region'}
       fields={regionFields}
-      selectFields={regionSelectFields}
     />
   )
 }

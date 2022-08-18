@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { attendanceReminderFields, attendanceReminderSelectFields } from './web-admin-attendance-reminder-helper'
+import { attendanceReminderFields } from './web-admin-attendance-reminder-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminAttendanceReminderUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminAttendanceReminderUpdate() {
 
   function defaultValues() {
     if (attendanceReminder?.attendanceReminder && !loading) {
-      return cleanDatabaseOutput(attendanceReminder.attendanceReminder, attendanceReminderSelectFields)
+      return cleanDatabaseOutput(attendanceReminder.attendanceReminder, attendanceReminderFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminAttendanceReminderUpdate() {
       buttonText={'AttendanceReminder'}
       fields={attendanceReminderFields}
       idName={'attendanceReminderId'}
-      selectFields={attendanceReminderSelectFields}
     />
   )
 }

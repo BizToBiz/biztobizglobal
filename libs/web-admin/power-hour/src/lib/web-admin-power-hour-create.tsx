@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreatePowerHourDocument } from '@biztobiz/shared/util-sdk'
-import { powerHourFields, powerHourSelectFields } from './web-admin-power-hour-helper'
+import { powerHourFields } from './web-admin-power-hour-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminPowerHourCreate() {
@@ -21,7 +21,6 @@ export function WebAdminPowerHourCreate() {
       mutationName={'createPowerHour'}
       buttonText={' PowerHour'}
       fields={powerHourFields}
-      selectFields={powerHourSelectFields}
     />
   )
 }

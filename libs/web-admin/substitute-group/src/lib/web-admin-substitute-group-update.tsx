@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { substituteGroupFields, substituteGroupSelectFields } from './web-admin-substitute-group-helper'
+import { substituteGroupFields } from './web-admin-substitute-group-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminSubstituteGroupUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminSubstituteGroupUpdate() {
 
   function defaultValues() {
     if (substituteGroup?.substituteGroup && !loading) {
-      return cleanDatabaseOutput(substituteGroup.substituteGroup, substituteGroupSelectFields)
+      return cleanDatabaseOutput(substituteGroup.substituteGroup, substituteGroupFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminSubstituteGroupUpdate() {
       buttonText={'SubstituteGroup'}
       fields={substituteGroupFields}
       idName={'substituteGroupId'}
-      selectFields={substituteGroupSelectFields}
     />
   )
 }

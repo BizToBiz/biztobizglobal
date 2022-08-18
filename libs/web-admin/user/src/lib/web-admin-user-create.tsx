@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminCreateUserDocument } from '@biztobiz/shared/util-sdk'
-import { userFields, userSelectFields } from './web-admin-user-helper'
+import { userFields } from './web-admin-user-helper'
 import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminUserCreate() {
@@ -21,7 +21,6 @@ export function WebAdminUserCreate() {
       mutationName={'createUser'}
       buttonText={' User'}
       fields={userFields}
-      selectFields={userSelectFields}
     />
   )
 }

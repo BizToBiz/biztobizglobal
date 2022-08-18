@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { notificationFields, notificationSelectFields } from './web-admin-notification-helper'
+import { notificationFields } from './web-admin-notification-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminNotificationUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminNotificationUpdate() {
 
   function defaultValues() {
     if (notification?.notification && !loading) {
-      return cleanDatabaseOutput(notification.notification, notificationSelectFields)
+      return cleanDatabaseOutput(notification.notification, notificationFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminNotificationUpdate() {
       buttonText={'Notification'}
       fields={notificationFields}
       idName={'notificationId'}
-      selectFields={notificationSelectFields}
     />
   )
 }

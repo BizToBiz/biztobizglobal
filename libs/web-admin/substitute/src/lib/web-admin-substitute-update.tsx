@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { substituteFields, substituteSelectFields } from './web-admin-substitute-helper'
+import { substituteFields } from './web-admin-substitute-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminSubstituteUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminSubstituteUpdate() {
 
   function defaultValues() {
     if (substitute?.substitute && !loading) {
-      return cleanDatabaseOutput(substitute.substitute, substituteSelectFields)
+      return cleanDatabaseOutput(substitute.substitute, substituteFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminSubstituteUpdate() {
       buttonText={'Substitute'}
       fields={substituteFields}
       idName={'substituteId'}
-      selectFields={substituteSelectFields}
     />
   )
 }

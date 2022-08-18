@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { meetingPresenceFields, meetingPresenceSelectFields } from './web-admin-meeting-presence-helper'
+import { meetingPresenceFields } from './web-admin-meeting-presence-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminMeetingPresenceUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminMeetingPresenceUpdate() {
 
   function defaultValues() {
     if (meetingPresence?.meetingPresence && !loading) {
-      return cleanDatabaseOutput(meetingPresence.meetingPresence, meetingPresenceSelectFields)
+      return cleanDatabaseOutput(meetingPresence.meetingPresence, meetingPresenceFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminMeetingPresenceUpdate() {
       buttonText={'MeetingPresence'}
       fields={meetingPresenceFields}
       idName={'meetingPresenceId'}
-      selectFields={meetingPresenceSelectFields}
     />
   )
 }
