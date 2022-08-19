@@ -36,6 +36,7 @@ fragment AdminChapterDetails on Chapter {
   }
   region {
     id
+    name
   }
   AttendanceReminder {
     id
