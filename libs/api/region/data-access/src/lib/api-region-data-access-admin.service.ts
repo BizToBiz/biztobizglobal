@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateRegionInput } from './dto/admin-create-region.input'
 import { AdminListRegionInput } from './dto/admin-list-region.input'
 import { AdminUpdateRegionInput } from './dto/admin-update-region.input'
-import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiRegionDataAccessAdminService {
@@ -17,21 +17,19 @@ export class ApiRegionDataAccessAdminService {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
 
-    // function relationalSearch() {
-    //   if (input?.regionId) {
-    //     return { regionId: input.regionId }
-    //   }
-    //   if (input?.substituteGroupId) {
-    //     return { substituteGroupId: input.substituteGroupId }
-    //   }
-    //   if (input?.memberId) {
-    //     return { members: { some: { id: input.memberId } } }
-    //   }
-    //   return null
-    // }
+    function relationalSearch() {
+      // TODO: implement relational search for region
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
     return {
       AND: [
-        // relationalSearch(),
+        relationalSearch(),
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),

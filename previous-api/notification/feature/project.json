@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/notification/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/notification/feature/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/notification/feature"],
+      "options": {
+        "jestConfig": "libs/api/notification/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/notification/feature"],
+      "options": {
+        "jestConfig": "libs/api/notification/feature/jest.e2e.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "load-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/notification/feature"],
+      "options": {
+        "jestConfig": "libs/api/notification/feature/jest.load.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "type:feature"]
+}

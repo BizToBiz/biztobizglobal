@@ -2,23 +2,26 @@ fragment AdminReferralDetails on Referral {
   id
   createdAt
   updatedAt
+  referralDate
+  rating
   firstName
   lastName
   email
-  rating
   phone
   notes
   fromIndustry
   toIndustry
+  sentBy {
+    id
+    name
+  }
   from {
     id
-    firstName
-    lastName
+    name
   }
   to {
     id
-    firstName
-    lastName
+    name
   }
   fromChapter {
     id
@@ -28,9 +31,7 @@ fragment AdminReferralDetails on Referral {
     id
     name
   }
-  sentBy {
+  transactions {
     id
-    firstName
-    lastName
   }
 }

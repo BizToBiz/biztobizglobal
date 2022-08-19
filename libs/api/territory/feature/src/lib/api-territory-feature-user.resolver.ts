@@ -1,11 +1,11 @@
-import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
 import { GraphQLResolveInfo } from 'graphql'
 import {
-  ApiTerritoryDataAccessUserService,
-  Territory,
   UserCreateTerritoryInput,
   UserListTerritoryInput,
   UserUpdateTerritoryInput,
+  ApiTerritoryDataAccessUserService,
+  Territory,
 } from '@biztobiz/api/territory/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
 import { CtxUser } from '@biztobiz/api/auth/util'

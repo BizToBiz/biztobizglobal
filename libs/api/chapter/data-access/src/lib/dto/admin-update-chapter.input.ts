@@ -1,6 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { DayOfWeek } from '../models/day-of-week.enum'
-import { ChapterStatus } from '../models/chapter-status.enum'
+import { ChapterStatus, DayOfWeek } from '@biztobiz/api/enums/data-access'
 
 @InputType()
 export class AdminUpdateChapterInput {

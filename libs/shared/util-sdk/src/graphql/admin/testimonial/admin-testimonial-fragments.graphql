@@ -1,0 +1,14 @@
+fragment AdminTestimonialDetails on Testimonial {
+  id
+  createdAt
+  updatedAt
+  text
+  from {
+    id
+    name
+  }
+  to {
+    id
+    name
+  }
+}

@@ -4,7 +4,7 @@ import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteChapterDocument, AdminUpdateChapterDocument, useAdminChapterQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { chapterFields, chapterSelectFields } from './web-admin-chapter-helper'
+import { chapterFields } from './web-admin-chapter-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminChapterUpdate() {
@@ -22,7 +22,7 @@ export function WebAdminChapterUpdate() {
 
   function defaultValues() {
     if (chapter?.chapter && !loading) {
-      return cleanDatabaseOutput(chapter.chapter, chapterSelectFields)
+      return cleanDatabaseOutput(chapter.chapter, chapterFields)
     } else {
       return undefined
     }
@@ -47,7 +47,6 @@ export function WebAdminChapterUpdate() {
       buttonText={'Chapter'}
       fields={chapterFields}
       idName={'chapterId'}
-      selectFields={chapterSelectFields}
     />
   )
 }

@@ -72,7 +72,7 @@ export class ApiTerritoryDataAccessLeaderService {
   leaderCreateTerritory(info: GraphQLResolveInfo, leaderId: string, input: AdminCreateTerritoryInput) {
     const select = new PrismaSelect(info).value
     return this.data.territory.create({
-      data: { ...input, regions: { connect: input.regions } },
+      data: { ...input },
       ...select,
     })
   }
@@ -81,10 +81,7 @@ export class ApiTerritoryDataAccessLeaderService {
     const select = new PrismaSelect(info).value
     return this.data.territory.update({
       where: { id: territoryId },
-      data: {
-        ...input,
-        regions: { set: input.regions },
-      },
+      data: { ...input },
       ...select,
     })
   }

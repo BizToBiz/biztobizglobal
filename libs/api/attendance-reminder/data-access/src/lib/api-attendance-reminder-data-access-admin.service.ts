@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
@@ -10,6 +11,31 @@ import { AdminUpdateAttendanceReminderInput } from './dto/admin-update-attendanc
 @Injectable()
 export class ApiAttendanceReminderDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = []
+  private where(input: AdminListAttendanceReminderInput): Prisma.AttendanceReminderWhereInput {
+    const query = input?.search?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    function relationalSearch() {
+      // TODO: implement relational search for attendance-reminder
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
+    return {
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
+    }
+  }
 
   adminAttendanceReminders(info: GraphQLResolveInfo, adminId: string, input?: AdminListAttendanceReminderInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +48,15 @@ export class ApiAttendanceReminderDataAccessAdminService {
 
   async adminCountAttendanceReminders(adminId: string, input?: AdminListAttendanceReminderInput): Promise<CorePaging> {
     const total = await this.data.attendanceReminder.count()
+    const count = await this.data.attendanceReminder.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +69,7 @@ export class ApiAttendanceReminderDataAccessAdminService {
   adminCreateAttendanceReminder(info: GraphQLResolveInfo, adminId: string, input: AdminCreateAttendanceReminderInput) {
     const select = new PrismaSelect(info).value
     return this.data.attendanceReminder.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -51,7 +83,7 @@ export class ApiAttendanceReminderDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.attendanceReminder.update({
       where: { id: attendanceReminderId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

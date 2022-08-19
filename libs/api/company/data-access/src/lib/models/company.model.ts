@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { CompanyMember } from './company-member.model'
+import { CompanyMember } from '@biztobiz/api/company-member/data-access'
 
 @ObjectType()
 export class Company {

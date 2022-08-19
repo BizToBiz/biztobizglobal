@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "root": "libs/api/meeting/feature",
   "sourceRoot": "libs/api/meeting/feature/src",
   "projectType": "library",
   "targets": {

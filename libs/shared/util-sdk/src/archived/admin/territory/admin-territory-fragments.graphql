@@ -1,0 +1,15 @@
+fragment AdminTerritoryDetails on Territory {
+  id
+  createdAt
+  updatedAt
+  name
+  regions {
+    id
+    name
+  }
+  manager {
+    id
+    firstName
+    lastName
+  }
+}

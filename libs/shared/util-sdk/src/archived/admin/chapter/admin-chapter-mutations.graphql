@@ -1,0 +1,17 @@
+mutation adminCreateChapter($input: AdminCreateChapterInput!) {
+  createChapter: adminCreateChapter(input: $input) {
+    ...AdminChapterDetails
+  }
+}
+
+mutation adminDeleteChapter($chapterId: String!) {
+  deleteChapter: adminDeleteChapter(chapterId: $chapterId) {
+    id
+  }
+}
+
+mutation adminUpdateChapter($chapterId: String!, $input: AdminUpdateChapterInput!) {
+  updateChapter: adminUpdateChapter(chapterId: $chapterId, input: $input) {
+    ...AdminChapterDetails
+  }
+}

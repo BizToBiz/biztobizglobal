@@ -1,20 +1,19 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
+import { Prisma } from '@prisma/client'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { UserCreateTerritoryInput } from './dto/user-create-territory.input'
 import { UserListTerritoryInput } from './dto/user-list-territory.input'
 import { UserUpdateTerritoryInput } from './dto/user-update-territory.input'
-import { AdminListTerritoryInput } from './dto/admin-list-territory.input'
-import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiTerritoryDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
   private readonly searchFields = ['name']
-  private where(input: AdminListTerritoryInput): Prisma.TerritoryWhereInput {
+  private where(input: UserListTerritoryInput): Prisma.TerritoryWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
 

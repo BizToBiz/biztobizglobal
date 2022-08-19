@@ -3,5 +3,5 @@ import { Field, InputType } from '@nestjs/graphql'
 @InputType()
 export class UserCreatePowerHourInput {
   @Field()
-  name: string
+  details: string
 }

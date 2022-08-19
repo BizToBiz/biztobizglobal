@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
@@ -10,6 +11,31 @@ import { AdminUpdateCompanyInput } from './dto/admin-update-company.input'
 @Injectable()
 export class ApiCompanyDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = ['name']
+  private where(input: AdminListCompanyInput): Prisma.CompanyWhereInput {
+    const query = input?.search?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    function relationalSearch() {
+      // TODO: implement relational search for company
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
+    return {
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
+    }
+  }
 
   adminCompanies(info: GraphQLResolveInfo, adminId: string, input?: AdminListCompanyInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +48,15 @@ export class ApiCompanyDataAccessAdminService {
 
   async adminCountCompanies(adminId: string, input?: AdminListCompanyInput): Promise<CorePaging> {
     const total = await this.data.company.count()
+    const count = await this.data.company.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +69,7 @@ export class ApiCompanyDataAccessAdminService {
   adminCreateCompany(info: GraphQLResolveInfo, adminId: string, input: AdminCreateCompanyInput) {
     const select = new PrismaSelect(info).value
     return this.data.company.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -46,7 +78,7 @@ export class ApiCompanyDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.company.update({
       where: { id: companyId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

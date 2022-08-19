@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "root": "libs/api/substitute-group/feature",
   "sourceRoot": "libs/api/substitute-group/feature/src",
   "projectType": "library",
   "targets": {

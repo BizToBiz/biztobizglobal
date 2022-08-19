@@ -1,5 +1,4 @@
 import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
-import { UseGuards } from '@nestjs/common'
 import { GraphQLResolveInfo } from 'graphql'
 import {
   UserCreateSubstituteInput,
@@ -9,11 +8,10 @@ import {
   Substitute,
 } from '@biztobiz/api/substitute/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
-import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
+import { CtxUser } from '@biztobiz/api/auth/util'
 import { User } from '@biztobiz/api/user/data-access'
 
 @Resolver()
-@UseGuards(GqlAuthGuard)
 export class ApiSubstituteFeatureUserResolver {
   constructor(private readonly service: ApiSubstituteDataAccessUserService) {}
 

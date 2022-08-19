@@ -17,7 +17,8 @@ import { UserCreateInput } from './dto/user-create.input'
 import { Prisma } from '@prisma/client'
 import { ApiMailerDataAccessService } from '@biztobiz/api/mailer/data-access'
 import { passwordResetEmail } from './templates/password-reset-email.template'
-import { Role, User } from '@biztobiz/api/user/data-access'
+import { User } from '@biztobiz/api/user/data-access'
+import { ChapterMemberRole, Role } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
 export class ApiAuthDataAccessService {
@@ -67,11 +68,31 @@ export class ApiAuthDataAccessService {
   async login(input: LoginInput) {
     const email = input.email.trim()
     const password = input.password.trim()
-    const user = await this.findUserByEmail(email)
+    const authUser = await this.findUserByEmail(email)
 
-    if (!user) {
+    if (!authUser) {
       throw new NotFoundException(`No user found for email: ${email}`)
     }
+
+    const user: User = authUser
+    const isLeader = await this.data.user.findFirst({
+      where: {
+        AND: [
+          { id: user.id },
+          {
+            OR: [
+              { chapter: { role: ChapterMemberRole.Chairman } },
+              { chapter: { role: ChapterMemberRole.VicePresident } },
+              { chapter: { role: ChapterMemberRole.President } },
+              { territoryManaged: { managerId: user.id } },
+              { regionManaged: { managerId: user.id } },
+            ],
+          },
+        ],
+      },
+    })
+
+    user.isLeader = !!isLeader
 
     const passwordValid = validatePassword(password, user.password)
 

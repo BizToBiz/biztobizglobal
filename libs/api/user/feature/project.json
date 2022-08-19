@@ -1,20 +1,35 @@
 {
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/user/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/api/user/feature/**/*.ts"]
-      }
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/api/user/feature"],
       "options": {
-        "jestConfig": "libs/api/user/feature/jest.config.ts",
+        "jestConfig": "libs/api/user/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/user/feature"],
+      "options": {
+        "jestConfig": "libs/api/user/feature/jest.e2e.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "load-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/user/feature"],
+      "options": {
+        "jestConfig": "libs/api/user/feature/jest.load.config.js",
         "passWithNoTests": true
       }
     }

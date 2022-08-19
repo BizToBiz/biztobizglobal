@@ -1,0 +1,39 @@
+{
+  "root": "libs/api/meeting-presence/feature",
+  "sourceRoot": "libs/api/meeting-presence/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/meeting-presence/feature/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/meeting-presence/feature"],
+      "options": {
+        "jestConfig": "libs/api/meeting-presence/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/meeting-presence/feature"],
+      "options": {
+        "jestConfig": "libs/api/meeting-presence/feature/jest.e2e.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "load-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/meeting-presence/feature"],
+      "options": {
+        "jestConfig": "libs/api/meeting-presence/feature/jest.load.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "type:feature"]
+}

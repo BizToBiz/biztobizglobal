@@ -1,7 +1,8 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { User } from '@biztobiz/api/user/data-access'
 import { Chapter } from '@biztobiz/api/chapter/data-access'
-import { ReferralRating } from './referral-rating.enum'
+import { User } from '@biztobiz/api/user/data-access'
+import { ReferralRating } from '@biztobiz/api/enums/data-access'
+import { Transaction } from '@biztobiz/api/transaction/data-access'
 
 @ObjectType()
 export class Referral {
@@ -13,6 +14,12 @@ export class Referral {
 
   @Field({ nullable: true })
   updatedAt?: Date
+
+  @Field({ nullable: true })
+  referralDate?: Date
+
+  @Field(() => ReferralRating, { nullable: true })
+  rating?: ReferralRating
 
   @Field({ nullable: true })
   firstName?: string
@@ -35,21 +42,21 @@ export class Referral {
   @Field({ nullable: true })
   toIndustry?: string
 
-  @Field(() => ReferralRating, { nullable: true })
-  rating?: ReferralRating
+  @Field(() => User, { nullable: true })
+  sentBy?: Omit<[User], ''>
 
   @Field(() => User, { nullable: true })
   from?: Omit<[User], ''>
-
-  @Field(() => Chapter, { nullable: true })
-  fromChapter?: Omit<[Chapter], ''>
-
-  @Field(() => User, { nullable: true })
-  sentBy?: Omit<[User], ''>
 
   @Field(() => User, { nullable: true })
   to?: Omit<[User], ''>
 
   @Field(() => Chapter, { nullable: true })
+  fromChapter?: Omit<[Chapter], ''>
+
+  @Field(() => Chapter, { nullable: true })
   toChapter?: Omit<[Chapter], ''>
+
+  @Field(() => [Transaction], { nullable: true })
+  transactions?: Transaction[]
 }

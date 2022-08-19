@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import { DocumentNode, TypedDocumentNode } from '@apollo/client'
+import { Maybe } from 'graphql/jsutils/Maybe'
 
 export enum WebUiFormFieldType {
   Email = 'Email',
@@ -31,6 +32,10 @@ export interface WebUiFormFieldOptions {
   selectOptionsFunction?: (data: any[]) => { label: string; value: string }[]
   multiselect?: boolean
   filter?: (data: any) => void
+  multi?: boolean
+  mapFunction?: (v: any) => { value: Maybe<string>; label: string } | { value: Maybe<string>; label: string }[]
+  dataName?: string
+  altPlural?: boolean
 }
 
 export interface WebUiFormField {

@@ -1,7 +1,6 @@
 import { Field, InputType, Int } from '@nestjs/graphql'
-import { Role } from '../models/role.enum'
-import { UserOnlineStatus } from '../models/user-online-status.enum'
-import { UserStatus } from '../models/user-status.enum'
+import { Role, UserOnlineStatus, UserStatus } from '@biztobiz/api/enums/data-access'
+import { MultiSelectInput } from '@biztobiz/api/core/data-access'
 
 @InputType()
 export class AdminUpdateUserInput {
@@ -229,4 +228,64 @@ export class AdminUpdateUserInput {
 
   @Field({ nullable: true })
   notifyByMobile?: boolean
+
+  @Field({ nullable: true })
+  chapterId?: string
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  companies?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  nofificationsSent?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  notificationsReceived?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  powerHoursFrom?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  powerHoursTo?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  referralsSent?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  referralsFrom?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  referralsTo?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  reminderSentBy?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  reminderSentTo?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  substituteAccepted?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  substituteInvited?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  testimonialsFrom?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  testimonialsTo?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  transactions?: MultiSelectInput[]
+
+  @Field({ nullable: true })
+  territoryManagedId?: string
+
+  @Field({ nullable: true })
+  regionManagedId?: string
+
+  @Field({ nullable: true })
+  avatarId?: string
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  presence?: MultiSelectInput[]
 }

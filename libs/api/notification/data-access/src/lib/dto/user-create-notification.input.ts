@@ -3,5 +3,5 @@ import { Field, InputType } from '@nestjs/graphql'
 @InputType()
 export class UserCreateNotificationInput {
   @Field()
-  name: string
+  message: string
 }

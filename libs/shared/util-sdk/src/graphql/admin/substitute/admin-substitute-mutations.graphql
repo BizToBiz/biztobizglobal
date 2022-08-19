@@ -1,0 +1,17 @@
+mutation adminCreateSubstitute($input: AdminCreateSubstituteInput!) {
+  createSubstitute: adminCreateSubstitute(input: $input) {
+    ...AdminSubstituteDetails
+  }
+}
+
+mutation adminDeleteSubstitute($substituteId: String!) {
+  deleteSubstitute: adminDeleteSubstitute(substituteId: $substituteId) {
+    id
+  }
+}
+
+mutation adminUpdateSubstitute($substituteId: String!, $input: AdminUpdateSubstituteInput!) {
+  updateSubstitute: adminUpdateSubstitute(substituteId: $substituteId, input: $input) {
+    ...AdminSubstituteDetails
+  }
+}

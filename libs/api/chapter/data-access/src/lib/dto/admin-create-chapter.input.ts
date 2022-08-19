@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { ChapterStatus, DayOfWeek } from '@prisma/client'
+import { ChapterStatus, DayOfWeek } from '@biztobiz/api/enums/data-access'
 
 @InputType()
 export class AdminCreateChapterInput {

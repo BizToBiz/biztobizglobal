@@ -1,38 +1,35 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateReferralInput } from './dto/admin-create-referral.input'
 import { AdminListReferralInput } from './dto/admin-list-referral.input'
 import { AdminUpdateReferralInput } from './dto/admin-update-referral.input'
-import { AdminListRegionInput } from '@biztobiz/api/region/data-access'
-import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApiReferralDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  private readonly searchFields = ['firstName', 'lastName', 'email', 'phone']
-  private where(input: AdminListRegionInput): Prisma.RegionWhereInput {
+  private readonly searchFields = ['firstName', 'lastName', 'email']
+  private where(input: AdminListReferralInput): Prisma.ReferralWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
 
-    // function relationalSearch() {
-    //   if (input?.regionId) {
-    //     return { regionId: input.regionId }
-    //   }
-    //   if (input?.substituteGroupId) {
-    //     return { substituteGroupId: input.substituteGroupId }
-    //   }
-    //   if (input?.memberId) {
-    //     return { members: { some: { id: input.memberId } } }
-    //   }
-    //   return null
-    // }
+    function relationalSearch() {
+      // TODO: implement relational search for referral
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
     return {
       AND: [
-        // relationalSearch(),
+        relationalSearch(),
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),

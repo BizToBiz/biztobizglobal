@@ -1,5 +1,4 @@
 import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
-import { UseGuards } from '@nestjs/common'
 import { GraphQLResolveInfo } from 'graphql'
 import {
   UserCreateAttendanceReminderInput,
@@ -9,11 +8,10 @@ import {
   AttendanceReminder,
 } from '@biztobiz/api/attendance-reminder/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
-import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
+import { CtxUser } from '@biztobiz/api/auth/util'
 import { User } from '@biztobiz/api/user/data-access'
 
 @Resolver()
-@UseGuards(GqlAuthGuard)
 export class ApiAttendanceReminderFeatureUserResolver {
   constructor(private readonly service: ApiAttendanceReminderDataAccessUserService) {}
 

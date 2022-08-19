@@ -13,6 +13,7 @@ fragment UserDetails on User {
   email
   role
   developer
+  isLeader
 }
 
 query me {

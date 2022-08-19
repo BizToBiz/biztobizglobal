@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { PowerHourStatus } from '@biztobiz/api/enums/data-access'
 import { User } from '@biztobiz/api/user/data-access'
-import { PowerHourStatus } from './power-hour-status.enum'
 
 @ObjectType()
 export class PowerHour {

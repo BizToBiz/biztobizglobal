@@ -1,4 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { User } from '@biztobiz/api/user/data-access'
+import { Chapter } from '@biztobiz/api/chapter/data-access'
 
 @ObjectType()
 export class Upload {
@@ -37,4 +39,10 @@ export class Upload {
 
   @Field({ nullable: true })
   type?: string
+
+  @Field(() => User, { nullable: true })
+  user?: Omit<[User], ''>
+
+  @Field(() => Chapter, { nullable: true })
+  chapter?: Omit<[Chapter], ''>
 }

@@ -1,6 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { NotificationType } from './notification-type.enum'
-import { NotificationReferenceType } from './notification-reference-type.enum'
+import { NotificationReferenceType, NotificationType } from '@biztobiz/api/enums/data-access'
 import { User } from '@biztobiz/api/user/data-access'
 
 @ObjectType()

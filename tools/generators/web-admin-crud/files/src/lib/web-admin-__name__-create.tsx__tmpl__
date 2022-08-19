@@ -1,13 +1,13 @@
 import React from 'react'
 import { AdminCreate<%= className %>Document } from '@<%= npmScope %>/shared/util-sdk'
-import { <%= propertyName %>Fields, <%= propertyName %>SelectFields } from './web-admin/<%= name %>-helper'
+import { <%= propertyName %>Fields, <%= propertyName %>SelectFields } from './web-admin-<%= name %>-helper'
 import { WebAdminCreateForm } from '@<%= npmScope %>/web-admin/crud-helper'
 
 export function WebAdmin<%= className %>Create() {
   const pathData = {
     path: '/admin/<%= pluralName %>/new',
     name: 'Create a <%= className %>',
-    description: 'Use the form below to add a new <%= name %>',
+    description: 'Use the form below to add a new <%= className %>',
     showSearch: false,
     actionText: 'Back to <%= className %> List',
     actionLink: '/admin/<%= pluralName %>',

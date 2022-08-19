@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
@@ -10,6 +11,31 @@ import { AdminUpdateNotificationInput } from './dto/admin-update-notification.in
 @Injectable()
 export class ApiNotificationDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = ['message']
+  private where(input: AdminListNotificationInput): Prisma.NotificationWhereInput {
+    const query = input?.search?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    function relationalSearch() {
+      // TODO: implement relational search for notification
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
+    return {
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
+    }
+  }
 
   adminNotifications(info: GraphQLResolveInfo, adminId: string, input?: AdminListNotificationInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +48,15 @@ export class ApiNotificationDataAccessAdminService {
 
   async adminCountNotifications(adminId: string, input?: AdminListNotificationInput): Promise<CorePaging> {
     const total = await this.data.notification.count()
+    const count = await this.data.notification.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +69,7 @@ export class ApiNotificationDataAccessAdminService {
   adminCreateNotification(info: GraphQLResolveInfo, adminId: string, input: AdminCreateNotificationInput) {
     const select = new PrismaSelect(info).value
     return this.data.notification.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -51,7 +83,7 @@ export class ApiNotificationDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.notification.update({
       where: { id: notificationId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

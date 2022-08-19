@@ -1,0 +1,38 @@
+query AdminUser($userId: String!) {
+  user: adminUser(userId: $userId) {
+    ...AdminUserDetails
+  }
+}
+
+#query AdminUserMeetings($userId: String!) {
+#  meetings: adminUserMeetings(userId: $userId) {
+#    ...MeetingDetails
+#  }
+#}
+
+query AdminUsers($input: CorePagingInput) {
+  users: adminUsers(input: $input) {
+    ...AdminUserDetails
+  }
+  counters: adminCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+#query AdminSubstituteGroups {
+#  substituteGroups: adminSubstituteGroups {
+#    id
+#    createdAt
+#    updatedAt
+#    name
+#    users {
+#      ...AdminUserDetails
+#    }
+#  }
+#}
+
+#query AdminMembersWithoutUser {
+#  members: adminMembersWithoutUser {
+#    ...UserBasics
+#  }
+#}

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
@@ -10,6 +11,31 @@ import { AdminUpdateSubstituteGroupInput } from './dto/admin-update-substitute-g
 @Injectable()
 export class ApiSubstituteGroupDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = ['name']
+  private where(input: AdminListSubstituteGroupInput): Prisma.SubstituteGroupWhereInput {
+    const query = input?.search?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    function relationalSearch() {
+      // TODO: implement relational search for substitute-group
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
+    return {
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
+    }
+  }
 
   adminSubstituteGroups(info: GraphQLResolveInfo, adminId: string, input?: AdminListSubstituteGroupInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +48,15 @@ export class ApiSubstituteGroupDataAccessAdminService {
 
   async adminCountSubstituteGroups(adminId: string, input?: AdminListSubstituteGroupInput): Promise<CorePaging> {
     const total = await this.data.substituteGroup.count()
+    const count = await this.data.substituteGroup.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +69,7 @@ export class ApiSubstituteGroupDataAccessAdminService {
   adminCreateSubstituteGroup(info: GraphQLResolveInfo, adminId: string, input: AdminCreateSubstituteGroupInput) {
     const select = new PrismaSelect(info).value
     return this.data.substituteGroup.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -51,7 +83,7 @@ export class ApiSubstituteGroupDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.substituteGroup.update({
       where: { id: substituteGroupId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

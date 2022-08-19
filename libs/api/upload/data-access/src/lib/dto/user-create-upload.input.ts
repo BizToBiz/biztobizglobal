@@ -3,5 +3,5 @@ import { Field, InputType } from '@nestjs/graphql'
 @InputType()
 export class UserCreateUploadInput {
   @Field()
-  name: string
+  originalFilename: string
 }

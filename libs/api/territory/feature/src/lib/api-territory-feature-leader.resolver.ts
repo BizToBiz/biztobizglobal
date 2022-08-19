@@ -1,4 +1,4 @@
-import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
 import { GraphQLResolveInfo } from 'graphql'
 import {
   AdminCreateTerritoryInput,
@@ -8,10 +8,12 @@ import {
   Territory,
 } from '@biztobiz/api/territory/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
-import { CtxUser } from '@biztobiz/api/auth/util'
+import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
+import { UseGuards } from '@nestjs/common'
 import { User } from '@biztobiz/api/user/data-access'
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class ApiTerritoryFeatureLeaderResolver {
   constructor(private readonly service: ApiTerritoryDataAccessLeaderService) {}
 

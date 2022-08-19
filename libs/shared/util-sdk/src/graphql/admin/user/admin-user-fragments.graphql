@@ -13,6 +13,7 @@ fragment AdminUserDetails on User {
   infusionsoftId
   firstName
   lastName
+  name
   password
   passwordResetToken
   passwordResetExpires
@@ -77,10 +78,70 @@ fragment AdminUserDetails on User {
   notifyBySMS
   notifyByWeb
   notifyByMobile
-  regionManaged {
+  chapter {
     id
   }
+  companies {
+    id
+    name
+  }
+  notificationsReceived {
+    id
+  }
+  notificationsReceived {
+    id
+  }
+  powerHoursFrom {
+    id
+  }
+  powerHoursTo {
+    id
+  }
+  referralsSent {
+    id
+  }
+  referralsFrom {
+    id
+  }
+  referralsTo {
+    id
+  }
+  reminderSentBy {
+    id
+  }
+  reminderSentTo {
+    id
+  }
+  substituteAccepted {
+    id
+  }
+  substituteInvited {
+    id
+  }
+  substitutesSentBy {
+    id
+  }
+  testimonialsFrom {
+    id
+  }
+  testimonialsto {
+    id
+  }
+  transactions {
+    id
+  }
+  regionManaged {
+    id
+    name
+  }
   territoryManaged {
+    id
+    name
+  }
+  avatar {
+    id
+  }
+  presence {
     id
   }
 }

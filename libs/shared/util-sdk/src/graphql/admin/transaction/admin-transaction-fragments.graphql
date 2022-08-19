@@ -8,13 +8,15 @@ fragment AdminTransactionDetails on Transaction {
   enteredOn
   industry
   state
-  user {
-    id
-    firstName
-    lastName
-  }
   chapter {
     id
     name
+  }
+  user {
+    id
+    name
+  }
+  referral {
+    id
   }
 }

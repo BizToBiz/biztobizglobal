@@ -3,13 +3,12 @@ fragment AdminTerritoryDetails on Territory {
   createdAt
   updatedAt
   name
-  regions {
+  manager {
     id
     name
   }
-  manager {
+  regions {
     id
-    firstName
-    lastName
+    name
   }
 }

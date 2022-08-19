@@ -1,4 +1,5 @@
 {
+  "root": "libs/api/territory/feature",
   "sourceRoot": "libs/api/territory/feature/src",
   "projectType": "library",
   "targets": {

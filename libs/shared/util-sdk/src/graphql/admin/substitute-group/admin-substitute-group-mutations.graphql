@@ -1,0 +1,17 @@
+mutation adminCreateSubstituteGroup($input: AdminCreateSubstituteGroupInput!) {
+  createSubstituteGroup: adminCreateSubstituteGroup(input: $input) {
+    ...AdminSubstituteGroupDetails
+  }
+}
+
+mutation adminDeleteSubstituteGroup($substituteGroupId: String!) {
+  deleteSubstituteGroup: adminDeleteSubstituteGroup(substituteGroupId: $substituteGroupId) {
+    id
+  }
+}
+
+mutation adminUpdateSubstituteGroup($substituteGroupId: String!, $input: AdminUpdateSubstituteGroupInput!) {
+  updateSubstituteGroup: adminUpdateSubstituteGroup(substituteGroupId: $substituteGroupId, input: $input) {
+    ...AdminSubstituteGroupDetails
+  }
+}

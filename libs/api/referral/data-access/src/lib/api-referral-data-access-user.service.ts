@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
+import { Prisma } from '@prisma/client'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { UserCreateReferralInput } from './dto/user-create-referral.input'
@@ -10,6 +11,34 @@ import { UserUpdateReferralInput } from './dto/user-update-referral.input'
 @Injectable()
 export class ApiReferralDataAccessUserService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = ['firstName', 'lastName', 'email']
+  private where(input: UserListReferralInput): Prisma.ReferralWhereInput {
+    const query = input?.search?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    // TODO: implement leader search query
+    // function leaderSearch() {}
+
+    function relationalSearch() {
+      // TODO: implement relational search for referral
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
+    return {
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
+    }
+  }
 
   userReferrals(info: GraphQLResolveInfo, userId: string, input?: UserListReferralInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +51,15 @@ export class ApiReferralDataAccessUserService {
 
   async userCountReferrals(userId: string, input?: UserListReferralInput): Promise<CorePaging> {
     const total = await this.data.referral.count()
+    const count = await this.data.referral.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +72,7 @@ export class ApiReferralDataAccessUserService {
   userCreateReferral(info: GraphQLResolveInfo, userId: string, input: UserCreateReferralInput) {
     const select = new PrismaSelect(info).value
     return this.data.referral.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -46,7 +81,7 @@ export class ApiReferralDataAccessUserService {
     const select = new PrismaSelect(info).value
     return this.data.referral.update({
       where: { id: referralId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

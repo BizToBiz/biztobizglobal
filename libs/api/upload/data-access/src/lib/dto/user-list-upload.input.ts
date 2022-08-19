@@ -4,5 +4,5 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 @InputType()
 export class UserListUploadInput extends CorePagingInput {
   @Field({ nullable: true })
-  name?: string
+  originalFilename?: string
 }

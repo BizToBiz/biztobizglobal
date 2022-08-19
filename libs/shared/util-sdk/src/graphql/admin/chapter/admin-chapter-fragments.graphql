@@ -2,23 +2,42 @@ fragment AdminChapterDetails on Chapter {
   id
   createdAt
   updatedAt
+  establishedDate
   name
   description
-  status
-  state
-  establishedDate
   avatarEmail
   avatarUrl
   latitude
   longitude
   city
   state
-  meetingDay
-  meetingDetails
-  meetingTime
   facebook
+  meetingDay
+  meetingTime
+  meetingDetails
+  status
+  meetings {
+    id
+  }
+  members {
+    id
+  }
+  transactions {
+    id
+  }
+  referralsFrom {
+    id
+  }
+  referralsTo {
+    id
+  }
+  substituteGroup {
+    id
+  }
   region {
     id
-    name
+  }
+  AttendanceReminder {
+    id
   }
 }

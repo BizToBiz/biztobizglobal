@@ -1,0 +1,17 @@
+fragment AdminPowerHourDetails on PowerHour {
+  id
+  createdAt
+  updatedAt
+  date
+  time
+  details
+  status
+  from {
+    id
+    name
+  }
+  to {
+    id
+    name
+  }
+}

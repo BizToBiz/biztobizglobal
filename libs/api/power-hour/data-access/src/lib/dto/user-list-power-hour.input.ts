@@ -4,5 +4,5 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 @InputType()
 export class UserListPowerHourInput extends CorePagingInput {
   @Field({ nullable: true })
-  name?: string
+  details?: string
 }

@@ -7,7 +7,6 @@ import { cleanFormInput } from '@biztobiz/shared/utils/feature'
 import { DocumentNode } from 'graphql'
 import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
-import { SelectFieldOptions } from './web-admin-helper'
 
 interface PathData {
   path: string
@@ -24,7 +23,6 @@ interface WebAdminCreateFormProps {
   mutationName: string
   buttonText: string
   fields: any[]
-  selectFields?: SelectFieldOptions[]
 }
 
 export function WebAdminCreateForm(props: WebAdminCreateFormProps) {
@@ -35,7 +33,7 @@ export function WebAdminCreateForm(props: WebAdminCreateFormProps) {
 
   const submit = async (input: any) => {
     setLoading(true)
-    const cleanedInput = cleanFormInput(input, props?.selectFields)
+    const cleanedInput = cleanFormInput(input, props?.fields)
     console.log(cleanedInput)
     createMutation({
       variables: {

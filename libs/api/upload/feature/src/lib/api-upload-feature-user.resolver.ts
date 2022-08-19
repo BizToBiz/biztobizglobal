@@ -1,19 +1,17 @@
-import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
-import { UseGuards } from '@nestjs/common'
+import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
 import { GraphQLResolveInfo } from 'graphql'
 import {
-  ApiUploadDataAccessUserService,
-  Upload,
   UserCreateUploadInput,
   UserListUploadInput,
   UserUpdateUploadInput,
+  ApiUploadDataAccessUserService,
+  Upload,
 } from '@biztobiz/api/upload/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
-import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
+import { CtxUser } from '@biztobiz/api/auth/util'
 import { User } from '@biztobiz/api/user/data-access'
 
 @Resolver()
-@UseGuards(GqlAuthGuard)
 export class ApiUploadFeatureUserResolver {
   constructor(private readonly service: ApiUploadDataAccessUserService) {}
 

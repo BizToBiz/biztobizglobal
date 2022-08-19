@@ -3,13 +3,16 @@ fragment AdminRegionDetails on Region {
   createdAt
   updatedAt
   name
+  manager {
+    id
+    name
+  }
   territory {
     id
     name
   }
-  manager {
+  chapters {
     id
-    firstName
-    lastName
+    name
   }
 }

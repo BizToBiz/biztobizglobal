@@ -3,4 +3,7 @@ fragment AdminCompanyDetails on Company {
   createdAt
   updatedAt
   name
+  members {
+    id
+  }
 }

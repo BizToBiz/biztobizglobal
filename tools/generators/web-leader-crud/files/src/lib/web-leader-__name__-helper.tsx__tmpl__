@@ -1,6 +1,6 @@
 import { WebUiFormField } from '@<%= npmScope %>/web-ui/form'
 import React from 'react'
-import { SelectFieldOptions } from '@<%= npmScope %>/web-admin-crud-helper'
+import { SelectFieldOptions } from '@<%= npmScope %>/web-admin/crud-helper'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {

@@ -17,6 +17,7 @@ import { useAtom } from 'jotai'
 import { identityAtom, isAuthenticatedAtom, isRememberedAtom } from '@biztobiz/web/global/data-access'
 import { SharedAuthProvider } from '@biztobiz/shared/auth/data-access'
 import { WebAdminRouter } from '@biztobiz/web-admin/router'
+import { WebLeaderRouter } from '@biztobiz/web-leader/router'
 
 function PrivateOutlet(props) {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom)
@@ -42,7 +43,8 @@ export function WebShellFeature() {
             <Route path="about" element={<WebAboutFeature />} />
           </Route>
           <Route path="admin/*" element={<WebAdminRouter user={user} />}></Route>
-          <Route path="/" element={<WebAboutFeature />} />
+          <Route path="leader/*" element={<WebLeaderRouter user={user} />}></Route>
+          <Route path="/" element={<WebFeatureLogin />} />
           <Route path="about" element={<WebAboutFeature />} />
           <Route path="dashboard" element={<WebDashboardFeature />} />
 

@@ -4,5 +4,5 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 @InputType()
 export class UserListTestimonialInput extends CorePagingInput {
   @Field({ nullable: true })
-  name?: string
+  text?: string
 }

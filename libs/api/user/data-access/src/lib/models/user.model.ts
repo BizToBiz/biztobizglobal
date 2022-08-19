@@ -1,19 +1,19 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Role } from './role.enum'
-import { UserStatus } from './user-status.enum'
+import { Role, UserOnlineStatus, UserStatus } from '@biztobiz/api/enums/data-access'
+import { ChapterMember } from '@biztobiz/api/chapter-member/data-access'
+import { AttendanceReminder } from '@biztobiz/api/attendance-reminder/data-access'
+import { Substitute } from '@biztobiz/api/substitute/data-access'
+import { Upload } from '@biztobiz/api/upload/data-access'
+import { MeetingPresence } from '@biztobiz/api/meeting-presence/data-access'
 import { Company } from '@biztobiz/api/company/data-access'
 import { Territory } from '@biztobiz/api/territory/data-access'
 import { Region } from '@biztobiz/api/region/data-access'
-import { Upload } from '@biztobiz/api/upload/data-access'
-import { ChapterMember } from '@biztobiz/api/chapter-member/data-access'
-import { UserOnlineStatus } from './user-online-status.enum'
+
 import { PowerHour } from '@biztobiz/api/power-hour/data-access'
 import { Referral } from '@biztobiz/api/referral/data-access'
 import { Testimonial } from '@biztobiz/api/testimonial/data-access'
 import { Transaction } from '@biztobiz/api/transaction/data-access'
-import { MeetingPresence } from '@biztobiz/api/meeting/data-access'
-import { AttendanceReminder } from '@biztobiz/api/attendance-reminder/data-access'
-import { Substitute } from '@biztobiz/api/substitute/data-access'
+
 import { Notification } from '@biztobiz/api/notification/data-access'
 
 @ObjectType()
@@ -314,4 +314,6 @@ export class User {
 
   @Field(() => MeetingPresence, { nullable: true })
   presence?: MeetingPresence
+
+  isLeader?: boolean
 }

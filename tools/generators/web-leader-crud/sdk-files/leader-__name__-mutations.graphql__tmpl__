@@ -1,4 +1,4 @@
-mutation leaderCreate<%= className %>($input: LeaderCreate<%= className %>Input!) {
+mutation leaderCreate<%= className %>($input: AdminCreate<%= className %>Input!) {
   create<%= className %>: leaderCreate<%= className %>(input: $input) {
     ...Leader<%= className %>Details
   }
@@ -10,7 +10,7 @@ mutation leaderDelete<%= className %>($<%= propertyName %>Id: String!) {
   }
 }
 
-mutation leaderUpdate<%= className %>($<%= propertyName %>Id: String!, $input: LeaderUpdate<%= className %>Input!) {
+mutation leaderUpdate<%= className %>($<%= propertyName %>Id: String!, $input: AdminUpdate<%= className %>Input!) {
   update<%= className %>: leaderUpdate<%= className %>(<%= propertyName %>Id: $<%= propertyName %>Id, input: $input) {
     ...Leader<%= className %>Details
   }

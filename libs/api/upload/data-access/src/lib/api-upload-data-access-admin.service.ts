@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
+import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
@@ -10,6 +11,31 @@ import { AdminUpdateUploadInput } from './dto/admin-update-upload.input'
 @Injectable()
 export class ApiUploadDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
+
+  private readonly searchFields = ['originalFilename', 'publicId', 'url']
+  private where(input: AdminListUploadInput): Prisma.UploadWhereInput {
+    const query = input?.search?.trim()
+    const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+
+    function relationalSearch() {
+      // TODO: implement relational search for upload
+      // if (input?.regionId) {
+      //   return { regionId: input.regionId }
+      // }
+      // if (input?.memberId) {
+      //   return { members: { some: { id: input.memberId } } }
+      // }
+      return null
+    }
+    return {
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+        })),
+      ],
+    }
+  }
 
   adminUploads(info: GraphQLResolveInfo, adminId: string, input?: AdminListUploadInput) {
     const select = new PrismaSelect(info).value
@@ -22,9 +48,15 @@ export class ApiUploadDataAccessAdminService {
 
   async adminCountUploads(adminId: string, input?: AdminListUploadInput): Promise<CorePaging> {
     const total = await this.data.upload.count()
+    const count = await this.data.upload.count({ where: this.where(input) })
+    const take = input?.take || 10
+    const skip = input?.skip || 0
+    const page = Math.floor(skip / take)
     return {
-      take: input?.take,
-      skip: input?.skip,
+      take,
+      skip,
+      page,
+      count,
       total,
     }
   }
@@ -37,7 +69,7 @@ export class ApiUploadDataAccessAdminService {
   adminCreateUpload(info: GraphQLResolveInfo, adminId: string, input: AdminCreateUploadInput) {
     const select = new PrismaSelect(info).value
     return this.data.upload.create({
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }
@@ -46,7 +78,7 @@ export class ApiUploadDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.upload.update({
       where: { id: uploadId },
-      data: { name: input.name },
+      data: { ...input },
       ...select,
     })
   }

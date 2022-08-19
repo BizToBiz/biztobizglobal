@@ -1,5 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { MeetingPresence } from './meeting-presence.model'
+import { Chapter } from '@biztobiz/api/chapter/data-access'
+import { MeetingPresence } from '@biztobiz/api/meeting-presence/data-access'
+import { Substitute } from '@biztobiz/api/substitute/data-access'
 
 @ObjectType()
 export class Meeting {
@@ -15,9 +17,15 @@ export class Meeting {
   @Field({ nullable: true })
   date?: Date
 
+  @Field(() => Chapter, { nullable: true })
+  chapter?: Omit<[Chapter], ''>
+
   @Field({ nullable: true })
   isVisitorDay?: boolean
 
   @Field(() => [MeetingPresence], { nullable: true })
   presence?: MeetingPresence[]
+
+  @Field(() => [Substitute], { nullable: true })
+  substitutes?: Substitute[]
 }

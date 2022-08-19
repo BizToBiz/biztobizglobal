@@ -1,11 +1,9 @@
 import { useAtom } from 'jotai'
-import { currentPathAtom, isAdminAtom } from '@biztobiz/web/global/data-access'
+import { currentPathAtom } from '@biztobiz/web/global/data-access'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import React from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
 import { WebLeaderDashboard } from '@biztobiz/web-leader/dashboard'
-import { WebLeaderChapterCreate, WebLeaderChapterList, WebLeaderChapterUpdate } from '@biztobiz/web-leader/chapter'
-import { WebLeaderCompanyCreate, WebLeaderCompanyList, WebLeaderCompanyUpdate } from '@biztobiz/web-leader/company'
 import { HomeIcon } from '@heroicons/react/outline'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 
@@ -16,7 +14,6 @@ export interface WebLeaderRouterProps {
 }
 
 export function WebLeaderRouter(props: WebLeaderRouterProps) {
-  const [isAdmin] = useAtom(isAdminAtom)
   const [currentPath] = useAtom(currentPathAtom)
 
   const navigation = [
@@ -33,16 +30,6 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
     <WebUiAdminLayoutFeature user={props.user} navigation={navigation}>
       <Routes>
         <Route path="dashboard" element={<WebLeaderDashboard />} />
-        <Route path="chapters" element={<WebLeaderChapterList />} />
-        <Route path="chapter">
-          <Route path="new" element={<WebLeaderChapterCreate />} />
-          <Route path=":id" element={<WebLeaderChapterUpdate />} />
-        </Route>
-        <Route path="companies" element={<WebLeaderCompanyList />} />
-        <Route path="company">
-          <Route path="new" element={<WebLeaderCompanyCreate />} />
-          <Route path=":id" element={<WebLeaderCompanyUpdate />} />
-        </Route>
         {/*Add New Routes Here*/}
       </Routes>
     </WebUiAdminLayoutFeature>

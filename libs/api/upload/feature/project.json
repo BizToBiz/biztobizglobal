@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "root": "libs/api/upload/feature",
   "sourceRoot": "libs/api/upload/feature/src",
   "projectType": "library",
   "targets": {

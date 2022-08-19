@@ -1,0 +1,17 @@
+mutation adminCreateNotification($input: AdminCreateNotificationInput!) {
+  createNotification: adminCreateNotification(input: $input) {
+    ...AdminNotificationDetails
+  }
+}
+
+mutation adminDeleteNotification($notificationId: String!) {
+  deleteNotification: adminDeleteNotification(notificationId: $notificationId) {
+    id
+  }
+}
+
+mutation adminUpdateNotification($notificationId: String!, $input: AdminUpdateNotificationInput!) {
+  updateNotification: adminUpdateNotification(notificationId: $notificationId, input: $input) {
+    ...AdminNotificationDetails
+  }
+}

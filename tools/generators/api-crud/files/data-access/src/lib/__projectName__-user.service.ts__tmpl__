@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
+import { Prisma } from '@prisma/client'
 import { <%= apiClassName %>CoreDataAccessService, CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
 
 import { UserCreate<%= modelClassName %>Input } from './dto/user-create-<%= modelName %>.input'
@@ -12,7 +13,7 @@ export class <%= apiClassName %><%= modelClassName %>DataAccessUserService {
   constructor(private readonly data: <%= apiClassName %>CoreDataAccessService) {}
 
     private readonly searchFields = [<%- searchFields %>]
-    private where(input: AdminList<%= modelClassName %>Input): Prisma.<%= modelClassName %>WhereInput {
+    private where(input: UserList<%= modelClassName %>Input): Prisma.<%= modelClassName %>WhereInput {
       const query = input?.search?.trim()
       const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
 

@@ -1,0 +1,20 @@
+query AdminRegion($regionId: String!) {
+  region: adminRegion(regionId: $regionId) {
+    ...AdminRegionDetails
+  }
+}
+
+query AdminRegions($input: AdminListRegionInput) {
+  regions: adminRegions(input: $input) {
+    ...AdminRegionDetails
+  }
+  counters: adminCountRegions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminRegionPagination($input: AdminListRegionInput) {
+  counters: adminCountRegions(input: $input) {
+    ...CorePagingDetails
+  }
+}

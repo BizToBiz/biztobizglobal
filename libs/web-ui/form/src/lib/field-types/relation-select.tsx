@@ -11,6 +11,25 @@ interface RelationSelectProps {
   control: Control<FieldValues, any>
 }
 
+function label(item: { id: string; name?: string; firstName?: string; lastName?: string }) {
+  if (item?.name) {
+    return item.name
+  }
+  if (item?.firstName && item?.lastName) {
+    return `${item.firstName} ${item.lastName}`
+  }
+  if (item?.firstName && !item?.lastName) {
+    return `${item.firstName}`
+  }
+  return item.id
+}
+
+function defaultOptionsMap(
+  items: { id: string; name?: string; firstName?: string; lastName?: string }[],
+): (any | { value?: string; label?: string })[] {
+  return items?.map?.((option) => ({ value: `${option.id}`, label: label(option) } || []))
+}
+
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
 
@@ -19,9 +38,12 @@ export function RelationSelect(props: RelationSelectProps) {
     dataList = props?.field?.options?.filter?.(dataList)
   }
 
-  const defaultOptions = props?.field?.options?.selectOptionsFunction
-    ? props?.field?.options?.selectOptionsFunction(dataList)
-    : [{ value: '', label: 'Loading...' }]
+  const defaultOptions =
+    dataList?.length > 0
+      ? props?.field?.options?.selectOptionsFunction
+        ? props?.field?.options?.selectOptionsFunction(dataList)
+        : defaultOptionsMap(dataList)
+      : [{ value: '', label: 'Loading...' }]
 
   async function getStorageOptions(inputText: string): Promise<OptionsOrGroups<any, GroupBase<any>>> {
     return refetch({ input: { search: inputText } }).then((res) => {
@@ -48,7 +70,7 @@ export function RelationSelect(props: RelationSelectProps) {
           loadOptions={getStorageOptions}
           onChange={onChange}
           isLoading={loading}
-          isMulti={props.field.options.multiselect}
+          isMulti={props.field.options.multi}
         />
       )}
     />
