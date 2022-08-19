@@ -15,11 +15,6 @@ jobs:
     name: Setup, Build, and Deploy
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 16.x ]
-        operating-system: [ ubuntu-20.04 ]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
