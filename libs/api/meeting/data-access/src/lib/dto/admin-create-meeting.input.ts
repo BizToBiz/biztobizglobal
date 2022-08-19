@@ -4,4 +4,10 @@ import { Field, InputType } from '@nestjs/graphql'
 export class AdminCreateMeetingInput {
   @Field()
   date: Date
+
+  @Field({ nullable: true })
+  chapterId?: string
+
+  @Field({ nullable: true })
+  isVisitorDay?: boolean
 }

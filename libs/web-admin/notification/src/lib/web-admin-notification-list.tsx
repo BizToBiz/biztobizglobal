@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminNotificationsQuery, useAdminNotificationPaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminNotificationPaginationQuery, useAdminNotificationsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminNotificationListProps {
@@ -57,7 +57,7 @@ export function WebAdminNotificationList(props: WebAdminNotificationListProps) {
       <WebUiDataTableFeature
         data={notifications?.notifications}
         path={'/admin/notification'}
-        fields={['name']}
+        fields={['referenceId', 'message']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

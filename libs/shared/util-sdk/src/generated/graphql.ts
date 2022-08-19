@@ -78,7 +78,9 @@ export type AdminCreateIndustryInput = {
 }
 
 export type AdminCreateMeetingInput = {
+  chapterId?: InputMaybe<Scalars['String']>
   date: Scalars['DateTime']
+  isVisitorDay?: InputMaybe<Scalars['Boolean']>
 }
 
 export type AdminCreateMeetingPresenceInput = {
@@ -86,7 +88,13 @@ export type AdminCreateMeetingPresenceInput = {
 }
 
 export type AdminCreateNotificationInput = {
-  message: Scalars['String']
+  actorId?: InputMaybe<Scalars['String']>
+  message?: InputMaybe<Scalars['String']>
+  read?: InputMaybe<Scalars['Boolean']>
+  referenceId?: InputMaybe<Scalars['String']>
+  referenceType?: InputMaybe<NotificationReferenceType>
+  toId?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<NotificationType>
 }
 
 export type AdminCreatePowerHourInput = {
@@ -3429,7 +3437,7 @@ export type AdminChapterDetailsFragment = {
   referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
   referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
   substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
-  region?: { __typename?: 'Region'; id?: string | null } | null
+  region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
 }
 
@@ -3464,7 +3472,7 @@ export type AdminCreateChapterMutation = {
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
-    region?: { __typename?: 'Region'; id?: string | null } | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
@@ -3510,7 +3518,7 @@ export type AdminUpdateChapterMutation = {
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
-    region?: { __typename?: 'Region'; id?: string | null } | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
@@ -3546,7 +3554,7 @@ export type AdminChapterQuery = {
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
-    region?: { __typename?: 'Region'; id?: string | null } | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
@@ -3582,7 +3590,7 @@ export type AdminChaptersQuery = {
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
-    region?: { __typename?: 'Region'; id?: string | null } | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   }> | null
   counters?: {
@@ -6282,6 +6290,7 @@ export const AdminChapterDetailsFragmentDoc = gql`
     }
     region {
       id
+      name
     }
     AttendanceReminder {
       id
