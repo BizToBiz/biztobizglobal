@@ -1,0 +1,20 @@
+query AdminSubstituteGroup($substituteGroupId: String!) {
+  substituteGroup: adminSubstituteGroup(substituteGroupId: $substituteGroupId) {
+    ...AdminSubstituteGroupDetails
+  }
+}
+
+query AdminSubstituteGroups($input: AdminListSubstituteGroupInput) {
+  substituteGroups: adminSubstituteGroups(input: $input) {
+    ...AdminSubstituteGroupDetails
+  }
+  counters: adminCountSubstituteGroups(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminSubstituteGroupPagination($input: AdminListSubstituteGroupInput) {
+  counters: adminCountSubstituteGroups(input: $input) {
+    ...CorePagingDetails
+  }
+}

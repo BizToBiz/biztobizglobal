@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { User } from '@biztobiz/api/user/data-access'
 import { Chapter } from '@biztobiz/api/chapter/data-access'
-import { ReferralRating } from './referral-rating.enum'
+import { ReferralRating } from '../../../../../../libs/api/enums/data-access/src/lib/models/referral-rating.enum'
 
 @ObjectType()
 export class Referral {

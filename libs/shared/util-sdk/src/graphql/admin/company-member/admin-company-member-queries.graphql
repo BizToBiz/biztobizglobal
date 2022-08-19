@@ -1,0 +1,20 @@
+query AdminCompanyMember($companyMemberId: String!) {
+  companyMember: adminCompanyMember(companyMemberId: $companyMemberId) {
+    ...AdminCompanyMemberDetails
+  }
+}
+
+query AdminCompanyMembers($input: AdminListCompanyMemberInput) {
+  companyMembers: adminCompanyMembers(input: $input) {
+    ...AdminCompanyMemberDetails
+  }
+  counters: adminCountCompanyMembers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminCompanyMemberPagination($input: AdminListCompanyMemberInput) {
+  counters: adminCountCompanyMembers(input: $input) {
+    ...CorePagingDetails
+  }
+}

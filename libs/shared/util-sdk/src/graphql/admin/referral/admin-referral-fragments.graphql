@@ -11,4 +11,27 @@ fragment AdminReferralDetails on Referral {
   notes
   fromIndustry
   toIndustry
+  sentBy {
+    id
+    name
+  }
+  from {
+    id
+    name
+  }
+  to {
+    id
+    name
+  }
+  fromChapter {
+    id
+    name
+  }
+  toChapter {
+    id
+    name
+  }
+  transactions {
+    id
+  }
 }

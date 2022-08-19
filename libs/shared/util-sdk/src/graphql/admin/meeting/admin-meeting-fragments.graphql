@@ -1,0 +1,17 @@
+fragment AdminMeetingDetails on Meeting {
+  id
+  createdAt
+  updatedAt
+  date
+  chapter {
+    id
+    name
+  }
+  isVisitorDay
+  presence {
+    id
+  }
+  substitutes {
+    id
+  }
+}

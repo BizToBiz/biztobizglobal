@@ -44,7 +44,7 @@ export function WebShellFeature() {
           </Route>
           <Route path="admin/*" element={<WebAdminRouter user={user} />}></Route>
           <Route path="leader/*" element={<WebLeaderRouter user={user} />}></Route>
-          <Route path="/" element={<WebAboutFeature />} />
+          <Route path="/" element={<WebFeatureLogin />} />
           <Route path="about" element={<WebAboutFeature />} />
           <Route path="dashboard" element={<WebDashboardFeature />} />
 

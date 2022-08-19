@@ -1,0 +1,20 @@
+query AdminIndustry($industryId: String!) {
+  industry: adminIndustry(industryId: $industryId) {
+    ...AdminIndustryDetails
+  }
+}
+
+query AdminIndustries($input: AdminListIndustryInput) {
+  industries: adminIndustries(input: $input) {
+    ...AdminIndustryDetails
+  }
+  counters: adminCountIndustries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminIndustryPagination($input: AdminListIndustryInput) {
+  counters: adminCountIndustries(input: $input) {
+    ...CorePagingDetails
+  }
+}

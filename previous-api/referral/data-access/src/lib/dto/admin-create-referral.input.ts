@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { ReferralRating } from '../models/referral-rating.enum'
+import { ReferralRating } from '../../../../../../libs/api/enums/data-access/src/lib/models/referral-rating.enum'
 
 @InputType()
 export class AdminCreateReferralInput {

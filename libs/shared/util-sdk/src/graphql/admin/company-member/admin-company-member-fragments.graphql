@@ -1,0 +1,15 @@
+fragment AdminCompanyMemberDetails on CompanyMember {
+  id
+  createdAt
+  updatedAt
+  fromDate
+  thruDate
+  role
+  location
+  company {
+    id
+  }
+  member {
+    id
+  }
+}

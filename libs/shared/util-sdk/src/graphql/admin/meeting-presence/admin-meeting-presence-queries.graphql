@@ -1,0 +1,20 @@
+query AdminMeetingPresence($meetingPresenceId: String!) {
+  meetingPresence: adminMeetingPresence(meetingPresenceId: $meetingPresenceId) {
+    ...AdminMeetingPresenceDetails
+  }
+}
+
+query AdminMeetingPresences($input: AdminListMeetingPresenceInput) {
+  meetingPresences: adminMeetingPresences(input: $input) {
+    ...AdminMeetingPresenceDetails
+  }
+  counters: adminCountMeetingPresences(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminMeetingPresencePagination($input: AdminListMeetingPresenceInput) {
+  counters: adminCountMeetingPresences(input: $input) {
+    ...CorePagingDetails
+  }
+}

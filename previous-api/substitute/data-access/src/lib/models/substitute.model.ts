@@ -16,8 +16,8 @@ export class Substitute {
   @Field(() => Meeting, { nullable: true })
   meeting?: Omit<[Meeting], ''>
 
-  @Field(() => User, { nullable: true })
-  invited?: Omit<[User], ''>
+  @Field(() => [User], { nullable: true })
+  invited?: Omit<[User[]], ''>
 
   @Field(() => User, { nullable: true })
   sentBy?: Omit<[User], ''>

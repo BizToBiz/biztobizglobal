@@ -1,0 +1,22 @@
+fragment AdminUploadDetails on Upload {
+  id
+  createdAt
+  updatedAt
+  format
+  originalFilename
+  publicId
+  resourceType
+  secureUrl
+  signature
+  thumbnailUrl
+  url
+  type
+  user {
+    id
+    name
+  }
+  chapter {
+    id
+    name
+  }
+}

@@ -1,0 +1,6 @@
+fragment AdminIndustryDetails on Industry {
+  id
+  createdAt
+  updatedAt
+  name
+}

@@ -1,0 +1,13 @@
+fragment AdminMeetingPresenceDetails on MeetingPresence {
+  id
+  createdAt
+  updatedAt
+  attendance
+  meeting {
+    id
+  }
+  member {
+    id
+    name
+  }
+}

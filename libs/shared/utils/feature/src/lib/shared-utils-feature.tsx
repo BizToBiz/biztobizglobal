@@ -1,5 +1,6 @@
-import { SelectFieldOptions } from '@biztobiz/web-admin/crud-helper'
 import { SVGProps } from 'react'
+import { WebUiFormField } from '@biztobiz/web-ui/form'
+import { Maybe } from 'graphql/jsutils/Maybe'
 
 export function capitalizeFirstLetter(string: string | undefined) {
   return string && string[0].toUpperCase() + string.slice(1)
@@ -21,10 +22,30 @@ function isValidDate(d: any) {
   return d instanceof Date && !isNaN(d as any)
 }
 
-export function cleanFormInput(obj: Record<string, unknown>, selectFieldOptions?: SelectFieldOptions[]) {
-  // console.log(obj)
-  const selectFields = selectFieldOptions?.filter((field) => field.type === 'single').map((field) => field.idName)
-  const multiSelectFields = selectFieldOptions?.filter((field) => field.type === 'multi').map((field) => field.name)
+function defaultMultiMap(items: { id: string; name?: string }[]): { value: string; label: string }[] {
+  return items?.map?.((option: { id: string; name?: string }) => ({
+    value: `${option.id}`,
+    label: `${option?.name ?? option.id}`,
+  }))
+}
+
+export function defaultSingleMap(item: { id: string; name?: string }): {
+  value: Maybe<string> | undefined
+  label: string
+} {
+  return {
+    value: item.id,
+    label: `${item?.name ?? item.id}`,
+  }
+}
+
+export function cleanFormInput(obj: Record<string, unknown>, fields?: WebUiFormField[]) {
+  const selectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && !field.options.multi)
+    .map((field) => field.key)
+  const multiSelectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && field.options.multi)
+    .map((field) => field.key)
 
   return Object.fromEntries(
     Object.entries(obj)
@@ -34,6 +55,7 @@ export function cleanFormInput(obj: Record<string, unknown>, selectFieldOptions?
           v === undefined ||
           !v ||
           v === '' ||
+          (v instanceof Array && !v.length) ||
           k === 'createdAt' ||
           k === 'updatedAt' ||
           k == '__typename' ||
@@ -53,7 +75,7 @@ export function cleanFormInput(obj: Record<string, unknown>, selectFieldOptions?
         }
         // Return array of values for multiselect fields
         if (multiSelectFields?.includes(k)) {
-          return [k, (v as any)?.map((item: any) => ({ id: item?.value }))]
+          return [k, (v as any)?.map?.((item: any) => ({ id: item?.value }))]
         }
         // Return value only for select fields
         if (selectFields?.includes(k)) {
@@ -64,9 +86,13 @@ export function cleanFormInput(obj: Record<string, unknown>, selectFieldOptions?
   )
 }
 
-export function cleanDatabaseOutput(obj: Record<string, unknown>, selectFieldOptions?: SelectFieldOptions[]) {
-  const selectFields = selectFieldOptions?.filter((field) => field.type === 'single').map((field) => field.name)
-  const multiSelectFields = selectFieldOptions?.filter((field) => field.type === 'multi').map((field) => field.name)
+export function cleanDatabaseOutput(obj: Record<string, unknown>, fields?: WebUiFormField[]) {
+  const selectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && !field.options.multi)
+    .map((field) => field.key)
+  const multiSelectFields = fields
+    ?.filter((field) => field.type === 'RelationSelect' && field.options.multi)
+    .map((field) => field.key)
 
   return Object.fromEntries(
     Object.entries(obj)
@@ -76,6 +102,7 @@ export function cleanDatabaseOutput(obj: Record<string, unknown>, selectFieldOpt
           v === undefined ||
           !v ||
           v === '' ||
+          (v instanceof Array && !v.length) ||
           k === 'createdAt' ||
           k === 'updatedAt' ||
           k == '__typename' ||
@@ -95,13 +122,14 @@ export function cleanDatabaseOutput(obj: Record<string, unknown>, selectFieldOpt
         }
         // Return array of values for multiselect fields
         if (multiSelectFields?.includes(k)) {
-          const field = selectFieldOptions?.find((f) => f.name === k)
-          return [k, field?.mapFunction(v as any)]
+          const field = fields?.find((f) => f.key === k)
+          return [k, field?.options?.mapFunction?.(v as any) ?? defaultMultiMap(v as any)]
         }
         // Return value for single select fields
-        if (selectFields?.includes(k)) {
-          const field = selectFieldOptions?.find((f) => f.name === k)
-          return [field?.idName, field?.mapFunction(v as any)]
+        if (selectFields?.includes(`${k}Id`)) {
+          console.log(k, v)
+          const field = fields?.find((f) => f.key.slice(0, -2) === k)
+          return [field?.key, field?.options?.mapFunction?.(v as any) ?? defaultSingleMap(v as any)]
         }
         return [k, v]
       }),

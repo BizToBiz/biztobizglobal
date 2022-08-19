@@ -1,5 +1,10 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
-import { Role } from '@biztobiz/shared/util-sdk'
+import React from 'react'
+
+// TODO: Create custom filter functions
+// function regionFilterFunction(regions: Region[]) {
+//   return regions?.filter((region) => !region.User?.id)
+// }
 
 export const userFields: WebUiFormField[] = [
   WebUiFormField.checkbox('developer', { label: 'Is the user a Developer?' }),

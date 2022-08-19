@@ -7,5 +7,5 @@ export class UserToken {
   token: string
 
   @Field(() => User)
-  user: User
+  user: Omit<[User], ''>
 }

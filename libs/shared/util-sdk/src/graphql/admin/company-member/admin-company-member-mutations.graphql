@@ -1,0 +1,17 @@
+mutation adminCreateCompanyMember($input: AdminCreateCompanyMemberInput!) {
+  createCompanyMember: adminCreateCompanyMember(input: $input) {
+    ...AdminCompanyMemberDetails
+  }
+}
+
+mutation adminDeleteCompanyMember($companyMemberId: String!) {
+  deleteCompanyMember: adminDeleteCompanyMember(companyMemberId: $companyMemberId) {
+    id
+  }
+}
+
+mutation adminUpdateCompanyMember($companyMemberId: String!, $input: AdminUpdateCompanyMemberInput!) {
+  updateCompanyMember: adminUpdateCompanyMember(companyMemberId: $companyMemberId, input: $input) {
+    ...AdminCompanyMemberDetails
+  }
+}

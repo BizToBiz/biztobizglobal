@@ -1,7 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { Role } from '../models/role.enum'
-import { UserOnlineStatus } from '../models/user-online-status.enum'
-import { UserStatus } from '../models/user-status.enum'
+import { Role, UserOnlineStatus, UserStatus } from '@biztobiz/api/enums/data-access'
 
 @InputType()
 export class AdminCreateUserInput {

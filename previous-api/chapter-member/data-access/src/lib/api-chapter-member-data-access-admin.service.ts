@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
-import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 
 import { AdminCreateChapterMemberInput } from './dto/admin-create-chapter-member.input'
 import { AdminListChapterMemberInput } from './dto/admin-list-chapter-member.input'

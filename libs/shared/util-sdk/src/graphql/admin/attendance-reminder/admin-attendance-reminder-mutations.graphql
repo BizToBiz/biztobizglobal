@@ -1,0 +1,17 @@
+mutation adminCreateAttendanceReminder($input: AdminCreateAttendanceReminderInput!) {
+  createAttendanceReminder: adminCreateAttendanceReminder(input: $input) {
+    ...AdminAttendanceReminderDetails
+  }
+}
+
+mutation adminDeleteAttendanceReminder($attendanceReminderId: String!) {
+  deleteAttendanceReminder: adminDeleteAttendanceReminder(attendanceReminderId: $attendanceReminderId) {
+    id
+  }
+}
+
+mutation adminUpdateAttendanceReminder($attendanceReminderId: String!, $input: AdminUpdateAttendanceReminderInput!) {
+  updateAttendanceReminder: adminUpdateAttendanceReminder(attendanceReminderId: $attendanceReminderId, input: $input) {
+    ...AdminAttendanceReminderDetails
+  }
+}

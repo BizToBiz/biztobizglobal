@@ -7,7 +7,7 @@ export function WebAdmin<%= className %>Create() {
   const pathData = {
     path: '/admin/<%= pluralName %>/new',
     name: 'Create a <%= className %>',
-    description: 'Use the form below to add a new <%= name %>',
+    description: 'Use the form below to add a new <%= className %>',
     showSearch: false,
     actionText: 'Back to <%= className %> List',
     actionLink: '/admin/<%= pluralName %>',

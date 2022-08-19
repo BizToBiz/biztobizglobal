@@ -1,0 +1,20 @@
+query AdminChapterMember($chapterMemberId: String!) {
+  chapterMember: adminChapterMember(chapterMemberId: $chapterMemberId) {
+    ...AdminChapterMemberDetails
+  }
+}
+
+query AdminChapterMembers($input: AdminListChapterMemberInput) {
+  chapterMembers: adminChapterMembers(input: $input) {
+    ...AdminChapterMemberDetails
+  }
+  counters: adminCountChapterMembers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminChapterMemberPagination($input: AdminListChapterMemberInput) {
+  counters: adminCountChapterMembers(input: $input) {
+    ...CorePagingDetails
+  }
+}

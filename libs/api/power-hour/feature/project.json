@@ -1,0 +1,39 @@
+{
+  "root": "libs/api/power-hour/feature",
+  "sourceRoot": "libs/api/power-hour/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/power-hour/feature/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/power-hour/feature"],
+      "options": {
+        "jestConfig": "libs/api/power-hour/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/power-hour/feature"],
+      "options": {
+        "jestConfig": "libs/api/power-hour/feature/jest.e2e.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "load-api": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/power-hour/feature"],
+      "options": {
+        "jestConfig": "libs/api/power-hour/feature/jest.load.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "type:feature"]
+}

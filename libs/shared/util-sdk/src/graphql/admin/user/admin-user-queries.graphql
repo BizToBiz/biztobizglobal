@@ -1,0 +1,20 @@
+query AdminUser($userId: String!) {
+  user: adminUser(userId: $userId) {
+    ...AdminUserDetails
+  }
+}
+
+query AdminUsers($input: AdminListUserInput) {
+  users: adminUsers(input: $input) {
+    ...AdminUserDetails
+  }
+  counters: adminCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminUserPagination($input: AdminListUserInput) {
+  counters: adminCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}

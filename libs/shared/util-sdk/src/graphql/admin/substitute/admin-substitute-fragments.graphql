@@ -1,0 +1,20 @@
+fragment AdminSubstituteDetails on Substitute {
+  id
+  createdAt
+  updatedAt
+  meeting {
+    id
+  }
+  invited {
+    id
+    name
+  }
+  sentBy {
+    id
+    name
+  }
+  substitute {
+    id
+    name
+  }
+}

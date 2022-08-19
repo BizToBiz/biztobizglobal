@@ -1,0 +1,17 @@
+mutation adminCreateIndustry($input: AdminCreateIndustryInput!) {
+  createIndustry: adminCreateIndustry(input: $input) {
+    ...AdminIndustryDetails
+  }
+}
+
+mutation adminDeleteIndustry($industryId: String!) {
+  deleteIndustry: adminDeleteIndustry(industryId: $industryId) {
+    id
+  }
+}
+
+mutation adminUpdateIndustry($industryId: String!, $input: AdminUpdateIndustryInput!) {
+  updateIndustry: adminUpdateIndustry(industryId: $industryId, input: $input) {
+    ...AdminIndustryDetails
+  }
+}

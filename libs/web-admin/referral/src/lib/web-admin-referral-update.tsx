@@ -8,7 +8,7 @@ import {
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { referralFields, referralSelectFields } from './web-admin-referral-helper'
+import { referralFields } from './web-admin-referral-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminReferralUpdate() {
@@ -26,7 +26,7 @@ export function WebAdminReferralUpdate() {
 
   function defaultValues() {
     if (referral?.referral && !loading) {
-      return cleanDatabaseOutput(referral.referral, referralSelectFields)
+      return cleanDatabaseOutput(referral.referral, referralFields)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebAdminReferralUpdate() {
       buttonText={'Referral'}
       fields={referralFields}
       idName={'referralId'}
-      selectFields={referralSelectFields}
     />
   )
 }

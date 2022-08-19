@@ -9,7 +9,8 @@ import {
 } from '@<%= npmScope %>/<%= directory %>/<%= modelName %>/data-access'
 import { CorePaging } from '@<%= npmScope %>/<%= directory %>/core/data-access'
 import {  CtxUser, GqlAuthGuard } from '@<%= npmScope %>/<%= directory %>/auth/util'
-import { User } from '@<%= npmScope %>/<%= directory %>/user/data-access'
+import { UseGuards } from '@nestjs/common'
+import { User } from '@<%= npmScope %>/api/user/data-access'
 
 @Resolver()
 @UseGuards(GqlAuthGuard)

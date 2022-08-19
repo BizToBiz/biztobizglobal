@@ -4,7 +4,7 @@ import { isDevAtom } from '@biztobiz/web/global/data-access'
 import { AdminDeleteCompanyDocument, AdminUpdateCompanyDocument, useAdminCompanyQuery } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { companyFields, companySelectFields } from './web-admin-company-helper'
+import { companyFields } from './web-admin-company-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
 export function WebAdminCompanyUpdate() {
@@ -22,7 +22,7 @@ export function WebAdminCompanyUpdate() {
 
   function defaultValues() {
     if (company?.company && !loading) {
-      return cleanDatabaseOutput(company.company, companySelectFields)
+      return cleanDatabaseOutput(company.company, companyFields)
     } else {
       return undefined
     }
@@ -47,7 +47,6 @@ export function WebAdminCompanyUpdate() {
       buttonText={'Company'}
       fields={companyFields}
       idName={'companyId'}
-      selectFields={companySelectFields}
     />
   )
 }

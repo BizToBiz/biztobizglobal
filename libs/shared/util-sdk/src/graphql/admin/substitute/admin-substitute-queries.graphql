@@ -1,0 +1,20 @@
+query AdminSubstitute($substituteId: String!) {
+  substitute: adminSubstitute(substituteId: $substituteId) {
+    ...AdminSubstituteDetails
+  }
+}
+
+query AdminSubstitutes($input: AdminListSubstituteInput) {
+  substitutes: adminSubstitutes(input: $input) {
+    ...AdminSubstituteDetails
+  }
+  counters: adminCountSubstitutes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminSubstitutePagination($input: AdminListSubstituteInput) {
+  counters: adminCountSubstitutes(input: $input) {
+    ...CorePagingDetails
+  }
+}
