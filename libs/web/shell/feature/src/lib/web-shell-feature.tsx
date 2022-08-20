@@ -30,7 +30,7 @@ function PrivateOutlet(props) {
 }
 
 export function WebShellFeature() {
-  const client = createApolloClient('/api')
+  const client = createApolloClient('/graphql')
   const [user] = useAtom(identityAtom)
 
   return (
