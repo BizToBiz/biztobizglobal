@@ -54,7 +54,7 @@
     "sdk": "graphql-codegen --config libs/shared/util-sdk/src/codegen.yml",
     "sdk:watch": "yarn sdk --watch",
     "setup": "yarn prisma:apply",
-    "start": "node dist/apps/api/main.js && nx serve web",
+    "start": "node dist/apps/api/main.js",
     "test": "nx test",
     "test:api": "yarn nx e2e api-e2e",
     "test:ci": "yarn test:api",
