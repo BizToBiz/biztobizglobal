@@ -11,6 +11,9 @@ import { validationSchema } from './config/validation'
 import { ApiCoreFeatureController } from './api-core-feature.controller'
 import { ApiCoreFeatureResolver } from './api-core-feature.resolver'
 import { ApiCoreFeatureService } from './api-core-feature.service'
+import { ServeStaticModule } from '@nestjs/serve-static'
+
+const rootPath = join(__dirname, '..', 'web')
 
 @Module({
   imports: [
@@ -25,12 +28,12 @@ import { ApiCoreFeatureService } from './api-core-feature.service'
       context: ({ req, res }) => ({ req, res }),
       installSubscriptionHandlers: true,
       sortSchema: true,
-      cors: {
-        credentials: true,
-        origin: '*',
-      },
     }),
     GraphQLIntercomModule.forRoot({ pubSub: new PubSub() }),
+    ServeStaticModule.forRoot({
+      rootPath,
+      exclude: ['/api', '/graphql'],
+    }),
   ],
   controllers: [ApiCoreFeatureController],
   providers: [ApiCoreFeatureResolver, ApiCoreFeatureService],

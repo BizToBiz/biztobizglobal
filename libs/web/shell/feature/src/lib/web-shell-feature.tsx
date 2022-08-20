@@ -2,7 +2,6 @@ import { ApolloProvider } from '@apollo/client'
 import { createApolloClient } from '@biztobiz/shared/util-apollo'
 import { WebAboutFeature } from '@biztobiz/web/about/feature'
 import { WebDashboardFeature } from '@biztobiz/web/dashboard/feature'
-import { environment } from '@biztobiz/web/environments'
 import React from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 
@@ -31,7 +30,7 @@ function PrivateOutlet(props) {
 }
 
 export function WebShellFeature() {
-  const client = createApolloClient(environment.graphql)
+  const client = createApolloClient('/graphql')
   const [user] = useAtom(identityAtom)
 
   return (
