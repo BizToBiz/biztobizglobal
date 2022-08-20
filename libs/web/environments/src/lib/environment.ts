@@ -3,5 +3,5 @@
 
 export const environment = {
   production: false,
-  graphql: 'https://api-stage.biztobiz.xyz/graqhql',
+  graphql: 'https://api-stage.biztobiz.xyz/graphql',
 }
