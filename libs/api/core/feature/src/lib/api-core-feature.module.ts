@@ -27,7 +27,7 @@ import { ApiCoreFeatureService } from './api-core-feature.service'
       sortSchema: true,
       cors: {
         credentials: true,
-        origin: process.env.WEB_URL,
+        origin: true,
       },
     }),
     GraphQLIntercomModule.forRoot({ pubSub: new PubSub() }),
