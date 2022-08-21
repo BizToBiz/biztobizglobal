@@ -4,6 +4,7 @@ import { WebAboutFeature } from '@biztobiz/web/about/feature'
 import { WebDashboardFeature } from '@biztobiz/web/dashboard/feature'
 import React from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import Cookie from 'js-cookie'
 
 import { WebUiLayout } from '@biztobiz/web-ui/layout'
 import {
@@ -30,11 +31,24 @@ function PrivateOutlet(props) {
 }
 
 export function WebShellFeature() {
-  const client = createApolloClient('/graphql')
+  // eslint-disable-next-line no-restricted-globals
+  let uri = `${location.protocol}//${location.hostname}:${location.port}/graphql`
+  // if (process.env.REACT_APP_STAGE === 'true') {
+  //   uri = `https://api-stage.expand.monroeinstitute.org`
+  // }
+  // if (process.env.NODE_ENV === 'production') {
+  //   uri = `https://api.expand.monroeinstitute.org/graphql`
+  // }
+  const wsUri = uri.replace('http', 'ws')
+  const client = createApolloClient(uri, wsUri, () =>
+    Promise.resolve({
+      authorization: `Bearer ${Cookie.get('__session')}`,
+    }),
+  )
   const [user] = useAtom(identityAtom)
 
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client.client}>
       <SharedAuthProvider identityAtom={identityAtom} isRememberedAtom={isRememberedAtom}>
         <Routes>
           <Route path="members" element={<PrivateOutlet user={user} />}>
