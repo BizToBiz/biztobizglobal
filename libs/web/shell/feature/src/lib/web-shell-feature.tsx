@@ -32,14 +32,15 @@ function PrivateOutlet(props) {
 
 export function WebShellFeature() {
   // eslint-disable-next-line no-restricted-globals
-  let uri = `${location.protocol}//${location.hostname}:${location.port}/graphql`
+  const uri = `${location.protocol}//${location.hostname}:${location.port}/graphql`
   // if (process.env.REACT_APP_STAGE === 'true') {
-  //   uri = `https://api-stage.expand.monroeinstitute.org`
+  //   uri = ``
   // }
   // if (process.env.NODE_ENV === 'production') {
-  //   uri = `https://api.expand.monroeinstitute.org/graphql`
+  //   uri = ``
   // }
   const wsUri = uri.replace('http', 'ws')
+  console.log(`Bearer ${Cookie.get('__session')}`)
   const client = createApolloClient(uri, wsUri, () =>
     Promise.resolve({
       authorization: `Bearer ${Cookie.get('__session')}`,

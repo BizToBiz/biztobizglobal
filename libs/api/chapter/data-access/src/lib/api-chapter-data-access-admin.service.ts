@@ -37,13 +37,14 @@ export class ApiChapterDataAccessAdminService {
     }
   }
 
-  adminChapters(info: GraphQLResolveInfo, adminId: string, input?: AdminListChapterInput) {
+  async adminChapters(info: GraphQLResolveInfo, adminId: string, input?: AdminListChapterInput) {
     const select = new PrismaSelect(info).value
-    return this.data.chapter.findMany({
+    const chapters = await this.data.chapter.findMany({
       take: input?.take,
       skip: input?.skip,
       ...select,
     })
+    return chapters
   }
 
   async adminCountChapters(adminId: string, input?: AdminListChapterInput): Promise<CorePaging> {
