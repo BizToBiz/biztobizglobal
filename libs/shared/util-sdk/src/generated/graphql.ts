@@ -616,6 +616,7 @@ export type AttendanceReminder = {
   chapter?: Maybe<Chapter>
   createdAt?: Maybe<Scalars['DateTime']>
   id?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
   sentBy?: Maybe<User>
   sentTo?: Maybe<User>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -3272,9 +3273,22 @@ export type AdminAttendanceReminderDetailsFragment = {
   id?: string | null
   createdAt?: any | null
   updatedAt?: any | null
+  name?: string | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-  sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  sentBy?: {
+    __typename?: 'User'
+    id?: string | null
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+  } | null
+  sentTo?: {
+    __typename?: 'User'
+    id?: string | null
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+  } | null
 }
 
 export type AdminCreateAttendanceReminderMutationVariables = Exact<{
@@ -3288,9 +3302,22 @@ export type AdminCreateAttendanceReminderMutation = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   } | null
 }
 
@@ -3315,9 +3342,22 @@ export type AdminUpdateAttendanceReminderMutation = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   } | null
 }
 
@@ -3332,9 +3372,22 @@ export type AdminAttendanceReminderQuery = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   } | null
 }
 
@@ -3349,9 +3402,22 @@ export type AdminAttendanceRemindersQuery = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -6308,6 +6374,7 @@ export const AdminAttendanceReminderDetailsFragmentDoc = gql`
     id
     createdAt
     updatedAt
+    name
     chapter {
       id
       name
@@ -6315,10 +6382,14 @@ export const AdminAttendanceReminderDetailsFragmentDoc = gql`
     sentBy {
       id
       name
+      firstName
+      lastName
     }
     sentTo {
       id
       name
+      firstName
+      lastName
     }
   }
 `

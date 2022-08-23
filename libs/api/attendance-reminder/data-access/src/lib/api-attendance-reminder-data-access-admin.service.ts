@@ -31,7 +31,13 @@ export class ApiAttendanceReminderDataAccessAdminService {
       AND: [
         relationalSearch(),
         ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          OR: [
+            { chapter: { name: { contains: term } } },
+            { sentBy: { firstName: { contains: term } } },
+            { sentBy: { lastName: { contains: term } } },
+            { sentTo: { firstName: { contains: term } } },
+            { sentTo: { lastName: { contains: term } } },
+          ], //this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),
       ],
     }
@@ -42,6 +48,7 @@ export class ApiAttendanceReminderDataAccessAdminService {
     return this.data.attendanceReminder.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

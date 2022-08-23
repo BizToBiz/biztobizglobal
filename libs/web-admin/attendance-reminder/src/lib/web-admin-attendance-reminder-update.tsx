@@ -25,9 +25,8 @@ export function WebAdminAttendanceReminderUpdate() {
   if (!params?.['id']) return <div>No Id</div>
 
   function defaultValues() {
-    console.log(attendanceReminder?.attendanceReminder)
     if (attendanceReminder?.attendanceReminder && !loading) {
-      return cleanDatabaseOutput(attendanceReminder.attendanceReminder, attendanceReminderFields)
+      return cleanDatabaseOutput(attendanceReminder.attendanceReminder, attendanceReminderFields, ['name'])
     } else {
       return undefined
     }
