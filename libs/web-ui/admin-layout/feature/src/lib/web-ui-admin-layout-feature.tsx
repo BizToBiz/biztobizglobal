@@ -9,10 +9,10 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { NavigationInterface } from '@biztobiz/shared/utils/feature'
 
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+const userNavigation: { name: string; href: string }[] = [
+  // { name: 'Your Profile', href: '#' },
+  // { name: 'Settings', href: '#' },
+  // { name: 'Sign out', href: '#' },
 ]
 
 function classNames(...classes: string[]) {
@@ -23,6 +23,7 @@ export interface WebAdminDashboardFeatureProps {
   children: React.ReactNode
   user: User
   navigation: NavigationInterface[]
+  logout: () => void
 }
 
 export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
@@ -225,6 +226,11 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                         )}
                       </Menu.Item>
                     ))}
+                    <Menu.Item key="logout">
+                      <button onClick={props?.logout} className="block px-4 py-2 text-sm text-gray-700">
+                        Log Out
+                      </button>
+                    </Menu.Item>
                   </Menu.Items>
                 </Transition>
               </Menu>

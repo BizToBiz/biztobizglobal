@@ -28,9 +28,8 @@ export class GqlAuthAdminGuard extends AuthGuard('jwt') {
 
     if (!hasAccess) {
       throw new ForbiddenException(`You need to have Admin access`)
-    } else {
-      console.log('User has admin access')
     }
+
     return req && req.user && this.hasAccess(req.user)
   }
 

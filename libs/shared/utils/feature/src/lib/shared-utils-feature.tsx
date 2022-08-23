@@ -86,7 +86,7 @@ export function cleanFormInput(obj: Record<string, unknown>, fields?: WebUiFormF
   )
 }
 
-export function cleanDatabaseOutput(obj: Record<string, unknown>, fields?: WebUiFormField[]) {
+export function cleanDatabaseOutput(obj: Record<string, unknown>, fields?: WebUiFormField[], falseName?: boolean) {
   const selectFields = fields
     ?.filter((field) => field.type === 'RelationSelect' && !field.options.multi)
     .map((field) => field.key)
@@ -107,7 +107,8 @@ export function cleanDatabaseOutput(obj: Record<string, unknown>, fields?: WebUi
           k === 'updatedAt' ||
           k == '__typename' ||
           k === 'id' ||
-          (v instanceof Date && !isValidDate(v))
+          (v instanceof Date && !isValidDate(v)) ||
+          (falseName && k === 'name')
         )
           return false
         return true

@@ -2,7 +2,7 @@ import { ApolloProvider } from '@apollo/client'
 import { createApolloClient } from '@biztobiz/shared/util-apollo'
 import { WebAboutFeature } from '@biztobiz/web/about/feature'
 import { WebDashboardFeature } from '@biztobiz/web/dashboard/feature'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import Cookie from 'js-cookie'
 
@@ -15,14 +15,16 @@ import {
 } from '@biztobiz/web/auth/feature'
 import { useAtom } from 'jotai'
 import { identityAtom, isAuthenticatedAtom, isRememberedAtom } from '@biztobiz/web/global/data-access'
-import { SharedAuthProvider } from '@biztobiz/shared/auth/data-access'
+import { SharedAuthContext, SharedAuthProvider } from '@biztobiz/shared/auth/data-access'
 import { WebAdminRouter } from '@biztobiz/web-admin/router'
 import { WebLeaderRouter } from '@biztobiz/web-leader/router'
 
 function PrivateOutlet(props) {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom)
+  const { logout } = useContext(SharedAuthContext)
+
   return isAuthenticated ? (
-    <WebUiLayout user={props.user}>
+    <WebUiLayout user={props.user} logout={logout}>
       <Outlet />
     </WebUiLayout>
   ) : (
@@ -40,7 +42,6 @@ export function WebShellFeature() {
   //   uri = ``
   // }
   const wsUri = uri.replace('http', 'ws')
-  console.log(`Bearer ${Cookie.get('__session')}`)
   const client = createApolloClient(uri, wsUri, () =>
     Promise.resolve({
       authorization: `Bearer ${Cookie.get('__session')}`,

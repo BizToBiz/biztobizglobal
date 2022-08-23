@@ -30,7 +30,7 @@ export class ApiAuthFeatureResolver {
 
   @Mutation(() => Boolean, { nullable: true })
   async logout(@Context() context) {
-    Logger.log('logout')
+    Logger.log('LOGOUT ++++++++')
     this.service.clearCookie(context.res)
     return true
   }

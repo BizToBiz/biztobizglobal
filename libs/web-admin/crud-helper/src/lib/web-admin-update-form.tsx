@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom } from '@biztobiz/web/global/data-access'
 import { RESET } from 'jotai/utils'
@@ -34,7 +34,7 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
   const navigate = useNavigate()
   const [isDev] = useAtom(isDevAtom)
   const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [cancelModalOpen, setCancelModalOpen] = useState(false)
   const [updateMutation] = useMutation(props.document)
   const [deleteMutation] = useMutation(props.deleteDocument)
@@ -66,6 +66,12 @@ export function WebAdminUpdateForm(props: WebAdminCreateFormProps) {
       setCurrentPath(RESET)
     }
   }, [])
+
+  useEffect(() => {
+    if (props?.defaultValues) {
+      setLoading(false)
+    }
+  }, [props?.defaultValues])
 
   return (
     <>

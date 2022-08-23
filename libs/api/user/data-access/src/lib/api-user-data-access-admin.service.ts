@@ -40,8 +40,9 @@ export class ApiUserDataAccessAdminService {
   adminUsers(info: GraphQLResolveInfo, adminId: string, input?: AdminListUserInput) {
     const select = new PrismaSelect(info).value
     return this.data.user.findMany({
-      take: input?.take,
+      take: input?.take || 20,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

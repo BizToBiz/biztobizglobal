@@ -1,11 +1,12 @@
 import { useAtom } from 'jotai'
 import { currentPathAtom } from '@biztobiz/web/global/data-access'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
 import { WebLeaderDashboard } from '@biztobiz/web-leader/dashboard'
 import { HomeIcon } from '@heroicons/react/outline'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
+import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 
 // Add New Imports Here
 
@@ -15,6 +16,7 @@ export interface WebLeaderRouterProps {
 
 export function WebLeaderRouter(props: WebLeaderRouterProps) {
   const [currentPath] = useAtom(currentPathAtom)
+  const { logout } = useContext(SharedAuthContext)
 
   const navigation = [
     {
@@ -27,7 +29,7 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
   ]
 
   return props?.user?.isLeader ? (
-    <WebUiAdminLayoutFeature user={props.user} navigation={navigation}>
+    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout}>
       <Routes>
         <Route path="dashboard" element={<WebLeaderDashboard />} />
         {/*Add New Routes Here*/}

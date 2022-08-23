@@ -4,6 +4,7 @@ import { WebUiFormField, WebUiFormFieldType } from './web-ui-form-fields'
 import { Switch } from '@headlessui/react'
 import { RelationSelect } from './field-types/relation-select'
 import { isPhoneNumber } from 'class-validator'
+import Skeleton from 'react-loading-skeleton'
 
 export interface WebUiFormProps extends UseFormProps {
   fields: WebUiFormField[]
@@ -241,7 +242,9 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
     }
   }
 
-  return (
+  return loading ? (
+    <Skeleton count={5} />
+  ) : (
     <form className="space-y-6" onSubmit={handleSubmit(submit)}>
       {fields.map((field) => {
         return renderFieldWrapper(field)
@@ -251,7 +254,7 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-50"
         >
           {buttonText}
         </button>

@@ -150,12 +150,101 @@ export type AdminCreateUploadInput = {
 }
 
 export type AdminCreateUserInput = {
+  address?: InputMaybe<Scalars['String']>
+  address2?: InputMaybe<Scalars['String']>
+  applicationDate?: InputMaybe<Scalars['DateTime']>
+  avatarId?: InputMaybe<Scalars['String']>
+  avatarUrl?: InputMaybe<Scalars['String']>
+  bio?: InputMaybe<Scalars['String']>
+  cell?: InputMaybe<Scalars['String']>
+  chapterId?: InputMaybe<Scalars['String']>
+  chapterTitle?: InputMaybe<Scalars['String']>
+  city?: InputMaybe<Scalars['String']>
+  comments?: InputMaybe<Scalars['String']>
+  companies?: InputMaybe<Array<MultiSelectInput>>
+  company?: InputMaybe<Scalars['String']>
+  confirmEmailExpires?: InputMaybe<Scalars['DateTime']>
+  confirmEmailToken?: InputMaybe<Scalars['String']>
   developer?: InputMaybe<Scalars['Boolean']>
-  firstName: Scalars['String']
+  email?: InputMaybe<Scalars['String']>
+  emailConfirmed?: InputMaybe<Scalars['Boolean']>
+  facebook?: InputMaybe<Scalars['String']>
+  fax?: InputMaybe<Scalars['String']>
+  firstName?: InputMaybe<Scalars['String']>
+  hear?: InputMaybe<Scalars['String']>
+  hearOther?: InputMaybe<Scalars['String']>
+  inactiveDate?: InputMaybe<Scalars['DateTime']>
+  industry?: InputMaybe<Scalars['String']>
+  infusionsoftId?: InputMaybe<Scalars['Int']>
+  inquiryDate?: InputMaybe<Scalars['DateTime']>
+  instagram?: InputMaybe<Scalars['String']>
+  internalComments?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
   lastSeen?: InputMaybe<Scalars['DateTime']>
+  launchComplete?: InputMaybe<Scalars['Boolean']>
+  linkedin?: InputMaybe<Scalars['String']>
+  location?: InputMaybe<Scalars['String']>
+  membershipDate?: InputMaybe<Scalars['DateTime']>
+  mentorName?: InputMaybe<Scalars['String']>
+  merchantCircle?: InputMaybe<Scalars['String']>
+  multipleBusinesses?: InputMaybe<Scalars['Boolean']>
+  multipleLocations?: InputMaybe<Scalars['Boolean']>
+  nofificationsSent?: InputMaybe<Array<MultiSelectInput>>
+  notificationsReceived?: InputMaybe<Array<MultiSelectInput>>
+  notifyByEmail?: InputMaybe<Scalars['Boolean']>
+  notifyByMobile?: InputMaybe<Scalars['Boolean']>
+  notifyBySMS?: InputMaybe<Scalars['Boolean']>
+  notifyByWeb?: InputMaybe<Scalars['Boolean']>
+  numberOfEmployees?: InputMaybe<Scalars['Int']>
   onlineStatus?: InputMaybe<UserOnlineStatus>
-  role: Role
+  organizer?: InputMaybe<Scalars['Int']>
+  otherBusinesses?: InputMaybe<Scalars['String']>
+  otherLocations?: InputMaybe<Scalars['String']>
+  password?: InputMaybe<Scalars['String']>
+  passwordResetExpires?: InputMaybe<Scalars['DateTime']>
+  passwordResetToken?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  postcode?: InputMaybe<Scalars['String']>
+  powerHoursFrom?: InputMaybe<Array<MultiSelectInput>>
+  powerHoursTo?: InputMaybe<Array<MultiSelectInput>>
+  presence?: InputMaybe<Array<MultiSelectInput>>
+  promoter?: InputMaybe<Scalars['Int']>
+  recognized?: InputMaybe<Scalars['Int']>
+  referralsFrom?: InputMaybe<Array<MultiSelectInput>>
+  referralsSent?: InputMaybe<Array<MultiSelectInput>>
+  referralsTo?: InputMaybe<Array<MultiSelectInput>>
+  regionManagedId?: InputMaybe<Scalars['String']>
+  reminderSentBy?: InputMaybe<Array<MultiSelectInput>>
+  reminderSentTo?: InputMaybe<Array<MultiSelectInput>>
+  renewalDate?: InputMaybe<Scalars['DateTime']>
+  role?: InputMaybe<Role>
+  salesAgentName?: InputMaybe<Scalars['String']>
+  showGravatar?: InputMaybe<Scalars['Boolean']>
+  state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<UserStatus>
+  strategizer?: InputMaybe<Scalars['Int']>
+  substitute?: InputMaybe<Scalars['Boolean']>
+  substituteAccepted?: InputMaybe<Array<MultiSelectInput>>
+  substituteInvited?: InputMaybe<Array<MultiSelectInput>>
+  tagline?: InputMaybe<Scalars['String']>
+  terminatedByName?: InputMaybe<Scalars['String']>
+  terminationComments?: InputMaybe<Scalars['String']>
+  terminationDate?: InputMaybe<Scalars['DateTime']>
+  terminationReason?: InputMaybe<Scalars['String']>
+  territoryManagedId?: InputMaybe<Scalars['String']>
+  testimonialsFrom?: InputMaybe<Array<MultiSelectInput>>
+  testimonialsTo?: InputMaybe<Array<MultiSelectInput>>
+  thinker?: InputMaybe<Scalars['Int']>
+  timeInIndustry?: InputMaybe<Scalars['String']>
+  title?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
+  transferDate?: InputMaybe<Scalars['DateTime']>
+  twitter?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<Scalars['String']>
+  username?: InputMaybe<Scalars['String']>
+  vet?: InputMaybe<Scalars['Boolean']>
+  website?: InputMaybe<Scalars['String']>
+  youtube?: InputMaybe<Scalars['String']>
 }
 
 export type AdminListAttendanceReminderInput = {

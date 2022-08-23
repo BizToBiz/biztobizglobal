@@ -32,8 +32,12 @@ function defaultOptionsMap(
 
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
+  console.log(data)
 
-  let dataList = props?.field?.options?.dataType && !loading ? data?.[props.field.options.dataType] : []
+  let dataList =
+    props?.field?.options?.dataType && !loading
+      ? data?.[props.field.options.dataType]
+      : [{ value: '', label: 'Loading...' }]
   if (props?.field?.options?.filter && !loading) {
     dataList = props?.field?.options?.filter?.(dataList)
   }
@@ -43,13 +47,15 @@ export function RelationSelect(props: RelationSelectProps) {
       ? props?.field?.options?.selectOptionsFunction
         ? props?.field?.options?.selectOptionsFunction(dataList)
         : defaultOptionsMap(dataList)
-      : [{ value: '', label: 'Loading...' }]
+      : [{ value: '', label: 'No Matching Data Found' }]
 
   async function getStorageOptions(inputText: string): Promise<OptionsOrGroups<any, GroupBase<any>>> {
     return refetch({ input: { search: inputText } }).then((res) => {
-      return props?.field?.options?.selectOptionsFunction && props?.field?.options?.dataType
-        ? props?.field?.options?.selectOptionsFunction(res?.data?.[props.field.options.dataType])
-        : [{ value: '', label: 'Loading...' }]
+      return props?.field?.options?.dataType
+        ? props?.field?.options?.selectOptionsFunction
+          ? props?.field?.options?.selectOptionsFunction(res?.data?.[props.field.options.dataType])
+          : defaultOptionsMap(res?.data?.[props.field.options.dataType])
+        : [{ value: '', label: 'No Matching Data Found' }]
     })
   }
 
