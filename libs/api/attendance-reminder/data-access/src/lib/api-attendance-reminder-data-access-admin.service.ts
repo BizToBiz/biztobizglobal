@@ -32,12 +32,12 @@ export class ApiAttendanceReminderDataAccessAdminService {
         relationalSearch(),
         ...terms.map((term) => ({
           OR: [
-            { chapter: { name: { contains: term } } },
-            { sentBy: { firstName: { contains: term } } },
-            { sentBy: { lastName: { contains: term } } },
-            { sentTo: { firstName: { contains: term } } },
-            { sentTo: { lastName: { contains: term } } },
-          ], //this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+            { chapter: { name: { contains: term, mode: 'insensitive' } } },
+            { sentBy: { firstName: { contains: term, mode: 'insensitive' } } },
+            { sentBy: { lastName: { contains: term, mode: 'insensitive' } } },
+            { sentTo: { firstName: { contains: term, mode: 'insensitive' } } },
+            { sentTo: { lastName: { contains: term, mode: 'insensitive' } } },
+          ],
         })),
       ],
     }

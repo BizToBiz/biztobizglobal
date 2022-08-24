@@ -239,7 +239,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminChapterUpdate />} />
         </Route>
         <Route path="chapter-members" element={<WebAdminChapterMemberList />} />
-        <Route path="chapterMember">
+        <Route path="chapter-member">
           <Route path="new" element={<WebAdminChapterMemberCreate />} />
           <Route path=":id" element={<WebAdminChapterMemberUpdate />} />
         </Route>
@@ -264,7 +264,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminMeetingUpdate />} />
         </Route>
         <Route path="meeting-presences" element={<WebAdminMeetingPresenceList />} />
-        <Route path="meetingPresence">
+        <Route path="meeting-presence">
           <Route path="new" element={<WebAdminMeetingPresenceCreate />} />
           <Route path=":id" element={<WebAdminMeetingPresenceUpdate />} />
         </Route>
@@ -274,7 +274,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminNotificationUpdate />} />
         </Route>
         <Route path="power-hours" element={<WebAdminPowerHourList />} />
-        <Route path="powerHour">
+        <Route path="power-hour">
           <Route path="new" element={<WebAdminPowerHourCreate />} />
           <Route path=":id" element={<WebAdminPowerHourUpdate />} />
         </Route>
@@ -294,7 +294,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminSubstituteUpdate />} />
         </Route>
         <Route path="substitute-groups" element={<WebAdminSubstituteGroupList />} />
-        <Route path="substituteGroup">
+        <Route path="substitute-group">
           <Route path="new" element={<WebAdminSubstituteGroupCreate />} />
           <Route path=":id" element={<WebAdminSubstituteGroupUpdate />} />
         </Route>

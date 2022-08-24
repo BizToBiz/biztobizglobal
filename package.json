@@ -59,7 +59,8 @@
     "test:api": "yarn nx e2e api-e2e",
     "test:ci": "yarn test:api",
     "update": "nx migrate latest",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "push:stage" : "gco stage && gm develop && gp && gco develop"
   },
   "dependencies": {
     "@apollo/client": "3.4.17",

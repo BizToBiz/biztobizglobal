@@ -34,7 +34,7 @@ function addNavigation(tree, options) {
     },`
     const routeEndpoint = `{/*Add New Routes Here*/}`
     const newRoute = `<Route path="${options.pluralName}" element={<WebAdmin${options.className}List />} />
-        <Route path="${options.propertyName}">
+        <Route path="${options.name}">
           <Route path="new" element={<WebAdmin${options.className}Create />} />
           <Route path=":id" element={<WebAdmin${options.className}Update />} />
         </Route>`

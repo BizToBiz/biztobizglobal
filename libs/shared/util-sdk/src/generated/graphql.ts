@@ -68,8 +68,10 @@ export type AdminCreateChapterInput = {
 }
 
 export type AdminCreateChapterMemberInput = {
+  chapterId?: InputMaybe<Scalars['String']>
   isMentor?: InputMaybe<Scalars['Boolean']>
   isTrainer?: InputMaybe<Scalars['Boolean']>
+  memberId?: InputMaybe<Scalars['String']>
   role?: InputMaybe<ChapterMemberRole>
 }
 
@@ -460,8 +462,10 @@ export type AdminUpdateChapterInput = {
 }
 
 export type AdminUpdateChapterMemberInput = {
+  chapterId?: InputMaybe<Scalars['String']>
   isMentor?: InputMaybe<Scalars['Boolean']>
   isTrainer?: InputMaybe<Scalars['Boolean']>
+  memberId?: InputMaybe<Scalars['String']>
   role?: InputMaybe<ChapterMemberRole>
 }
 
@@ -676,6 +680,7 @@ export type ChapterMember = {
   isMentor?: Maybe<Scalars['Boolean']>
   isTrainer?: Maybe<Scalars['Boolean']>
   member?: Maybe<User>
+  name?: Maybe<Scalars['String']>
   role?: Maybe<ChapterMemberRole>
   updatedAt?: Maybe<Scalars['DateTime']>
 }
@@ -3469,8 +3474,15 @@ export type AdminChapterMemberDetailsFragment = {
   isMentor?: boolean | null
   isTrainer?: boolean | null
   role?: ChapterMemberRole | null
+  name?: string | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  member?: {
+    __typename?: 'User'
+    id?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+  } | null
 }
 
 export type AdminCreateChapterMemberMutationVariables = Exact<{
@@ -3487,8 +3499,15 @@ export type AdminCreateChapterMemberMutation = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3516,8 +3535,15 @@ export type AdminUpdateChapterMemberMutation = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3535,8 +3561,15 @@ export type AdminChapterMemberQuery = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3554,8 +3587,15 @@ export type AdminChapterMembersQuery = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -6417,12 +6457,15 @@ export const AdminChapterMemberDetailsFragmentDoc = gql`
     isMentor
     isTrainer
     role
+    name
     chapter {
       id
       name
     }
     member {
       id
+      firstName
+      lastName
       name
     }
   }

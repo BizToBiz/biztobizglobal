@@ -40,10 +40,10 @@ export function WebAdminChapterMemberList(props: WebAdminChapterMemberListProps)
   useLayoutEffect(() => {
     setCurrentPath({
       path: '/admin/chapter-members',
-      name: 'ChapterMembers',
-      description: 'View and manage all chapter-members in your organization',
+      name: 'Chapter Members',
+      description: 'View and manage all chapter members in your organization',
       showSearch: true,
-      actionText: 'Add ChapterMember',
+      actionText: 'Add Chapter Member',
       actionLink: '/admin/chapter-member/new',
     })
 
