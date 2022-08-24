@@ -12,7 +12,7 @@ import { AdminUpdateTransactionInput } from './dto/admin-update-transaction.inpu
 export class ApiTransactionDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  private readonly searchFields = []
+  private readonly searchFields = ['id']
   private where(input: AdminListTransactionInput): Prisma.TransactionWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]

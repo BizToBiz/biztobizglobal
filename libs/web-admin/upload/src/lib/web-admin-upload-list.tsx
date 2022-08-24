@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminUploadsQuery, useAdminUploadPaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminUploadPaginationQuery, useAdminUploadsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminUploadListProps {
@@ -57,7 +57,7 @@ export function WebAdminUploadList(props: WebAdminUploadListProps) {
       <WebUiDataTableFeature
         data={uploads?.uploads}
         path={'/admin/upload'}
-        fields={['name']}
+        fields={['originalFileName', 'publicId', 'url']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

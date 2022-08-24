@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminTransactionsQuery, useAdminTransactionPaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminTransactionPaginationQuery, useAdminTransactionsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminTransactionListProps {
@@ -57,7 +57,7 @@ export function WebAdminTransactionList(props: WebAdminTransactionListProps) {
       <WebUiDataTableFeature
         data={transactions?.transactions}
         path={'/admin/transaction'}
-        fields={['name']}
+        fields={['id', 'amount', 'date']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

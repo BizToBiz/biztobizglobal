@@ -175,11 +175,29 @@ export type AdminCreateTestimonialInput = {
 }
 
 export type AdminCreateTransactionInput = {
-  text: Scalars['String']
+  amount?: InputMaybe<Scalars['Float']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date?: InputMaybe<Scalars['DateTime']>
+  enteredBy?: InputMaybe<Scalars['String']>
+  enteredOn?: InputMaybe<Scalars['String']>
+  industry?: InputMaybe<Scalars['String']>
+  referralId?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateUploadInput = {
-  originalFilename: Scalars['String']
+  chapterId?: InputMaybe<Scalars['String']>
+  format?: InputMaybe<Scalars['String']>
+  originalFilename?: InputMaybe<Scalars['String']>
+  publicId?: InputMaybe<Scalars['String']>
+  resourceType?: InputMaybe<Scalars['String']>
+  secureUrl?: InputMaybe<Scalars['String']>
+  signature?: InputMaybe<Scalars['String']>
+  thumbnailUrl?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateUserInput = {
@@ -597,11 +615,29 @@ export type AdminUpdateTestimonialInput = {
 }
 
 export type AdminUpdateTransactionInput = {
-  text?: InputMaybe<Scalars['String']>
+  amount?: InputMaybe<Scalars['Float']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date?: InputMaybe<Scalars['DateTime']>
+  enteredBy?: InputMaybe<Scalars['String']>
+  enteredOn?: InputMaybe<Scalars['String']>
+  industry?: InputMaybe<Scalars['String']>
+  referralId?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateUploadInput = {
+  chapterId?: InputMaybe<Scalars['String']>
+  format?: InputMaybe<Scalars['String']>
   originalFilename?: InputMaybe<Scalars['String']>
+  publicId?: InputMaybe<Scalars['String']>
+  resourceType?: InputMaybe<Scalars['String']>
+  secureUrl?: InputMaybe<Scalars['String']>
+  signature?: InputMaybe<Scalars['String']>
+  thumbnailUrl?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateUserInput = {
