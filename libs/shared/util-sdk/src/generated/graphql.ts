@@ -144,6 +144,7 @@ export type AdminCreateReferralInput = {
 }
 
 export type AdminCreateRegionInput = {
+  chapters?: InputMaybe<Array<MultiSelectInput>>
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   territoryId?: InputMaybe<Scalars['String']>
@@ -154,7 +155,10 @@ export type AdminCreateSubstituteGroupInput = {
 }
 
 export type AdminCreateSubstituteInput = {
-  name: Scalars['String']
+  invited?: InputMaybe<Array<MultiSelectInput>>
+  meetingId?: InputMaybe<Scalars['String']>
+  sentById?: InputMaybe<Scalars['String']>
+  substituteId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateTerritoryInput = {
@@ -559,6 +563,7 @@ export type AdminUpdateReferralInput = {
 }
 
 export type AdminUpdateRegionInput = {
+  chapters?: InputMaybe<MultiSelectInput>
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   territoryId?: InputMaybe<Scalars['String']>
@@ -569,7 +574,10 @@ export type AdminUpdateSubstituteGroupInput = {
 }
 
 export type AdminUpdateSubstituteInput = {
-  name?: InputMaybe<Scalars['String']>
+  invited?: InputMaybe<Array<MultiSelectInput>>
+  meetingId?: InputMaybe<Scalars['String']>
+  sentById?: InputMaybe<Scalars['String']>
+  substituteId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateTerritoryInput = {

@@ -1,6 +1,6 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { AdminTerritoriesDocument, AdminUsersDocument } from '@biztobiz/shared/util-sdk'
+import { AdminChaptersDocument, AdminTerritoriesDocument, AdminUsersDocument } from '@biztobiz/shared/util-sdk'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {
@@ -18,5 +18,11 @@ export const regionFields: WebUiFormField[] = [
     label: 'Territory',
     document: AdminTerritoriesDocument,
     dataType: 'territories',
+  }),
+  WebUiFormField.relationSelect('chapters', {
+    label: 'Chapters',
+    document: AdminChaptersDocument,
+    dataType: 'chapters',
+    multi: true,
   }),
 ]

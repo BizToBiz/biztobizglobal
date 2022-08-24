@@ -42,6 +42,7 @@ export class ApiRegionDataAccessAdminService {
     return this.data.region.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }
@@ -78,7 +79,7 @@ export class ApiRegionDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.region.update({
       where: { id: regionId },
-      data: { ...input },
+      data: { ...input, chapters: { set: input.chapters } },
       ...select,
     })
   }

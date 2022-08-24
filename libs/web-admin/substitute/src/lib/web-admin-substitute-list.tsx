@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminSubstitutesQuery, useAdminSubstitutePaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminSubstitutePaginationQuery, useAdminSubstitutesQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminSubstituteListProps {
@@ -57,7 +57,7 @@ export function WebAdminSubstituteList(props: WebAdminSubstituteListProps) {
       <WebUiDataTableFeature
         data={substitutes?.substitutes}
         path={'/admin/substitute'}
-        fields={['name']}
+        fields={['id']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

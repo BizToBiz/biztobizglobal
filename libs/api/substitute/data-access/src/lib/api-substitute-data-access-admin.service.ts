@@ -12,7 +12,7 @@ import { AdminUpdateSubstituteInput } from './dto/admin-update-substitute.input'
 export class ApiSubstituteDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  private readonly searchFields = []
+  private readonly searchFields = ['id']
   private where(input: AdminListSubstituteInput): Prisma.SubstituteWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
@@ -42,6 +42,7 @@ export class ApiSubstituteDataAccessAdminService {
     return this.data.substitute.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }
@@ -69,7 +70,7 @@ export class ApiSubstituteDataAccessAdminService {
   adminCreateSubstitute(info: GraphQLResolveInfo, adminId: string, input: AdminCreateSubstituteInput) {
     const select = new PrismaSelect(info).value
     return this.data.substitute.create({
-      data: { ...input },
+      data: { ...input, invited: { connect: input.invited } },
       ...select,
     })
   }
@@ -78,7 +79,7 @@ export class ApiSubstituteDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.substitute.update({
       where: { id: substituteId },
-      data: { ...input },
+      data: { ...input, invited: { set: input.invited } },
       ...select,
     })
   }
