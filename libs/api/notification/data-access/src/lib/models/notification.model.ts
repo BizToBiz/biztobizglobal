@@ -29,8 +29,8 @@ export class Notification {
   referenceType?: NotificationReferenceType
 
   @Field(() => User, { nullable: true })
-  actor?: Omit<[User], ''>
+  actor?: Partial<User>
 
   @Field(() => User, { nullable: true })
-  to?: Omit<[User], ''>
+  to?: Partial<User>
 }

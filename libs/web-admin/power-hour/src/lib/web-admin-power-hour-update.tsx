@@ -34,10 +34,10 @@ export function WebAdminPowerHourUpdate() {
 
   const pathData = {
     path: '/admin/power-hour/:id',
-    name: 'Edit PowerHour',
-    description: 'Update the information for this power-hour',
+    name: 'Edit Power Hour',
+    description: 'Update the information for this power hour',
     showSearch: false,
-    actionText: 'Back to PowerHour List',
+    actionText: 'Back to Power Hour List',
     actionLink: '/admin/power-hours',
   }
 
@@ -48,7 +48,7 @@ export function WebAdminPowerHourUpdate() {
       defaultValues={defaultValues()}
       document={AdminUpdatePowerHourDocument}
       deleteDocument={AdminDeletePowerHourDocument}
-      buttonText={'PowerHour'}
+      buttonText={'Power Hour'}
       fields={powerHourFields}
       idName={'powerHourId'}
     />

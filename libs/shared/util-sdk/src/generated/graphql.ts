@@ -118,7 +118,12 @@ export type AdminCreateNotificationInput = {
 }
 
 export type AdminCreatePowerHourInput = {
-  details: Scalars['String']
+  date?: InputMaybe<Scalars['DateTime']>
+  details?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  status?: InputMaybe<PowerHourStatus>
+  time?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateReferralInput = {
@@ -517,11 +522,22 @@ export type AdminUpdateMeetingPresenceInput = {
 }
 
 export type AdminUpdateNotificationInput = {
+  actorId?: InputMaybe<Scalars['String']>
   message?: InputMaybe<Scalars['String']>
+  read?: InputMaybe<Scalars['Boolean']>
+  referenceId?: InputMaybe<Scalars['String']>
+  referenceType?: InputMaybe<NotificationReferenceType>
+  toId?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<NotificationType>
 }
 
 export type AdminUpdatePowerHourInput = {
+  date?: InputMaybe<Scalars['DateTime']>
   details?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  status?: InputMaybe<PowerHourStatus>
+  time?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateReferralInput = {

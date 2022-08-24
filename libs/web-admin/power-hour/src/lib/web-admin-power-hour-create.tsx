@@ -6,10 +6,10 @@ import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 export function WebAdminPowerHourCreate() {
   const pathData = {
     path: '/admin/power-hours/new',
-    name: 'Create a PowerHour',
-    description: 'Use the form below to add a new PowerHour',
+    name: 'Create a Power Hour',
+    description: 'Use the form below to add a new Power Hour',
     showSearch: false,
-    actionText: 'Back to PowerHour List',
+    actionText: 'Back to Power Hour List',
     actionLink: '/admin/power-hours',
   }
 
@@ -19,7 +19,7 @@ export function WebAdminPowerHourCreate() {
       document={AdminCreatePowerHourDocument}
       navigateTo={'/admin/power-hour'}
       mutationName={'createPowerHour'}
-      buttonText={' PowerHour'}
+      buttonText={' Power Hour'}
       fields={powerHourFields}
     />
   )
