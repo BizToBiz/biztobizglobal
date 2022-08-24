@@ -169,7 +169,9 @@ export type AdminCreateTerritoryInput = {
 }
 
 export type AdminCreateTestimonialInput = {
+  fromId?: InputMaybe<Scalars['String']>
   text: Scalars['String']
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateTransactionInput = {
@@ -589,7 +591,9 @@ export type AdminUpdateTerritoryInput = {
 }
 
 export type AdminUpdateTestimonialInput = {
-  text?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  text: Scalars['String']
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateTransactionInput = {

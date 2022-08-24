@@ -42,6 +42,7 @@ export class ApiTestimonialDataAccessAdminService {
     return this.data.testimonial.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

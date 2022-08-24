@@ -2,6 +2,12 @@ import { Field, InputType } from '@nestjs/graphql'
 
 @InputType()
 export class AdminUpdateTestimonialInput {
+  @Field()
+  text: string
+
   @Field({ nullable: true })
-  text?: string
+  fromId?: string
+
+  @Field({ nullable: true })
+  toId?: string
 }
