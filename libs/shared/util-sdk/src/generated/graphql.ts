@@ -151,7 +151,8 @@ export type AdminCreateRegionInput = {
 }
 
 export type AdminCreateSubstituteGroupInput = {
-  name: Scalars['String']
+  chapters?: InputMaybe<Array<MultiSelectInput>>
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateSubstituteInput = {
@@ -570,6 +571,7 @@ export type AdminUpdateRegionInput = {
 }
 
 export type AdminUpdateSubstituteGroupInput = {
+  chapters?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
 }
 
