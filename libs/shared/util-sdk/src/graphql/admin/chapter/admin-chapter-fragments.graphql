@@ -38,7 +38,7 @@ fragment AdminChapterDetails on Chapter {
     id
     name
   }
-  AttendanceReminder {
+  attendanceReminders {
     id
   }
 }

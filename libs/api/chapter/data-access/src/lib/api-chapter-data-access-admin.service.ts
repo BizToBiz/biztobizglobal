@@ -70,7 +70,15 @@ export class ApiChapterDataAccessAdminService {
   adminCreateChapter(info: GraphQLResolveInfo, adminId: string, input: AdminCreateChapterInput) {
     const select = new PrismaSelect(info).value
     return this.data.chapter.create({
-      data: { ...input },
+      data: {
+        ...input,
+        meetings: { set: input.meetings },
+        members: { set: input.members },
+        transactions: { set: input.transactions },
+        referralsFrom: { set: input.referralsFrom },
+        referralsTo: { set: input.referralsTo },
+        attendanceReminders: { set: input.attendanceReminders },
+      },
       ...select,
     })
   }
@@ -79,7 +87,15 @@ export class ApiChapterDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.chapter.update({
       where: { id: chapterId },
-      data: { ...input },
+      data: {
+        ...input,
+        meetings: { set: input.meetings },
+        members: { set: input.members },
+        transactions: { set: input.transactions },
+        referralsFrom: { set: input.referralsFrom },
+        referralsTo: { set: input.referralsTo },
+        attendanceReminders: { set: input.attendanceReminders },
+      },
       ...select,
     })
   }

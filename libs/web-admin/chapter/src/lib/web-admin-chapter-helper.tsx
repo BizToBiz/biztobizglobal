@@ -1,4 +1,15 @@
-import { AdminRegionsDocument, ChapterStatus, DayOfWeek } from '@biztobiz/shared/util-sdk'
+import {
+  AdminAttendanceRemindersDocument,
+  AdminMeetingsDocument,
+  AdminReferralsDocument,
+  AdminRegionsDocument,
+  AdminSubstituteGroupsDocument,
+  AdminTransactionsDocument,
+  AdminUploadsDocument,
+  AdminUsersDocument,
+  ChapterStatus,
+  DayOfWeek,
+} from '@biztobiz/shared/util-sdk'
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
 
@@ -27,9 +38,55 @@ export const chapterFields: WebUiFormField[] = [
   WebUiFormField.enumSelect('meetingDay', { label: 'Meeting Day', enum: DayOfWeek }),
   WebUiFormField.input('meetingtime', { label: 'Meeting Time' }),
   WebUiFormField.input('meetingDetails', { label: 'Meeting Details' }),
+  WebUiFormField.relationSelect('meetings', {
+    label: 'Meetings',
+    document: AdminMeetingsDocument,
+    dataType: 'meetings',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('members', {
+    label: 'Members',
+    document: AdminUsersDocument,
+    dataType: 'users',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('transactions', {
+    label: 'Transactions',
+    document: AdminTransactionsDocument,
+    dataType: 'transactions',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('referralsFrom', {
+    label: 'Referrals From',
+    document: AdminReferralsDocument,
+    dataType: 'referrals',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('referralsTo', {
+    label: 'Referrals To',
+    document: AdminReferralsDocument,
+    dataType: 'referrals',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('substituteGroupId', {
+    label: 'Substitute Group',
+    document: AdminSubstituteGroupsDocument,
+    dataType: 'substituteGroups',
+  }),
   WebUiFormField.relationSelect('regionId', {
     label: 'Region',
     document: AdminRegionsDocument,
     dataType: 'regions',
+  }),
+  WebUiFormField.relationSelect('attendanceReminders', {
+    label: 'Attendance Reminders',
+    document: AdminAttendanceRemindersDocument,
+    dataType: 'attendanceReminders',
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('avatarId', {
+    label: 'Avatar',
+    document: AdminUploadsDocument,
+    dataType: 'uploads',
   }),
 ]

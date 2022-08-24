@@ -11,12 +11,16 @@ import {
   CalendarIcon,
   CashIcon,
   ChatAltIcon,
+  ClockIcon,
   CloudUploadIcon,
   CollectionIcon,
   GlobeAltIcon,
   HomeIcon,
   InboxInIcon,
   OfficeBuildingIcon,
+  ShieldExclamationIcon,
+  UserCircleIcon,
+  UserGroupIcon,
   UserIcon,
   UsersIcon,
 } from '@heroicons/react/outline'
@@ -105,21 +109,15 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
       current: currentPath.path.includes('/admin/users'),
     },
     {
-      name: 'AttendanceReminders',
-      href: '/admin/attendance-reminders',
-      icon: HomeIcon,
-      current: currentPath.path.includes('/admin/attendance-reminders'),
-    },
-    {
       name: 'Chapters',
       href: '/admin/chapters',
       icon: UsersIcon,
       current: currentPath.path.includes('/admin/chapters'),
     },
     {
-      name: 'ChapterMembers',
+      name: 'Chapter Members',
       href: '/admin/chapter-members',
-      icon: HomeIcon,
+      icon: UserGroupIcon,
       current: currentPath.path.includes('/admin/chapter-members'),
     },
     {
@@ -129,9 +127,9 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
       current: currentPath.path.includes('/admin/companies'),
     },
     {
-      name: 'CompanyMembers',
+      name: 'Company Members',
       href: '/admin/company-members',
-      icon: HomeIcon,
+      icon: UserCircleIcon,
       current: currentPath.path.includes('/admin/company-members'),
     },
     {
@@ -147,10 +145,16 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
       current: currentPath.path.includes('/admin/meetings'),
     },
     {
-      name: 'MeetingPresences',
+      name: 'Meeting Presences',
       href: '/admin/meeting-presences',
       icon: BadgeCheckIcon,
       current: currentPath.path.includes('/admin/meeting-presences'),
+    },
+    {
+      name: 'Attendance Reminders',
+      href: '/admin/attendance-reminders',
+      icon: ShieldExclamationIcon,
+      current: currentPath.path.includes('/admin/attendance-reminders'),
     },
     {
       name: 'Notifications',
@@ -159,9 +163,9 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
       current: currentPath.path.includes('/admin/notifications'),
     },
     {
-      name: 'PowerHours',
+      name: 'Power Hours',
       href: '/admin/power-hours',
-      icon: HomeIcon,
+      icon: ClockIcon,
       current: currentPath.path.includes('/admin/power-hours'),
     },
     {
@@ -183,7 +187,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
       current: currentPath.path.includes('/admin/substitutes'),
     },
     {
-      name: 'SubstituteGroups',
+      name: 'Substitute Groups',
       href: '/admin/substitute-groups',
       icon: CollectionIcon,
       current: currentPath.path.includes('/admin/substitute-groups'),

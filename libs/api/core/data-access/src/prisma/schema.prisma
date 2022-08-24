@@ -134,34 +134,34 @@ enum UserOnlineStatus {
 }
 
 model Chapter {
-  id                 String               @id @default(cuid())
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @default(now()) @updatedAt
-  establishedDate    DateTime?            @default(now())
-  name               String
-  description        String?
-  avatarEmail        String?
-  avatarUrl          String?
-  latitude           String?
-  longitude          String?
-  city               String?
-  state              String?
-  facebook           String?
-  meetingDay         DayOfWeek?
-  meetingTime        String?
-  meetingDetails     String?
-  status             ChapterStatus
-  meetings           Meeting[]            @relation("Meeting_BelongsTo_Chapter")
-  members            ChapterMember[]      @relation("ChapterMember_BelongsTo_Chapter")
-  transactions       Transaction[]        @relation("Transactions_BelongsTo_Chapter")
-  referralsFrom      Referral[]           @relation("Referral_HasOne_FromChapter")
-  referralsTo        Referral[]           @relation("Referral_HasOne_ToChapter")
-  substituteGroup    SubstituteGroup?     @relation(name: "Chapter_BelongsTo_SubstituteGroup", fields: [substituteGroupId], references: [id])
-  substituteGroupId  String?
-  region             Region?              @relation(name: "Chapter_BelongsTo_Region", fields: [regionId], references: [id])
-  regionId           String?
-  AttendanceReminder AttendanceReminder[] @relation("AttendanceReminder_BelongsTo_Chapter")
-  avatar             Upload?              @relation("Upload_BelongsTo_Chapter")
+  id                  String               @id @default(cuid())
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @default(now()) @updatedAt
+  establishedDate     DateTime?            @default(now())
+  name                String
+  description         String?
+  avatarEmail         String?
+  avatarUrl           String?
+  latitude            String?
+  longitude           String?
+  city                String?
+  state               String?
+  facebook            String?
+  meetingDay          DayOfWeek?
+  meetingTime         String?
+  meetingDetails      String?
+  status              ChapterStatus
+  meetings            Meeting[]            @relation("Meeting_BelongsTo_Chapter")
+  members             ChapterMember[]      @relation("ChapterMember_BelongsTo_Chapter")
+  transactions        Transaction[]        @relation("Transactions_BelongsTo_Chapter")
+  referralsFrom       Referral[]           @relation("Referral_HasOne_FromChapter")
+  referralsTo         Referral[]           @relation("Referral_HasOne_ToChapter")
+  substituteGroup     SubstituteGroup?     @relation(name: "Chapter_BelongsTo_SubstituteGroup", fields: [substituteGroupId], references: [id])
+  substituteGroupId   String?
+  region              Region?              @relation(name: "Chapter_BelongsTo_Region", fields: [regionId], references: [id])
+  regionId            String?
+  attendanceReminders AttendanceReminder[] @relation("AttendanceReminder_BelongsTo_Chapter")
+  avatar              Upload?              @relation("Upload_BelongsTo_Chapter")
 }
 
 enum ChapterStatus {

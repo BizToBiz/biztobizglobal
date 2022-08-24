@@ -70,7 +70,7 @@ export class ApiUserDataAccessAdminService {
   adminCreateUser(info: GraphQLResolveInfo, adminId: string, input: AdminCreateUserInput) {
     const select = new PrismaSelect(info).value
     return this.data.user.create({
-      data: { ...input },
+      data: { ...input, companies: { set: input.companies } },
       ...select,
     })
   }
@@ -79,11 +79,10 @@ export class ApiUserDataAccessAdminService {
     const select = new PrismaSelect(info).value
 
     delete input.chapterId
-    delete input.companies
 
     return this.data.user.update({
       where: { id: userId },
-      data: { ...input },
+      data: { ...input, companies: { set: input.companies } },
       ...select,
     })
   }

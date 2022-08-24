@@ -167,7 +167,7 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
             {...register(`${field.key}`, {
               required: field?.options?.required,
               valueAsDate: true,
-              setValueAs: (v) => v.split('T')[0],
+              setValueAs: (v) => v?.split?.('T')[0],
             })}
             className="text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />

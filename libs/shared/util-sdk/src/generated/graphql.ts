@@ -42,7 +42,9 @@ export type AdminCreateAttendanceReminderInput = {
 }
 
 export type AdminCreateChapterInput = {
+  attendanceReminders?: InputMaybe<Array<MultiSelectInput>>
   avatarEmail?: InputMaybe<Scalars['String']>
+  avatarId?: InputMaybe<Scalars['String']>
   avatarUrl?: InputMaybe<Scalars['String']>
   city?: InputMaybe<Scalars['String']>
   description?: InputMaybe<Scalars['String']>
@@ -53,10 +55,16 @@ export type AdminCreateChapterInput = {
   meetingDay?: InputMaybe<DayOfWeek>
   meetingDetails?: InputMaybe<Scalars['String']>
   meetingTime?: InputMaybe<Scalars['String']>
+  meetings?: InputMaybe<Array<MultiSelectInput>>
+  members?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
+  referralsFrom?: InputMaybe<Array<MultiSelectInput>>
+  referralsTo?: InputMaybe<Array<MultiSelectInput>>
   regionId?: InputMaybe<Scalars['String']>
   state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<ChapterStatus>
+  substituteGroupId?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateChapterMemberInput = {
@@ -426,7 +434,9 @@ export type AdminUpdateAttendanceReminderInput = {
 }
 
 export type AdminUpdateChapterInput = {
+  attendanceReminders?: InputMaybe<Array<MultiSelectInput>>
   avatarEmail?: InputMaybe<Scalars['String']>
+  avatarId?: InputMaybe<Scalars['String']>
   avatarUrl?: InputMaybe<Scalars['String']>
   city?: InputMaybe<Scalars['String']>
   description?: InputMaybe<Scalars['String']>
@@ -437,10 +447,16 @@ export type AdminUpdateChapterInput = {
   meetingDay?: InputMaybe<DayOfWeek>
   meetingDetails?: InputMaybe<Scalars['String']>
   meetingTime?: InputMaybe<Scalars['String']>
+  meetings?: InputMaybe<Array<MultiSelectInput>>
+  members?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
+  referralsFrom?: InputMaybe<Array<MultiSelectInput>>
+  referralsTo?: InputMaybe<Array<MultiSelectInput>>
   regionId?: InputMaybe<Scalars['String']>
   state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<ChapterStatus>
+  substituteGroupId?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminUpdateChapterMemberInput = {
@@ -624,7 +640,7 @@ export type AttendanceReminder = {
 
 export type Chapter = {
   __typename?: 'Chapter'
-  AttendanceReminder?: Maybe<Array<AttendanceReminder>>
+  attendanceReminders?: Maybe<Array<AttendanceReminder>>
   avatar?: Maybe<Upload>
   avatarEmail?: Maybe<Scalars['String']>
   avatarUrl?: Maybe<Scalars['String']>
@@ -3593,7 +3609,7 @@ export type AdminChapterDetailsFragment = {
   referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
   substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
   region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-  AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+  attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
 }
 
 export type AdminCreateChapterMutationVariables = Exact<{
@@ -3628,7 +3644,7 @@ export type AdminCreateChapterMutation = {
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
 
@@ -3674,7 +3690,7 @@ export type AdminUpdateChapterMutation = {
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
 
@@ -3710,7 +3726,7 @@ export type AdminChapterQuery = {
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
 
@@ -3746,7 +3762,7 @@ export type AdminChaptersQuery = {
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -6452,7 +6468,7 @@ export const AdminChapterDetailsFragmentDoc = gql`
       id
       name
     }
-    AttendanceReminder {
+    attendanceReminders {
       id
     }
   }
