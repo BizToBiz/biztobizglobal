@@ -3757,7 +3757,7 @@ export type AdminChapterDetailsFragment = {
   transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
   referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
   referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-  substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+  substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
   region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
   attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
 }
@@ -3792,7 +3792,7 @@ export type AdminCreateChapterMutation = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
@@ -3838,7 +3838,7 @@ export type AdminUpdateChapterMutation = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
@@ -3874,7 +3874,7 @@ export type AdminChapterQuery = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
@@ -3910,7 +3910,7 @@ export type AdminChaptersQuery = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
     attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   }> | null
@@ -6691,6 +6691,7 @@ export const AdminChapterDetailsFragmentDoc = gql`
     }
     substituteGroup {
       id
+      name
     }
     region {
       id

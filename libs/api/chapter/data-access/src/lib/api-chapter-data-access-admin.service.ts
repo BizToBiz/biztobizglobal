@@ -72,12 +72,12 @@ export class ApiChapterDataAccessAdminService {
     return this.data.chapter.create({
       data: {
         ...input,
-        meetings: { set: input.meetings },
-        members: { set: input.members },
-        transactions: { set: input.transactions },
-        referralsFrom: { set: input.referralsFrom },
-        referralsTo: { set: input.referralsTo },
-        attendanceReminders: { set: input.attendanceReminders },
+        meetings: { connect: input.meetings },
+        members: { connect: input.members },
+        transactions: { connect: input.transactions },
+        referralsFrom: { connect: input.referralsFrom },
+        referralsTo: { connect: input.referralsTo },
+        attendanceReminders: { connect: input.attendanceReminders },
       },
       ...select,
     })
@@ -95,6 +95,8 @@ export class ApiChapterDataAccessAdminService {
         referralsFrom: { set: input.referralsFrom },
         referralsTo: { set: input.referralsTo },
         attendanceReminders: { set: input.attendanceReminders },
+        regionId: { set: input.regionId },
+        substituteGroupId: { set: input.substituteGroupId },
       },
       ...select,
     })
