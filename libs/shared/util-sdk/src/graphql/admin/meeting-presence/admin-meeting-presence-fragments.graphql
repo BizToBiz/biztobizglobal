@@ -3,11 +3,14 @@ fragment AdminMeetingPresenceDetails on MeetingPresence {
   createdAt
   updatedAt
   attendance
+  name
   meeting {
     id
   }
   member {
     id
+    firstName
+    lastName
     name
   }
 }

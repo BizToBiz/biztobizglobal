@@ -18,7 +18,7 @@ export class Meeting {
   date?: Date
 
   @Field(() => Chapter, { nullable: true })
-  chapter?: Omit<[Chapter], ''>
+  chapter?: Partial<Chapter>
 
   @Field({ nullable: true })
   isVisitorDay?: boolean

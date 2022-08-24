@@ -40,10 +40,10 @@ export function WebAdminMeetingPresenceList(props: WebAdminMeetingPresenceListPr
   useLayoutEffect(() => {
     setCurrentPath({
       path: '/admin/meeting-presences',
-      name: 'MeetingPresences',
+      name: 'Meeting Presences',
       description: 'View and manage all Meeting Presences in your organization',
       showSearch: true,
-      actionText: 'Add MeetingPresence',
+      actionText: 'Add Meeting Presence',
       actionLink: '/admin/meeting-presence/new',
     })
 

@@ -1,6 +1,10 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { AdminChaptersDocument } from '@biztobiz/shared/util-sdk'
+import {
+  AdminChaptersDocument,
+  AdminMeetingPresencesDocument,
+  AdminSubstitutesDocument,
+} from '@biztobiz/shared/util-sdk'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {
@@ -15,10 +19,16 @@ export const meetingFields: WebUiFormField[] = [
     dataType: 'chapters',
   }),
   WebUiFormField.checkbox('isVisitorDay', { label: 'Is Visitor Day?' }),
-  // WebUiFormField.relationSelect('substitutes', {
-  //   label: 'Substitutes',
-  //   document: AdminSubstitutesDocument,
-  //   dataType: 'substitutes',
-  //   multi: true,
-  // }),
+  WebUiFormField.relationSelect('presence', {
+    label: 'Presence',
+    dataType: 'presences',
+    document: AdminMeetingPresencesDocument,
+    multi: true,
+  }),
+  WebUiFormField.relationSelect('substitutes', {
+    label: 'Substitutes',
+    document: AdminSubstitutesDocument,
+    dataType: 'substitutes',
+    multi: true,
+  }),
 ]

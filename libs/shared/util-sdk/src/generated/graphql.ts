@@ -97,10 +97,14 @@ export type AdminCreateMeetingInput = {
   chapterId?: InputMaybe<Scalars['String']>
   date: Scalars['DateTime']
   isVisitorDay?: InputMaybe<Scalars['Boolean']>
+  presence?: InputMaybe<Array<MultiSelectInput>>
+  substitutes?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateMeetingPresenceInput = {
-  date: Scalars['String']
+  attendance?: InputMaybe<MeetingAttendance>
+  meetingId?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateNotificationInput = {
@@ -499,11 +503,17 @@ export type AdminUpdateIndustryInput = {
 }
 
 export type AdminUpdateMeetingInput = {
-  date?: InputMaybe<Scalars['DateTime']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date: Scalars['DateTime']
+  isVisitorDay?: InputMaybe<Scalars['Boolean']>
+  presence?: InputMaybe<Array<MultiSelectInput>>
+  substitutes?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminUpdateMeetingPresenceInput = {
-  date?: InputMaybe<Scalars['String']>
+  attendance?: InputMaybe<MeetingAttendance>
+  meetingId?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateNotificationInput = {
@@ -796,6 +806,7 @@ export type Meeting = {
   date?: Maybe<Scalars['DateTime']>
   id?: Maybe<Scalars['String']>
   isVisitorDay?: Maybe<Scalars['Boolean']>
+  name?: Maybe<Scalars['String']>
   presence?: Maybe<Array<MeetingPresence>>
   substitutes?: Maybe<Array<Substitute>>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -818,6 +829,7 @@ export type MeetingPresence = {
   id?: Maybe<Scalars['String']>
   meeting?: Maybe<Meeting>
   member?: Maybe<User>
+  name?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
@@ -4225,8 +4237,15 @@ export type AdminMeetingPresenceDetailsFragment = {
   createdAt?: any | null
   updatedAt?: any | null
   attendance?: MeetingAttendance | null
+  name?: string | null
   meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-  member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  member?: {
+    __typename?: 'User'
+    id?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+  } | null
 }
 
 export type AdminCreateMeetingPresenceMutationVariables = Exact<{
@@ -4241,8 +4260,15 @@ export type AdminCreateMeetingPresenceMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -4268,8 +4294,15 @@ export type AdminUpdateMeetingPresenceMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -4285,8 +4318,15 @@ export type AdminMeetingPresenceQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -4302,8 +4342,15 @@ export type AdminMeetingPresencesQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -4337,6 +4384,7 @@ export type AdminMeetingDetailsFragment = {
   createdAt?: any | null
   updatedAt?: any | null
   date?: any | null
+  name?: string | null
   isVisitorDay?: boolean | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4355,6 +4403,7 @@ export type AdminCreateMeetingMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4384,6 +4433,7 @@ export type AdminUpdateMeetingMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4403,6 +4453,7 @@ export type AdminMeetingQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4422,6 +4473,7 @@ export type AdminMeetingsQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -6616,11 +6668,14 @@ export const AdminMeetingPresenceDetailsFragmentDoc = gql`
     createdAt
     updatedAt
     attendance
+    name
     meeting {
       id
     }
     member {
       id
+      firstName
+      lastName
       name
     }
   }
@@ -6631,6 +6686,7 @@ export const AdminMeetingDetailsFragmentDoc = gql`
     createdAt
     updatedAt
     date
+    name
     chapter {
       id
       name

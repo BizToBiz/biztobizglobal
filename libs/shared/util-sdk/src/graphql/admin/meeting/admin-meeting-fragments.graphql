@@ -3,6 +3,7 @@ fragment AdminMeetingDetails on Meeting {
   createdAt
   updatedAt
   date
+  name
   chapter {
     id
     name
