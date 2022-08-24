@@ -140,6 +140,7 @@ export type AdminCreateReferralInput = {
   toChapterId?: InputMaybe<Scalars['String']>
   toId?: InputMaybe<Scalars['String']>
   toIndustry?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateRegionInput = {
@@ -541,7 +542,20 @@ export type AdminUpdatePowerHourInput = {
 }
 
 export type AdminUpdateReferralInput = {
+  email?: InputMaybe<Scalars['String']>
   firstName?: InputMaybe<Scalars['String']>
+  fromChapterId?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  fromIndustry?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
+  notes?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  rating?: InputMaybe<ReferralRating>
+  sentById?: InputMaybe<Scalars['String']>
+  toChapterId?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
+  toIndustry?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminUpdateRegionInput = {

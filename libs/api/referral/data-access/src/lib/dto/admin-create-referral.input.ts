@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql'
 import { ReferralRating } from '@biztobiz/api/enums/data-access'
+import { MultiSelectInput } from '@biztobiz/api/core/data-access'
 
 @InputType()
 export class AdminCreateReferralInput {
@@ -41,4 +42,7 @@ export class AdminCreateReferralInput {
 
   @Field({ nullable: true })
   sentById?: string
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  transactions?: MultiSelectInput[]
 }
