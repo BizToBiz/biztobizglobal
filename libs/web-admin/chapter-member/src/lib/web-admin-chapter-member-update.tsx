@@ -26,7 +26,7 @@ export function WebAdminChapterMemberUpdate() {
 
   function defaultValues() {
     if (chapterMember?.chapterMember && !loading) {
-      return cleanDatabaseOutput(chapterMember.chapterMember, chapterMemberFields)
+      return cleanDatabaseOutput(chapterMember.chapterMember, chapterMemberFields, ['name'])
     } else {
       return undefined
     }

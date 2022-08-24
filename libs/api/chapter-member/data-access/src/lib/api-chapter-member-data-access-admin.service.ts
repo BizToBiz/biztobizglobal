@@ -94,6 +94,6 @@ export class ApiChapterMemberDataAccessAdminService {
   }
 
   adminDeleteChapterMember(info: GraphQLResolveInfo, adminId: string, chapterMemberId) {
-    return this.data.chapterMember.delete({ where: { memberId: chapterMemberId } })
+    return this.data.chapterMember.delete({ where: { id: chapterMemberId } })
   }
 }
