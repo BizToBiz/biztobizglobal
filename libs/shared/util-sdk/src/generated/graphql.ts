@@ -76,7 +76,8 @@ export type AdminCreateChapterMemberInput = {
 }
 
 export type AdminCreateCompanyInput = {
-  name: Scalars['String']
+  members?: InputMaybe<Array<MultiSelectInput>>
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateCompanyMemberInput = {
@@ -470,6 +471,7 @@ export type AdminUpdateChapterMemberInput = {
 }
 
 export type AdminUpdateCompanyInput = {
+  members?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
 }
 

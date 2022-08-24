@@ -60,7 +60,7 @@
     "test:ci": "yarn test:api",
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
-    "push:stage" : "gco stage && gm develop && gp && gco develop"
+    "push:stage" : "git checkout stage && git merge develop && git push && git checkout develop"
   },
   "dependencies": {
     "@apollo/client": "3.4.17",

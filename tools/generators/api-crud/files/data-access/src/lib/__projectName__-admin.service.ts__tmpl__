@@ -42,6 +42,7 @@ export class <%= apiClassName %><%= modelClassName %>DataAccessAdminService {
     return this.data.<%= modelPropertyName %>.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }
