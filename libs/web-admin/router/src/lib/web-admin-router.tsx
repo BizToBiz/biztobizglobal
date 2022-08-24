@@ -249,7 +249,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminCompanyUpdate />} />
         </Route>
         <Route path="company-members" element={<WebAdminCompanyMemberList />} />
-        <Route path="companyMember">
+        <Route path="company-member">
           <Route path="new" element={<WebAdminCompanyMemberCreate />} />
           <Route path=":id" element={<WebAdminCompanyMemberUpdate />} />
         </Route>

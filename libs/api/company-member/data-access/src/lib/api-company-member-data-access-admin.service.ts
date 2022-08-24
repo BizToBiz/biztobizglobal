@@ -31,7 +31,11 @@ export class ApiCompanyMemberDataAccessAdminService {
       AND: [
         relationalSearch(),
         ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          OR: [
+            { company: { name: { contains: term, mode: 'insensitive' } } },
+            { member: { firstName: { contains: term, mode: 'insensitive' } } },
+            { member: { lastName: { contains: term, mode: 'insensitive' } } },
+          ],
         })),
       ],
     }
@@ -42,6 +46,7 @@ export class ApiCompanyMemberDataAccessAdminService {
     return this.data.companyMember.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

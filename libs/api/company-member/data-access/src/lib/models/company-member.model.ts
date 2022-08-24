@@ -26,8 +26,8 @@ export class CompanyMember {
   location?: string
 
   @Field(() => Company, { nullable: true })
-  company?: Omit<[Company], ''>
+  company?: Partial<Company>
 
   @Field(() => User, { nullable: true })
-  member?: Omit<[User], ''>
+  member?: Partial<User>
 }

@@ -81,7 +81,12 @@ export type AdminCreateCompanyInput = {
 }
 
 export type AdminCreateCompanyMemberInput = {
-  location: Scalars['String']
+  companyId?: InputMaybe<Scalars['String']>
+  fromDate?: InputMaybe<Scalars['DateTime']>
+  location?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
+  thruDate?: InputMaybe<Scalars['DateTime']>
 }
 
 export type AdminCreateIndustryInput = {
@@ -296,12 +301,17 @@ export type AdminListCompanyInput = {
 }
 
 export type AdminListCompanyMemberInput = {
+  companyId?: InputMaybe<Scalars['String']>
+  fromDate?: InputMaybe<Scalars['DateTime']>
   location?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
   take?: InputMaybe<Scalars['Float']>
+  thruDate?: InputMaybe<Scalars['DateTime']>
 }
 
 export type AdminListIndustryInput = {
@@ -476,7 +486,12 @@ export type AdminUpdateCompanyInput = {
 }
 
 export type AdminUpdateCompanyMemberInput = {
+  companyId?: InputMaybe<Scalars['String']>
+  fromDate?: InputMaybe<Scalars['DateTime']>
   location?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
+  thruDate?: InputMaybe<Scalars['DateTime']>
 }
 
 export type AdminUpdateIndustryInput = {
@@ -722,6 +737,7 @@ export type CompanyMember = {
   id?: Maybe<Scalars['String']>
   location?: Maybe<Scalars['String']>
   member?: Maybe<User>
+  name?: Maybe<Scalars['String']>
   role?: Maybe<Scalars['String']>
   thruDate?: Maybe<Scalars['DateTime']>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -3841,8 +3857,15 @@ export type AdminCompanyMemberDetailsFragment = {
   thruDate?: any | null
   role?: string | null
   location?: string | null
-  company?: { __typename?: 'Company'; id?: string | null } | null
-  member?: { __typename?: 'User'; id?: string | null } | null
+  name?: string | null
+  company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+  member?: {
+    __typename?: 'User'
+    id?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+  } | null
 }
 
 export type AdminCreateCompanyMemberMutationVariables = Exact<{
@@ -3860,8 +3883,15 @@ export type AdminCreateCompanyMemberMutation = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3890,8 +3920,15 @@ export type AdminUpdateCompanyMemberMutation = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3910,8 +3947,15 @@ export type AdminCompanyMemberQuery = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3930,8 +3974,15 @@ export type AdminCompanyMembersQuery = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -6527,11 +6578,16 @@ export const AdminCompanyMemberDetailsFragmentDoc = gql`
     thruDate
     role
     location
+    name
     company {
       id
+      name
     }
     member {
       id
+      firstName
+      lastName
+      name
     }
   }
 `

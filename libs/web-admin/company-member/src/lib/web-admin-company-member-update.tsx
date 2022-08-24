@@ -34,10 +34,10 @@ export function WebAdminCompanyMemberUpdate() {
 
   const pathData = {
     path: '/admin/company-member/:id',
-    name: 'Edit CompanyMember',
-    description: 'Update the information for this company-member',
+    name: 'Edit Company Member',
+    description: 'Update the information for this company member',
     showSearch: false,
-    actionText: 'Back to CompanyMember List',
+    actionText: 'Back to Company Member List',
     actionLink: '/admin/company-members',
   }
 
@@ -48,7 +48,7 @@ export function WebAdminCompanyMemberUpdate() {
       defaultValues={defaultValues()}
       document={AdminUpdateCompanyMemberDocument}
       deleteDocument={AdminDeleteCompanyMemberDocument}
-      buttonText={'CompanyMember'}
+      buttonText={'Company Member'}
       fields={companyMemberFields}
       idName={'companyMemberId'}
     />

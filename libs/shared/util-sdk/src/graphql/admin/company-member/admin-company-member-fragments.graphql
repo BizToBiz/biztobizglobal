@@ -6,10 +6,15 @@ fragment AdminCompanyMemberDetails on CompanyMember {
   thruDate
   role
   location
+  name
   company {
     id
+    name
   }
   member {
     id
+    firstName
+    lastName
+    name
   }
 }

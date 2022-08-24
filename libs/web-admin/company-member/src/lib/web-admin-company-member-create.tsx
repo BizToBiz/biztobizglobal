@@ -6,10 +6,10 @@ import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 export function WebAdminCompanyMemberCreate() {
   const pathData = {
     path: '/admin/company-members/new',
-    name: 'Create a CompanyMember',
-    description: 'Use the form below to add a new CompanyMember',
+    name: 'Create a Company Member',
+    description: 'Use the form below to add a new Company Member',
     showSearch: false,
-    actionText: 'Back to CompanyMember List',
+    actionText: 'Back to Company Member List',
     actionLink: '/admin/company-members',
   }
 
@@ -19,7 +19,7 @@ export function WebAdminCompanyMemberCreate() {
       document={AdminCreateCompanyMemberDocument}
       navigateTo={'/admin/company-member'}
       mutationName={'createCompanyMember'}
-      buttonText={' CompanyMember'}
+      buttonText={' Company Member'}
       fields={companyMemberFields}
     />
   )
