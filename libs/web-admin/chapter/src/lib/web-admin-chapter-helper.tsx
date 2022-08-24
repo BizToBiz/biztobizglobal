@@ -36,7 +36,7 @@ export const chapterFields: WebUiFormField[] = [
   WebUiFormField.input('state', { label: 'State' }),
   WebUiFormField.url('facebook', { label: 'Facebook URL' }),
   WebUiFormField.enumSelect('meetingDay', { label: 'Meeting Day', enum: DayOfWeek }),
-  WebUiFormField.input('meetingtime', { label: 'Meeting Time' }),
+  WebUiFormField.input('meetingTime', { label: 'Meeting Time' }),
   WebUiFormField.input('meetingDetails', { label: 'Meeting Details' }),
   WebUiFormField.relationSelect('meetings', {
     label: 'Meetings',
