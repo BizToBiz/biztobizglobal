@@ -69,7 +69,7 @@ export class ApiTerritoryDataAccessAdminService {
   adminCreateTerritory(info: GraphQLResolveInfo, adminId: string, input: AdminCreateTerritoryInput) {
     const select = new PrismaSelect(info).value
     return this.data.territory.create({
-      data: { ...input },
+      data: { ...input, regions: { connect: input.regions } },
       ...select,
     })
   }

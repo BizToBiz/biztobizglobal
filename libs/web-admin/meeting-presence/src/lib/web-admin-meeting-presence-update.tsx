@@ -26,7 +26,7 @@ export function WebAdminMeetingPresenceUpdate() {
 
   function defaultValues() {
     if (meetingPresence?.meetingPresence && !loading) {
-      return cleanDatabaseOutput(meetingPresence.meetingPresence, meetingPresenceFields)
+      return cleanDatabaseOutput(meetingPresence.meetingPresence, meetingPresenceFields, ['name'])
     } else {
       return undefined
     }

@@ -584,7 +584,7 @@ export type AdminUpdateReferralInput = {
 }
 
 export type AdminUpdateRegionInput = {
-  chapters?: InputMaybe<MultiSelectInput>
+  chapters?: InputMaybe<Array<MultiSelectInput>>
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   territoryId?: InputMaybe<Scalars['String']>

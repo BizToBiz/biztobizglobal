@@ -12,6 +12,6 @@ export class AdminUpdateRegionInput {
   @Field({ nullable: true })
   territoryId?: string
 
-  @Field(() => MultiSelectInput, { nullable: true })
+  @Field(() => [MultiSelectInput], { nullable: true })
   chapters?: MultiSelectInput[]
 }

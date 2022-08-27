@@ -26,7 +26,7 @@ export function WebAdminCompanyMemberUpdate() {
 
   function defaultValues() {
     if (companyMember?.companyMember && !loading) {
-      return cleanDatabaseOutput(companyMember.companyMember, companyMemberFields)
+      return cleanDatabaseOutput(companyMember.companyMember, companyMemberFields, ['name'])
     } else {
       return undefined
     }

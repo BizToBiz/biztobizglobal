@@ -10,7 +10,7 @@ import { AdminChaptersDocument, AdminUsersDocument } from '@biztobiz/shared/util
 export const uploadFields: WebUiFormField[] = [
   WebUiFormField.input('format', { label: 'Format' }),
   WebUiFormField.input('originalFilename', { label: 'Original Filename' }),
-  WebUiFormField.input('publicId', { label: 'Public Id' }),
+  WebUiFormField.input('publicId', { label: 'Public Id', required: true }),
   WebUiFormField.input('resourceType', { label: 'Resource Type', required: true }),
   WebUiFormField.input('secureUrl', { label: 'Secure URL', required: true }),
   WebUiFormField.input('signature', { label: 'Signature', required: true }),

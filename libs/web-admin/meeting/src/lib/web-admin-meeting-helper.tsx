@@ -12,7 +12,7 @@ import {
 // }
 
 export const meetingFields: WebUiFormField[] = [
-  WebUiFormField.datePicker('date', { label: 'Meeting Date' }),
+  WebUiFormField.datePicker('date', { label: 'Meeting Date', required: true }),
   WebUiFormField.relationSelect('chapterId', {
     label: 'Chapter',
     document: AdminChaptersDocument,

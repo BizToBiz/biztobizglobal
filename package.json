@@ -60,7 +60,7 @@
     "test:ci": "yarn test:api",
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
-    "push:stage" : "git checkout stage && git merge develop && git push && git checkout develop"
+    "push:stage": "git checkout stage && git merge develop && git push && git checkout develop"
   },
   "dependencies": {
     "@apollo/client": "3.4.17",
@@ -126,6 +126,7 @@
     "react-native-screens": "3.11.1",
     "react-native-simple-toast": "1.1.3",
     "react-native-tab-view": "^3.1.1",
+    "react-phone-number-input": "^3.2.9",
     "react-router-dom": "6.3.0",
     "react-select": "^5.4.0",
     "react-select-search": "^3.0.10",

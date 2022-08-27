@@ -70,7 +70,7 @@ export class ApiMeetingDataAccessAdminService {
   adminCreateMeeting(info: GraphQLResolveInfo, adminId: string, input: AdminCreateMeetingInput) {
     const select = new PrismaSelect(info).value
     return this.data.meeting.create({
-      data: { ...input },
+      data: { ...input, substitutes: { connect: input.substitutes } },
       ...select,
     })
   }
@@ -79,7 +79,7 @@ export class ApiMeetingDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.meeting.update({
       where: { id: meetingId },
-      data: { ...input },
+      data: { ...input, substitutes: { set: input.substitutes } },
       ...select,
     })
   }

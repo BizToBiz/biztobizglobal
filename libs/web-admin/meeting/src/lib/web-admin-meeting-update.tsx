@@ -22,7 +22,7 @@ export function WebAdminMeetingUpdate() {
 
   function defaultValues() {
     if (meeting?.meeting && !loading) {
-      return cleanDatabaseOutput(meeting.meeting, meetingFields)
+      return cleanDatabaseOutput(meeting.meeting, meetingFields, ['name'])
     } else {
       return undefined
     }
