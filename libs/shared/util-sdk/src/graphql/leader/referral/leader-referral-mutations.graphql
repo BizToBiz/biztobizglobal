@@ -1,0 +1,17 @@
+mutation leaderCreateReferral($input: AdminCreateReferralInput!) {
+  createReferral: leaderCreateReferral(input: $input) {
+    ...LeaderReferralDetails
+  }
+}
+
+mutation leaderDeleteReferral($referralId: String!) {
+  deleteReferral: leaderDeleteReferral(referralId: $referralId) {
+    id
+  }
+}
+
+mutation leaderUpdateReferral($referralId: String!, $input: AdminUpdateReferralInput!) {
+  updateReferral: leaderUpdateReferral(referralId: $referralId, input: $input) {
+    ...LeaderReferralDetails
+  }
+}

@@ -8,7 +8,7 @@ import {
 } from '@<%= npmScope %>/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@<%= npmScope %>/shared/utils/feature'
-import { <%= propertyName %>Fields, <%= propertyName %>SelectFields } from './web-leader-<%= name %>-helper'
+import { <%= propertyName %>Fields } from './web-leader-<%= name %>-helper'
 import { WebAdminUpdateForm } from '@<%= npmScope %>/web-admin/crud-helper'
 
 export function WebLeader<%= className %>Update() {
@@ -26,7 +26,7 @@ export function WebLeader<%= className %>Update() {
 
   function defaultValues() {
     if (<%= propertyName %>?.<%= propertyName %> && !loading) {
-      return cleanDatabaseOutput(<%= propertyName %>.<%= propertyName %>, <%= propertyName %>SelectFields)
+      return cleanDatabaseOutput(<%= propertyName %>.<%= propertyName %>)
     } else {
       return undefined
     }
@@ -51,7 +51,6 @@ export function WebLeader<%= className %>Update() {
       buttonText={'<%= className %>'}
       fields={<%= name %>Fields}
       idName={'<%= propertyName %>Id'}
-      selectFields={<%= propertyName %>SelectFields}
     />
   )
 }

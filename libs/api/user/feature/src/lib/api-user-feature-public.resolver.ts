@@ -7,8 +7,7 @@ export class ApiUserFeaturePublicResolver {
 
   @ResolveField(() => String, { nullable: true })
   name(@Parent() user: User) {
-    const name = [user?.firstName, user?.lastName].join(' ').trim()
-    return name.length ? name : ''
+    return this.service.getUserName(user.id)
   }
 
   @ResolveField(() => Boolean, { nullable: true })

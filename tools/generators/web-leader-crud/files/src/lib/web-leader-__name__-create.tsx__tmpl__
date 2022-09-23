@@ -1,6 +1,6 @@
 import React from 'react'
 import { LeaderCreate<%= className %>Document } from '@<%= npmScope %>/shared/util-sdk'
-import { <%= propertyName %>Fields, <%= propertyName %>SelectFields } from './web-leader-<%= name %>-helper'
+import { <%= propertyName %>Fields } from './web-leader-<%= name %>-helper'
 import { WebAdminCreateForm } from '@<%= npmScope %>/web-admin/crud-helper'
 
 export function WebLeader<%= className %>Create() {
@@ -21,7 +21,6 @@ export function WebLeader<%= className %>Create() {
       mutationName={'create<%= className %>'}
       buttonText={' <%= className %>'}
       fields={<%= propertyName %>Fields}
-      selectFields={<%= propertyName %>SelectFields}
     />
   )
 }

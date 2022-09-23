@@ -7,6 +7,10 @@ import { ChapterMemberRole } from '@biztobiz/api/enums/data-access'
 export class ApiUserDataAccessPublicService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
+  getUserName(userId: string) {
+    return this.data.user.findUnique({ where: { id: userId } }).then((user) => `${user?.firstName} ${user?.lastName}`)
+  }
+
   private formatUsername(email: string, username?: string): string {
     return username?.trim() || uniqueSuffix(email.trim().split('@')[0])
   }

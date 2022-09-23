@@ -6610,6 +6610,279 @@ export type IntercomSubSubscription = {
   } | null
 }
 
+export type LeaderReferralDetailsFragment = {
+  __typename?: 'Referral'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  referralDate?: any | null
+  rating?: ReferralRating | null
+  firstName?: string | null
+  lastName?: string | null
+  email?: string | null
+  phone?: string | null
+  notes?: string | null
+  fromIndustry?: string | null
+  toIndustry?: string | null
+  sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+  toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+  transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+}
+
+export type LeaderCreateReferralMutationVariables = Exact<{
+  input: AdminCreateReferralInput
+}>
+
+export type LeaderCreateReferralMutation = {
+  __typename?: 'Mutation'
+  createReferral?: {
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  } | null
+}
+
+export type LeaderDeleteReferralMutationVariables = Exact<{
+  referralId: Scalars['String']
+}>
+
+export type LeaderDeleteReferralMutation = {
+  __typename?: 'Mutation'
+  deleteReferral?: { __typename?: 'Referral'; id?: string | null } | null
+}
+
+export type LeaderUpdateReferralMutationVariables = Exact<{
+  referralId: Scalars['String']
+  input: AdminUpdateReferralInput
+}>
+
+export type LeaderUpdateReferralMutation = {
+  __typename?: 'Mutation'
+  updateReferral?: {
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  } | null
+}
+
+export type LeaderReferralQueryVariables = Exact<{
+  referralId: Scalars['String']
+}>
+
+export type LeaderReferralQuery = {
+  __typename?: 'Query'
+  referral?: {
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  } | null
+}
+
+export type LeaderReferralsQueryVariables = Exact<{
+  input?: InputMaybe<AdminListReferralInput>
+}>
+
+export type LeaderReferralsQuery = {
+  __typename?: 'Query'
+  referrals?: Array<{
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type LeaderReferralPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListReferralInput>
+}>
+
+export type LeaderReferralPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type LeaderTransactionReferralDetailsFragment = {
+  __typename?: 'Transaction'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  date?: any | null
+  amount?: number | null
+  enteredBy?: string | null
+  enteredOn?: string | null
+  industry?: string | null
+  state?: string | null
+  chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+  user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  referral?: {
+    __typename?: 'Referral'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    referralDate?: any | null
+    rating?: ReferralRating | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    fromIndustry?: string | null
+    toIndustry?: string | null
+    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+  } | null
+}
+
+export type LeaderTransactionReferralsQueryVariables = Exact<{
+  input?: InputMaybe<AdminListTransactionInput>
+}>
+
+export type LeaderTransactionReferralsQuery = {
+  __typename?: 'Query'
+  transactions?: Array<{
+    __typename?: 'Transaction'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    date?: any | null
+    amount?: number | null
+    enteredBy?: string | null
+    enteredOn?: string | null
+    industry?: string | null
+    state?: string | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    referral?: {
+      __typename?: 'Referral'
+      id?: string | null
+      createdAt?: any | null
+      updatedAt?: any | null
+      referralDate?: any | null
+      rating?: ReferralRating | null
+      firstName?: string | null
+      lastName?: string | null
+      email?: string | null
+      phone?: string | null
+      notes?: string | null
+      fromIndustry?: string | null
+      toIndustry?: string | null
+      sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+      from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+      to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+      fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+      toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    } | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
+export type LeaderTransactionReferralPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListTransactionInput>
+}>
+
+export type LeaderTransactionReferralPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+  } | null
+}
+
 export const AdminAttendanceReminderDetailsFragmentDoc = gql`
   fragment AdminAttendanceReminderDetails on AttendanceReminder {
     id
@@ -7177,6 +7450,100 @@ export const IntercomDetailsFragmentDoc = gql`
     type
     scope
     payload
+  }
+`
+export const LeaderReferralDetailsFragmentDoc = gql`
+  fragment LeaderReferralDetails on Referral {
+    id
+    createdAt
+    updatedAt
+    referralDate
+    rating
+    firstName
+    lastName
+    email
+    phone
+    notes
+    fromIndustry
+    toIndustry
+    sentBy {
+      id
+      name
+    }
+    from {
+      id
+      name
+    }
+    to {
+      id
+      name
+    }
+    fromChapter {
+      id
+      name
+    }
+    toChapter {
+      id
+      name
+    }
+    transactions {
+      id
+    }
+  }
+`
+export const LeaderTransactionReferralDetailsFragmentDoc = gql`
+  fragment LeaderTransactionReferralDetails on Transaction {
+    id
+    createdAt
+    updatedAt
+    date
+    amount
+    enteredBy
+    enteredOn
+    industry
+    state
+    chapter {
+      id
+      name
+    }
+    user {
+      id
+      name
+    }
+    referral {
+      id
+      createdAt
+      updatedAt
+      referralDate
+      rating
+      firstName
+      lastName
+      email
+      phone
+      notes
+      fromIndustry
+      toIndustry
+      sentBy {
+        id
+        name
+      }
+      from {
+        id
+        name
+      }
+      to {
+        id
+        name
+      }
+      fromChapter {
+        id
+        name
+      }
+      toChapter {
+        id
+        name
+      }
+    }
   }
 `
 export const AdminCreateAttendanceReminderDocument = gql`
@@ -12739,3 +13106,383 @@ export function useIntercomSubSubscription(
 }
 export type IntercomSubSubscriptionHookResult = ReturnType<typeof useIntercomSubSubscription>
 export type IntercomSubSubscriptionResult = Apollo.SubscriptionResult<IntercomSubSubscription>
+export const LeaderCreateReferralDocument = gql`
+  mutation leaderCreateReferral($input: AdminCreateReferralInput!) {
+    createReferral: leaderCreateReferral(input: $input) {
+      ...LeaderReferralDetails
+    }
+  }
+  ${LeaderReferralDetailsFragmentDoc}
+`
+export type LeaderCreateReferralMutationFn = Apollo.MutationFunction<
+  LeaderCreateReferralMutation,
+  LeaderCreateReferralMutationVariables
+>
+
+/**
+ * __useLeaderCreateReferralMutation__
+ *
+ * To run a mutation, you first call `useLeaderCreateReferralMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderCreateReferralMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderCreateReferralMutation, { data, loading, error }] = useLeaderCreateReferralMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderCreateReferralMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderCreateReferralMutation, LeaderCreateReferralMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderCreateReferralMutation, LeaderCreateReferralMutationVariables>(
+    LeaderCreateReferralDocument,
+    options,
+  )
+}
+export type LeaderCreateReferralMutationHookResult = ReturnType<typeof useLeaderCreateReferralMutation>
+export type LeaderCreateReferralMutationResult = Apollo.MutationResult<LeaderCreateReferralMutation>
+export type LeaderCreateReferralMutationOptions = Apollo.BaseMutationOptions<
+  LeaderCreateReferralMutation,
+  LeaderCreateReferralMutationVariables
+>
+export const LeaderDeleteReferralDocument = gql`
+  mutation leaderDeleteReferral($referralId: String!) {
+    deleteReferral: leaderDeleteReferral(referralId: $referralId) {
+      id
+    }
+  }
+`
+export type LeaderDeleteReferralMutationFn = Apollo.MutationFunction<
+  LeaderDeleteReferralMutation,
+  LeaderDeleteReferralMutationVariables
+>
+
+/**
+ * __useLeaderDeleteReferralMutation__
+ *
+ * To run a mutation, you first call `useLeaderDeleteReferralMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderDeleteReferralMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderDeleteReferralMutation, { data, loading, error }] = useLeaderDeleteReferralMutation({
+ *   variables: {
+ *      referralId: // value for 'referralId'
+ *   },
+ * });
+ */
+export function useLeaderDeleteReferralMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderDeleteReferralMutation, LeaderDeleteReferralMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderDeleteReferralMutation, LeaderDeleteReferralMutationVariables>(
+    LeaderDeleteReferralDocument,
+    options,
+  )
+}
+export type LeaderDeleteReferralMutationHookResult = ReturnType<typeof useLeaderDeleteReferralMutation>
+export type LeaderDeleteReferralMutationResult = Apollo.MutationResult<LeaderDeleteReferralMutation>
+export type LeaderDeleteReferralMutationOptions = Apollo.BaseMutationOptions<
+  LeaderDeleteReferralMutation,
+  LeaderDeleteReferralMutationVariables
+>
+export const LeaderUpdateReferralDocument = gql`
+  mutation leaderUpdateReferral($referralId: String!, $input: AdminUpdateReferralInput!) {
+    updateReferral: leaderUpdateReferral(referralId: $referralId, input: $input) {
+      ...LeaderReferralDetails
+    }
+  }
+  ${LeaderReferralDetailsFragmentDoc}
+`
+export type LeaderUpdateReferralMutationFn = Apollo.MutationFunction<
+  LeaderUpdateReferralMutation,
+  LeaderUpdateReferralMutationVariables
+>
+
+/**
+ * __useLeaderUpdateReferralMutation__
+ *
+ * To run a mutation, you first call `useLeaderUpdateReferralMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderUpdateReferralMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderUpdateReferralMutation, { data, loading, error }] = useLeaderUpdateReferralMutation({
+ *   variables: {
+ *      referralId: // value for 'referralId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderUpdateReferralMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderUpdateReferralMutation, LeaderUpdateReferralMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderUpdateReferralMutation, LeaderUpdateReferralMutationVariables>(
+    LeaderUpdateReferralDocument,
+    options,
+  )
+}
+export type LeaderUpdateReferralMutationHookResult = ReturnType<typeof useLeaderUpdateReferralMutation>
+export type LeaderUpdateReferralMutationResult = Apollo.MutationResult<LeaderUpdateReferralMutation>
+export type LeaderUpdateReferralMutationOptions = Apollo.BaseMutationOptions<
+  LeaderUpdateReferralMutation,
+  LeaderUpdateReferralMutationVariables
+>
+export const LeaderReferralDocument = gql`
+  query LeaderReferral($referralId: String!) {
+    referral: leaderReferral(referralId: $referralId) {
+      ...LeaderReferralDetails
+    }
+  }
+  ${LeaderReferralDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderReferralQuery__
+ *
+ * To run a query within a React component, call `useLeaderReferralQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderReferralQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderReferralQuery({
+ *   variables: {
+ *      referralId: // value for 'referralId'
+ *   },
+ * });
+ */
+export function useLeaderReferralQuery(
+  baseOptions: Apollo.QueryHookOptions<LeaderReferralQuery, LeaderReferralQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderReferralQuery, LeaderReferralQueryVariables>(LeaderReferralDocument, options)
+}
+export function useLeaderReferralLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderReferralQuery, LeaderReferralQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderReferralQuery, LeaderReferralQueryVariables>(LeaderReferralDocument, options)
+}
+export type LeaderReferralQueryHookResult = ReturnType<typeof useLeaderReferralQuery>
+export type LeaderReferralLazyQueryHookResult = ReturnType<typeof useLeaderReferralLazyQuery>
+export type LeaderReferralQueryResult = Apollo.QueryResult<LeaderReferralQuery, LeaderReferralQueryVariables>
+export const LeaderReferralsDocument = gql`
+  query LeaderReferrals($input: AdminListReferralInput) {
+    referrals: leaderReferrals(input: $input) {
+      ...LeaderReferralDetails
+    }
+    counters: leaderCountReferrals(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${LeaderReferralDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderReferralsQuery__
+ *
+ * To run a query within a React component, call `useLeaderReferralsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderReferralsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderReferralsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderReferralsQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderReferralsQuery, LeaderReferralsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderReferralsQuery, LeaderReferralsQueryVariables>(LeaderReferralsDocument, options)
+}
+export function useLeaderReferralsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderReferralsQuery, LeaderReferralsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderReferralsQuery, LeaderReferralsQueryVariables>(LeaderReferralsDocument, options)
+}
+export type LeaderReferralsQueryHookResult = ReturnType<typeof useLeaderReferralsQuery>
+export type LeaderReferralsLazyQueryHookResult = ReturnType<typeof useLeaderReferralsLazyQuery>
+export type LeaderReferralsQueryResult = Apollo.QueryResult<LeaderReferralsQuery, LeaderReferralsQueryVariables>
+export const LeaderReferralPaginationDocument = gql`
+  query LeaderReferralPagination($input: AdminListReferralInput) {
+    counters: leaderCountReferrals(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderReferralPaginationQuery__
+ *
+ * To run a query within a React component, call `useLeaderReferralPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderReferralPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderReferralPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderReferralPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderReferralPaginationQuery, LeaderReferralPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderReferralPaginationQuery, LeaderReferralPaginationQueryVariables>(
+    LeaderReferralPaginationDocument,
+    options,
+  )
+}
+export function useLeaderReferralPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderReferralPaginationQuery, LeaderReferralPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderReferralPaginationQuery, LeaderReferralPaginationQueryVariables>(
+    LeaderReferralPaginationDocument,
+    options,
+  )
+}
+export type LeaderReferralPaginationQueryHookResult = ReturnType<typeof useLeaderReferralPaginationQuery>
+export type LeaderReferralPaginationLazyQueryHookResult = ReturnType<typeof useLeaderReferralPaginationLazyQuery>
+export type LeaderReferralPaginationQueryResult = Apollo.QueryResult<
+  LeaderReferralPaginationQuery,
+  LeaderReferralPaginationQueryVariables
+>
+export const LeaderTransactionReferralsDocument = gql`
+  query LeaderTransactionReferrals($input: AdminListTransactionInput) {
+    transactions: leaderTransactions(input: $input) {
+      ...LeaderTransactionReferralDetails
+    }
+    counters: leaderCountTransactions(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${LeaderTransactionReferralDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderTransactionReferralsQuery__
+ *
+ * To run a query within a React component, call `useLeaderTransactionReferralsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderTransactionReferralsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderTransactionReferralsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderTransactionReferralsQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderTransactionReferralsQuery, LeaderTransactionReferralsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderTransactionReferralsQuery, LeaderTransactionReferralsQueryVariables>(
+    LeaderTransactionReferralsDocument,
+    options,
+  )
+}
+export function useLeaderTransactionReferralsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderTransactionReferralsQuery, LeaderTransactionReferralsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderTransactionReferralsQuery, LeaderTransactionReferralsQueryVariables>(
+    LeaderTransactionReferralsDocument,
+    options,
+  )
+}
+export type LeaderTransactionReferralsQueryHookResult = ReturnType<typeof useLeaderTransactionReferralsQuery>
+export type LeaderTransactionReferralsLazyQueryHookResult = ReturnType<typeof useLeaderTransactionReferralsLazyQuery>
+export type LeaderTransactionReferralsQueryResult = Apollo.QueryResult<
+  LeaderTransactionReferralsQuery,
+  LeaderTransactionReferralsQueryVariables
+>
+export const LeaderTransactionReferralPaginationDocument = gql`
+  query LeaderTransactionReferralPagination($input: AdminListTransactionInput) {
+    counters: leaderCountTransactions(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderTransactionReferralPaginationQuery__
+ *
+ * To run a query within a React component, call `useLeaderTransactionReferralPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderTransactionReferralPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderTransactionReferralPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderTransactionReferralPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    LeaderTransactionReferralPaginationQuery,
+    LeaderTransactionReferralPaginationQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderTransactionReferralPaginationQuery, LeaderTransactionReferralPaginationQueryVariables>(
+    LeaderTransactionReferralPaginationDocument,
+    options,
+  )
+}
+export function useLeaderTransactionReferralPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    LeaderTransactionReferralPaginationQuery,
+    LeaderTransactionReferralPaginationQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    LeaderTransactionReferralPaginationQuery,
+    LeaderTransactionReferralPaginationQueryVariables
+  >(LeaderTransactionReferralPaginationDocument, options)
+}
+export type LeaderTransactionReferralPaginationQueryHookResult = ReturnType<
+  typeof useLeaderTransactionReferralPaginationQuery
+>
+export type LeaderTransactionReferralPaginationLazyQueryHookResult = ReturnType<
+  typeof useLeaderTransactionReferralPaginationLazyQuery
+>
+export type LeaderTransactionReferralPaginationQueryResult = Apollo.QueryResult<
+  LeaderTransactionReferralPaginationQuery,
+  LeaderTransactionReferralPaginationQueryVariables
+>

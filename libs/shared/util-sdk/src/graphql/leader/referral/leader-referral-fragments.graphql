@@ -1,0 +1,37 @@
+fragment LeaderReferralDetails on Referral {
+  id
+  createdAt
+  updatedAt
+  referralDate
+  rating
+  firstName
+  lastName
+  email
+  phone
+  notes
+  fromIndustry
+  toIndustry
+  sentBy {
+    id
+    name
+  }
+  from {
+    id
+    name
+  }
+  to {
+    id
+    name
+  }
+  fromChapter {
+    id
+    name
+  }
+  toChapter {
+    id
+    name
+  }
+  transactions {
+    id
+  }
+}

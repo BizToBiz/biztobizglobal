@@ -56,5 +56,6 @@ export const referralFields: WebUiFormField[] = [
     label: 'Transactions',
     document: AdminTransactionsDocument,
     dataType: 'transactions',
+    multi: true,
   }),
 ]

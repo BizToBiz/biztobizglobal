@@ -1,0 +1,20 @@
+query LeaderReferral($referralId: String!) {
+  referral: leaderReferral(referralId: $referralId) {
+    ...LeaderReferralDetails
+  }
+}
+
+query LeaderReferrals($input: AdminListReferralInput) {
+  referrals: leaderReferrals(input: $input) {
+    ...LeaderReferralDetails
+  }
+  counters: leaderCountReferrals(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query LeaderReferralPagination($input: AdminListReferralInput) {
+  counters: leaderCountReferrals(input: $input) {
+    ...CorePagingDetails
+  }
+}

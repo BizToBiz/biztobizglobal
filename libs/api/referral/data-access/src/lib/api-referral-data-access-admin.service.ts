@@ -70,7 +70,7 @@ export class ApiReferralDataAccessAdminService {
   adminCreateReferral(info: GraphQLResolveInfo, adminId: string, input: AdminCreateReferralInput) {
     const select = new PrismaSelect(info).value
     return this.data.referral.create({
-      data: { ...input },
+      data: { ...input, transactions: { set: input.transactions } },
       ...select,
     })
   }
@@ -79,7 +79,7 @@ export class ApiReferralDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.referral.update({
       where: { id: referralId },
-      data: { ...input },
+      data: { ...input, transactions: { set: input.transactions } },
       ...select,
     })
   }

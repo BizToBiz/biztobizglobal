@@ -1,0 +1,14 @@
+query LeaderTransactionReferrals($input: AdminListTransactionInput) {
+  transactions: leaderTransactions(input: $input) {
+    ...LeaderTransactionReferralDetails
+  }
+  counters: leaderCountTransactions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query LeaderTransactionReferralPagination($input: AdminListTransactionInput) {
+  counters: leaderCountTransactions(input: $input) {
+    ...CorePagingDetails
+  }
+}

@@ -4,9 +4,12 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import React, { useContext } from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
 import { WebLeaderDashboard } from '@biztobiz/web-leader/dashboard'
-import { HomeIcon } from '@heroicons/react/outline'
+import { CashIcon, HomeIcon, InboxInIcon } from '@heroicons/react/outline'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
+
+import { WebLeaderReferralCreate, WebLeaderReferralList, WebLeaderReferralUpdate } from '@biztobiz/web-leader/referral'
+import { WebLeaderTransactionReferralReport } from '@biztobiz/web-leader/transaction-referral-report'
 
 // Add New Imports Here
 
@@ -25,13 +28,31 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
       icon: HomeIcon,
       current: currentPath.path.includes('/leader/dashboard'),
     },
+    {
+      name: 'Transactions & Referrals',
+      href: '/leader/transactions-and-referrals',
+      icon: CashIcon,
+      current: currentPath.path.includes('/leader/transactions-and-referrals'),
+    },
+    {
+      name: 'Referrals',
+      href: '/leader/referrals',
+      icon: InboxInIcon,
+      current: currentPath.path.includes('/leader/referrals'),
+    },
     // Add New Nav Objects Here
   ]
 
-  return props?.user?.isLeader ? (
+  return props?.user?.isLeader || props?.user.role === 'Admin' ? (
     <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout}>
       <Routes>
         <Route path="dashboard" element={<WebLeaderDashboard />} />
+        <Route path="referrals" element={<WebLeaderReferralList />} />
+        <Route path="referral">
+          <Route path="new" element={<WebLeaderReferralCreate />} />
+          <Route path=":id" element={<WebLeaderReferralUpdate />} />
+        </Route>
+        <Route path="transactions-and-referrals" element={<WebLeaderTransactionReferralReport />} />
         {/*Add New Routes Here*/}
       </Routes>
     </WebUiAdminLayoutFeature>

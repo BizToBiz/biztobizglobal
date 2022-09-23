@@ -1,6 +1,7 @@
 import { SVGProps } from 'react'
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import { Maybe } from 'graphql/jsutils/Maybe'
+import { CorePaging } from '@biztobiz/shared/util-sdk'
 
 export function capitalizeFirstLetter(string: string | undefined) {
   return string && string[0].toUpperCase() + string.slice(1)
@@ -51,19 +52,17 @@ export function cleanFormInput(obj: Record<string, unknown>, fields?: WebUiFormF
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
       .filter(([k, v]) => {
-        if (
+        return !(
           v === undefined ||
           !v ||
           v === '' ||
           (v instanceof Array && !v.length) ||
           k === 'createdAt' ||
           k === 'updatedAt' ||
-          k == '__typename' ||
+          k === '__typename' ||
           k === 'id' ||
           (v instanceof Date && !isValidDate(v))
         )
-          return false
-        return true
       })
       .map(([k, v]) => {
         // Reformat date strings for storage in database
@@ -102,20 +101,18 @@ export function cleanDatabaseOutput(
     Object.entries(obj)
       // Remove id, __typename, updatedAt, createdAt, and empty fields
       .filter(([k, v]) => {
-        if (
+        return !(
           v === undefined ||
           !v ||
           v === '' ||
           (v instanceof Array && !v.length) ||
           k === 'createdAt' ||
           k === 'updatedAt' ||
-          k == '__typename' ||
+          k === '__typename' ||
           k === 'id' ||
           (v instanceof Date && !isValidDate(v)) ||
           resolverFields?.includes(k)
         )
-          return false
-        return true
       })
       .map(([k, v]) => {
         // Reformat date strings for storage in database
@@ -160,4 +157,9 @@ export function getDateFromDateTime(yourDate: Date) {
   const offset = yourDate.getTimezoneOffset()
   yourDate = new Date(yourDate.getTime() - offset * 60 * 1000)
   return yourDate.toISOString().split('T')[0]
+}
+
+export function toCount(p: CorePaging | null) {
+  if ((p?.take ?? 0) + (p?.skip ?? 0) > (p?.count ?? 0)) return p?.count
+  return (p?.take ?? 0) + (p?.skip ?? 0)
 }
