@@ -1,7 +1,20 @@
 import { Field, InputType } from '@nestjs/graphql'
+import { MultiSelectInput } from '@biztobiz/api/core/data-access'
 
 @InputType()
 export class AdminUpdateMeetingInput {
+  @Field()
+  date: Date
+
   @Field({ nullable: true })
-  date?: Date
+  chapterId?: string
+
+  @Field({ nullable: true })
+  isVisitorDay?: boolean
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  presence?: MultiSelectInput[]
+
+  @Field(() => [MultiSelectInput], { nullable: true })
+  substitutes?: MultiSelectInput[]
 }

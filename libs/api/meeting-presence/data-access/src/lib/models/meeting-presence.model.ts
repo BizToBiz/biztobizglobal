@@ -18,8 +18,8 @@ export class MeetingPresence {
   attendance?: MeetingAttendance
 
   @Field(() => Meeting, { nullable: true })
-  meeting?: Omit<[Meeting], ''>
+  meeting?: Partial<Meeting>
 
   @Field(() => User, { nullable: true })
-  member?: Omit<[User], ''>
+  member?: Partial<User>
 }

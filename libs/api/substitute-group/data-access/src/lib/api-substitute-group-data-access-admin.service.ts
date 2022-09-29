@@ -42,6 +42,7 @@ export class ApiSubstituteGroupDataAccessAdminService {
     return this.data.substituteGroup.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }
@@ -69,7 +70,7 @@ export class ApiSubstituteGroupDataAccessAdminService {
   adminCreateSubstituteGroup(info: GraphQLResolveInfo, adminId: string, input: AdminCreateSubstituteGroupInput) {
     const select = new PrismaSelect(info).value
     return this.data.substituteGroup.create({
-      data: { ...input },
+      data: { ...input, chapters: { connect: input.chapters } },
       ...select,
     })
   }
@@ -83,7 +84,7 @@ export class ApiSubstituteGroupDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.substituteGroup.update({
       where: { id: substituteGroupId },
-      data: { ...input },
+      data: { ...input, chapters: { set: input.chapters } },
       ...select,
     })
   }

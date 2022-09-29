@@ -24,8 +24,8 @@ export class ChapterMember {
   role?: ChapterMemberRole
 
   @Field(() => Chapter, { nullable: true })
-  chapter?: Omit<[Chapter], ''>
+  chapter?: Partial<Chapter>
 
   @Field(() => User, { nullable: true })
-  member?: Omit<[User], ''>
+  member?: Partial<User>
 }

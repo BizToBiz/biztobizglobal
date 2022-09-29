@@ -80,7 +80,7 @@ export const userFields: WebUiFormField[] = [
   WebUiFormField.input('merchantCircle', { label: 'Merchant Circle' }),
   WebUiFormField.checkbox('multipleBusinesses', { label: 'Multiple Businesses' }),
   WebUiFormField.checkbox('multipleLocations', { label: 'Multiple Locations' }),
-  WebUiFormField.input('numberOfEmployees', { label: 'Number of Employees' }),
+  WebUiFormField.number('numberOfEmployees', { label: 'Number of Employees' }),
   WebUiFormField.input('organizer', { label: 'Organizer' }),
   WebUiFormField.input('otherBusinesses', { label: 'Other Businesses' }),
   WebUiFormField.input('otherLocations', { label: 'Other Locations' }),

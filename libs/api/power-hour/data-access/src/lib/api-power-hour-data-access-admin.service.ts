@@ -42,6 +42,7 @@ export class ApiPowerHourDataAccessAdminService {
     return this.data.powerHour.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

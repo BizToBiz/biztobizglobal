@@ -42,6 +42,7 @@ export class ApiReferralDataAccessAdminService {
     return this.data.referral.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

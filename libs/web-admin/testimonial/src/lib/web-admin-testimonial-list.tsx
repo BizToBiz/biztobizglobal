@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminTestimonialsQuery, useAdminTestimonialPaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminTestimonialPaginationQuery, useAdminTestimonialsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminTestimonialListProps {
@@ -57,7 +57,7 @@ export function WebAdminTestimonialList(props: WebAdminTestimonialListProps) {
       <WebUiDataTableFeature
         data={testimonials?.testimonials}
         path={'/admin/testimonial'}
-        fields={['name']}
+        fields={['text']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

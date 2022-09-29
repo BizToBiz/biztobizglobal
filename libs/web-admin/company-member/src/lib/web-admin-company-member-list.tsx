@@ -40,10 +40,10 @@ export function WebAdminCompanyMemberList(props: WebAdminCompanyMemberListProps)
   useLayoutEffect(() => {
     setCurrentPath({
       path: '/admin/company-members',
-      name: 'CompanyMembers',
-      description: 'View and manage all company-members in your organization',
+      name: 'Company Members',
+      description: 'View and manage all company members in your organization',
       showSearch: true,
-      actionText: 'Add CompanyMember',
+      actionText: 'Add Company Member',
       actionLink: '/admin/company-member/new',
     })
 

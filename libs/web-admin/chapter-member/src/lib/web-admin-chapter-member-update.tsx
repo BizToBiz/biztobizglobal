@@ -26,7 +26,7 @@ export function WebAdminChapterMemberUpdate() {
 
   function defaultValues() {
     if (chapterMember?.chapterMember && !loading) {
-      return cleanDatabaseOutput(chapterMember.chapterMember, chapterMemberFields)
+      return cleanDatabaseOutput(chapterMember.chapterMember, chapterMemberFields, ['name'])
     } else {
       return undefined
     }
@@ -34,10 +34,10 @@ export function WebAdminChapterMemberUpdate() {
 
   const pathData = {
     path: '/admin/chapter-member/:id',
-    name: 'Edit ChapterMember',
-    description: 'Update the information for this chapter-member',
+    name: 'Edit Chapter Member',
+    description: 'Update the information for this chapter member',
     showSearch: false,
-    actionText: 'Back to ChapterMember List',
+    actionText: 'Back to Chapter Member List',
     actionLink: '/admin/chapter-members',
   }
 
@@ -48,7 +48,7 @@ export function WebAdminChapterMemberUpdate() {
       defaultValues={defaultValues()}
       document={AdminUpdateChapterMemberDocument}
       deleteDocument={AdminDeleteChapterMemberDocument}
-      buttonText={'ChapterMember'}
+      buttonText={'Chapter Member'}
       fields={chapterMemberFields}
       idName={'chapterMemberId'}
     />

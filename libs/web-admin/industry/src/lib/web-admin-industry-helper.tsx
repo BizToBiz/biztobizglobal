@@ -6,4 +6,4 @@ import React from 'react'
 //   return regions?.filter((region) => !region.Industry?.id)
 // }
 
-export const industryFields: WebUiFormField[] = [WebUiFormField.input('Industry', { label: 'name' })]
+export const industryFields: WebUiFormField[] = [WebUiFormField.input('name', { label: 'Industry' })]

@@ -2,6 +2,7 @@ fragment AdminAttendanceReminderDetails on AttendanceReminder {
   id
   createdAt
   updatedAt
+  name
   chapter {
     id
     name
@@ -9,9 +10,13 @@ fragment AdminAttendanceReminderDetails on AttendanceReminder {
   sentBy {
     id
     name
+    firstName
+    lastName
   }
   sentTo {
     id
     name
+    firstName
+    lastName
   }
 }

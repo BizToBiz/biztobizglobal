@@ -22,7 +22,7 @@ export function WebAdminUserUpdate() {
 
   function defaultValues() {
     if (user?.user && !loading) {
-      return cleanDatabaseOutput(user.user, userFields)
+      return cleanDatabaseOutput(user.user, userFields, ['name'])
     } else {
       return undefined
     }

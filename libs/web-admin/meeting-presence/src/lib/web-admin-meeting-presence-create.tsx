@@ -6,10 +6,10 @@ import { WebAdminCreateForm } from '@biztobiz/web-admin/crud-helper'
 export function WebAdminMeetingPresenceCreate() {
   const pathData = {
     path: '/admin/meeting-presences/new',
-    name: 'Create a MeetingPresence',
-    description: 'Use the form below to add a new MeetingPresence',
+    name: 'Create a Meeting Presence',
+    description: 'Use the form below to add a new Meeting Presence',
     showSearch: false,
-    actionText: 'Back to MeetingPresence List',
+    actionText: 'Back to Meeting Presence List',
     actionLink: '/admin/meeting-presences',
   }
 
@@ -19,7 +19,7 @@ export function WebAdminMeetingPresenceCreate() {
       document={AdminCreateMeetingPresenceDocument}
       navigateTo={'/admin/meeting-presence'}
       mutationName={'createMeetingPresence'}
-      buttonText={' MeetingPresence'}
+      buttonText={' Meeting Presence'}
       fields={meetingPresenceFields}
     />
   )

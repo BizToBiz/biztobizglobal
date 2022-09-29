@@ -9,7 +9,7 @@ generator client {
 }
 
 model User {
-  id                    String               @id @default(cuid())
+  id                    String               @id @default(cuid())id                    String               @id @default(cuid())
   createdAt             DateTime             @default(now())
   updatedAt             DateTime             @default(now()) @updatedAt
   lastSeen              DateTime?
@@ -160,7 +160,7 @@ model Chapter {
   substituteGroupId  String?
   region             Region?              @relation(name: "Chapter_BelongsTo_Region", fields: [regionId], references: [id])
   regionId           String?
-  AttendanceReminder AttendanceReminder[] @relation("AttendanceReminder_BelongsTo_Chapter")
+  attendanceReminders AttendanceReminder[] @relation("AttendanceReminder_BelongsTo_Chapter")
   avatar             Upload?              @relation("Upload_BelongsTo_Chapter")
 }
 

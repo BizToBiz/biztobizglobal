@@ -40,10 +40,10 @@ export function WebAdminPowerHourList(props: WebAdminPowerHourListProps) {
   useLayoutEffect(() => {
     setCurrentPath({
       path: '/admin/power-hours',
-      name: 'PowerHours',
+      name: 'Power Hours',
       description: 'View and manage all Power Hours in your organization',
       showSearch: true,
-      actionText: 'Add PowerHour',
+      actionText: 'Add Power Hour',
       actionLink: '/admin/power-hour/new',
     })
 
@@ -57,7 +57,7 @@ export function WebAdminPowerHourList(props: WebAdminPowerHourListProps) {
       <WebUiDataTableFeature
         data={powerHours?.powerHours}
         path={'/admin/power-hour'}
-        fields={['name']}
+        fields={['date', 'details']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

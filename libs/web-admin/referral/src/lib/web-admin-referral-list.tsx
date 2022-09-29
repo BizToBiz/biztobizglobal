@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminReferralsQuery, useAdminReferralPaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminReferralPaginationQuery, useAdminReferralsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminReferralListProps {
@@ -57,7 +57,7 @@ export function WebAdminReferralList(props: WebAdminReferralListProps) {
       <WebUiDataTableFeature
         data={referrals?.referrals}
         path={'/admin/referral'}
-        fields={['name']}
+        fields={['firstName', 'lastName', 'email']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

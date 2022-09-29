@@ -84,7 +84,7 @@ export class Chapter {
   region?: Omit<[Region], ''>
 
   @Field(() => [AttendanceReminder], { nullable: true })
-  AttendanceReminder?: AttendanceReminder[]
+  attendanceReminders?: AttendanceReminder[]
 
   @Field(() => Upload, { nullable: true })
   avatar?: Upload

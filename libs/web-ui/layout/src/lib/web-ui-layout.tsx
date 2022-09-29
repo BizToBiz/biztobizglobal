@@ -12,6 +12,7 @@ import fullLogo from './full-logo.png'
 interface WebUiLayoutProps {
   children: React.ReactNode
   user: User
+  logout: () => void
 }
 
 const navigation = [

@@ -33,12 +33,13 @@ fragment AdminChapterDetails on Chapter {
   }
   substituteGroup {
     id
+    name
   }
   region {
     id
     name
   }
-  AttendanceReminder {
+  attendanceReminders {
     id
   }
 }

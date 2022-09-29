@@ -5,12 +5,15 @@ fragment AdminChapterMemberDetails on ChapterMember {
   isMentor
   isTrainer
   role
+  name
   chapter {
     id
     name
   }
   member {
     id
+    firstName
+    lastName
     name
   }
 }

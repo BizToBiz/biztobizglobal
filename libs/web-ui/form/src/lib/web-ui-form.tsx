@@ -3,7 +3,8 @@ import { Controller, useForm, UseFormProps } from 'react-hook-form'
 import { WebUiFormField, WebUiFormFieldType } from './web-ui-form-fields'
 import { Switch } from '@headlessui/react'
 import { RelationSelect } from './field-types/relation-select'
-import { isPhoneNumber } from 'class-validator'
+import Skeleton from 'react-loading-skeleton'
+import { isPossiblePhoneNumber } from 'react-phone-number-input'
 
 export interface WebUiFormProps extends UseFormProps {
   fields: WebUiFormField[]
@@ -30,7 +31,7 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
   }
 
   function validatePhone(phone: string) {
-    return isPhoneNumber(phone, 'US')
+    return !phone || isPossiblePhoneNumber(phone, 'US')
   }
 
   function renderFieldWrapper(field: WebUiFormField) {
@@ -112,7 +113,6 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
               id={field.key}
               type="tel"
               {...register(`${field.key}`, {
-                required: false,
                 validate: (v) => validatePhone(v),
               })}
               className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -166,7 +166,7 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
             {...register(`${field.key}`, {
               required: field?.options?.required,
               valueAsDate: true,
-              setValueAs: (v) => v.split('T')[0],
+              setValueAs: (v) => v?.split?.('T')[0],
             })}
             className="text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
@@ -241,7 +241,9 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
     }
   }
 
-  return (
+  return loading ? (
+    <Skeleton count={5} />
+  ) : (
     <form className="space-y-6" onSubmit={handleSubmit(submit)}>
       {fields.map((field) => {
         return renderFieldWrapper(field)
@@ -251,7 +253,7 @@ export function WebUiForm({ fields, submit, buttonText, defaultValues, loading =
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-50"
         >
           {buttonText}
         </button>

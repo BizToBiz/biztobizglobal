@@ -26,7 +26,7 @@ export function WebAdminMeetingPresenceUpdate() {
 
   function defaultValues() {
     if (meetingPresence?.meetingPresence && !loading) {
-      return cleanDatabaseOutput(meetingPresence.meetingPresence, meetingPresenceFields)
+      return cleanDatabaseOutput(meetingPresence.meetingPresence, meetingPresenceFields, ['name'])
     } else {
       return undefined
     }
@@ -34,10 +34,10 @@ export function WebAdminMeetingPresenceUpdate() {
 
   const pathData = {
     path: '/admin/meeting-presence/:id',
-    name: 'Edit MeetingPresence',
-    description: 'Update the information for this meeting-presence',
+    name: 'Edit Meeting Presence',
+    description: 'Update the information for this meeting presence',
     showSearch: false,
-    actionText: 'Back to MeetingPresence List',
+    actionText: 'Back to Meeting Presence List',
     actionLink: '/admin/meeting-presences',
   }
 
@@ -48,7 +48,7 @@ export function WebAdminMeetingPresenceUpdate() {
       defaultValues={defaultValues()}
       document={AdminUpdateMeetingPresenceDocument}
       deleteDocument={AdminDeleteMeetingPresenceDocument}
-      buttonText={'MeetingPresence'}
+      buttonText={'Meeting Presence'}
       fields={meetingPresenceFields}
       idName={'meetingPresenceId'}
     />

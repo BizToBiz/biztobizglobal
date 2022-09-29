@@ -42,7 +42,9 @@ export type AdminCreateAttendanceReminderInput = {
 }
 
 export type AdminCreateChapterInput = {
+  attendanceReminders?: InputMaybe<Array<MultiSelectInput>>
   avatarEmail?: InputMaybe<Scalars['String']>
+  avatarId?: InputMaybe<Scalars['String']>
   avatarUrl?: InputMaybe<Scalars['String']>
   city?: InputMaybe<Scalars['String']>
   description?: InputMaybe<Scalars['String']>
@@ -53,24 +55,38 @@ export type AdminCreateChapterInput = {
   meetingDay?: InputMaybe<DayOfWeek>
   meetingDetails?: InputMaybe<Scalars['String']>
   meetingTime?: InputMaybe<Scalars['String']>
+  meetings?: InputMaybe<Array<MultiSelectInput>>
+  members?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
+  referralsFrom?: InputMaybe<Array<MultiSelectInput>>
+  referralsTo?: InputMaybe<Array<MultiSelectInput>>
   regionId?: InputMaybe<Scalars['String']>
   state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<ChapterStatus>
+  substituteGroupId?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateChapterMemberInput = {
+  chapterId?: InputMaybe<Scalars['String']>
   isMentor?: InputMaybe<Scalars['Boolean']>
   isTrainer?: InputMaybe<Scalars['Boolean']>
+  memberId?: InputMaybe<Scalars['String']>
   role?: InputMaybe<ChapterMemberRole>
 }
 
 export type AdminCreateCompanyInput = {
-  name: Scalars['String']
+  members?: InputMaybe<Array<MultiSelectInput>>
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateCompanyMemberInput = {
-  location: Scalars['String']
+  companyId?: InputMaybe<Scalars['String']>
+  fromDate?: InputMaybe<Scalars['DateTime']>
+  location?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
+  thruDate?: InputMaybe<Scalars['DateTime']>
 }
 
 export type AdminCreateIndustryInput = {
@@ -81,10 +97,14 @@ export type AdminCreateMeetingInput = {
   chapterId?: InputMaybe<Scalars['String']>
   date: Scalars['DateTime']
   isVisitorDay?: InputMaybe<Scalars['Boolean']>
+  presence?: InputMaybe<Array<MultiSelectInput>>
+  substitutes?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateMeetingPresenceInput = {
-  date: Scalars['String']
+  attendance?: InputMaybe<MeetingAttendance>
+  meetingId?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateNotificationInput = {
@@ -98,7 +118,12 @@ export type AdminCreateNotificationInput = {
 }
 
 export type AdminCreatePowerHourInput = {
-  details: Scalars['String']
+  date?: InputMaybe<Scalars['DateTime']>
+  details?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  status?: InputMaybe<PowerHourStatus>
+  time?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateReferralInput = {
@@ -115,20 +140,26 @@ export type AdminCreateReferralInput = {
   toChapterId?: InputMaybe<Scalars['String']>
   toId?: InputMaybe<Scalars['String']>
   toIndustry?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminCreateRegionInput = {
+  chapters?: InputMaybe<Array<MultiSelectInput>>
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   territoryId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateSubstituteGroupInput = {
-  name: Scalars['String']
+  chapters?: InputMaybe<Array<MultiSelectInput>>
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateSubstituteInput = {
-  name: Scalars['String']
+  invited?: InputMaybe<Array<MultiSelectInput>>
+  meetingId?: InputMaybe<Scalars['String']>
+  sentById?: InputMaybe<Scalars['String']>
+  substituteId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateTerritoryInput = {
@@ -138,24 +169,133 @@ export type AdminCreateTerritoryInput = {
 }
 
 export type AdminCreateTestimonialInput = {
+  fromId?: InputMaybe<Scalars['String']>
   text: Scalars['String']
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateTransactionInput = {
-  text: Scalars['String']
+  amount?: InputMaybe<Scalars['Float']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date?: InputMaybe<Scalars['DateTime']>
+  enteredBy?: InputMaybe<Scalars['String']>
+  enteredOn?: InputMaybe<Scalars['String']>
+  industry?: InputMaybe<Scalars['String']>
+  referralId?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateUploadInput = {
-  originalFilename: Scalars['String']
+  chapterId?: InputMaybe<Scalars['String']>
+  format?: InputMaybe<Scalars['String']>
+  originalFilename?: InputMaybe<Scalars['String']>
+  publicId?: InputMaybe<Scalars['String']>
+  resourceType?: InputMaybe<Scalars['String']>
+  secureUrl?: InputMaybe<Scalars['String']>
+  signature?: InputMaybe<Scalars['String']>
+  thumbnailUrl?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminCreateUserInput = {
+  address?: InputMaybe<Scalars['String']>
+  address2?: InputMaybe<Scalars['String']>
+  applicationDate?: InputMaybe<Scalars['DateTime']>
+  avatarId?: InputMaybe<Scalars['String']>
+  avatarUrl?: InputMaybe<Scalars['String']>
+  bio?: InputMaybe<Scalars['String']>
+  cell?: InputMaybe<Scalars['String']>
+  chapterId?: InputMaybe<Scalars['String']>
+  chapterTitle?: InputMaybe<Scalars['String']>
+  city?: InputMaybe<Scalars['String']>
+  comments?: InputMaybe<Scalars['String']>
+  companies?: InputMaybe<Array<MultiSelectInput>>
+  company?: InputMaybe<Scalars['String']>
+  confirmEmailExpires?: InputMaybe<Scalars['DateTime']>
+  confirmEmailToken?: InputMaybe<Scalars['String']>
   developer?: InputMaybe<Scalars['Boolean']>
-  firstName: Scalars['String']
+  email?: InputMaybe<Scalars['String']>
+  emailConfirmed?: InputMaybe<Scalars['Boolean']>
+  facebook?: InputMaybe<Scalars['String']>
+  fax?: InputMaybe<Scalars['String']>
+  firstName?: InputMaybe<Scalars['String']>
+  hear?: InputMaybe<Scalars['String']>
+  hearOther?: InputMaybe<Scalars['String']>
+  inactiveDate?: InputMaybe<Scalars['DateTime']>
+  industry?: InputMaybe<Scalars['String']>
+  infusionsoftId?: InputMaybe<Scalars['Int']>
+  inquiryDate?: InputMaybe<Scalars['DateTime']>
+  instagram?: InputMaybe<Scalars['String']>
+  internalComments?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
   lastSeen?: InputMaybe<Scalars['DateTime']>
+  launchComplete?: InputMaybe<Scalars['Boolean']>
+  linkedin?: InputMaybe<Scalars['String']>
+  location?: InputMaybe<Scalars['String']>
+  membershipDate?: InputMaybe<Scalars['DateTime']>
+  mentorName?: InputMaybe<Scalars['String']>
+  merchantCircle?: InputMaybe<Scalars['String']>
+  multipleBusinesses?: InputMaybe<Scalars['Boolean']>
+  multipleLocations?: InputMaybe<Scalars['Boolean']>
+  nofificationsSent?: InputMaybe<Array<MultiSelectInput>>
+  notificationsReceived?: InputMaybe<Array<MultiSelectInput>>
+  notifyByEmail?: InputMaybe<Scalars['Boolean']>
+  notifyByMobile?: InputMaybe<Scalars['Boolean']>
+  notifyBySMS?: InputMaybe<Scalars['Boolean']>
+  notifyByWeb?: InputMaybe<Scalars['Boolean']>
+  numberOfEmployees?: InputMaybe<Scalars['Int']>
   onlineStatus?: InputMaybe<UserOnlineStatus>
-  role: Role
+  organizer?: InputMaybe<Scalars['Int']>
+  otherBusinesses?: InputMaybe<Scalars['String']>
+  otherLocations?: InputMaybe<Scalars['String']>
+  password?: InputMaybe<Scalars['String']>
+  passwordResetExpires?: InputMaybe<Scalars['DateTime']>
+  passwordResetToken?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  postcode?: InputMaybe<Scalars['String']>
+  powerHoursFrom?: InputMaybe<Array<MultiSelectInput>>
+  powerHoursTo?: InputMaybe<Array<MultiSelectInput>>
+  presence?: InputMaybe<Array<MultiSelectInput>>
+  promoter?: InputMaybe<Scalars['Int']>
+  recognized?: InputMaybe<Scalars['Int']>
+  referralsFrom?: InputMaybe<Array<MultiSelectInput>>
+  referralsSent?: InputMaybe<Array<MultiSelectInput>>
+  referralsTo?: InputMaybe<Array<MultiSelectInput>>
+  regionManagedId?: InputMaybe<Scalars['String']>
+  reminderSentBy?: InputMaybe<Array<MultiSelectInput>>
+  reminderSentTo?: InputMaybe<Array<MultiSelectInput>>
+  renewalDate?: InputMaybe<Scalars['DateTime']>
+  role?: InputMaybe<Role>
+  salesAgentName?: InputMaybe<Scalars['String']>
+  showGravatar?: InputMaybe<Scalars['Boolean']>
+  state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<UserStatus>
+  strategizer?: InputMaybe<Scalars['Int']>
+  substitute?: InputMaybe<Scalars['Boolean']>
+  substituteAccepted?: InputMaybe<Array<MultiSelectInput>>
+  substituteInvited?: InputMaybe<Array<MultiSelectInput>>
+  tagline?: InputMaybe<Scalars['String']>
+  terminatedByName?: InputMaybe<Scalars['String']>
+  terminationComments?: InputMaybe<Scalars['String']>
+  terminationDate?: InputMaybe<Scalars['DateTime']>
+  terminationReason?: InputMaybe<Scalars['String']>
+  territoryManagedId?: InputMaybe<Scalars['String']>
+  testimonialsFrom?: InputMaybe<Array<MultiSelectInput>>
+  testimonialsTo?: InputMaybe<Array<MultiSelectInput>>
+  thinker?: InputMaybe<Scalars['Int']>
+  timeInIndustry?: InputMaybe<Scalars['String']>
+  title?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
+  transferDate?: InputMaybe<Scalars['DateTime']>
+  twitter?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<Scalars['String']>
+  username?: InputMaybe<Scalars['String']>
+  vet?: InputMaybe<Scalars['Boolean']>
+  website?: InputMaybe<Scalars['String']>
+  youtube?: InputMaybe<Scalars['String']>
 }
 
 export type AdminListAttendanceReminderInput = {
@@ -196,12 +336,17 @@ export type AdminListCompanyInput = {
 }
 
 export type AdminListCompanyMemberInput = {
+  companyId?: InputMaybe<Scalars['String']>
+  fromDate?: InputMaybe<Scalars['DateTime']>
   location?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
   take?: InputMaybe<Scalars['Float']>
+  thruDate?: InputMaybe<Scalars['DateTime']>
 }
 
 export type AdminListIndustryInput = {
@@ -337,7 +482,9 @@ export type AdminUpdateAttendanceReminderInput = {
 }
 
 export type AdminUpdateChapterInput = {
+  attendanceReminders?: InputMaybe<Array<MultiSelectInput>>
   avatarEmail?: InputMaybe<Scalars['String']>
+  avatarId?: InputMaybe<Scalars['String']>
   avatarUrl?: InputMaybe<Scalars['String']>
   city?: InputMaybe<Scalars['String']>
   description?: InputMaybe<Scalars['String']>
@@ -348,24 +495,38 @@ export type AdminUpdateChapterInput = {
   meetingDay?: InputMaybe<DayOfWeek>
   meetingDetails?: InputMaybe<Scalars['String']>
   meetingTime?: InputMaybe<Scalars['String']>
+  meetings?: InputMaybe<Array<MultiSelectInput>>
+  members?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
+  referralsFrom?: InputMaybe<Array<MultiSelectInput>>
+  referralsTo?: InputMaybe<Array<MultiSelectInput>>
   regionId?: InputMaybe<Scalars['String']>
   state?: InputMaybe<Scalars['String']>
   status?: InputMaybe<ChapterStatus>
+  substituteGroupId?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminUpdateChapterMemberInput = {
+  chapterId?: InputMaybe<Scalars['String']>
   isMentor?: InputMaybe<Scalars['Boolean']>
   isTrainer?: InputMaybe<Scalars['Boolean']>
+  memberId?: InputMaybe<Scalars['String']>
   role?: InputMaybe<ChapterMemberRole>
 }
 
 export type AdminUpdateCompanyInput = {
+  members?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateCompanyMemberInput = {
+  companyId?: InputMaybe<Scalars['String']>
+  fromDate?: InputMaybe<Scalars['DateTime']>
   location?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
+  thruDate?: InputMaybe<Scalars['DateTime']>
 }
 
 export type AdminUpdateIndustryInput = {
@@ -373,37 +534,72 @@ export type AdminUpdateIndustryInput = {
 }
 
 export type AdminUpdateMeetingInput = {
-  date?: InputMaybe<Scalars['DateTime']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date: Scalars['DateTime']
+  isVisitorDay?: InputMaybe<Scalars['Boolean']>
+  presence?: InputMaybe<Array<MultiSelectInput>>
+  substitutes?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminUpdateMeetingPresenceInput = {
-  date?: InputMaybe<Scalars['String']>
+  attendance?: InputMaybe<MeetingAttendance>
+  meetingId?: InputMaybe<Scalars['String']>
+  memberId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateNotificationInput = {
+  actorId?: InputMaybe<Scalars['String']>
   message?: InputMaybe<Scalars['String']>
+  read?: InputMaybe<Scalars['Boolean']>
+  referenceId?: InputMaybe<Scalars['String']>
+  referenceType?: InputMaybe<NotificationReferenceType>
+  toId?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<NotificationType>
 }
 
 export type AdminUpdatePowerHourInput = {
+  date?: InputMaybe<Scalars['DateTime']>
   details?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  status?: InputMaybe<PowerHourStatus>
+  time?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateReferralInput = {
+  email?: InputMaybe<Scalars['String']>
   firstName?: InputMaybe<Scalars['String']>
+  fromChapterId?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  fromIndustry?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
+  notes?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  rating?: InputMaybe<ReferralRating>
+  sentById?: InputMaybe<Scalars['String']>
+  toChapterId?: InputMaybe<Scalars['String']>
+  toId?: InputMaybe<Scalars['String']>
+  toIndustry?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
 export type AdminUpdateRegionInput = {
+  chapters?: InputMaybe<Array<MultiSelectInput>>
   managerId?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   territoryId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateSubstituteGroupInput = {
+  chapters?: InputMaybe<Array<MultiSelectInput>>
   name?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateSubstituteInput = {
-  name?: InputMaybe<Scalars['String']>
+  invited?: InputMaybe<Array<MultiSelectInput>>
+  meetingId?: InputMaybe<Scalars['String']>
+  sentById?: InputMaybe<Scalars['String']>
+  substituteId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateTerritoryInput = {
@@ -413,15 +609,35 @@ export type AdminUpdateTerritoryInput = {
 }
 
 export type AdminUpdateTestimonialInput = {
-  text?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  text: Scalars['String']
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateTransactionInput = {
-  text?: InputMaybe<Scalars['String']>
+  amount?: InputMaybe<Scalars['Float']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date?: InputMaybe<Scalars['DateTime']>
+  enteredBy?: InputMaybe<Scalars['String']>
+  enteredOn?: InputMaybe<Scalars['String']>
+  industry?: InputMaybe<Scalars['String']>
+  referralId?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateUploadInput = {
+  chapterId?: InputMaybe<Scalars['String']>
+  format?: InputMaybe<Scalars['String']>
   originalFilename?: InputMaybe<Scalars['String']>
+  publicId?: InputMaybe<Scalars['String']>
+  resourceType?: InputMaybe<Scalars['String']>
+  secureUrl?: InputMaybe<Scalars['String']>
+  signature?: InputMaybe<Scalars['String']>
+  thumbnailUrl?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
 }
 
 export type AdminUpdateUserInput = {
@@ -527,6 +743,7 @@ export type AttendanceReminder = {
   chapter?: Maybe<Chapter>
   createdAt?: Maybe<Scalars['DateTime']>
   id?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
   sentBy?: Maybe<User>
   sentTo?: Maybe<User>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -534,7 +751,7 @@ export type AttendanceReminder = {
 
 export type Chapter = {
   __typename?: 'Chapter'
-  AttendanceReminder?: Maybe<Array<AttendanceReminder>>
+  attendanceReminders?: Maybe<Array<AttendanceReminder>>
   avatar?: Maybe<Upload>
   avatarEmail?: Maybe<Scalars['String']>
   avatarUrl?: Maybe<Scalars['String']>
@@ -570,6 +787,7 @@ export type ChapterMember = {
   isMentor?: Maybe<Scalars['Boolean']>
   isTrainer?: Maybe<Scalars['Boolean']>
   member?: Maybe<User>
+  name?: Maybe<Scalars['String']>
   role?: Maybe<ChapterMemberRole>
   updatedAt?: Maybe<Scalars['DateTime']>
 }
@@ -609,6 +827,7 @@ export type CompanyMember = {
   id?: Maybe<Scalars['String']>
   location?: Maybe<Scalars['String']>
   member?: Maybe<User>
+  name?: Maybe<Scalars['String']>
   role?: Maybe<Scalars['String']>
   thruDate?: Maybe<Scalars['DateTime']>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -667,6 +886,7 @@ export type Meeting = {
   date?: Maybe<Scalars['DateTime']>
   id?: Maybe<Scalars['String']>
   isVisitorDay?: Maybe<Scalars['Boolean']>
+  name?: Maybe<Scalars['String']>
   presence?: Maybe<Array<MeetingPresence>>
   substitutes?: Maybe<Array<Substitute>>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -689,6 +909,7 @@ export type MeetingPresence = {
   id?: Maybe<Scalars['String']>
   meeting?: Maybe<Meeting>
   member?: Maybe<User>
+  name?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
@@ -3183,9 +3404,22 @@ export type AdminAttendanceReminderDetailsFragment = {
   id?: string | null
   createdAt?: any | null
   updatedAt?: any | null
+  name?: string | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-  sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  sentBy?: {
+    __typename?: 'User'
+    id?: string | null
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+  } | null
+  sentTo?: {
+    __typename?: 'User'
+    id?: string | null
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+  } | null
 }
 
 export type AdminCreateAttendanceReminderMutationVariables = Exact<{
@@ -3199,9 +3433,22 @@ export type AdminCreateAttendanceReminderMutation = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   } | null
 }
 
@@ -3226,9 +3473,22 @@ export type AdminUpdateAttendanceReminderMutation = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   } | null
 }
 
@@ -3243,9 +3503,22 @@ export type AdminAttendanceReminderQuery = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   } | null
 }
 
@@ -3260,9 +3533,22 @@ export type AdminAttendanceRemindersQuery = {
     id?: string | null
     createdAt?: any | null
     updatedAt?: any | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    sentTo?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    sentBy?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    sentTo?: {
+      __typename?: 'User'
+      id?: string | null
+      name?: string | null
+      firstName?: string | null
+      lastName?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -3298,8 +3584,15 @@ export type AdminChapterMemberDetailsFragment = {
   isMentor?: boolean | null
   isTrainer?: boolean | null
   role?: ChapterMemberRole | null
+  name?: string | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  member?: {
+    __typename?: 'User'
+    id?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+  } | null
 }
 
 export type AdminCreateChapterMemberMutationVariables = Exact<{
@@ -3316,8 +3609,15 @@ export type AdminCreateChapterMemberMutation = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3345,8 +3645,15 @@ export type AdminUpdateChapterMemberMutation = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3364,8 +3671,15 @@ export type AdminChapterMemberQuery = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3383,8 +3697,15 @@ export type AdminChapterMembersQuery = {
     isMentor?: boolean | null
     isTrainer?: boolean | null
     role?: ChapterMemberRole | null
+    name?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -3436,9 +3757,9 @@ export type AdminChapterDetailsFragment = {
   transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
   referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
   referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-  substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+  substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
   region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-  AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+  attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
 }
 
 export type AdminCreateChapterMutationVariables = Exact<{
@@ -3471,9 +3792,9 @@ export type AdminCreateChapterMutation = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
 
@@ -3517,9 +3838,9 @@ export type AdminUpdateChapterMutation = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
 
@@ -3553,9 +3874,9 @@ export type AdminChapterQuery = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   } | null
 }
 
@@ -3589,9 +3910,9 @@ export type AdminChaptersQuery = {
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
     referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
     referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
-    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null } | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
     region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
-    AttendanceReminder?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -3628,8 +3949,15 @@ export type AdminCompanyMemberDetailsFragment = {
   thruDate?: any | null
   role?: string | null
   location?: string | null
-  company?: { __typename?: 'Company'; id?: string | null } | null
-  member?: { __typename?: 'User'; id?: string | null } | null
+  name?: string | null
+  company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+  member?: {
+    __typename?: 'User'
+    id?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+  } | null
 }
 
 export type AdminCreateCompanyMemberMutationVariables = Exact<{
@@ -3647,8 +3975,15 @@ export type AdminCreateCompanyMemberMutation = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3677,8 +4012,15 @@ export type AdminUpdateCompanyMemberMutation = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3697,8 +4039,15 @@ export type AdminCompanyMemberQuery = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -3717,8 +4066,15 @@ export type AdminCompanyMembersQuery = {
     thruDate?: any | null
     role?: string | null
     location?: string | null
-    company?: { __typename?: 'Company'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null } | null
+    name?: string | null
+    company?: { __typename?: 'Company'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -3961,8 +4317,15 @@ export type AdminMeetingPresenceDetailsFragment = {
   createdAt?: any | null
   updatedAt?: any | null
   attendance?: MeetingAttendance | null
+  name?: string | null
   meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-  member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  member?: {
+    __typename?: 'User'
+    id?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+  } | null
 }
 
 export type AdminCreateMeetingPresenceMutationVariables = Exact<{
@@ -3977,8 +4340,15 @@ export type AdminCreateMeetingPresenceMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -4004,8 +4374,15 @@ export type AdminUpdateMeetingPresenceMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -4021,8 +4398,15 @@ export type AdminMeetingPresenceQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   } | null
 }
 
@@ -4038,8 +4422,15 @@ export type AdminMeetingPresencesQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     attendance?: MeetingAttendance | null
+    name?: string | null
     meeting?: { __typename?: 'Meeting'; id?: string | null } | null
-    member?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    member?: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      name?: string | null
+    } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -4073,6 +4464,7 @@ export type AdminMeetingDetailsFragment = {
   createdAt?: any | null
   updatedAt?: any | null
   date?: any | null
+  name?: string | null
   isVisitorDay?: boolean | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4091,6 +4483,7 @@ export type AdminCreateMeetingMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4120,6 +4513,7 @@ export type AdminUpdateMeetingMutation = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4139,6 +4533,7 @@ export type AdminMeetingQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -4158,6 +4553,7 @@ export type AdminMeetingsQuery = {
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
+    name?: string | null
     isVisitorDay?: boolean | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     presence?: Array<{ __typename?: 'MeetingPresence'; id?: string | null }> | null
@@ -6219,6 +6615,7 @@ export const AdminAttendanceReminderDetailsFragmentDoc = gql`
     id
     createdAt
     updatedAt
+    name
     chapter {
       id
       name
@@ -6226,10 +6623,14 @@ export const AdminAttendanceReminderDetailsFragmentDoc = gql`
     sentBy {
       id
       name
+      firstName
+      lastName
     }
     sentTo {
       id
       name
+      firstName
+      lastName
     }
   }
 `
@@ -6241,12 +6642,15 @@ export const AdminChapterMemberDetailsFragmentDoc = gql`
     isMentor
     isTrainer
     role
+    name
     chapter {
       id
       name
     }
     member {
       id
+      firstName
+      lastName
       name
     }
   }
@@ -6287,12 +6691,13 @@ export const AdminChapterDetailsFragmentDoc = gql`
     }
     substituteGroup {
       id
+      name
     }
     region {
       id
       name
     }
-    AttendanceReminder {
+    attendanceReminders {
       id
     }
   }
@@ -6306,11 +6711,16 @@ export const AdminCompanyMemberDetailsFragmentDoc = gql`
     thruDate
     role
     location
+    name
     company {
       id
+      name
     }
     member {
       id
+      firstName
+      lastName
+      name
     }
   }
 `
@@ -6339,11 +6749,14 @@ export const AdminMeetingPresenceDetailsFragmentDoc = gql`
     createdAt
     updatedAt
     attendance
+    name
     meeting {
       id
     }
     member {
       id
+      firstName
+      lastName
       name
     }
   }
@@ -6354,6 +6767,7 @@ export const AdminMeetingDetailsFragmentDoc = gql`
     createdAt
     updatedAt
     date
+    name
     chapter {
       id
       name

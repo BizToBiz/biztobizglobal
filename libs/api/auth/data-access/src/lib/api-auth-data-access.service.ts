@@ -75,6 +75,7 @@ export class ApiAuthDataAccessService {
     }
 
     const user: User = authUser
+
     const isLeader = await this.data.user.findFirst({
       where: {
         AND: [
@@ -174,6 +175,7 @@ export class ApiAuthDataAccessService {
   }
 
   public setCookie(res: Response, token: string) {
+    console.log(res, this.core.cookie.name)
     return res?.cookie(this.core.cookie.name, token, this.core.cookie.options)
   }
 

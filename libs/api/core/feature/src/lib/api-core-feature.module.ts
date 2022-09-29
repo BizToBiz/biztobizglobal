@@ -1,6 +1,6 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { GraphQLIntercomModule } from '@kikstart-playground/graphql-intercom'
-import { Logger, Module } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { PubSub } from 'graphql-subscriptions'
@@ -11,10 +11,8 @@ import { ApiCoreFeatureController } from './api-core-feature.controller'
 import { ApiCoreFeatureResolver } from './api-core-feature.resolver'
 import { ApiCoreFeatureService } from './api-core-feature.service'
 import { ServeStaticModule } from '@nestjs/serve-static'
-import { writeFileSync } from 'fs'
-import { ensureDirSync, existsSync } from 'fs-extra'
 
-const rootPath = join(__dirname, '..', 'biztobiz')
+const rootPath = join(__dirname, '..', 'web')
 
 @Module({
   imports: [
@@ -40,12 +38,4 @@ const rootPath = join(__dirname, '..', 'biztobiz')
   providers: [ApiCoreFeatureResolver, ApiCoreFeatureService],
   exports: [ApiCoreFeatureService],
 })
-export class ApiCoreFeatureModule {
-  constructor() {
-    if (!existsSync(rootPath)) {
-      ensureDirSync(rootPath)
-      writeFileSync(join(rootPath, 'index.html'), `<pre>Run 'yarn build:web' to build the frontend.</pre>`)
-      Logger.verbose(`Created static root path ${rootPath}`)
-    }
-  }
-}
+export class ApiCoreFeatureModule {}

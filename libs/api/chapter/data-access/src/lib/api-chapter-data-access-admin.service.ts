@@ -37,13 +37,14 @@ export class ApiChapterDataAccessAdminService {
     }
   }
 
-  adminChapters(info: GraphQLResolveInfo, adminId: string, input?: AdminListChapterInput) {
+  async adminChapters(info: GraphQLResolveInfo, adminId: string, input?: AdminListChapterInput) {
     const select = new PrismaSelect(info).value
-    return this.data.chapter.findMany({
+    const chapters = await this.data.chapter.findMany({
       take: input?.take,
       skip: input?.skip,
       ...select,
     })
+    return chapters
   }
 
   async adminCountChapters(adminId: string, input?: AdminListChapterInput): Promise<CorePaging> {
@@ -69,7 +70,15 @@ export class ApiChapterDataAccessAdminService {
   adminCreateChapter(info: GraphQLResolveInfo, adminId: string, input: AdminCreateChapterInput) {
     const select = new PrismaSelect(info).value
     return this.data.chapter.create({
-      data: { ...input },
+      data: {
+        ...input,
+        meetings: { connect: input.meetings },
+        members: { connect: input.members },
+        transactions: { connect: input.transactions },
+        referralsFrom: { connect: input.referralsFrom },
+        referralsTo: { connect: input.referralsTo },
+        attendanceReminders: { connect: input.attendanceReminders },
+      },
       ...select,
     })
   }
@@ -78,7 +87,17 @@ export class ApiChapterDataAccessAdminService {
     const select = new PrismaSelect(info).value
     return this.data.chapter.update({
       where: { id: chapterId },
-      data: { ...input },
+      data: {
+        ...input,
+        meetings: { set: input.meetings },
+        members: { set: input.members },
+        transactions: { set: input.transactions },
+        referralsFrom: { set: input.referralsFrom },
+        referralsTo: { set: input.referralsTo },
+        attendanceReminders: { set: input.attendanceReminders },
+        regionId: { set: input.regionId },
+        substituteGroupId: { set: input.substituteGroupId },
+      },
       ...select,
     })
   }

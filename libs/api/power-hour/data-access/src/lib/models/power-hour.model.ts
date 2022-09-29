@@ -26,8 +26,8 @@ export class PowerHour {
   status?: PowerHourStatus
 
   @Field(() => User, { nullable: true })
-  from?: Omit<[User], ''>
+  from?: Partial<User>
 
   @Field(() => User, { nullable: true })
-  to?: Omit<[User], ''>
+  to?: Partial<User>
 }

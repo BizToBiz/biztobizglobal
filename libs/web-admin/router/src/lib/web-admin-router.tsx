@@ -1,10 +1,29 @@
 import { useAtom } from 'jotai'
 import { currentPathAtom, isAdminAtom } from '@biztobiz/web/global/data-access'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
 import { WebAdminDashboard } from '@biztobiz/web-admin/dashboard'
-import { HomeIcon } from '@heroicons/react/outline'
+import {
+  BadgeCheckIcon,
+  BellIcon,
+  BriefcaseIcon,
+  CalendarIcon,
+  CashIcon,
+  ChatAltIcon,
+  ClockIcon,
+  CloudUploadIcon,
+  CollectionIcon,
+  GlobeAltIcon,
+  HomeIcon,
+  InboxInIcon,
+  OfficeBuildingIcon,
+  ShieldExclamationIcon,
+  UserCircleIcon,
+  UserGroupIcon,
+  UserIcon,
+  UsersIcon,
+} from '@heroicons/react/outline'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 
 import { WebAdminUserCreate, WebAdminUserList, WebAdminUserUpdate } from '@biztobiz/web-admin/user'
@@ -62,6 +81,8 @@ import {
   WebAdminTransactionUpdate,
 } from '@biztobiz/web-admin/transaction'
 import { WebAdminUploadCreate, WebAdminUploadList, WebAdminUploadUpdate } from '@biztobiz/web-admin/upload'
+import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
+import { GlobeIcon, RefreshIcon } from '@heroicons/react/solid'
 
 // Add New Imports Here
 
@@ -72,6 +93,7 @@ export interface WebAdminRouterProps {
 export function WebAdminRouter(props: WebAdminRouterProps) {
   const [isAdmin] = useAtom(isAdminAtom)
   const [currentPath] = useAtom(currentPathAtom)
+  const { logout } = useContext(SharedAuthContext)
 
   const navigation = [
     {
@@ -83,122 +105,122 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
     {
       name: 'Users',
       href: '/admin/users',
-      icon: HomeIcon,
+      icon: UserIcon,
       current: currentPath.path.includes('/admin/users'),
-    },
-    {
-      name: 'AttendanceReminders',
-      href: '/admin/attendance-reminders',
-      icon: HomeIcon,
-      current: currentPath.path.includes('/admin/attendance-reminders'),
     },
     {
       name: 'Chapters',
       href: '/admin/chapters',
-      icon: HomeIcon,
+      icon: UsersIcon,
       current: currentPath.path.includes('/admin/chapters'),
     },
     {
-      name: 'ChapterMembers',
+      name: 'Chapter Members',
       href: '/admin/chapter-members',
-      icon: HomeIcon,
+      icon: UserGroupIcon,
       current: currentPath.path.includes('/admin/chapter-members'),
     },
     {
       name: 'Companies',
       href: '/admin/companies',
-      icon: HomeIcon,
+      icon: OfficeBuildingIcon,
       current: currentPath.path.includes('/admin/companies'),
     },
     {
-      name: 'CompanyMembers',
+      name: 'Company Members',
       href: '/admin/company-members',
-      icon: HomeIcon,
+      icon: UserCircleIcon,
       current: currentPath.path.includes('/admin/company-members'),
     },
     {
       name: 'Industries',
       href: '/admin/industries',
-      icon: HomeIcon,
+      icon: BriefcaseIcon,
       current: currentPath.path.includes('/admin/industries'),
     },
     {
       name: 'Meetings',
       href: '/admin/meetings',
-      icon: HomeIcon,
+      icon: CalendarIcon,
       current: currentPath.path.includes('/admin/meetings'),
     },
     {
-      name: 'MeetingPresences',
+      name: 'Meeting Presences',
       href: '/admin/meeting-presences',
-      icon: HomeIcon,
+      icon: BadgeCheckIcon,
       current: currentPath.path.includes('/admin/meeting-presences'),
+    },
+    {
+      name: 'Attendance Reminders',
+      href: '/admin/attendance-reminders',
+      icon: ShieldExclamationIcon,
+      current: currentPath.path.includes('/admin/attendance-reminders'),
     },
     {
       name: 'Notifications',
       href: '/admin/notifications',
-      icon: HomeIcon,
+      icon: BellIcon,
       current: currentPath.path.includes('/admin/notifications'),
     },
     {
-      name: 'PowerHours',
+      name: 'Power Hours',
       href: '/admin/power-hours',
-      icon: HomeIcon,
+      icon: ClockIcon,
       current: currentPath.path.includes('/admin/power-hours'),
     },
     {
       name: 'Referrals',
       href: '/admin/referrals',
-      icon: HomeIcon,
+      icon: InboxInIcon,
       current: currentPath.path.includes('/admin/referrals'),
     },
     {
       name: 'Regions',
       href: '/admin/regions',
-      icon: HomeIcon,
+      icon: GlobeIcon,
       current: currentPath.path.includes('/admin/regions'),
     },
     {
       name: 'Substitutes',
       href: '/admin/substitutes',
-      icon: HomeIcon,
+      icon: RefreshIcon,
       current: currentPath.path.includes('/admin/substitutes'),
     },
     {
-      name: 'SubstituteGroups',
+      name: 'Substitute Groups',
       href: '/admin/substitute-groups',
-      icon: HomeIcon,
+      icon: CollectionIcon,
       current: currentPath.path.includes('/admin/substitute-groups'),
     },
     {
       name: 'Territories',
       href: '/admin/territories',
-      icon: HomeIcon,
+      icon: GlobeAltIcon,
       current: currentPath.path.includes('/admin/territories'),
     },
     {
       name: 'Testimonials',
       href: '/admin/testimonials',
-      icon: HomeIcon,
+      icon: ChatAltIcon,
       current: currentPath.path.includes('/admin/testimonials'),
     },
     {
       name: 'Transactions',
       href: '/admin/transactions',
-      icon: HomeIcon,
+      icon: CashIcon,
       current: currentPath.path.includes('/admin/transactions'),
     },
     {
       name: 'Uploads',
       href: '/admin/uploads',
-      icon: HomeIcon,
+      icon: CloudUploadIcon,
       current: currentPath.path.includes('/admin/uploads'),
     },
     // Add New Nav Objects Here
   ]
 
   return isAdmin ? (
-    <WebUiAdminLayoutFeature user={props.user} navigation={navigation}>
+    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout}>
       <Routes>
         <Route path="dashboard" element={<WebAdminDashboard />} />
         <Route path="users" element={<WebAdminUserList />} />
@@ -217,7 +239,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminChapterUpdate />} />
         </Route>
         <Route path="chapter-members" element={<WebAdminChapterMemberList />} />
-        <Route path="chapterMember">
+        <Route path="chapter-member">
           <Route path="new" element={<WebAdminChapterMemberCreate />} />
           <Route path=":id" element={<WebAdminChapterMemberUpdate />} />
         </Route>
@@ -227,7 +249,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminCompanyUpdate />} />
         </Route>
         <Route path="company-members" element={<WebAdminCompanyMemberList />} />
-        <Route path="companyMember">
+        <Route path="company-member">
           <Route path="new" element={<WebAdminCompanyMemberCreate />} />
           <Route path=":id" element={<WebAdminCompanyMemberUpdate />} />
         </Route>
@@ -242,7 +264,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminMeetingUpdate />} />
         </Route>
         <Route path="meeting-presences" element={<WebAdminMeetingPresenceList />} />
-        <Route path="meetingPresence">
+        <Route path="meeting-presence">
           <Route path="new" element={<WebAdminMeetingPresenceCreate />} />
           <Route path=":id" element={<WebAdminMeetingPresenceUpdate />} />
         </Route>
@@ -252,7 +274,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminNotificationUpdate />} />
         </Route>
         <Route path="power-hours" element={<WebAdminPowerHourList />} />
-        <Route path="powerHour">
+        <Route path="power-hour">
           <Route path="new" element={<WebAdminPowerHourCreate />} />
           <Route path=":id" element={<WebAdminPowerHourUpdate />} />
         </Route>
@@ -272,7 +294,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
           <Route path=":id" element={<WebAdminSubstituteUpdate />} />
         </Route>
         <Route path="substitute-groups" element={<WebAdminSubstituteGroupList />} />
-        <Route path="substituteGroup">
+        <Route path="substitute-group">
           <Route path="new" element={<WebAdminSubstituteGroupCreate />} />
           <Route path=":id" element={<WebAdminSubstituteGroupUpdate />} />
         </Route>

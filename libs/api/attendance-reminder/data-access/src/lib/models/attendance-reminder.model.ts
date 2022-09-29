@@ -14,11 +14,11 @@ export class AttendanceReminder {
   updatedAt?: Date
 
   @Field(() => Chapter, { nullable: true })
-  chapter?: () => Chapter
+  chapter?: Partial<Chapter>
 
   @Field(() => User, { nullable: true })
-  sentBy?: () => User
+  sentBy?: Partial<User>
 
   @Field(() => User, { nullable: true })
-  sentTo?: () => User
+  sentTo?: Partial<User>
 }

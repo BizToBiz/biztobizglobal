@@ -42,6 +42,7 @@ export class ApiCompanyDataAccessAdminService {
     return this.data.company.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

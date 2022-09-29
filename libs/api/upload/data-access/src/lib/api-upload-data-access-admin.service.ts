@@ -42,6 +42,7 @@ export class ApiUploadDataAccessAdminService {
     return this.data.upload.findMany({
       take: input?.take,
       skip: input?.skip,
+      where: this.where(input),
       ...select,
     })
   }

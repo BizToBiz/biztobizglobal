@@ -3,7 +3,7 @@ import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 import React, { ReactNode, useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { WebUiFormField } from '@biztobiz/web-ui/form'
-import { identityAtom, isRememberedAtom } from '@biztobiz/web/global/data-access'
+import { isRememberedAtom } from '@biztobiz/web/global/data-access'
 import { useAtom } from 'jotai'
 import { WebAuthPage } from '@biztobiz/web/auth/ui'
 import { WebUiAlertProps } from '@biztobiz/web-ui/alert'
@@ -13,7 +13,6 @@ export function WebFeatureLogin() {
   const navigate = useNavigate()
   const [alert, setAlert] = useState<WebUiAlertProps>()
   const [isRemembered] = useAtom(isRememberedAtom)
-  const [, setIdentity] = useAtom(identityAtom)
 
   const processLogin = async (input: LoginInput) => {
     const loginInfo = await login(input)
