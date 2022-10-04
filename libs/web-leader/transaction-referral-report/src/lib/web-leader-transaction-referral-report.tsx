@@ -4,7 +4,7 @@ import React, { useLayoutEffect, useState } from 'react'
 import { RESET } from 'jotai/utils'
 import {
   useLeaderTransactionReferralPaginationQuery,
-  useLeaderTransactionReferralsQuery
+  useLeaderTransactionReferralsQuery,
 } from '@biztobiz/shared/util-sdk'
 import { capitalizeFirstLetter, toCount } from '@biztobiz/shared/utils/feature'
 import { Link } from 'react-router-dom'
@@ -28,10 +28,14 @@ export function WebLeaderTransactionReferralReport(props: WebLeaderTransactionRe
     },
   }
 
-  const { data: transactions, error, loading } = useLeaderTransactionReferralsQuery({
+  const {
+    data: transactions,
+    error,
+    loading,
+  } = useLeaderTransactionReferralsQuery({
     variables,
   })
-  console.log({transactions, error, loading})
+  console.log({ transactions, error, loading })
 
   const { data: pagination } = useLeaderTransactionReferralPaginationQuery({
     variables,
