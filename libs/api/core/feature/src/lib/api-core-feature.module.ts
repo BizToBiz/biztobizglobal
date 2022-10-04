@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { PubSub } from 'graphql-subscriptions'
 import { join } from 'path'
-
 import { configuration } from './config/configuration'
 import { validationSchema } from './config/validation'
 import { ApiCoreFeatureController } from './api-core-feature.controller'

@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres
     ports:
-      - 5432:5432
+      - '5432:5432'
     environment:
       POSTGRES_DB: prisma
       POSTGRES_USER: prisma
@@ -15,3 +15,5 @@ services:
     ports:
       - '1025:1025'
       - '8025:8025'
+volumes:
+  postgres:
