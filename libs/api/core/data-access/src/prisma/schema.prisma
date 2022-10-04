@@ -1,11 +1,11 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -87,27 +87,285 @@ model User {
   notifyBySMS           Boolean?
   notifyByWeb           Boolean?
   notifyByMobile        Boolean?
+  reminderSentBy        AttendanceReminder[] @relation("AttendanceReminder_HasOne_SentByUser")
+  reminderSentTo        AttendanceReminder[] @relation("AttendanceReminder_HasOne_SentToUser")
   chapter               ChapterMember?       @relation("ChapterMember_BelongsTo_User")
   companies             CompanyMember[]      @relation("CompanyMember_BelongsTo_User")
+  presence              MeetingPresence[]    @relation("MeetingPressence_BelongsTo_User")
   notificationsSent     Notification[]       @relation("Notification_HasOne_FromUser")
   notificationsReceived Notification[]       @relation("Notification_HasOne_ToUser")
   powerHoursFrom        PowerHour[]          @relation("PowerHour_HasOne_FromUser")
   powerHoursTo          PowerHour[]          @relation("PowerHour_HasOne_ToUser")
-  referralsSent         Referral[]           @relation("Referral_HasOne_SentByUser")
   referralsFrom         Referral[]           @relation("Referral_HasOne_FromUser")
+  referralsSent         Referral[]           @relation("Referral_HasOne_SentByUser")
   referralsTo           Referral[]           @relation("Referral_HasOne_ToUser")
-  reminderSentBy        AttendanceReminder[] @relation("AttendanceReminder_HasOne_SentByUser")
-  reminderSentTo        AttendanceReminder[] @relation("AttendanceReminder_HasOne_SentToUser")
-  substituteAccepted    Substitute[]         @relation("Substitute_BelongsTo_User")
-  substituteInvited     Substitute[]         @relation("Substitute_HasMany_User")
+  regionManaged         Region?              @relation("Region_HasOne_Manager")
   substitutesSentBy     Substitute[]         @relation("Substitute_BelongsTo_UserSentBy")
+  substituteAccepted    Substitute[]         @relation("Substitute_BelongsTo_User")
+  territoryManaged      Territory?           @relation("Territory_HasOne_Manager")
   testimonialsFrom      Testimonial[]        @relation("Testimonial_HasOne_FromUser")
   testimonialsTo        Testimonial[]        @relation("Testimonial_HasOne_ToUser")
   transactions          Transaction[]        @relation("Transactions_BelongsTo_User")
-  territoryManaged      Territory?           @relation("Territory_HasOne_Manager")
-  regionManaged         Region?              @relation("Region_HasOne_Manager")
   avatar                Upload?              @relation("Upload_BelongsTo_User")
-  presence              MeetingPresence[]    @relation("MeetingPressence_BelongsTo_User")
+  substituteInvited     Substitute[]         @relation("Substitute_HasMany_User")
+}
+
+model Chapter {
+  id                  String               @id @default(cuid())
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @default(now()) @updatedAt
+  establishedDate     DateTime?            @default(now())
+  name                String
+  description         String?
+  avatarEmail         String?
+  avatarUrl           String?
+  latitude            String?
+  longitude           String?
+  city                String?
+  state               String?
+  facebook            String?
+  meetingDay          DayOfWeek?
+  meetingTime         String?
+  meetingDetails      String?
+  status              ChapterStatus
+  substituteGroupId   String?
+  regionId            String?
+  region              Region?              @relation("Chapter_BelongsTo_Region", fields: [regionId], references: [id])
+  substituteGroup     SubstituteGroup?     @relation("Chapter_BelongsTo_SubstituteGroup", fields: [substituteGroupId], references: [id])
+  attendanceReminders AttendanceReminder[] @relation("AttendanceReminder_BelongsTo_Chapter")
+  members             ChapterMember[]      @relation("ChapterMember_BelongsTo_Chapter")
+  meetings            Meeting[]            @relation("Meeting_BelongsTo_Chapter")
+  referralsFrom       Referral[]           @relation("Referral_HasOne_FromChapter")
+  referralsTo         Referral[]           @relation("Referral_HasOne_ToChapter")
+  transactions        Transaction[]        @relation("Transactions_BelongsTo_Chapter")
+  avatar              Upload?              @relation("Upload_BelongsTo_Chapter")
+}
+
+model Meeting {
+  id           String            @id @default(cuid())
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @default(now()) @updatedAt
+  date         DateTime          @default(now())
+  chapterId    String
+  isVisitorDay Boolean           @default(false)
+  chapter      Chapter           @relation("Meeting_BelongsTo_Chapter", fields: [chapterId], references: [id])
+  presence     MeetingPresence[] @relation("MeetingPressence_BelongsTo_Meeting")
+  substitutes  Substitute[]      @relation("Substitute_BelongsTo_Meeting")
+}
+
+model MeetingPresence {
+  id         String            @id @default(cuid())
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @default(now()) @updatedAt
+  attendance MeetingAttendance @default(Unknown)
+  meetingId  String
+  memberId   String
+  meeting    Meeting           @relation("MeetingPressence_BelongsTo_Meeting", fields: [meetingId], references: [id])
+  member     User              @relation("MeetingPressence_BelongsTo_User", fields: [memberId], references: [id])
+}
+
+model Substitute {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+  meetingId    String
+  sentById     String
+  substituteId String?
+  meeting      Meeting  @relation("Substitute_BelongsTo_Meeting", fields: [meetingId], references: [id])
+  sentBy       User     @relation("Substitute_BelongsTo_UserSentBy", fields: [sentById], references: [id])
+  substitute   User?    @relation("Substitute_BelongsTo_User", fields: [substituteId], references: [id])
+  invited      User[]   @relation("Substitute_HasMany_User")
+}
+
+model AttendanceReminder {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  chapterId String?
+  sentById  String
+  sentToId  String
+  chapter   Chapter? @relation("AttendanceReminder_BelongsTo_Chapter", fields: [chapterId], references: [id])
+  sentBy    User     @relation("AttendanceReminder_HasOne_SentByUser", fields: [sentById], references: [id])
+  sentTo    User     @relation("AttendanceReminder_HasOne_SentToUser", fields: [sentToId], references: [id])
+}
+
+model ChapterMember {
+  id        String            @unique @default(cuid())
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @default(now()) @updatedAt
+  isMentor  Boolean           @default(false)
+  isTrainer Boolean           @default(false)
+  role      ChapterMemberRole
+  chapterId String
+  memberId  String            @unique
+  chapter   Chapter           @relation("ChapterMember_BelongsTo_Chapter", fields: [chapterId], references: [id])
+  member    User              @relation("ChapterMember_BelongsTo_User", fields: [memberId], references: [id])
+
+  @@id([chapterId, memberId])
+}
+
+model Upload {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now()) @updatedAt
+  format           String?
+  originalFilename String
+  publicId         String
+  resourceType     String
+  secureUrl        String
+  signature        String
+  thumbnailUrl     String
+  url              String?
+  type             String?
+  userId           String?  @unique
+  chapterId        String?  @unique
+  chapter          Chapter? @relation("Upload_BelongsTo_Chapter", fields: [chapterId], references: [id])
+  user             User?    @relation("Upload_BelongsTo_User", fields: [userId], references: [id])
+}
+
+model SubstituteGroup {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  name      String
+  chapters  Chapter[] @relation("Chapter_BelongsTo_SubstituteGroup")
+}
+
+model Territory {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  name      String?
+  managerId String?  @unique
+  manager   User?    @relation("Territory_HasOne_Manager", fields: [managerId], references: [id])
+  regions   Region[] @relation("Region_BelongsTo_Territory")
+}
+
+model Region {
+  id          String     @id @default(cuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now()) @updatedAt
+  name        String?
+  managerId   String?    @unique
+  territoryId String?
+  manager     User?      @relation("Region_HasOne_Manager", fields: [managerId], references: [id])
+  territory   Territory? @relation("Region_BelongsTo_Territory", fields: [territoryId], references: [id])
+  chapters    Chapter[]  @relation("Chapter_BelongsTo_Region")
+}
+
+model Company {
+  id        String          @id @default(cuid())
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @default(now()) @updatedAt
+  name      String
+  members   CompanyMember[] @relation("CompanyMember_BelongsTo_Company")
+}
+
+model CompanyMember {
+  id        String    @unique @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  fromDate  DateTime?
+  thruDate  DateTime?
+  role      String?
+  location  String?
+  companyId String
+  memberId  String
+  company   Company   @relation("CompanyMember_BelongsTo_Company", fields: [companyId], references: [id])
+  member    User      @relation("CompanyMember_BelongsTo_User", fields: [memberId], references: [id])
+
+  @@id([companyId, memberId])
+}
+
+model Industry {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  name      String
+}
+
+model Referral {
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
+  referralDate  DateTime?
+  rating        ReferralRating
+  firstName     String
+  lastName      String
+  email         String?
+  phone         String?
+  notes         String?
+  fromIndustry  String?
+  toIndustry    String?
+  sentById      String?
+  fromId        String?
+  toId          String?
+  fromChapterId String?
+  toChapterId   String?
+  fromChapter   Chapter?       @relation("Referral_HasOne_FromChapter", fields: [fromChapterId], references: [id])
+  from          User?          @relation("Referral_HasOne_FromUser", fields: [fromId], references: [id])
+  sentBy        User?          @relation("Referral_HasOne_SentByUser", fields: [sentById], references: [id])
+  toChapter     Chapter?       @relation("Referral_HasOne_ToChapter", fields: [toChapterId], references: [id])
+  to            User?          @relation("Referral_HasOne_ToUser", fields: [toId], references: [id])
+  transactions  Transaction[]  @relation("Transactions_BelongsTo_Referral")
+}
+
+model Notification {
+  id            String                     @id @default(cuid())
+  createdAt     DateTime                   @default(now())
+  updatedAt     DateTime                   @default(now()) @updatedAt
+  read          Boolean                    @default(false)
+  type          NotificationType
+  message       String?
+  referenceId   String?
+  referenceType NotificationReferenceType?
+  actorId       String?
+  toId          String
+  actor         User?                      @relation("Notification_HasOne_FromUser", fields: [actorId], references: [id])
+  to            User                       @relation("Notification_HasOne_ToUser", fields: [toId], references: [id])
+}
+
+model Transaction {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
+  date       DateTime
+  amount     Float
+  enteredBy  String?
+  enteredOn  String?
+  industry   String?
+  state      String?
+  chapterId  String?
+  userId     String?
+  referralId String?
+  chapter    Chapter?  @relation("Transactions_BelongsTo_Chapter", fields: [chapterId], references: [id])
+  referral   Referral? @relation("Transactions_BelongsTo_Referral", fields: [referralId], references: [id])
+  user       User?     @relation("Transactions_BelongsTo_User", fields: [userId], references: [id])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  text      String
+  fromId    String
+  toId      String
+  from      User     @relation("Testimonial_HasOne_FromUser", fields: [fromId], references: [id])
+  to        User     @relation("Testimonial_HasOne_ToUser", fields: [toId], references: [id])
+}
+
+model PowerHour {
+  id        String          @id @default(cuid())
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @default(now()) @updatedAt
+  date      DateTime
+  time      String
+  details   String?
+  status    PowerHourStatus @default(Proposed)
+  fromId    String
+  toId      String
+  from      User            @relation("PowerHour_HasOne_FromUser", fields: [fromId], references: [id])
+  to        User            @relation("PowerHour_HasOne_ToUser", fields: [toId], references: [id])
 }
 
 enum Role {
@@ -133,37 +391,6 @@ enum UserOnlineStatus {
   Online
 }
 
-model Chapter {
-  id                  String               @id @default(cuid())
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @default(now()) @updatedAt
-  establishedDate     DateTime?            @default(now())
-  name                String
-  description         String?
-  avatarEmail         String?
-  avatarUrl           String?
-  latitude            String?
-  longitude           String?
-  city                String?
-  state               String?
-  facebook            String?
-  meetingDay          DayOfWeek?
-  meetingTime         String?
-  meetingDetails      String?
-  status              ChapterStatus
-  meetings            Meeting[]            @relation("Meeting_BelongsTo_Chapter")
-  members             ChapterMember[]      @relation("ChapterMember_BelongsTo_Chapter")
-  transactions        Transaction[]        @relation("Transactions_BelongsTo_Chapter")
-  referralsFrom       Referral[]           @relation("Referral_HasOne_FromChapter")
-  referralsTo         Referral[]           @relation("Referral_HasOne_ToChapter")
-  substituteGroup     SubstituteGroup?     @relation(name: "Chapter_BelongsTo_SubstituteGroup", fields: [substituteGroupId], references: [id])
-  substituteGroupId   String?
-  region              Region?              @relation(name: "Chapter_BelongsTo_Region", fields: [regionId], references: [id])
-  regionId            String?
-  attendanceReminders AttendanceReminder[] @relation("AttendanceReminder_BelongsTo_Chapter")
-  avatar              Upload?              @relation("Upload_BelongsTo_Chapter")
-}
-
 enum ChapterStatus {
   Active
   NowForming
@@ -184,29 +411,6 @@ enum DayOfWeek {
   Unknown
 }
 
-model Meeting {
-  id           String            @id @default(cuid())
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @default(now()) @updatedAt
-  date         DateTime          @default(now())
-  chapter      Chapter           @relation(name: "Meeting_BelongsTo_Chapter", fields: [chapterId], references: [id])
-  chapterId    String
-  isVisitorDay Boolean           @default(false)
-  presence     MeetingPresence[] @relation("MeetingPressence_BelongsTo_Meeting")
-  substitutes  Substitute[]      @relation("Substitute_BelongsTo_Meeting")
-}
-
-model MeetingPresence {
-  id         String            @id @default(cuid())
-  createdAt  DateTime          @default(now())
-  updatedAt  DateTime          @default(now()) @updatedAt
-  attendance MeetingAttendance @default(Unknown)
-  meeting    Meeting           @relation(name: "MeetingPressence_BelongsTo_Meeting", fields: [meetingId], references: [id])
-  meetingId  String
-  member     User              @relation(name: "MeetingPressence_BelongsTo_User", fields: [memberId], references: [id])
-  memberId   String
-}
-
 enum MeetingAttendance {
   Absent
   Excused
@@ -216,95 +420,6 @@ enum MeetingAttendance {
   Unknown
 }
 
-model Substitute {
-  id           String   @id @default(cuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now()) @updatedAt
-  meeting      Meeting  @relation(name: "Substitute_BelongsTo_Meeting", fields: [meetingId], references: [id])
-  meetingId    String
-  invited      User[]   @relation("Substitute_HasMany_User")
-  sentBy       User     @relation(name: "Substitute_BelongsTo_UserSentBy", fields: [sentById], references: [id])
-  sentById     String
-  substitute   User?    @relation(name: "Substitute_BelongsTo_User", fields: [substituteId], references: [id])
-  substituteId String?
-}
-
-model AttendanceReminder {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  chapter   Chapter? @relation(name: "AttendanceReminder_BelongsTo_Chapter", fields: [chapterId], references: [id])
-  chapterId String?
-  sentBy    User     @relation(name: "AttendanceReminder_HasOne_SentByUser", fields: [sentById], references: [id])
-  sentById  String
-  sentTo    User     @relation(name: "AttendanceReminder_HasOne_SentToUser", fields: [sentToId], references: [id])
-  sentToId  String
-}
-
-model ChapterMember {
-  id        String            @unique @default(cuid())
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @default(now()) @updatedAt
-  isMentor  Boolean           @default(false)
-  isTrainer Boolean           @default(false)
-  role      ChapterMemberRole
-  chapter   Chapter           @relation(name: "ChapterMember_BelongsTo_Chapter", fields: [chapterId], references: [id])
-  chapterId String
-  member    User              @relation(name: "ChapterMember_BelongsTo_User", fields: [memberId], references: [id])
-  memberId  String            @unique
-
-  @@id([chapterId, memberId])
-}
-
-model Upload {
-  id               String   @id @default(cuid())
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @default(now()) @updatedAt
-  format           String?
-  originalFilename String
-  publicId         String
-  resourceType     String
-  secureUrl        String
-  signature        String
-  thumbnailUrl     String
-  url              String?
-  type             String?
-  user             User?    @relation(name: "Upload_BelongsTo_User", fields: [userId], references: [id])
-  userId           String?  @unique
-  chapter          Chapter? @relation(name: "Upload_BelongsTo_Chapter", fields: [chapterId], references: [id])
-  chapterId        String?  @unique
-}
-
-model SubstituteGroup {
-  id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
-  name      String
-  chapters  Chapter[] @relation("Chapter_BelongsTo_SubstituteGroup")
-}
-
-model Territory {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  name      String?
-  manager   User?    @relation(name: "Territory_HasOne_Manager", fields: [managerId], references: [id])
-  managerId String?  @unique
-  regions   Region[] @relation("Region_BelongsTo_Territory")
-}
-
-model Region {
-  id          String     @id @default(cuid())
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @default(now()) @updatedAt
-  name        String?
-  manager     User?      @relation(name: "Region_HasOne_Manager", fields: [managerId], references: [id])
-  managerId   String?    @unique
-  territory   Territory? @relation(name: "Region_BelongsTo_Territory", fields: [territoryId], references: [id])
-  territoryId String?
-  chapters    Chapter[]  @relation("Chapter_BelongsTo_Region")
-}
-
 enum ChapterMemberRole {
   Chairman
   Member
@@ -312,82 +427,10 @@ enum ChapterMemberRole {
   VicePresident
 }
 
-model Company {
-  id        String          @id @default(cuid())
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @default(now()) @updatedAt
-  name      String
-  members   CompanyMember[] @relation("CompanyMember_BelongsTo_Company")
-}
-
-model CompanyMember {
-  id        String    @unique @default(cuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
-  fromDate  DateTime?
-  thruDate  DateTime?
-  role      String?
-  location  String?
-  company   Company   @relation(name: "CompanyMember_BelongsTo_Company", fields: [companyId], references: [id])
-  companyId String
-  member    User      @relation(name: "CompanyMember_BelongsTo_User", fields: [memberId], references: [id])
-  memberId  String
-
-  @@id([companyId, memberId])
-}
-
-model Industry {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  name      String
-}
-
-model Referral {
-  id            String         @id @default(cuid())
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @default(now()) @updatedAt
-  referralDate  DateTime?
-  rating        ReferralRating
-  firstName     String
-  lastName      String
-  email         String?
-  phone         String?
-  notes         String?
-  fromIndustry  String?
-  toIndustry    String?
-  sentBy        User?          @relation(name: "Referral_HasOne_SentByUser", fields: [sentById], references: [id])
-  sentById      String?
-  from          User?          @relation(name: "Referral_HasOne_FromUser", fields: [fromId], references: [id])
-  fromId        String?
-  to            User?          @relation(name: "Referral_HasOne_ToUser", fields: [toId], references: [id])
-  toId          String?
-  fromChapter   Chapter?       @relation(name: "Referral_HasOne_FromChapter", fields: [fromChapterId], references: [id])
-  fromChapterId String?
-  toChapter     Chapter?       @relation(name: "Referral_HasOne_ToChapter", fields: [toChapterId], references: [id])
-  toChapterId   String?
-  transactions  Transaction[]  @relation("Transactions_BelongsTo_Referral")
-}
-
 enum ReferralRating {
   Hot
   Warm
   Cold
-}
-
-model Notification {
-  id            String                     @id @default(cuid())
-  createdAt     DateTime                   @default(now())
-  updatedAt     DateTime                   @default(now()) @updatedAt
-  read          Boolean                    @default(false)
-  type          NotificationType
-  message       String?
-  referenceId   String?
-  referenceType NotificationReferenceType?
-  actor         User?                      @relation(name: "Notification_HasOne_FromUser", fields: [actorId], references: [id])
-  actorId       String?
-  to            User                       @relation(name: "Notification_HasOne_ToUser", fields: [toId], references: [id])
-  toId          String
 }
 
 enum NotificationType {
@@ -408,49 +451,6 @@ enum NotificationReferenceType {
   Substitute
   Testimonial
   SharedContact
-}
-
-model Transaction {
-  id         String    @id @default(cuid())
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @default(now()) @updatedAt
-  date       DateTime
-  amount     Float
-  enteredBy  String?
-  enteredOn  String?
-  industry   String?
-  state      String?
-  chapter    Chapter?  @relation(name: "Transactions_BelongsTo_Chapter", fields: [chapterId], references: [id])
-  chapterId  String?
-  user       User?     @relation(name: "Transactions_BelongsTo_User", fields: [userId], references: [id])
-  userId     String?
-  referral   Referral? @relation(name: "Transactions_BelongsTo_Referral", fields: [referralId], references: [id])
-  referralId String?
-}
-
-model Testimonial {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  text      String
-  from      User     @relation(name: "Testimonial_HasOne_FromUser", fields: [fromId], references: [id])
-  fromId    String
-  to        User     @relation(name: "Testimonial_HasOne_ToUser", fields: [toId], references: [id])
-  toId      String
-}
-
-model PowerHour {
-  id        String          @id @default(cuid())
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @default(now()) @updatedAt
-  date      DateTime
-  time      String
-  details   String?
-  status    PowerHourStatus @default(Proposed)
-  from      User            @relation(name: "PowerHour_HasOne_FromUser", fields: [fromId], references: [id])
-  fromId    String
-  to        User            @relation(name: "PowerHour_HasOne_ToUser", fields: [toId], references: [id])
-  toId      String
 }
 
 enum PowerHourStatus {

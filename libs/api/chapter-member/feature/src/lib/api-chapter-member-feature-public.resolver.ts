@@ -7,6 +7,6 @@ export class ApiChapterMemberFeaturePublicResolver {
 
   @ResolveField(() => String, { nullable: true })
   name(@Parent() chapterMember: ChapterMember) {
-    return `${chapterMember?.chapter?.name} - ${chapterMember?.member?.firstName} ${chapterMember?.member?.lastName}`
+    return this.service.chapterMemberName(chapterMember)
   }
 }
