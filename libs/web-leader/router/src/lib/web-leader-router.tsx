@@ -1,21 +1,21 @@
-import { useAtom } from "jotai";
-import { currentPathAtom } from "@biztobiz/web/global/data-access";
-import { Navigate, Route, Routes } from "react-router-dom";
-import React, { useContext } from "react";
-import { User } from "@biztobiz/shared/util-sdk";
-import { WebLeaderDashboard } from "@biztobiz/web-leader/dashboard";
-import { CashIcon, HomeIcon } from "@heroicons/react/outline";
-import { WebUiAdminLayoutFeature } from "@biztobiz/web-ui/admin-layout/feature";
-import { SharedAuthContext } from "@biztobiz/shared/auth/data-access";
+import { useAtom } from 'jotai'
+import { currentPathAtom } from '@biztobiz/web/global/data-access'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { User } from '@biztobiz/shared/util-sdk'
+import { WebLeaderDashboard } from '@biztobiz/web-leader/dashboard'
+import { CashIcon, HomeIcon } from '@heroicons/react/outline'
+import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
+import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 
-import { WebLeaderReferralCreate, WebLeaderReferralList, WebLeaderReferralUpdate } from "@biztobiz/web-leader/referral";
-import { WebLeaderTransactionReferralReport } from "@biztobiz/web-leader/transaction-referral-report";
+import { WebLeaderReferralCreate, WebLeaderReferralList, WebLeaderReferralUpdate } from '@biztobiz/web-leader/referral'
+import { WebLeaderTransactionReferralReport } from '@biztobiz/web-leader/transaction-referral-report'
 
 import {
   WebLeaderTransactionCreate,
   WebLeaderTransactionList,
-  WebLeaderTransactionUpdate
-} from "@biztobiz/web-leader/transaction";
+  WebLeaderTransactionUpdate,
+} from '@biztobiz/web-leader/transaction'
 
 // Add New Imports Here
 

@@ -1,8 +1,8 @@
-import { useAtom } from "jotai";
-import { currentPathAtom } from "@biztobiz/web/global/data-access";
-import { useLayoutEffect } from "react";
-import { RESET } from "jotai/utils";
-import WebLeaderCommand from "./web-leader-command";
+import { useAtom } from 'jotai'
+import { currentPathAtom } from '@biztobiz/web/global/data-access'
+import { useLayoutEffect } from 'react'
+import { RESET } from 'jotai/utils'
+import WebLeaderCommand from './web-leader-command'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface WebLeaderDashboardProps {}

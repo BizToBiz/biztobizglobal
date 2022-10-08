@@ -1,11 +1,11 @@
-import { WebUiFormField } from "@biztobiz/web-ui/form";
-import React from "react";
+import { WebUiFormField } from '@biztobiz/web-ui/form'
+import React from 'react'
 import {
   AdminChaptersDocument,
   AdminTransactionsDocument,
   AdminUsersDocument,
-  ReferralRating
-} from "@biztobiz/shared/util-sdk";
+  ReferralRating,
+} from '@biztobiz/shared/util-sdk'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {

@@ -1,16 +1,16 @@
-import { useAtom } from "jotai";
-import { currentPathAtom, isDevAtom, searchAtom } from "@biztobiz/web/global/data-access";
-import React, { useLayoutEffect, useState } from "react";
-import { RESET } from "jotai/utils";
+import { useAtom } from 'jotai'
+import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
+import React, { useLayoutEffect, useState } from 'react'
+import { RESET } from 'jotai/utils'
 import {
   useLeaderTransactionReferralPaginationQuery,
-  useLeaderTransactionReferralsQuery
-} from "@biztobiz/shared/util-sdk";
-import { capitalizeFirstLetter, toCount } from "@biztobiz/shared/utils/feature";
-import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
-import { WebUiDevDataFeature } from "@biztobiz/web-ui/dev-data/feature";
-import dayjs from "dayjs";
+  useLeaderTransactionReferralsQuery,
+} from '@biztobiz/shared/util-sdk'
+import { capitalizeFirstLetter, toCount } from '@biztobiz/shared/utils/feature'
+import { Link } from 'react-router-dom'
+import Skeleton from 'react-loading-skeleton'
+import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
+import dayjs from 'dayjs'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface WebLeaderTransactionReferralReportProps {}
