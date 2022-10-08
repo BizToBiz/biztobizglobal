@@ -4,5 +4,11 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 @InputType()
 export class AdminListTransactionInput extends CorePagingInput {
   @Field({ nullable: true })
-  text?: string
+  startDate: Date
+
+  @Field({ nullable: true })
+  endDate?: Date
+
+  @Field({ nullable: true })
+  amount?: number
 }

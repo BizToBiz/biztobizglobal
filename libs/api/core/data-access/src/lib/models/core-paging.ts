@@ -16,4 +16,7 @@ export class CorePaging {
 
   @Field({ nullable: true })
   skip?: number
+
+  @Field({ nullable: true })
+  sum?: number
 }

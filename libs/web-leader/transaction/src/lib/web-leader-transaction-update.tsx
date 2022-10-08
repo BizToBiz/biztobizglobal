@@ -2,40 +2,40 @@ import React from 'react'
 import { useAtom } from 'jotai'
 import { isDevAtom } from '@biztobiz/web/global/data-access'
 import {
-  LeaderDeleteReferralDocument,
-  LeaderUpdateReferralDocument,
-  useLeaderReferralQuery,
+  LeaderDeleteTransactionDocument,
+  LeaderUpdateTransactionDocument,
+  useLeaderTransactionQuery,
 } from '@biztobiz/shared/util-sdk'
 import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
-import { referralFields } from './web-leader-referral-helper'
+import { transactionFields } from './web-leader-transaction-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
 
-export function WebLeaderReferralUpdate() {
+export function WebLeaderTransactionUpdate() {
   const params = useParams()
   const [isDev] = useAtom(isDevAtom)
 
-  const { data: referral, loading } = useLeaderReferralQuery({
+  const { data: transaction, loading } = useLeaderTransactionQuery({
     skip: !params?.['id'],
     variables: {
-      referralId: params?.['id'] ?? 'NoId',
+      transactionId: params?.['id'] ?? 'NoId',
     },
   })
 
   if (!params?.['id']) return <div>No Id</div>
 
   function defaultValues() {
-    if (referral?.referral && !loading) {
-      return cleanDatabaseOutput(referral.referral, referralFields)
+    if (transaction?.transaction && !loading) {
+      return cleanDatabaseOutput(transaction.transaction, transactionFields)
     } else {
       return undefined
     }
   }
 
   const pathData = {
-    path: '/leader/referral/:id',
-    name: 'Edit Referral',
-    description: 'Update the information for this referral',
+    path: '/leader/transaction/:id',
+    name: 'Edit Transaction',
+    description: 'Update the information for this transaction',
     showSearch: false,
     actionText: 'Back to Transactions & Referrals Report',
     actionLink: '/leader/transactions-and-referrals',
@@ -46,11 +46,11 @@ export function WebLeaderReferralUpdate() {
       pathData={pathData}
       id={params['id']}
       defaultValues={defaultValues()}
-      document={LeaderUpdateReferralDocument}
-      deleteDocument={LeaderDeleteReferralDocument}
-      buttonText={'Referral'}
-      fields={referralFields}
-      idName={'referralId'}
+      document={LeaderUpdateTransactionDocument}
+      deleteDocument={LeaderDeleteTransactionDocument}
+      buttonText={'Transaction'}
+      fields={transactionFields}
+      idName={'transactionId'}
     />
   )
 }

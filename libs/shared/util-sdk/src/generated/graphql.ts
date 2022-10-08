@@ -449,12 +449,14 @@ export type AdminListTestimonialInput = {
 }
 
 export type AdminListTransactionInput = {
+  amount?: InputMaybe<Scalars['Float']>
+  endDate?: InputMaybe<Scalars['DateTime']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  startDate?: InputMaybe<Scalars['DateTime']>
   take?: InputMaybe<Scalars['Float']>
-  text?: InputMaybe<Scalars['String']>
 }
 
 export type AdminListUploadInput = {
@@ -838,6 +840,7 @@ export type CorePaging = {
   count?: Maybe<Scalars['Float']>
   page?: Maybe<Scalars['Float']>
   skip?: Maybe<Scalars['Float']>
+  sum?: Maybe<Scalars['Float']>
   take?: Maybe<Scalars['Float']>
   total?: Maybe<Scalars['Float']>
 }
@@ -3557,6 +3560,7 @@ export type AdminAttendanceRemindersQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -3573,6 +3577,7 @@ export type AdminAttendanceReminderPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -3714,6 +3719,7 @@ export type AdminChapterMembersQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -3730,6 +3736,7 @@ export type AdminChapterMemberPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -3921,6 +3928,7 @@ export type AdminChaptersQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -3937,6 +3945,7 @@ export type AdminChapterPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4083,6 +4092,7 @@ export type AdminCompanyMembersQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4099,6 +4109,7 @@ export type AdminCompanyMemberPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4190,6 +4201,7 @@ export type AdminCompaniesQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4206,6 +4218,7 @@ export type AdminCompanyPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4292,6 +4305,7 @@ export type AdminIndustriesQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4308,6 +4322,7 @@ export type AdminIndustryPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4439,6 +4454,7 @@ export type AdminMeetingPresencesQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4455,6 +4471,7 @@ export type AdminMeetingPresencePaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4566,6 +4583,7 @@ export type AdminMeetingsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4582,6 +4600,7 @@ export type AdminMeetingPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4698,6 +4717,7 @@ export type AdminNotificationsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4714,6 +4734,7 @@ export type AdminNotificationPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4825,6 +4846,7 @@ export type AdminPowerHoursQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4841,6 +4863,7 @@ export type AdminPowerHourPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -4997,6 +5020,7 @@ export type AdminReferralsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5013,6 +5037,7 @@ export type AdminReferralPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5114,6 +5139,7 @@ export type AdminRegionsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5130,6 +5156,7 @@ export type AdminRegionPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5221,6 +5248,7 @@ export type AdminSubstituteGroupsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5237,6 +5265,7 @@ export type AdminSubstituteGroupPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5338,6 +5367,7 @@ export type AdminSubstitutesQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5354,6 +5384,7 @@ export type AdminSubstitutePaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5450,6 +5481,7 @@ export type AdminTerritoriesQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5466,6 +5498,7 @@ export type AdminTerritoryPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5562,6 +5595,7 @@ export type AdminTestimonialsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5578,6 +5612,7 @@ export type AdminTestimonialPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5704,6 +5739,7 @@ export type AdminTransactionsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5720,6 +5756,7 @@ export type AdminTransactionPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5856,6 +5893,7 @@ export type AdminUploadsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -5872,6 +5910,7 @@ export type AdminUploadPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -6433,6 +6472,7 @@ export type AdminUsersQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -6449,6 +6489,7 @@ export type AdminUserPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -6573,6 +6614,7 @@ export type CorePagingDetailsFragment = {
   page?: number | null
   skip?: number | null
   total?: number | null
+  sum?: number | null
 }
 
 export type IntercomDetailsFragment = {
@@ -6763,6 +6805,7 @@ export type LeaderReferralsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -6779,6 +6822,7 @@ export type LeaderReferralPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -6864,6 +6908,7 @@ export type LeaderTransactionReferralsQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -6880,6 +6925,151 @@ export type LeaderTransactionReferralPaginationQuery = {
     page?: number | null
     skip?: number | null
     total?: number | null
+    sum?: number | null
+  } | null
+}
+
+export type LeaderTransactionDetailsFragment = {
+  __typename?: 'Transaction'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  date?: any | null
+  amount?: number | null
+  enteredBy?: string | null
+  enteredOn?: string | null
+  industry?: string | null
+  state?: string | null
+  chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+  user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+  referral?: { __typename?: 'Referral'; id?: string | null } | null
+}
+
+export type LeaderCreateTransactionMutationVariables = Exact<{
+  input: AdminCreateTransactionInput
+}>
+
+export type LeaderCreateTransactionMutation = {
+  __typename?: 'Mutation'
+  createTransaction?: {
+    __typename?: 'Transaction'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    date?: any | null
+    amount?: number | null
+    enteredBy?: string | null
+    enteredOn?: string | null
+    industry?: string | null
+    state?: string | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null } | null
+  } | null
+}
+
+export type LeaderDeleteTransactionMutationVariables = Exact<{
+  transactionId: Scalars['String']
+}>
+
+export type LeaderDeleteTransactionMutation = {
+  __typename?: 'Mutation'
+  deleteTransaction?: { __typename?: 'Transaction'; id?: string | null } | null
+}
+
+export type LeaderUpdateTransactionMutationVariables = Exact<{
+  transactionId: Scalars['String']
+  input: AdminUpdateTransactionInput
+}>
+
+export type LeaderUpdateTransactionMutation = {
+  __typename?: 'Mutation'
+  updateTransaction?: {
+    __typename?: 'Transaction'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    date?: any | null
+    amount?: number | null
+    enteredBy?: string | null
+    enteredOn?: string | null
+    industry?: string | null
+    state?: string | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null } | null
+  } | null
+}
+
+export type LeaderTransactionQueryVariables = Exact<{
+  transactionId: Scalars['String']
+}>
+
+export type LeaderTransactionQuery = {
+  __typename?: 'Query'
+  transaction?: {
+    __typename?: 'Transaction'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    date?: any | null
+    amount?: number | null
+    enteredBy?: string | null
+    enteredOn?: string | null
+    industry?: string | null
+    state?: string | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null } | null
+  } | null
+}
+
+export type LeaderTransactionsQueryVariables = Exact<{
+  input?: InputMaybe<AdminListTransactionInput>
+}>
+
+export type LeaderTransactionsQuery = {
+  __typename?: 'Query'
+  transactions?: Array<{
+    __typename?: 'Transaction'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    date?: any | null
+    amount?: number | null
+    enteredBy?: string | null
+    enteredOn?: string | null
+    industry?: string | null
+    state?: string | null
+    chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
+    user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null } | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+    sum?: number | null
+  } | null
+}
+
+export type LeaderTransactionPaginationQueryVariables = Exact<{
+  input?: InputMaybe<AdminListTransactionInput>
+}>
+
+export type LeaderTransactionPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+    sum?: number | null
   } | null
 }
 
@@ -7443,6 +7633,7 @@ export const CorePagingDetailsFragmentDoc = gql`
     page
     skip
     total
+    sum
   }
 `
 export const IntercomDetailsFragmentDoc = gql`
@@ -7543,6 +7734,30 @@ export const LeaderTransactionReferralDetailsFragmentDoc = gql`
         id
         name
       }
+    }
+  }
+`
+export const LeaderTransactionDetailsFragmentDoc = gql`
+  fragment LeaderTransactionDetails on Transaction {
+    id
+    createdAt
+    updatedAt
+    date
+    amount
+    enteredBy
+    enteredOn
+    industry
+    state
+    chapter {
+      id
+      name
+    }
+    user {
+      id
+      name
+    }
+    referral {
+      id
     }
   }
 `
@@ -13485,4 +13700,284 @@ export type LeaderTransactionReferralPaginationLazyQueryHookResult = ReturnType<
 export type LeaderTransactionReferralPaginationQueryResult = Apollo.QueryResult<
   LeaderTransactionReferralPaginationQuery,
   LeaderTransactionReferralPaginationQueryVariables
+>
+export const LeaderCreateTransactionDocument = gql`
+  mutation leaderCreateTransaction($input: AdminCreateTransactionInput!) {
+    createTransaction: leaderCreateTransaction(input: $input) {
+      ...LeaderTransactionDetails
+    }
+  }
+  ${LeaderTransactionDetailsFragmentDoc}
+`
+export type LeaderCreateTransactionMutationFn = Apollo.MutationFunction<
+  LeaderCreateTransactionMutation,
+  LeaderCreateTransactionMutationVariables
+>
+
+/**
+ * __useLeaderCreateTransactionMutation__
+ *
+ * To run a mutation, you first call `useLeaderCreateTransactionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderCreateTransactionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderCreateTransactionMutation, { data, loading, error }] = useLeaderCreateTransactionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderCreateTransactionMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderCreateTransactionMutation, LeaderCreateTransactionMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderCreateTransactionMutation, LeaderCreateTransactionMutationVariables>(
+    LeaderCreateTransactionDocument,
+    options,
+  )
+}
+export type LeaderCreateTransactionMutationHookResult = ReturnType<typeof useLeaderCreateTransactionMutation>
+export type LeaderCreateTransactionMutationResult = Apollo.MutationResult<LeaderCreateTransactionMutation>
+export type LeaderCreateTransactionMutationOptions = Apollo.BaseMutationOptions<
+  LeaderCreateTransactionMutation,
+  LeaderCreateTransactionMutationVariables
+>
+export const LeaderDeleteTransactionDocument = gql`
+  mutation leaderDeleteTransaction($transactionId: String!) {
+    deleteTransaction: leaderDeleteTransaction(transactionId: $transactionId) {
+      id
+    }
+  }
+`
+export type LeaderDeleteTransactionMutationFn = Apollo.MutationFunction<
+  LeaderDeleteTransactionMutation,
+  LeaderDeleteTransactionMutationVariables
+>
+
+/**
+ * __useLeaderDeleteTransactionMutation__
+ *
+ * To run a mutation, you first call `useLeaderDeleteTransactionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderDeleteTransactionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderDeleteTransactionMutation, { data, loading, error }] = useLeaderDeleteTransactionMutation({
+ *   variables: {
+ *      transactionId: // value for 'transactionId'
+ *   },
+ * });
+ */
+export function useLeaderDeleteTransactionMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderDeleteTransactionMutation, LeaderDeleteTransactionMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderDeleteTransactionMutation, LeaderDeleteTransactionMutationVariables>(
+    LeaderDeleteTransactionDocument,
+    options,
+  )
+}
+export type LeaderDeleteTransactionMutationHookResult = ReturnType<typeof useLeaderDeleteTransactionMutation>
+export type LeaderDeleteTransactionMutationResult = Apollo.MutationResult<LeaderDeleteTransactionMutation>
+export type LeaderDeleteTransactionMutationOptions = Apollo.BaseMutationOptions<
+  LeaderDeleteTransactionMutation,
+  LeaderDeleteTransactionMutationVariables
+>
+export const LeaderUpdateTransactionDocument = gql`
+  mutation leaderUpdateTransaction($transactionId: String!, $input: AdminUpdateTransactionInput!) {
+    updateTransaction: leaderUpdateTransaction(transactionId: $transactionId, input: $input) {
+      ...LeaderTransactionDetails
+    }
+  }
+  ${LeaderTransactionDetailsFragmentDoc}
+`
+export type LeaderUpdateTransactionMutationFn = Apollo.MutationFunction<
+  LeaderUpdateTransactionMutation,
+  LeaderUpdateTransactionMutationVariables
+>
+
+/**
+ * __useLeaderUpdateTransactionMutation__
+ *
+ * To run a mutation, you first call `useLeaderUpdateTransactionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaderUpdateTransactionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaderUpdateTransactionMutation, { data, loading, error }] = useLeaderUpdateTransactionMutation({
+ *   variables: {
+ *      transactionId: // value for 'transactionId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderUpdateTransactionMutation(
+  baseOptions?: Apollo.MutationHookOptions<LeaderUpdateTransactionMutation, LeaderUpdateTransactionMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LeaderUpdateTransactionMutation, LeaderUpdateTransactionMutationVariables>(
+    LeaderUpdateTransactionDocument,
+    options,
+  )
+}
+export type LeaderUpdateTransactionMutationHookResult = ReturnType<typeof useLeaderUpdateTransactionMutation>
+export type LeaderUpdateTransactionMutationResult = Apollo.MutationResult<LeaderUpdateTransactionMutation>
+export type LeaderUpdateTransactionMutationOptions = Apollo.BaseMutationOptions<
+  LeaderUpdateTransactionMutation,
+  LeaderUpdateTransactionMutationVariables
+>
+export const LeaderTransactionDocument = gql`
+  query LeaderTransaction($transactionId: String!) {
+    transaction: leaderTransaction(transactionId: $transactionId) {
+      ...LeaderTransactionDetails
+    }
+  }
+  ${LeaderTransactionDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderTransactionQuery__
+ *
+ * To run a query within a React component, call `useLeaderTransactionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderTransactionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderTransactionQuery({
+ *   variables: {
+ *      transactionId: // value for 'transactionId'
+ *   },
+ * });
+ */
+export function useLeaderTransactionQuery(
+  baseOptions: Apollo.QueryHookOptions<LeaderTransactionQuery, LeaderTransactionQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderTransactionQuery, LeaderTransactionQueryVariables>(LeaderTransactionDocument, options)
+}
+export function useLeaderTransactionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderTransactionQuery, LeaderTransactionQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderTransactionQuery, LeaderTransactionQueryVariables>(
+    LeaderTransactionDocument,
+    options,
+  )
+}
+export type LeaderTransactionQueryHookResult = ReturnType<typeof useLeaderTransactionQuery>
+export type LeaderTransactionLazyQueryHookResult = ReturnType<typeof useLeaderTransactionLazyQuery>
+export type LeaderTransactionQueryResult = Apollo.QueryResult<LeaderTransactionQuery, LeaderTransactionQueryVariables>
+export const LeaderTransactionsDocument = gql`
+  query LeaderTransactions($input: AdminListTransactionInput) {
+    transactions: leaderTransactions(input: $input) {
+      ...LeaderTransactionDetails
+    }
+    counters: leaderCountTransactions(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${LeaderTransactionDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderTransactionsQuery__
+ *
+ * To run a query within a React component, call `useLeaderTransactionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderTransactionsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderTransactionsQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderTransactionsQuery, LeaderTransactionsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderTransactionsQuery, LeaderTransactionsQueryVariables>(LeaderTransactionsDocument, options)
+}
+export function useLeaderTransactionsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderTransactionsQuery, LeaderTransactionsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderTransactionsQuery, LeaderTransactionsQueryVariables>(
+    LeaderTransactionsDocument,
+    options,
+  )
+}
+export type LeaderTransactionsQueryHookResult = ReturnType<typeof useLeaderTransactionsQuery>
+export type LeaderTransactionsLazyQueryHookResult = ReturnType<typeof useLeaderTransactionsLazyQuery>
+export type LeaderTransactionsQueryResult = Apollo.QueryResult<
+  LeaderTransactionsQuery,
+  LeaderTransactionsQueryVariables
+>
+export const LeaderTransactionPaginationDocument = gql`
+  query LeaderTransactionPagination($input: AdminListTransactionInput) {
+    counters: leaderCountTransactions(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderTransactionPaginationQuery__
+ *
+ * To run a query within a React component, call `useLeaderTransactionPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderTransactionPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderTransactionPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderTransactionPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderTransactionPaginationQuery, LeaderTransactionPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderTransactionPaginationQuery, LeaderTransactionPaginationQueryVariables>(
+    LeaderTransactionPaginationDocument,
+    options,
+  )
+}
+export function useLeaderTransactionPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    LeaderTransactionPaginationQuery,
+    LeaderTransactionPaginationQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderTransactionPaginationQuery, LeaderTransactionPaginationQueryVariables>(
+    LeaderTransactionPaginationDocument,
+    options,
+  )
+}
+export type LeaderTransactionPaginationQueryHookResult = ReturnType<typeof useLeaderTransactionPaginationQuery>
+export type LeaderTransactionPaginationLazyQueryHookResult = ReturnType<typeof useLeaderTransactionPaginationLazyQuery>
+export type LeaderTransactionPaginationQueryResult = Apollo.QueryResult<
+  LeaderTransactionPaginationQuery,
+  LeaderTransactionPaginationQueryVariables
 >

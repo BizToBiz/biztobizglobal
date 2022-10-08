@@ -8,6 +8,7 @@ fragment CorePagingDetails on CorePaging {
   page
   skip
   total
+  sum
 }
 
 fragment IntercomDetails on IntercomMessage {

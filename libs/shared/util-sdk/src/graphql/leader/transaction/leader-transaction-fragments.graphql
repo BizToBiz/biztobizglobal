@@ -1,0 +1,22 @@
+fragment LeaderTransactionDetails on Transaction {
+  id
+  createdAt
+  updatedAt
+  date
+  amount
+  enteredBy
+  enteredOn
+  industry
+  state
+  chapter {
+    id
+    name
+  }
+  user {
+    id
+    name
+  }
+  referral {
+    id
+  }
+}

@@ -109,6 +109,7 @@
       "@biztobiz/web-leader/dashboard": ["libs/web-leader/dashboard/src/index.ts"],
       "@biztobiz/web-leader/referral": ["libs/web-leader/referral/src/index.ts"],
       "@biztobiz/web-leader/router": ["libs/web-leader/router/src/index.ts"],
+      "@biztobiz/web-leader/transaction": ["libs/web-leader/transaction/src/index.ts"],
       "@biztobiz/web-leader/transaction-referral-report": ["libs/web-leader/transaction-referral-report/src/index.ts"],
       "@biztobiz/web-ui/admin-layout/feature": ["libs/web-ui/admin-layout/feature/src/index.ts"],
       "@biztobiz/web-ui/alert": ["libs/web-ui/alert/src/index.ts"],

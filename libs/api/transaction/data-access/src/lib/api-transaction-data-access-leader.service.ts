@@ -3,24 +3,54 @@ import { PrismaSelect } from '@paljs/plugins'
 import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
-
 import { AdminCreateTransactionInput } from './dto/admin-create-transaction.input'
 import { AdminListTransactionInput } from './dto/admin-list-transaction.input'
 import { AdminUpdateTransactionInput } from './dto/admin-update-transaction.input'
+import { ChapterMemberRole } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
 export class ApiTransactionDataAccessLeaderService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  private readonly searchFields = []
-  private where(input: AdminListTransactionInput): Prisma.TransactionWhereInput {
+  private async leaderChapters(leaderId: string): Promise<string[]> {
+    const chapters = await this.data.chapter.findMany({
+      where: {
+        OR: [
+          {
+            members: {
+              some: {
+                OR: [
+                  { memberId: leaderId, role: ChapterMemberRole.President },
+                  { memberId: leaderId, role: ChapterMemberRole.VicePresident },
+                  { memberId: leaderId, role: ChapterMemberRole.Chairman },
+                ],
+              },
+            },
+          },
+          {
+            region: { manager: { id: leaderId } },
+          },
+          {
+            region: { territory: { manager: { id: leaderId } } },
+          },
+        ],
+      },
+    })
+    return chapters.map((chapter) => chapter.id)
+  }
+
+  private async where(input: AdminListTransactionInput, leaderId: string): Promise<Prisma.TransactionWhereInput> {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+    const leaderChapters = await this.leaderChapters(leaderId)
 
-    // TODO: implement leader search query
-    // function leaderSearch() {}
+    function leaderSearch(): Prisma.TransactionWhereInput {
+      return {
+        OR: [{ user: { chapter: { id: { in: leaderChapters } } } }, { chapter: { id: { in: leaderChapters } } }],
+      }
+    }
 
-    function relationalSearch() {
+    function relationalSearch(): Prisma.TransactionWhereInput {
       // TODO: implement relational search for transaction
       // if (input?.regionId) {
       //   return { regionId: input.regionId }
@@ -30,28 +60,85 @@ export class ApiTransactionDataAccessLeaderService {
       // }
       return null
     }
+
+    function dateSearch(): Prisma.TransactionWhereInput {
+      if (input?.startDate && input?.endDate) {
+        return {
+          AND: [{ date: { gte: input.startDate } }, { date: { lte: input.endDate } }],
+        }
+      } else if (input?.startDate) {
+        return {
+          date: { gte: input.startDate },
+        }
+      } else if (input?.endDate) {
+        return {
+          date: { lte: input.endDate },
+        }
+      } else return null
+    }
+
+    function amountSearch(): Prisma.TransactionWhereInput {
+      if (input?.amount) {
+        return { amount: { equals: input.amount } }
+      }
+      return null
+    }
+
     return {
       AND: [
+        leaderSearch(),
         relationalSearch(),
+        dateSearch(),
+        amountSearch(),
         ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          OR: [
+            { referral: { firstName: { contains: term } } },
+            { referral: { lastName: { contains: term } } },
+            { referral: { from: { firstName: { contains: term } } } },
+            { referral: { from: { lastName: { contains: term } } } },
+            { referral: { to: { firstName: { contains: term } } } },
+            { referral: { to: { lastName: { contains: term } } } },
+          ],
         })),
       ],
     }
   }
 
-  leaderTransactions(info: GraphQLResolveInfo, leaderId: string, input?: AdminListTransactionInput) {
+  getOrderBy(orderByValue: string, orderDirection) {
+    switch (orderByValue) {
+      case 'transactionDate':
+        return { date: orderDirection }
+      case 'amount':
+        return { amount: orderDirection }
+      case 'referralFrom':
+        return { referral: { from: { firstName: orderDirection } } }
+      case 'referralTo':
+        return { referral: { to: { firstName: orderDirection } } }
+      case 'firstName':
+        return { referral: { firstName: orderDirection } }
+      case 'lastName':
+        return { referral: { lastName: orderDirection } }
+      default:
+        return { createdAt: 'desc' }
+    }
+  }
+
+  async leaderTransactions(info: GraphQLResolveInfo, leaderId: string, input?: AdminListTransactionInput) {
+    const orderBy = this.getOrderBy(input?.orderBy, input?.orderDirection ?? 'desc')
     const select = new PrismaSelect(info).value
     return this.data.transaction.findMany({
       take: input?.take,
       skip: input?.skip,
+      orderBy: orderBy,
+      where: await this.where(input, leaderId),
       ...select,
     })
   }
 
   async leaderCountTransactions(leaderId: string, input?: AdminListTransactionInput): Promise<CorePaging> {
     const total = await this.data.transaction.count()
-    const count = await this.data.transaction.count({ where: this.where(input) })
+    const count = await this.data.transaction.count({ where: await this.where(input, leaderId) })
+    const sum = await this.data.transaction.aggregate({ _sum: { amount: true } }).then((r) => r._sum.amount)
     const take = input?.take || 10
     const skip = input?.skip || 0
     const page = Math.floor(skip / take)
@@ -61,6 +148,7 @@ export class ApiTransactionDataAccessLeaderService {
       page,
       count,
       total,
+      sum,
     }
   }
 

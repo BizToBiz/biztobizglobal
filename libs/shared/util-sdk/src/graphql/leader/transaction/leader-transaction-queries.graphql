@@ -1,0 +1,20 @@
+query LeaderTransaction($transactionId: String!) {
+  transaction: leaderTransaction(transactionId: $transactionId) {
+    ...LeaderTransactionDetails
+  }
+}
+
+query LeaderTransactions($input: AdminListTransactionInput) {
+  transactions: leaderTransactions(input: $input) {
+    ...LeaderTransactionDetails
+  }
+  counters: leaderCountTransactions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query LeaderTransactionPagination($input: AdminListTransactionInput) {
+  counters: leaderCountTransactions(input: $input) {
+    ...CorePagingDetails
+  }
+}

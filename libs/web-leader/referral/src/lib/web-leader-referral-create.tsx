@@ -9,8 +9,8 @@ export function WebLeaderReferralCreate() {
     name: 'Create a Referral',
     description: 'Use the form below to add a new referral',
     showSearch: false,
-    actionText: 'Back to Referral List',
-    actionLink: '/leader/referrals',
+    actionText: 'Back to Dashboard',
+    actionLink: '/leader/dashboard',
   }
 
   return (

@@ -105,6 +105,7 @@
     "web-leader-dashboard": "libs/web-leader/dashboard",
     "web-leader-referral": "libs/web-leader/referral",
     "web-leader-router": "libs/web-leader/router",
+    "web-leader-transaction": "libs/web-leader/transaction",
     "web-leader-transaction-referral-report": "libs/web-leader/transaction-referral-report",
     "web-shell-feature": "libs/web/shell/feature",
     "web-style": "libs/web/style",

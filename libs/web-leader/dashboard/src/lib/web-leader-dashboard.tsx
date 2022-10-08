@@ -1,7 +1,8 @@
-import { useAtom } from 'jotai'
-import { currentPathAtom } from '@biztobiz/web/global/data-access'
-import { useLayoutEffect } from 'react'
-import { RESET } from 'jotai/utils'
+import { useAtom } from "jotai";
+import { currentPathAtom } from "@biztobiz/web/global/data-access";
+import { useLayoutEffect } from "react";
+import { RESET } from "jotai/utils";
+import WebLeaderCommand from "./web-leader-command";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface WebLeaderDashboardProps {}
@@ -11,8 +12,8 @@ export function WebLeaderDashboard(props: WebLeaderDashboardProps) {
 
   const pathData = {
     path: '/leader/dashboard',
-    name: 'Leader Dashboard',
-    description: 'The home base for Leaders',
+    name: 'Tools & Reports for Leaders',
+    description: 'Manage your network effectively',
     showSearch: false,
   }
 
@@ -23,11 +24,7 @@ export function WebLeaderDashboard(props: WebLeaderDashboardProps) {
     }
   }, [])
 
-  return (
-    <div>
-      <h1>Welcome to WebLeaderDashboard!</h1>
-    </div>
-  )
+  return <WebLeaderCommand />
 }
 
 export default WebLeaderDashboard

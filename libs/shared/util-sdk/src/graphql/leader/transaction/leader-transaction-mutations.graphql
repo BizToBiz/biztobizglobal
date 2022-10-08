@@ -1,0 +1,17 @@
+mutation leaderCreateTransaction($input: AdminCreateTransactionInput!) {
+  createTransaction: leaderCreateTransaction(input: $input) {
+    ...LeaderTransactionDetails
+  }
+}
+
+mutation leaderDeleteTransaction($transactionId: String!) {
+  deleteTransaction: leaderDeleteTransaction(transactionId: $transactionId) {
+    id
+  }
+}
+
+mutation leaderUpdateTransaction($transactionId: String!, $input: AdminUpdateTransactionInput!) {
+  updateTransaction: leaderUpdateTransaction(transactionId: $transactionId, input: $input) {
+    ...LeaderTransactionDetails
+  }
+}
