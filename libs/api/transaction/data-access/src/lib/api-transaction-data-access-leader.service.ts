@@ -138,7 +138,12 @@ export class ApiTransactionDataAccessLeaderService {
   async leaderCountTransactions(leaderId: string, input?: AdminListTransactionInput): Promise<CorePaging> {
     const total = await this.data.transaction.count()
     const count = await this.data.transaction.count({ where: await this.where(input, leaderId) })
-    const sum = await this.data.transaction.aggregate({ _sum: { amount: true } }).then((r) => r._sum.amount)
+    const sum = await this.data.transaction
+      .aggregate({
+        _sum: { amount: true },
+        where: await this.where(input, leaderId),
+      })
+      .then((r) => r._sum.amount)
     const take = input?.take || 10
     const skip = input?.skip || 0
     const page = Math.floor(skip / take)
