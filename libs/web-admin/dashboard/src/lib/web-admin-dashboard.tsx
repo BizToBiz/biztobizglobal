@@ -1,7 +1,8 @@
-import { useLayoutEffect } from 'react'
-import { RESET } from 'jotai/utils'
-import { useAtom } from 'jotai'
-import { currentPathAtom } from '@biztobiz/web/global/data-access'
+import { useLayoutEffect } from "react";
+import { RESET } from "jotai/utils";
+import { useAtom } from "jotai";
+import { currentPathAtom } from "@biztobiz/web/global/data-access";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface WebAdminDashboardProps {}
@@ -24,7 +25,9 @@ export function WebAdminDashboard(props: WebAdminDashboardProps) {
   }, [])
   return (
     <div>
-      <h1>Welcome to WebAdminDashboard!</h1>
+      <p>
+        <Link to={'/leader/dashboard'}>Switch to the Leader's Dashboard</Link>
+      </p>
     </div>
   )
 }

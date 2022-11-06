@@ -1,11 +1,11 @@
-import { WebUiFormField } from '@biztobiz/web-ui/form'
-import React from 'react'
+import { WebUiFormField } from "@biztobiz/web-ui/form";
+import React from "react";
 import {
   AdminChaptersDocument,
   AdminTransactionsDocument,
   AdminUsersDocument,
-  ReferralRating,
-} from '@biztobiz/shared/util-sdk'
+  ReferralRating
+} from "@biztobiz/shared/util-sdk";
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {
@@ -30,17 +30,18 @@ export const referralFields: WebUiFormField[] = [
     label: 'From',
     document: AdminUsersDocument,
     dataType: 'users',
+    required: true,
   }),
   WebUiFormField.relationSelect('toId', {
     label: 'To',
     document: AdminUsersDocument,
     dataType: 'users',
+    required: true,
   }),
   WebUiFormField.relationSelect('sentById', {
-    label: 'Sent By',
+    label: 'Entered By',
     document: AdminUsersDocument,
     dataType: 'users',
-    required: true,
   }),
   WebUiFormField.relationSelect('fromChapterId', {
     label: 'From Chapter',
