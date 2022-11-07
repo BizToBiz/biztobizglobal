@@ -1,4 +1,4 @@
-import { LoginInput, Role } from '@biztobiz/shared/util-sdk'
+import { LoginInput } from '@biztobiz/shared/util-sdk'
 import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 import React, { ReactNode, useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -16,16 +16,16 @@ export function WebFeatureLogin() {
 
   const processLogin = async (input: LoginInput) => {
     const loginInfo = await login(input)
-
-    if (loginInfo?.user?.role === Role.Admin) {
-      navigate('/admin/dashboard')
-    } else if (loginInfo?.user?.id) {
-      navigate('/members/dashboard')
-    } else if (loginInfo?.error) {
-      setAlert({ alertType: 'warning', title: loginInfo?.error })
-    } else {
-      setAlert({ alertType: 'warning', title: 'Something went wrong' })
-    }
+    navigate('/leader/dashboard')
+    // if (loginInfo?.user?.role === Role.Admin) {
+    //   navigate('/admin/dashboard')
+    // } else if (loginInfo?.user?.id) {
+    //   navigate('/members/dashboard')
+    // } else if (loginInfo?.error) {
+    //   setAlert({ alertType: 'warning', title: loginInfo?.error })
+    // } else {
+    //   setAlert({ alertType: 'warning', title: 'Something went wrong' })
+    // }
   }
   const fields: WebUiFormField[] = [
     WebUiFormField.email('email', {
