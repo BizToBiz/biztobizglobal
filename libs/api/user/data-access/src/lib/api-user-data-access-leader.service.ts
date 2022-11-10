@@ -43,8 +43,8 @@ export class ApiUserDataAccessLeaderService {
   leaderUsers(info: GraphQLResolveInfo, leaderId: string, input?: AdminListUserInput) {
     const select = new PrismaSelect(info).value
     return this.data.user.findMany({
-      take: input?.take,
-      skip: input?.skip,
+      take: input?.take ?? 10,
+      skip: input?.skip ?? 0,
       ...select,
     })
   }

@@ -40,8 +40,8 @@ export class ApiTransactionDataAccessAdminService {
   adminTransactions(info: GraphQLResolveInfo, adminId: string, input?: AdminListTransactionInput) {
     const select = new PrismaSelect(info).value
     return this.data.transaction.findMany({
-      take: input?.take,
-      skip: input?.skip,
+      take: input?.take ?? 10,
+      skip: input?.skip ?? 0,
       ...select,
     })
   }

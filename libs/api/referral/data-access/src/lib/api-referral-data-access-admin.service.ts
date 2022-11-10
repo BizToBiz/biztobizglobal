@@ -40,8 +40,8 @@ export class ApiReferralDataAccessAdminService {
   adminReferrals(info: GraphQLResolveInfo, adminId: string, input?: AdminListReferralInput) {
     const select = new PrismaSelect(info).value
     return this.data.referral.findMany({
-      take: input?.take,
-      skip: input?.skip,
+      take: input?.take ?? 10,
+      skip: input?.skip ?? 0,
       where: this.where(input),
       ...select,
     })
@@ -50,8 +50,8 @@ export class ApiReferralDataAccessAdminService {
   async adminCountReferrals(adminId: string, input?: AdminListReferralInput): Promise<CorePaging> {
     const total = await this.data.referral.count()
     const count = await this.data.referral.count({ where: this.where(input) })
-    const take = input?.take || 10
-    const skip = input?.skip || 0
+    const take = input?.take ?? 10
+    const skip = input?.skip ?? 0
     const page = Math.floor(skip / take)
     return {
       take,

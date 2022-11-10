@@ -40,8 +40,8 @@ export class ApiChapterDataAccessAdminService {
   async adminChapters(info: GraphQLResolveInfo, adminId: string, input?: AdminListChapterInput) {
     const select = new PrismaSelect(info).value
     const chapters = await this.data.chapter.findMany({
-      take: input?.take,
-      skip: input?.skip,
+      take: input?.take ?? 10,
+      skip: input?.skip ?? 0,
       ...select,
     })
     return chapters
@@ -50,8 +50,8 @@ export class ApiChapterDataAccessAdminService {
   async adminCountChapters(adminId: string, input?: AdminListChapterInput): Promise<CorePaging> {
     const total = await this.data.chapter.count()
     const count = await this.data.chapter.count({ where: this.where(input) })
-    const take = input?.take || 10
-    const skip = input?.skip || 0
+    const take = input?.take ?? 10
+    const skip = input?.skip ?? 0
     const page = Math.floor(skip / take)
     return {
       take,
