@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { ApiCoreDataAccessService } from '@biztobiz/api/core/data-access'
 import { uniqueSuffix } from '@biztobiz/api/auth/data-access'
-import { ChapterMemberRole } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
 export class ApiUserDataAccessPublicService {
@@ -24,23 +23,6 @@ export class ApiUserDataAccessPublicService {
   }
 
   async isLeader(userId: string) {
-    const user = await this.data.user.findFirst({
-      where: {
-        AND: [
-          { id: userId },
-          {
-            OR: [
-              { chapter: { role: ChapterMemberRole.Chairman } },
-              { chapter: { role: ChapterMemberRole.VicePresident } },
-              { chapter: { role: ChapterMemberRole.President } },
-              { territoryManaged: { managerId: userId } },
-              { regionManaged: { managerId: userId } },
-            ],
-          },
-        ],
-      },
-    })
-
-    return !!user
+    return this.data.isLeader(userId)
   }
 }

@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { PrismaClient, Role } from '@prisma/client'
 import { getGravatarUrl, hashPassword, UserCreateInput } from '@biztobiz/api/auth/data-access'
+import { ChapterMemberRole } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
 export class ApiCoreDataAccessService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
@@ -87,5 +88,57 @@ export class ApiCoreDataAccessService extends PrismaClient implements OnModuleIn
       count,
       total,
     }
+  }
+
+  async isLeader(userId: string) {
+    const user = await this.user.findFirst({
+      where: {
+        AND: [
+          { id: userId },
+          {
+            OR: [
+              { chapter: { role: ChapterMemberRole.Chairman } },
+              { chapter: { role: ChapterMemberRole.VicePresident } },
+              { chapter: { role: ChapterMemberRole.President } },
+              { territoryManaged: { managerId: userId } },
+              { regionManaged: { managerId: userId } },
+            ],
+          },
+        ],
+      },
+    })
+
+    return !!user
+  }
+
+  async ensureChapterLeader(userId: string, chapterId: string) {
+    const user = await this.user.findFirst({
+      where: {
+        id: userId,
+      },
+      select: {
+        territoryManaged: { select: { id: true } },
+        regionManaged: { select: { id: true } },
+      },
+    })
+
+    const chapter = await this.chapter.findFirst({
+      where: {
+        AND: [
+          { id: chapterId },
+          {
+            OR: [
+              { members: { some: { id: userId, role: ChapterMemberRole.Chairman } } },
+              { members: { some: { id: userId, role: ChapterMemberRole.VicePresident } } },
+              { members: { some: { id: userId, role: ChapterMemberRole.President } } },
+              { region: { id: user?.regionManaged?.id } },
+              { region: { territory: { id: user?.territoryManaged?.id } } },
+            ],
+          },
+        ],
+      },
+    })
+
+    return !!chapter
   }
 }
