@@ -1,4 +1,4 @@
-mutation leaderCreateReferral($input: AdminCreateReferralInput!) {
+mutation leaderCreateReferral($input: LeaderReferralInput!) {
   createReferral: leaderCreateReferral(input: $input) {
     ...LeaderReferralDetails
   }
@@ -10,7 +10,7 @@ mutation leaderDeleteReferral($referralId: String!) {
   }
 }
 
-mutation leaderUpdateReferral($referralId: String!, $input: AdminUpdateReferralInput!) {
+mutation leaderUpdateReferral($referralId: String!, $input: LeaderReferralInput!) {
   updateReferral: leaderUpdateReferral(referralId: $referralId, input: $input) {
     ...LeaderReferralDetails
   }

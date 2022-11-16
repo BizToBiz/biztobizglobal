@@ -1,6 +1,5 @@
 fragment LeaderReferralDetails on Referral {
   id
-  name
   createdAt
   updatedAt
   referralDate
@@ -10,25 +9,11 @@ fragment LeaderReferralDetails on Referral {
   email
   phone
   notes
-  fromIndustry
-  toIndustry
-  sentBy {
-    id
-    name
-  }
   from {
     id
     name
   }
   to {
-    id
-    name
-  }
-  fromChapter {
-    id
-    name
-  }
-  toChapter {
     id
     name
   }

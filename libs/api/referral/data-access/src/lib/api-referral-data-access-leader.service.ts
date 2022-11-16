@@ -3,10 +3,8 @@ import { PrismaSelect } from '@paljs/plugins'
 import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
-
-import { AdminCreateReferralInput } from './dto/admin-create-referral.input'
 import { AdminListReferralInput } from './dto/admin-list-referral.input'
-import { AdminUpdateReferralInput } from './dto/admin-update-referral.input'
+import { LeaderReferralInput } from './dto/leader-referral.input'
 
 @Injectable()
 export class ApiReferralDataAccessLeaderService {
@@ -69,48 +67,40 @@ export class ApiReferralDataAccessLeaderService {
     return this.data.referral.findUnique({ where: { id: referralId }, ...select })
   }
 
-  leaderCreateReferral(info: GraphQLResolveInfo, leaderId: string, input: AdminCreateReferralInput) {
-    const select = new PrismaSelect(info).value
-    return this.data.referral.create({
-      data: { ...input },
-      ...select,
-    })
-  }
-
-  async leaderCreateReferral(info: GraphQLResolveInfo, userId: string, input: AdminCreateReferralInput) {
+  async leaderCreateReferral(info: GraphQLResolveInfo, leaderId: string, input: LeaderReferralInput) {
     const user = await this.data.user.findUnique({
-      where: { id: userId },
+      where: { id: leaderId },
       select: { id: true, role: true, chapter: { select: { id: true } } },
     })
 
-    const isLeader = await this.data.ensureChapterLeader(userId, user?.chapter?.id)
+    const isLeader = await this.data.ensureChapterLeader(leaderId, user?.chapter?.id)
 
-    if (input.fromId && input.toId !== userId && user.role !== 'Admin' && !isLeader) {
+    if (input.fromId && input.toId !== leaderId && user.role !== 'Admin' && !isLeader) {
       throw new UnauthorizedException(`You need elevated permissions to do this.`)
     }
 
-    const fromId = input.fromId ? input.fromId : userId
+    const fromId = input.fromId ? input.fromId : leaderId
     const toId = input.toId
 
     const fromUser = await this.data.user.findUnique({
       where: { id: fromId },
-      select: { id: true, industry: true, chapter: { select: { id: true } } },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
     })
     const toUser = await this.data.user.findUnique({
       where: { id: toId },
-      select: { id: true, industry: true, chapter: { select: { id: true } } },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
     })
 
-    if (!fromUser?.chapter?.id) {
+    if (!fromUser?.chapter?.chapterId) {
       throw new Error(`Member ${fromId} has no chapter`)
     }
 
-    if (!toUser?.chapter?.id) {
+    if (!toUser?.chapter?.chapterId) {
       throw new Error(`Member ${toId} has no chapter`)
     }
 
-    const fromChapterId = fromUser?.chapter?.id
-    const toChapterId = toUser?.chapter?.id
+    const fromChapterId = fromUser?.chapter?.chapterId
+    const toChapterId = toUser?.chapter?.chapterId
 
     const select = new PrismaSelect(info).value
 
@@ -118,7 +108,7 @@ export class ApiReferralDataAccessLeaderService {
       data: {
         from: { connect: { id: fromId } },
         fromChapter: { connect: { id: fromChapterId } },
-        sentBy: { connect: { id: userId } },
+        sentBy: { connect: { id: leaderId } },
         to: { connect: { id: input.toId } },
         toChapter: { connect: { id: toChapterId } },
         firstName: input.firstName,
@@ -141,11 +131,64 @@ export class ApiReferralDataAccessLeaderService {
     // return created
   }
 
-  leaderUpdateReferral(info: GraphQLResolveInfo, leaderId: string, referralId, input: AdminUpdateReferralInput) {
+  async leaderUpdateReferral(info: GraphQLResolveInfo, leaderId: string, referralId, input: LeaderReferralInput) {
+    const user = await this.data.user.findUnique({
+      where: { id: leaderId },
+      select: { id: true, role: true, chapter: { select: { id: true } } },
+    })
+
+    const isLeader = await this.data.ensureChapterLeader(leaderId, user?.chapter?.id)
+
+    if (input.fromId && input.toId !== leaderId && user.role !== 'Admin' && !isLeader) {
+      throw new UnauthorizedException(`You need elevated permissions to do this.`)
+    }
+
+    const fromId = input.fromId ? input.fromId : leaderId
+    const toId = input.toId
+
+    const fromUser = await this.data.user.findUnique({
+      where: { id: fromId },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
+    })
+    const toUser = await this.data.user.findUnique({
+      where: { id: toId },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
+    })
+
+    if (!fromUser?.chapter?.chapterId) {
+      throw new Error(`Member ${fromId} has no chapter`)
+    }
+
+    if (!toUser?.chapter?.chapterId) {
+      throw new Error(`Member ${toId} has no chapter`)
+    }
+
+    const fromChapterId = fromUser?.chapter?.chapterId
+    const toChapterId = toUser?.chapter?.chapterId
+
+    console.log(fromChapterId, toChapterId)
+
     const select = new PrismaSelect(info).value
+
     return this.data.referral.update({
-      where: { id: referralId },
-      data: { ...input },
+      where: {
+        id: referralId,
+      },
+      data: {
+        from: { connect: { id: fromId } },
+        fromChapter: { connect: { id: fromChapterId } },
+        sentBy: { connect: { id: leaderId } },
+        to: { connect: { id: input.toId } },
+        toChapter: { connect: { id: toChapterId } },
+        firstName: input.firstName,
+        lastName: input.lastName,
+        email: input.email,
+        notes: input.notes,
+        phone: input.phone,
+        rating: input.rating,
+        fromIndustry: fromUser.industry,
+        toIndustry: toUser.industry,
+      },
       ...select,
     })
   }

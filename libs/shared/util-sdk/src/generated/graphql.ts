@@ -876,6 +876,18 @@ export type IntercomMessage = {
   type?: Maybe<Scalars['String']>
 }
 
+export type LeaderReferralInput = {
+  email?: InputMaybe<Scalars['String']>
+  firstName?: InputMaybe<Scalars['String']>
+  fromId?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
+  notes?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  rating?: InputMaybe<ReferralRating>
+  toId?: InputMaybe<Scalars['String']>
+  transactions?: InputMaybe<Array<MultiSelectInput>>
+}
+
 export type LoginInput = {
   email: Scalars['String']
   password: Scalars['String']
@@ -1410,7 +1422,7 @@ export type MutationLeaderCreatePowerHourArgs = {
 }
 
 export type MutationLeaderCreateReferralArgs = {
-  input: AdminCreateReferralInput
+  input: LeaderReferralInput
 }
 
 export type MutationLeaderCreateRegionArgs = {
@@ -1572,7 +1584,7 @@ export type MutationLeaderUpdatePowerHourArgs = {
 }
 
 export type MutationLeaderUpdateReferralArgs = {
-  input: AdminUpdateReferralInput
+  input: LeaderReferralInput
   referralId: Scalars['String']
 }
 
@@ -6667,7 +6679,6 @@ export type IntercomSubSubscription = {
 export type LeaderReferralDetailsFragment = {
   __typename?: 'Referral'
   id?: string | null
-  name?: string | null
   createdAt?: any | null
   updatedAt?: any | null
   referralDate?: any | null
@@ -6677,18 +6688,13 @@ export type LeaderReferralDetailsFragment = {
   email?: string | null
   phone?: string | null
   notes?: string | null
-  fromIndustry?: string | null
-  toIndustry?: string | null
-  sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
   from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
   to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-  fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
 }
 
 export type LeaderCreateReferralMutationVariables = Exact<{
-  input: AdminCreateReferralInput
+  input: LeaderReferralInput
 }>
 
 export type LeaderCreateReferralMutation = {
@@ -6696,7 +6702,6 @@ export type LeaderCreateReferralMutation = {
   createReferral?: {
     __typename?: 'Referral'
     id?: string | null
-    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6706,13 +6711,8 @@ export type LeaderCreateReferralMutation = {
     email?: string | null
     phone?: string | null
     notes?: string | null
-    fromIndustry?: string | null
-    toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
@@ -6728,7 +6728,7 @@ export type LeaderDeleteReferralMutation = {
 
 export type LeaderUpdateReferralMutationVariables = Exact<{
   referralId: Scalars['String']
-  input: AdminUpdateReferralInput
+  input: LeaderReferralInput
 }>
 
 export type LeaderUpdateReferralMutation = {
@@ -6736,7 +6736,6 @@ export type LeaderUpdateReferralMutation = {
   updateReferral?: {
     __typename?: 'Referral'
     id?: string | null
-    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6746,13 +6745,8 @@ export type LeaderUpdateReferralMutation = {
     email?: string | null
     phone?: string | null
     notes?: string | null
-    fromIndustry?: string | null
-    toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
@@ -6766,7 +6760,6 @@ export type LeaderReferralQuery = {
   referral?: {
     __typename?: 'Referral'
     id?: string | null
-    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6776,13 +6769,8 @@ export type LeaderReferralQuery = {
     email?: string | null
     phone?: string | null
     notes?: string | null
-    fromIndustry?: string | null
-    toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
@@ -6796,7 +6784,6 @@ export type LeaderReferralsQuery = {
   referrals?: Array<{
     __typename?: 'Referral'
     id?: string | null
-    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6806,13 +6793,8 @@ export type LeaderReferralsQuery = {
     email?: string | null
     phone?: string | null
     notes?: string | null
-    fromIndustry?: string | null
-    toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   }> | null
   counters?: {
@@ -7667,7 +7649,6 @@ export const IntercomDetailsFragmentDoc = gql`
 export const LeaderReferralDetailsFragmentDoc = gql`
   fragment LeaderReferralDetails on Referral {
     id
-    name
     createdAt
     updatedAt
     referralDate
@@ -7677,25 +7658,11 @@ export const LeaderReferralDetailsFragmentDoc = gql`
     email
     phone
     notes
-    fromIndustry
-    toIndustry
-    sentBy {
-      id
-      name
-    }
     from {
       id
       name
     }
     to {
-      id
-      name
-    }
-    fromChapter {
-      id
-      name
-    }
-    toChapter {
       id
       name
     }
@@ -13346,7 +13313,7 @@ export function useIntercomSubSubscription(
 export type IntercomSubSubscriptionHookResult = ReturnType<typeof useIntercomSubSubscription>
 export type IntercomSubSubscriptionResult = Apollo.SubscriptionResult<IntercomSubSubscription>
 export const LeaderCreateReferralDocument = gql`
-  mutation leaderCreateReferral($input: AdminCreateReferralInput!) {
+  mutation leaderCreateReferral($input: LeaderReferralInput!) {
     createReferral: leaderCreateReferral(input: $input) {
       ...LeaderReferralDetails
     }
@@ -13435,7 +13402,7 @@ export type LeaderDeleteReferralMutationOptions = Apollo.BaseMutationOptions<
   LeaderDeleteReferralMutationVariables
 >
 export const LeaderUpdateReferralDocument = gql`
-  mutation leaderUpdateReferral($referralId: String!, $input: AdminUpdateReferralInput!) {
+  mutation leaderUpdateReferral($referralId: String!, $input: LeaderReferralInput!) {
     updateReferral: leaderUpdateReferral(referralId: $referralId, input: $input) {
       ...LeaderReferralDetails
     }
