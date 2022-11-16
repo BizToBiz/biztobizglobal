@@ -2809,6 +2809,7 @@ export type Referral = {
   fromIndustry?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>
   lastName?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
   notes?: Maybe<Scalars['String']>
   phone?: Maybe<Scalars['String']>
   rating?: Maybe<ReferralRating>
@@ -2921,6 +2922,7 @@ export type Transaction = {
   enteredOn?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>
   industry?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
   referral?: Maybe<Referral>
   state?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -4870,6 +4872,7 @@ export type AdminPowerHourPaginationQuery = {
 export type AdminReferralDetailsFragment = {
   __typename?: 'Referral'
   id?: string | null
+  name?: string | null
   createdAt?: any | null
   updatedAt?: any | null
   referralDate?: any | null
@@ -4886,7 +4889,7 @@ export type AdminReferralDetailsFragment = {
   to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
   fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
 }
 
 export type AdminCreateReferralMutationVariables = Exact<{
@@ -4898,6 +4901,7 @@ export type AdminCreateReferralMutation = {
   createReferral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -4914,7 +4918,7 @@ export type AdminCreateReferralMutation = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
 
@@ -4937,6 +4941,7 @@ export type AdminUpdateReferralMutation = {
   updateReferral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -4953,7 +4958,7 @@ export type AdminUpdateReferralMutation = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
 
@@ -4966,6 +4971,7 @@ export type AdminReferralQuery = {
   referral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -4982,7 +4988,7 @@ export type AdminReferralQuery = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
 
@@ -4995,6 +5001,7 @@ export type AdminReferralsQuery = {
   referrals?: Array<{
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -5011,7 +5018,7 @@ export type AdminReferralsQuery = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -5619,6 +5626,7 @@ export type AdminTestimonialPaginationQuery = {
 export type AdminTransactionDetailsFragment = {
   __typename?: 'Transaction'
   id?: string | null
+  name?: string | null
   createdAt?: any | null
   updatedAt?: any | null
   date?: any | null
@@ -5629,7 +5637,7 @@ export type AdminTransactionDetailsFragment = {
   state?: string | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-  referral?: { __typename?: 'Referral'; id?: string | null } | null
+  referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
 }
 
 export type AdminCreateTransactionMutationVariables = Exact<{
@@ -5641,6 +5649,7 @@ export type AdminCreateTransactionMutation = {
   createTransaction?: {
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -5651,7 +5660,7 @@ export type AdminCreateTransactionMutation = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -5674,6 +5683,7 @@ export type AdminUpdateTransactionMutation = {
   updateTransaction?: {
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -5684,7 +5694,7 @@ export type AdminUpdateTransactionMutation = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -5697,6 +5707,7 @@ export type AdminTransactionQuery = {
   transaction?: {
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -5707,7 +5718,7 @@ export type AdminTransactionQuery = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -5720,6 +5731,7 @@ export type AdminTransactionsQuery = {
   transactions?: Array<{
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -5730,7 +5742,7 @@ export type AdminTransactionsQuery = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -6655,6 +6667,7 @@ export type IntercomSubSubscription = {
 export type LeaderReferralDetailsFragment = {
   __typename?: 'Referral'
   id?: string | null
+  name?: string | null
   createdAt?: any | null
   updatedAt?: any | null
   referralDate?: any | null
@@ -6671,7 +6684,7 @@ export type LeaderReferralDetailsFragment = {
   to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
   fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
 }
 
 export type LeaderCreateReferralMutationVariables = Exact<{
@@ -6683,6 +6696,7 @@ export type LeaderCreateReferralMutation = {
   createReferral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6699,7 +6713,7 @@ export type LeaderCreateReferralMutation = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
 
@@ -6722,6 +6736,7 @@ export type LeaderUpdateReferralMutation = {
   updateReferral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6738,7 +6753,7 @@ export type LeaderUpdateReferralMutation = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
 
@@ -6751,6 +6766,7 @@ export type LeaderReferralQuery = {
   referral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6767,7 +6783,7 @@ export type LeaderReferralQuery = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
 
@@ -6780,6 +6796,7 @@ export type LeaderReferralsQuery = {
   referrals?: Array<{
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6796,7 +6813,7 @@ export type LeaderReferralsQuery = {
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -6942,7 +6959,7 @@ export type LeaderTransactionDetailsFragment = {
   state?: string | null
   chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-  referral?: { __typename?: 'Referral'; id?: string | null } | null
+  referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
 }
 
 export type LeaderCreateTransactionMutationVariables = Exact<{
@@ -6964,7 +6981,7 @@ export type LeaderCreateTransactionMutation = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -6997,7 +7014,7 @@ export type LeaderUpdateTransactionMutation = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -7020,7 +7037,7 @@ export type LeaderTransactionQuery = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   } | null
 }
 
@@ -7043,7 +7060,7 @@ export type LeaderTransactionsQuery = {
     state?: string | null
     chapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     user?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    referral?: { __typename?: 'Referral'; id?: string | null } | null
+    referral?: { __typename?: 'Referral'; id?: string | null; name?: string | null } | null
   }> | null
   counters?: {
     __typename?: 'CorePaging'
@@ -7286,6 +7303,7 @@ export const AdminPowerHourDetailsFragmentDoc = gql`
 export const AdminReferralDetailsFragmentDoc = gql`
   fragment AdminReferralDetails on Referral {
     id
+    name
     createdAt
     updatedAt
     referralDate
@@ -7319,6 +7337,7 @@ export const AdminReferralDetailsFragmentDoc = gql`
     }
     transactions {
       id
+      name
     }
   }
 `
@@ -7411,6 +7430,7 @@ export const AdminTestimonialDetailsFragmentDoc = gql`
 export const AdminTransactionDetailsFragmentDoc = gql`
   fragment AdminTransactionDetails on Transaction {
     id
+    name
     createdAt
     updatedAt
     date
@@ -7429,6 +7449,7 @@ export const AdminTransactionDetailsFragmentDoc = gql`
     }
     referral {
       id
+      name
     }
   }
 `
@@ -7646,6 +7667,7 @@ export const IntercomDetailsFragmentDoc = gql`
 export const LeaderReferralDetailsFragmentDoc = gql`
   fragment LeaderReferralDetails on Referral {
     id
+    name
     createdAt
     updatedAt
     referralDate
@@ -7679,6 +7701,7 @@ export const LeaderReferralDetailsFragmentDoc = gql`
     }
     transactions {
       id
+      name
     }
   }
 `
@@ -7758,6 +7781,7 @@ export const LeaderTransactionDetailsFragmentDoc = gql`
     }
     referral {
       id
+      name
     }
   }
 `

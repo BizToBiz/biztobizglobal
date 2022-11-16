@@ -127,8 +127,8 @@ export class ApiTransactionDataAccessLeaderService {
     const orderBy = this.getOrderBy(input?.orderBy, input?.orderDirection ?? 'desc')
     const select = new PrismaSelect(info).value
     return this.data.transaction.findMany({
-      take: input?.take,
-      skip: input?.skip,
+      take: input?.take ?? 10,
+      skip: input?.skip ?? 0,
       orderBy: orderBy,
       where: await this.where(input, leaderId),
       ...select,

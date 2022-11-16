@@ -1,5 +1,6 @@
 fragment AdminTransactionDetails on Transaction {
   id
+  name
   createdAt
   updatedAt
   date
@@ -18,5 +19,6 @@ fragment AdminTransactionDetails on Transaction {
   }
   referral {
     id
+    name
   }
 }
