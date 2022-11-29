@@ -42,6 +42,7 @@ export class ApiChapterDataAccessAdminService {
     const chapters = await this.data.chapter.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
+      where: this.where(input),
       ...select,
     })
     return chapters

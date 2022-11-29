@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
@@ -162,10 +162,43 @@ export class ApiTransactionDataAccessLeaderService {
     return this.data.transaction.findUnique({ where: { id: transactionId }, ...select })
   }
 
-  leaderCreateTransaction(info: GraphQLResolveInfo, leaderId: string, input: AdminCreateTransactionInput) {
+  async leaderCreateTransaction(info: GraphQLResolveInfo, leaderId: string, input: AdminCreateTransactionInput) {
     const select = new PrismaSelect(info).value
+
+    const user = await this.data.user.findUnique({ where: { id: input.userId } })
+    if (!user) {
+      throw new NotFoundException(`User with id ${input.userId} not found!`)
+    }
+
+    const chapter = await this.data.user
+      .findUnique({ where: { id: input.userId } })
+      .chapter()
+      .chapter()
+    if (!chapter) {
+      throw new NotFoundException(`Chapter for user with id ${input.userId} not found!`)
+    }
+
+    // Referral is optional. If it's passed though, we want to make sure it exists.
+    let referral
+    if (input.referralId) {
+      referral = await this.data.referral.findUnique({ where: { id: input.referralId } })
+      if (!referral) {
+        throw new NotFoundException(`Referral with id ${input.referralId} not found!`)
+      }
+    }
+
     return this.data.transaction.create({
-      data: { ...input },
+      data: {
+        date: input.date,
+        amount: input.amount,
+        user: { connect: { id: user.id } },
+        chapter: { connect: { id: chapter.id } },
+        referral: referral ? { connect: { id: referral.id } } : undefined,
+        enteredBy: leaderId,
+        enteredOn: new Date().toISOString(),
+        industry: user.industry,
+        state: chapter.state,
+      },
       ...select,
     })
   }
