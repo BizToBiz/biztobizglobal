@@ -49,7 +49,7 @@ export function RelationSelect(props: RelationSelectProps) {
       : [{ value: '', label: 'No Matching Data Found' }]
 
   async function getStorageOptions(inputText: string): Promise<OptionsOrGroups<any, GroupBase<any>>> {
-    return refetch({ input: { search: inputText } }).then((res) => {
+    return refetch({ input: { search: inputText, take: 100 } }).then((res) => {
       return props?.field?.options?.dataType
         ? props?.field?.options?.selectOptionsFunction
           ? props?.field?.options?.selectOptionsFunction(res?.data?.[props.field.options.dataType])

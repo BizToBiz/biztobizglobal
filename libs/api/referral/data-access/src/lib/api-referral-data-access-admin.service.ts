@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { PrismaSelect } from '@paljs/plugins'
 import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
@@ -12,7 +12,6 @@ import { AdminUpdateReferralInput } from './dto/admin-update-referral.input'
 export class ApiReferralDataAccessAdminService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
-  private readonly searchFields = ['firstName', 'lastName', 'email']
   private where(input: AdminListReferralInput): Prisma.ReferralWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
@@ -27,11 +26,19 @@ export class ApiReferralDataAccessAdminService {
       // }
       return null
     }
+
     return {
       AND: [
         relationalSearch(),
         ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          OR: [
+            { firstName: { contains: term, mode: 'insensitive' } },
+            { lastName: { contains: term, mode: 'insensitive' } },
+            { from: { firstName: { contains: term, mode: 'insensitive' } } },
+            { from: { lastName: { contains: term, mode: 'insensitive' } } },
+            { to: { firstName: { contains: term, mode: 'insensitive' } } },
+            { to: { lastName: { contains: term, mode: 'insensitive' } } },
+          ],
         })),
       ],
     }
@@ -43,6 +50,7 @@ export class ApiReferralDataAccessAdminService {
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
       where: this.where(input),
+      orderBy: { createdAt: 'desc' },
       ...select,
     })
   }
@@ -67,19 +75,123 @@ export class ApiReferralDataAccessAdminService {
     return this.data.referral.findUnique({ where: { id: referralId }, ...select })
   }
 
-  adminCreateReferral(info: GraphQLResolveInfo, adminId: string, input: AdminCreateReferralInput) {
+  async adminCreateReferral(info: GraphQLResolveInfo, adminId: string, input: AdminCreateReferralInput) {
+    const user = await this.data.user.findUnique({
+      where: { id: adminId },
+      select: { id: true, role: true, chapter: { select: { id: true } } },
+    })
+
+    const isLeader = await this.data.ensureChapterLeader(adminId, user?.chapter?.id)
+
+    if (input.fromId && input.toId !== adminId && user.role !== 'Admin' && !isLeader) {
+      throw new UnauthorizedException(`You need elevated permissions to do this.`)
+    }
+
+    const fromId = input.fromId ? input.fromId : adminId
+    const toId = input.toId
+
+    const fromUser = await this.data.user.findUnique({
+      where: { id: fromId },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
+    })
+    const toUser = await this.data.user.findUnique({
+      where: { id: toId },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
+    })
+
+    if (!fromUser?.chapter?.chapterId) {
+      throw new Error(`Member ${fromId} has no chapter`)
+    }
+
+    if (!toUser?.chapter?.chapterId) {
+      throw new Error(`Member ${toId} has no chapter`)
+    }
+
+    const fromChapterId = fromUser?.chapter?.chapterId
+    const toChapterId = toUser?.chapter?.chapterId
+
     const select = new PrismaSelect(info).value
+
     return this.data.referral.create({
-      data: { ...input, transactions: { set: input.transactions } },
+      data: {
+        referralDate: input?.referralDate || new Date(),
+        from: { connect: { id: fromId } },
+        fromChapter: { connect: { id: fromChapterId } },
+        sentBy: { connect: { id: adminId } },
+        to: { connect: { id: input.toId } },
+        toChapter: { connect: { id: toChapterId } },
+        firstName: input.firstName,
+        lastName: input.lastName,
+        email: input.email,
+        notes: input.notes,
+        phone: input.phone,
+        rating: input.rating,
+        fromIndustry: fromUser.industry,
+        toIndustry: toUser.industry,
+      },
       ...select,
     })
   }
 
-  adminUpdateReferral(info: GraphQLResolveInfo, adminId: string, referralId, input: AdminUpdateReferralInput) {
+  async adminUpdateReferral(info: GraphQLResolveInfo, adminId: string, referralId, input: AdminUpdateReferralInput) {
+    const user = await this.data.user.findUnique({
+      where: { id: adminId },
+      select: { id: true, role: true, chapter: { select: { id: true } } },
+    })
+
+    const isLeader = await this.data.ensureChapterLeader(adminId, user?.chapter?.id)
+
+    if (input.fromId && input.toId !== adminId && user.role !== 'Admin' && !isLeader) {
+      throw new UnauthorizedException(`You need elevated permissions to do this.`)
+    }
+
+    const fromId = input.fromId ? input.fromId : adminId
+    const toId = input.toId
+
+    const fromUser = await this.data.user.findUnique({
+      where: { id: fromId },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
+    })
+    const toUser = await this.data.user.findUnique({
+      where: { id: toId },
+      select: { id: true, industry: true, chapter: { select: { chapterId: true } } },
+    })
+
+    if (!fromUser?.chapter?.chapterId) {
+      throw new Error(`Member ${fromId} has no chapter`)
+    }
+
+    if (!toUser?.chapter?.chapterId) {
+      throw new Error(`Member ${toId} has no chapter`)
+    }
+
+    const fromChapterId = fromUser?.chapter?.chapterId
+    const toChapterId = toUser?.chapter?.chapterId
+
+    console.log(fromChapterId, toChapterId)
+
     const select = new PrismaSelect(info).value
+
     return this.data.referral.update({
-      where: { id: referralId },
-      data: { ...input, transactions: { set: input.transactions } },
+      where: {
+        id: referralId,
+      },
+      data: {
+        referralDate: input?.referralDate || new Date(),
+        from: { connect: { id: fromId } },
+        fromChapter: { connect: { id: fromChapterId } },
+        sentBy: { connect: { id: adminId } },
+        to: { connect: { id: input.toId } },
+        toChapter: { connect: { id: toChapterId } },
+        firstName: input.firstName,
+        lastName: input.lastName,
+        email: input.email,
+        notes: input.notes,
+        phone: input.phone,
+        rating: input.rating,
+        fromIndustry: fromUser.industry,
+        toIndustry: toUser.industry,
+      },
       ...select,
     })
   }

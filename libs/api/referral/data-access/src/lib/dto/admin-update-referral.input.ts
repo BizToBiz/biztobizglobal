@@ -5,6 +5,9 @@ import { MultiSelectInput } from '@biztobiz/api/core/data-access'
 @InputType()
 export class AdminUpdateReferralInput {
   @Field({ nullable: true })
+  referralDate?: Date
+
+  @Field({ nullable: true })
   firstName?: string
 
   @Field({ nullable: true })

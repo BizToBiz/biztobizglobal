@@ -106,6 +106,7 @@ export class ApiReferralDataAccessLeaderService {
 
     return this.data.referral.create({
       data: {
+        referralDate: input.referralDate || new Date(),
         from: { connect: { id: fromId } },
         fromChapter: { connect: { id: fromChapterId } },
         sentBy: { connect: { id: leaderId } },
@@ -175,6 +176,7 @@ export class ApiReferralDataAccessLeaderService {
         id: referralId,
       },
       data: {
+        referralDate: input.referralDate || new Date(),
         from: { connect: { id: fromId } },
         fromChapter: { connect: { id: fromChapterId } },
         sentBy: { connect: { id: leaderId } },

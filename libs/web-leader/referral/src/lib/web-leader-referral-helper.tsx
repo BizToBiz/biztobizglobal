@@ -8,6 +8,7 @@ import { AdminTransactionsDocument, AdminUsersDocument, ReferralRating } from '@
 // }
 
 export const referralFields: WebUiFormField[] = [
+  WebUiFormField.datePicker('referralDate', { label: 'Date', required: true }),
   WebUiFormField.input('firstName', { label: 'First Name', required: true }),
   WebUiFormField.input('lastName', { label: 'Last Name', required: true }),
   WebUiFormField.email('email', { label: 'Email' }),

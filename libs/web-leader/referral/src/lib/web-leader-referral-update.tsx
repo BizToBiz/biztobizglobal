@@ -26,7 +26,7 @@ export function WebLeaderReferralUpdate() {
 
   function defaultValues() {
     if (referral?.referral && !loading) {
-      return cleanDatabaseOutput(referral.referral, referralFields)
+      return cleanDatabaseOutput(referral.referral, referralFields, ['name'])
     } else {
       return undefined
     }

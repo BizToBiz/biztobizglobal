@@ -26,7 +26,7 @@ export function WebLeaderTransactionUpdate() {
 
   function defaultValues() {
     if (transaction?.transaction && !loading) {
-      return cleanDatabaseOutput(transaction.transaction, transactionFields)
+      return cleanDatabaseOutput(transaction.transaction, transactionFields, ['name', 'chapter'])
     } else {
       return undefined
     }

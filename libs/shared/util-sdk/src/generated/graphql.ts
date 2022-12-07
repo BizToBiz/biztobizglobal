@@ -136,6 +136,7 @@ export type AdminCreateReferralInput = {
   notes?: InputMaybe<Scalars['String']>
   phone?: InputMaybe<Scalars['String']>
   rating?: InputMaybe<ReferralRating>
+  referralDate?: InputMaybe<Scalars['DateTime']>
   sentById?: InputMaybe<Scalars['String']>
   toChapterId?: InputMaybe<Scalars['String']>
   toId?: InputMaybe<Scalars['String']>
@@ -578,6 +579,7 @@ export type AdminUpdateReferralInput = {
   notes?: InputMaybe<Scalars['String']>
   phone?: InputMaybe<Scalars['String']>
   rating?: InputMaybe<ReferralRating>
+  referralDate?: InputMaybe<Scalars['DateTime']>
   sentById?: InputMaybe<Scalars['String']>
   toChapterId?: InputMaybe<Scalars['String']>
   toId?: InputMaybe<Scalars['String']>
@@ -884,6 +886,7 @@ export type LeaderReferralInput = {
   notes?: InputMaybe<Scalars['String']>
   phone?: InputMaybe<Scalars['String']>
   rating?: InputMaybe<ReferralRating>
+  referralDate?: InputMaybe<Scalars['DateTime']>
   toId?: InputMaybe<Scalars['String']>
   transactions?: InputMaybe<Array<MultiSelectInput>>
 }
@@ -4896,11 +4899,8 @@ export type AdminReferralDetailsFragment = {
   notes?: string | null
   fromIndustry?: string | null
   toIndustry?: string | null
-  sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
   from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
   to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-  fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-  toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
   transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
 }
 
@@ -4925,11 +4925,8 @@ export type AdminCreateReferralMutation = {
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
@@ -4965,11 +4962,8 @@ export type AdminUpdateReferralMutation = {
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
@@ -4995,11 +4989,8 @@ export type AdminReferralQuery = {
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   } | null
 }
@@ -5025,11 +5016,8 @@ export type AdminReferralsQuery = {
     notes?: string | null
     fromIndustry?: string | null
     toIndustry?: string | null
-    sentBy?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     from?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
     to?: { __typename?: 'User'; id?: string | null; name?: string | null } | null
-    fromChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
-    toChapter?: { __typename?: 'Chapter'; id?: string | null; name?: string | null } | null
     transactions?: Array<{ __typename?: 'Transaction'; id?: string | null; name?: string | null }> | null
   }> | null
   counters?: {
@@ -7297,23 +7285,11 @@ export const AdminReferralDetailsFragmentDoc = gql`
     notes
     fromIndustry
     toIndustry
-    sentBy {
-      id
-      name
-    }
     from {
       id
       name
     }
     to {
-      id
-      name
-    }
-    fromChapter {
-      id
-      name
-    }
-    toChapter {
       id
       name
     }
