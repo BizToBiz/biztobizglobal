@@ -35,7 +35,7 @@ export function WebLeaderTransactionReferralReport(props: WebLeaderTransactionRe
       orderDirection,
       startDate: startDate || null,
       endDate: endDate || null,
-      amount: amount ? parseInt(amount) : null,
+      amount: amount ? parseFloat(amount) : null,
     },
   }
 
