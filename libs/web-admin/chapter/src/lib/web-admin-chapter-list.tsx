@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminChaptersQuery, useAdminChapterPaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminChapterPaginationQuery, useAdminChaptersQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminChapterListProps {
@@ -17,6 +17,9 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
   const [search] = useAtom(searchAtom)
   const [isDev] = useAtom(isDevAtom)
   const [skip, setSkip] = useState(0)
+  const [filters, setFilters] = useState([])
+
+  console.log(filters)
 
   const variables = {
     input: {
@@ -24,6 +27,7 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
       userId: props?.userId,
       chapterId: props?.chapterId,
       referralId: props?.referralId,
+      ...filters,
       skip,
       search,
     },
@@ -36,6 +40,18 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
   const { data: pagination } = useAdminChapterPaginationQuery({
     variables,
   })
+
+  const filterOptions = [
+    {
+      id: 'status',
+      name: 'Status',
+      options: [
+        { value: 'Active', label: 'Active' },
+        { value: 'Inactive', label: 'Inactive' },
+        { value: 'Shutdown', label: 'Shutdown' },
+      ],
+    },
+  ]
 
   useLayoutEffect(() => {
     setCurrentPath({
@@ -57,9 +73,12 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
       <WebUiDataTableFeature
         data={chapters?.chapters}
         path={'/admin/chapter'}
-        fields={['name']}
+        fields={['name', 'status']}
         pagination={pagination?.counters}
         setSkip={setSkip}
+        filters={filters}
+        filterOptions={filterOptions}
+        setFilters={setFilters}
       />
       {isDev && chapters?.chapters ? <WebUiDevDataFeature data={chapters} /> : null}
     </>

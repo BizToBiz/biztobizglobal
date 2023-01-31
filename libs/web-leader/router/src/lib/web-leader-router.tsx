@@ -24,6 +24,7 @@ export interface WebLeaderRouterProps {
 }
 
 export function WebLeaderRouter(props: WebLeaderRouterProps) {
+  console.log(props.user)
   const [currentPath] = useAtom(currentPathAtom)
   const { logout } = useContext(SharedAuthContext)
 
