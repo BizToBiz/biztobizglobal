@@ -315,6 +315,7 @@ export type AdminListChapterInput = {
   regionId?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  status?: InputMaybe<Array<Scalars['String']>>
   substituteGroupId?: InputMaybe<Scalars['String']>
   take?: InputMaybe<Scalars['Float']>
 }

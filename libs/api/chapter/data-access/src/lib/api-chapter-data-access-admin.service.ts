@@ -7,6 +7,7 @@ import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-ac
 import { AdminCreateChapterInput } from './dto/admin-create-chapter.input'
 import { AdminListChapterInput } from './dto/admin-list-chapter.input'
 import { AdminUpdateChapterInput } from './dto/admin-update-chapter.input'
+import { ChapterStatus } from '@biztobiz/shared/util-sdk'
 
 @Injectable()
 export class ApiChapterDataAccessAdminService {
@@ -27,9 +28,18 @@ export class ApiChapterDataAccessAdminService {
       // }
       return null
     }
+    function statusFilter(): Prisma.ChapterWhereInput {
+      if (input?.status) {
+        const inputStatus = input.status.map((status) => ChapterStatus[status])
+        return { status: { in: inputStatus } }
+        return null
+      }
+    }
+
     return {
       AND: [
         relationalSearch(),
+        statusFilter(),
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),
