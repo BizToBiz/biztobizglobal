@@ -21,8 +21,6 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
   const [skip, setSkip] = useState(0)
   const [filters, setFilters] = useState([])
 
-  console.log(filters?.['status'])
-
   const variables = {
     input: {
       take: 20,
