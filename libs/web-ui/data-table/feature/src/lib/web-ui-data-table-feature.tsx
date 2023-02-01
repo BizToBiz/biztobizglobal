@@ -3,6 +3,7 @@ import { CorePaging } from '@biztobiz/shared/util-sdk'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Link } from 'react-router-dom'
+import React from 'react'
 
 export interface WebUiDataTableFeatureProps {
   data?: any
@@ -10,10 +11,14 @@ export interface WebUiDataTableFeatureProps {
   fields: string[]
   pagination?: CorePaging | null
   setSkip?: (skip: number) => void
+  filters?: any
+  setFilters?: (filters: any) => void
+  filterOptions?: { id: string; name: string; options: { value: string; label: string }[] }[]
+  loading?: boolean
 }
 
 export function WebUiDataTableFeature(props: WebUiDataTableFeatureProps) {
-  return props.data ? (
+  return props.data && !props.loading ? (
     <>
       <div className="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
         <table className="min-w-full divide-y divide-gray-300">

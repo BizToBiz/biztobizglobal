@@ -11,4 +11,7 @@ export class AdminListChapterInput extends CorePagingInput {
 
   @Field({ nullable: true })
   substituteGroupId?: string
+
+  @Field(() => [String], { nullable: true })
+  status?: string[]
 }
