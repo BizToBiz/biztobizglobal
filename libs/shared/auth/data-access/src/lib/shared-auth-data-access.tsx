@@ -9,6 +9,7 @@ import {
   User,
   useRegisterMutation,
   useResetPasswordMutation,
+  useSpyOnUserMutation,
 } from '@biztobiz/shared/util-sdk'
 import React, { createContext } from 'react'
 
@@ -21,6 +22,7 @@ export interface SharedAuthContextProps {
   register: (input: RegisterInput) => Promise<{ user: User | null; error: string | null }>
   forgotPassword: (input: ForgotPasswordInput) => Promise<{ success: boolean; error: string }>
   resetPassword: (input: ResetPasswordInput) => Promise<{ success: boolean; error: string }>
+  spyOnUser: (userId: string) => void
 }
 
 const SharedAuthContext = createContext<SharedAuthContextProps>({
@@ -29,6 +31,7 @@ const SharedAuthContext = createContext<SharedAuthContextProps>({
   register: (_: RegisterInput) => Promise.resolve({ user: null, error: '' }),
   forgotPassword: (_: ForgotPasswordInput) => Promise.resolve({ success: false, error: '' }),
   resetPassword: (_: ResetPasswordInput) => Promise.resolve({ success: false, error: '' }),
+  spyOnUser: (_: string) => null,
 })
 
 const { Provider } = SharedAuthContext
@@ -47,7 +50,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
   const [registerMutation] = useRegisterMutation()
   const [forgotPasswordMutation] = useForgotPasswordMutation()
   const [resetPasswordMutation] = useResetPasswordMutation()
-
+  const [spyOnUserMutation] = useSpyOnUserMutation()
   async function login(input: LoginInput) {
     try {
       const res = await loginMutation({ variables: { input } })
@@ -114,6 +117,16 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
     }
   }
 
+  async function spyOnUser(userId: string) {
+    try {
+      await spyOnUserMutation({ variables: { input: { userId: userId } } })
+      return { success: true, error: null }
+    } catch (e: any) {
+      console.log(e.message)
+      return { success: false, error: e.message }
+    }
+  }
+
   return (
     <Provider
       value={{
@@ -122,6 +135,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
         register,
         forgotPassword,
         resetPassword,
+        spyOnUser,
       }}
     >
       {children}

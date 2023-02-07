@@ -18,6 +18,7 @@ export const isAdminAtom = atom((get) => get(identityAtom)?.role === Role.Admin)
 export const isDevAtom = atom((get) => get(identityAtom)?.developer === true)
 export const isLeaderAtom = atom((get) => get(identityAtom)?.isLeader === true)
 export const isRememberedAtom = atomWithStorage<User | null>('isRemembered', null)
+export const spyAtom = atomWithStorage<User | null>('user', null)
 
 // Navigation Atoms
 export const currentPathAtom = atomWithStorage<path>('currentPath', {

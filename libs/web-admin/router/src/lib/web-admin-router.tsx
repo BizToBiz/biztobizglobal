@@ -93,7 +93,7 @@ export interface WebAdminRouterProps {
 export function WebAdminRouter(props: WebAdminRouterProps) {
   const [isAdmin] = useAtom(isAdminAtom)
   const [currentPath] = useAtom(currentPathAtom)
-  const { logout } = useContext(SharedAuthContext)
+  const { logout, spyOnUser } = useContext(SharedAuthContext)
 
   const navigation = [
     {
@@ -220,7 +220,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
   ]
 
   return isAdmin ? (
-    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout}>
+    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout} spyOnUser={spyOnUser}>
       <Routes>
         <Route path="dashboard" element={<WebAdminDashboard />} />
         <Route path="users" element={<WebAdminUserList />} />

@@ -1060,6 +1060,7 @@ export type Mutation = {
   logout?: Maybe<Scalars['Boolean']>
   register?: Maybe<UserToken>
   resetPassword?: Maybe<User>
+  spyOnUser?: Maybe<UserToken>
   userCreateAttendanceReminder?: Maybe<AttendanceReminder>
   userCreateChapter?: Maybe<Chapter>
   userCreateChapterMember?: Maybe<ChapterMember>
@@ -1641,6 +1642,10 @@ export type MutationRegisterArgs = {
 
 export type MutationResetPasswordArgs = {
   input: ResetPasswordInput
+}
+
+export type MutationSpyOnUserArgs = {
+  input: SpyOnUserInput
 }
 
 export type MutationUserCreateAttendanceReminderArgs = {
@@ -2875,6 +2880,10 @@ export enum Role {
   Admin = 'Admin',
   Guest = 'Guest',
   User = 'User',
+}
+
+export type SpyOnUserInput = {
+  userId: Scalars['String']
 }
 
 export type Subscription = {
@@ -6613,6 +6622,29 @@ export type ResetPasswordMutationVariables = Exact<{
 export type ResetPasswordMutation = {
   __typename?: 'Mutation'
   resetPassword?: { __typename?: 'User'; email?: string | null } | null
+}
+
+export type SpyOnUserMutationVariables = Exact<{
+  input: SpyOnUserInput
+}>
+
+export type SpyOnUserMutation = {
+  __typename?: 'Mutation'
+  spyOnUser?: {
+    __typename?: 'UserToken'
+    token: string
+    user: {
+      __typename?: 'User'
+      id?: string | null
+      firstName?: string | null
+      lastName?: string | null
+      avatarUrl?: string | null
+      email?: string | null
+      role?: Role | null
+      developer?: boolean | null
+      isLeader?: boolean | null
+    }
+  } | null
 }
 
 export type UptimeQueryVariables = Exact<{ [key: string]: never }>
@@ -13186,6 +13218,42 @@ export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<
   ResetPasswordMutation,
   ResetPasswordMutationVariables
 >
+export const SpyOnUserDocument = gql`
+  mutation SpyOnUser($input: SpyOnUserInput!) {
+    spyOnUser(input: $input) {
+      ...UserTokenDetails
+    }
+  }
+  ${UserTokenDetailsFragmentDoc}
+`
+export type SpyOnUserMutationFn = Apollo.MutationFunction<SpyOnUserMutation, SpyOnUserMutationVariables>
+
+/**
+ * __useSpyOnUserMutation__
+ *
+ * To run a mutation, you first call `useSpyOnUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSpyOnUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [spyOnUserMutation, { data, loading, error }] = useSpyOnUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSpyOnUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<SpyOnUserMutation, SpyOnUserMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<SpyOnUserMutation, SpyOnUserMutationVariables>(SpyOnUserDocument, options)
+}
+export type SpyOnUserMutationHookResult = ReturnType<typeof useSpyOnUserMutation>
+export type SpyOnUserMutationResult = Apollo.MutationResult<SpyOnUserMutation>
+export type SpyOnUserMutationOptions = Apollo.BaseMutationOptions<SpyOnUserMutation, SpyOnUserMutationVariables>
 export const UptimeDocument = gql`
   query Uptime {
     uptime

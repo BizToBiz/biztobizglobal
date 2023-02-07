@@ -4,6 +4,7 @@ import {
   LoginInput,
   RegisterInput,
   ResetPasswordInput,
+  SpyOnUserInput,
   UserToken,
 } from '@biztobiz/api/auth/data-access'
 import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
@@ -51,6 +52,13 @@ export class ApiAuthFeatureResolver {
   @Mutation(() => User, { nullable: true })
   resetPassword(@Args('input') input: ResetPasswordInput): Promise<User> {
     return this.service.resetPassword(input.password, input.token)
+  }
+
+  @Mutation(() => UserToken, { nullable: true })
+  async spyOnUser(@Context() context, @Args('input') input: SpyOnUserInput): Promise<UserToken> {
+    const userToken = await this.service.spyOnUser(input)
+    this.service.setCookie(context.res, userToken.token)
+    return userToken
   }
 
   @ResolveField('user')

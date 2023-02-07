@@ -19,6 +19,7 @@ import { ApiMailerDataAccessService } from '@biztobiz/api/mailer/data-access'
 import { passwordResetEmail } from './templates/password-reset-email.template'
 import { User } from '@biztobiz/api/user/data-access'
 import { ChapterMemberRole, Role } from '@biztobiz/api/enums/data-access'
+import { SpyOnUserInput } from './dto/spy-on-user.input'
 
 @Injectable()
 export class ApiAuthDataAccessService {
@@ -101,6 +102,11 @@ export class ApiAuthDataAccessService {
       throw new BadRequestException('Invalid password')
     }
 
+    return this.signUser(user)
+  }
+
+  async spyOnUser(input: SpyOnUserInput) {
+    const user = await this.findUserById(input?.userId)
     return this.signUser(user)
   }
 

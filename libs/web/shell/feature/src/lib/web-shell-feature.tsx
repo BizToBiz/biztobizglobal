@@ -14,7 +14,7 @@ import {
   WebFeatureResetPassword,
 } from '@biztobiz/web/auth/feature'
 import { useAtom } from 'jotai'
-import { identityAtom, isAuthenticatedAtom, isRememberedAtom } from '@biztobiz/web/global/data-access'
+import { identityAtom, isAuthenticatedAtom, isRememberedAtom, spyAtom } from '@biztobiz/web/global/data-access'
 import { SharedAuthContext, SharedAuthProvider } from '@biztobiz/shared/auth/data-access'
 import { WebAdminRouter } from '@biztobiz/web-admin/router'
 import { WebLeaderRouter } from '@biztobiz/web-leader/router'
@@ -48,17 +48,18 @@ export function WebShellFeature() {
     }),
   )
   const [user] = useAtom(identityAtom)
+  const [spyUser] = useAtom(spyAtom)
 
   return (
     <ApolloProvider client={client.client}>
       <SharedAuthProvider identityAtom={identityAtom} isRememberedAtom={isRememberedAtom}>
         <Routes>
-          <Route path="members" element={<PrivateOutlet user={user} />}>
+          <Route path="members" element={<PrivateOutlet user={spyUser ?? user} />}>
             <Route path="dashboard" element={<WebDashboardFeature />} />
             <Route path="about" element={<WebAboutFeature />} />
           </Route>
-          <Route path="admin/*" element={<WebAdminRouter user={user} />}></Route>
-          <Route path="leader/*" element={<WebLeaderRouter user={user} />}></Route>
+          <Route path="admin/*" element={<WebAdminRouter user={spyUser ?? user} />}></Route>
+          <Route path="leader/*" element={<WebLeaderRouter user={spyUser ?? user} />}></Route>
           <Route path="/" element={<WebFeatureLogin />} />
           <Route path="about" element={<WebAboutFeature />} />
           <Route path="dashboard" element={<WebDashboardFeature />} />

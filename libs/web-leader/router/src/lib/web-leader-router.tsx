@@ -25,7 +25,7 @@ export interface WebLeaderRouterProps {
 
 export function WebLeaderRouter(props: WebLeaderRouterProps) {
   const [currentPath] = useAtom(currentPathAtom)
-  const { logout } = useContext(SharedAuthContext)
+  const { logout, spyOnUser } = useContext(SharedAuthContext)
 
   const navigation = [
     {
@@ -56,7 +56,7 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
   ]
 
   return props?.user?.isLeader || props?.user.role === 'Admin' ? (
-    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout}>
+    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout} spyOnUser={spyOnUser}>
       <Routes>
         <Route path="dashboard" element={<WebLeaderDashboard />} />
         <Route path="referrals" element={<WebLeaderReferralList />} />
