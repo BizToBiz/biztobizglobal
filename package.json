@@ -66,7 +66,7 @@
     "@apollo/client": "3.7.0",
     "@codebrew/nestjs-storage": "^0.1.6",
     "@headlessui/react": "^1.6.4",
-    "@heroicons/react": "^1.0.5",
+    "@heroicons/react": "^2.0.15",
     "@kikstart-playground/graphql-intercom": "1.4.1",
     "@nestjs/apollo": "10.0.2",
     "@nestjs/axios": "0.0.5",

@@ -52,7 +52,7 @@ export function WebShellFeature() {
 
   return (
     <ApolloProvider client={client.client}>
-      <SharedAuthProvider identityAtom={identityAtom} isRememberedAtom={isRememberedAtom}>
+      <SharedAuthProvider identityAtom={identityAtom} isRememberedAtom={isRememberedAtom} spyAtom={spyAtom}>
         <Routes>
           <Route path="members" element={<PrivateOutlet user={spyUser ?? user} />}>
             <Route path="dashboard" element={<WebDashboardFeature />} />

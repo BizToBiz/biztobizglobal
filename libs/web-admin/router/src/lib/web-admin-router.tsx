@@ -5,25 +5,26 @@ import React, { useContext } from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
 import { WebAdminDashboard } from '@biztobiz/web-admin/dashboard'
 import {
-  BadgeCheckIcon,
+  ArrowDownOnSquareIcon,
+  ArrowPathIcon,
+  BanknotesIcon,
   BellIcon,
   BriefcaseIcon,
+  BuildingOfficeIcon,
   CalendarIcon,
-  CashIcon,
-  ChatAltIcon,
+  ChatBubbleOvalLeftIcon,
+  CheckBadgeIcon,
+  CircleStackIcon,
   ClockIcon,
-  CloudUploadIcon,
-  CollectionIcon,
+  CloudArrowUpIcon,
   GlobeAltIcon,
   HomeIcon,
-  InboxInIcon,
-  OfficeBuildingIcon,
   ShieldExclamationIcon,
   UserCircleIcon,
   UserGroupIcon,
   UserIcon,
   UsersIcon,
-} from '@heroicons/react/outline'
+} from '@heroicons/react/24/outline'
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 
 import { WebAdminUserCreate, WebAdminUserList, WebAdminUserUpdate } from '@biztobiz/web-admin/user'
@@ -82,7 +83,6 @@ import {
 } from '@biztobiz/web-admin/transaction'
 import { WebAdminUploadCreate, WebAdminUploadList, WebAdminUploadUpdate } from '@biztobiz/web-admin/upload'
 import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
-import { GlobeIcon, RefreshIcon } from '@heroicons/react/solid'
 
 // Add New Imports Here
 
@@ -123,7 +123,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
     {
       name: 'Companies',
       href: '/admin/companies',
-      icon: OfficeBuildingIcon,
+      icon: BuildingOfficeIcon,
       current: currentPath.path.includes('/admin/companies'),
     },
     {
@@ -147,7 +147,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
     {
       name: 'Meeting Presences',
       href: '/admin/meeting-presences',
-      icon: BadgeCheckIcon,
+      icon: CheckBadgeIcon,
       current: currentPath.path.includes('/admin/meeting-presences'),
     },
     {
@@ -171,25 +171,25 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
     {
       name: 'Referrals',
       href: '/admin/referrals',
-      icon: InboxInIcon,
+      icon: ArrowDownOnSquareIcon,
       current: currentPath.path.includes('/admin/referrals'),
     },
     {
       name: 'Regions',
       href: '/admin/regions',
-      icon: GlobeIcon,
+      icon: GlobeAltIcon,
       current: currentPath.path.includes('/admin/regions'),
     },
     {
       name: 'Substitutes',
       href: '/admin/substitutes',
-      icon: RefreshIcon,
+      icon: ArrowPathIcon,
       current: currentPath.path.includes('/admin/substitutes'),
     },
     {
       name: 'Substitute Groups',
       href: '/admin/substitute-groups',
-      icon: CollectionIcon,
+      icon: CircleStackIcon,
       current: currentPath.path.includes('/admin/substitute-groups'),
     },
     {
@@ -201,19 +201,19 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
     {
       name: 'Testimonials',
       href: '/admin/testimonials',
-      icon: ChatAltIcon,
+      icon: ChatBubbleOvalLeftIcon,
       current: currentPath.path.includes('/admin/testimonials'),
     },
     {
       name: 'Transactions',
       href: '/admin/transactions',
-      icon: CashIcon,
+      icon: BanknotesIcon,
       current: currentPath.path.includes('/admin/transactions'),
     },
     {
       name: 'Uploads',
       href: '/admin/uploads',
-      icon: CloudUploadIcon,
+      icon: CloudArrowUpIcon,
       current: currentPath.path.includes('/admin/uploads'),
     },
     // Add New Nav Objects Here

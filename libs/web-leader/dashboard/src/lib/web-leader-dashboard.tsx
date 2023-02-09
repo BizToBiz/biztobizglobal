@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { currentPathAtom } from '@biztobiz/web/global/data-access'
+import { currentPathAtom, identityAtom } from '@biztobiz/web/global/data-access'
 import { useLayoutEffect } from 'react'
 import { RESET } from 'jotai/utils'
 import WebLeaderCommand from './web-leader-command'
@@ -9,6 +9,7 @@ export interface WebLeaderDashboardProps {}
 
 export function WebLeaderDashboard(props: WebLeaderDashboardProps) {
   const [, setCurrentPath] = useAtom(currentPathAtom)
+  const [identity] = useAtom(identityAtom)
 
   const pathData = {
     path: '/leader/dashboard',
@@ -23,6 +24,8 @@ export function WebLeaderDashboard(props: WebLeaderDashboardProps) {
       setCurrentPath(RESET)
     }
   }, [])
+
+  console.log(identity)
 
   return <WebLeaderCommand />
 }

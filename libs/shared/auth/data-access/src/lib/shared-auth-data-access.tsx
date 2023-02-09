@@ -23,6 +23,7 @@ export interface SharedAuthContextProps {
   forgotPassword: (input: ForgotPasswordInput) => Promise<{ success: boolean; error: string }>
   resetPassword: (input: ResetPasswordInput) => Promise<{ success: boolean; error: string }>
   spyOnUser: (userId: string) => void
+  restoreAdminUser: () => void
 }
 
 const SharedAuthContext = createContext<SharedAuthContextProps>({
@@ -32,6 +33,7 @@ const SharedAuthContext = createContext<SharedAuthContextProps>({
   forgotPassword: (_: ForgotPasswordInput) => Promise.resolve({ success: false, error: '' }),
   resetPassword: (_: ResetPasswordInput) => Promise.resolve({ success: false, error: '' }),
   spyOnUser: (_: string) => null,
+  restoreAdminUser: () => null,
 })
 
 const { Provider } = SharedAuthContext
@@ -40,11 +42,13 @@ interface SharedAuthProviderProps {
   children: React.ReactNode
   identityAtom: any
   isRememberedAtom: any
+  spyAtom: any
 }
 
-function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: SharedAuthProviderProps) {
-  const [, setIdentity] = useAtom(identityAtom)
+function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children }: SharedAuthProviderProps) {
+  const [identity, setIdentity] = useAtom(identityAtom)
   const [, setIsRemembered] = useAtom(isRememberedAtom)
+  const [spyUser, setSpyUser] = useAtom(spyAtom)
   const [loginMutation] = useLoginMutation()
   const [logoutMutation] = useLogoutMutation()
   const [registerMutation] = useRegisterMutation()
@@ -118,12 +122,27 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
   }
 
   async function spyOnUser(userId: string) {
+    setSpyUser(identity)
     try {
-      await spyOnUserMutation({ variables: { input: { userId: userId } } })
+      const newSpyUser = await spyOnUserMutation({ variables: { input: { userId: userId } } })
+      if (newSpyUser?.data?.spyOnUser?.user) {
+        setIdentity(newSpyUser.data.spyOnUser.user)
+      }
       return { success: true, error: null }
     } catch (e: any) {
       console.log(e.message)
       return { success: false, error: e.message }
+    }
+  }
+
+  async function restoreAdminUser() {
+    if (spyUser) {
+      const id = (spyUser as User).id
+      if (id) {
+        await spyOnUserMutation({ variables: { input: { userId: id } } })
+        setIdentity(spyUser)
+        setSpyUser(RESET)
+      }
     }
   }
 
@@ -136,6 +155,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
         forgotPassword,
         resetPassword,
         spyOnUser,
+        restoreAdminUser,
       }}
     >
       {children}

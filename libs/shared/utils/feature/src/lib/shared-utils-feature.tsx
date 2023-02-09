@@ -1,7 +1,7 @@
-import { SVGProps } from 'react'
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import { Maybe } from 'graphql/jsutils/Maybe'
 import { CorePaging } from '@biztobiz/shared/util-sdk'
+import { ForwardRefExoticComponent, SVGProps } from 'react'
 
 export function capitalizeFirstLetter(string: string | undefined) {
   return string && string[0].toUpperCase() + string.slice(1)
@@ -15,7 +15,9 @@ interface SelectReturn {
 export interface NavigationInterface {
   name: string
   href: string
-  icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
+  icon: ForwardRefExoticComponent<
+    SVGProps<SVGSVGElement> & { title?: string | undefined; titleId?: string | undefined }
+  >
   current: boolean
 }
 

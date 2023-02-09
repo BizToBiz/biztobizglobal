@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import React, { useContext } from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
 import { WebLeaderDashboard } from '@biztobiz/web-leader/dashboard'
-import { CashIcon, HomeIcon } from '@heroicons/react/outline'
+
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 
@@ -16,6 +16,7 @@ import {
   WebLeaderTransactionList,
   WebLeaderTransactionUpdate,
 } from '@biztobiz/web-leader/transaction'
+import { BanknotesIcon, HomeIcon } from '@heroicons/react/24/outline'
 
 // Add New Imports Here
 
@@ -37,7 +38,7 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
     {
       name: 'Transactions & Referrals',
       href: '/leader/transactions-and-referrals',
-      icon: CashIcon,
+      icon: BanknotesIcon,
       current: currentPath.path.includes('/leader/transactions-and-referrals'),
     },
     // {
