@@ -181,7 +181,6 @@ export class ApiAuthDataAccessService {
   }
 
   public setCookie(res: Response, token: string) {
-    console.log(res, this.core.cookie.name)
     return res?.cookie(this.core.cookie.name, token, this.core.cookie.options)
   }
 

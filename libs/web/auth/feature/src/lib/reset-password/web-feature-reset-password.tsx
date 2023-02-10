@@ -13,7 +13,7 @@ export function WebFeatureResetPassword() {
 
   const { search } = useLocation()
   const values = queryString.parse(search)
-  const [alert, setAlert] = useState<WebUiAlertProps>()
+  const [thisAlert, setAlert] = useState<WebUiAlertProps>()
 
   const resetPasswordFunction = async (input: { password: string; password2: string }) => {
     if (!values['?token']) {
@@ -62,7 +62,7 @@ export function WebFeatureResetPassword() {
         </p>
       }
       fields={fields}
-      alert={alert}
+      error={thisAlert}
       buttonText={'Reset Password'}
     />
   )

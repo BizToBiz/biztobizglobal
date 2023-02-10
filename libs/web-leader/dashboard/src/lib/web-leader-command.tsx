@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { Combobox } from '@headlessui/react'
-import { CashIcon, ChartBarIcon, InboxInIcon } from '@heroicons/react/outline'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { useNavigate } from 'react-router-dom'
+import { BanknotesIcon, ChartBarIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 
 const reports = [{ id: 1, name: 'Transaction & Referral Report', url: '/leader/transactions-and-referrals' }]
 
 const quickActions = [
-  { name: 'Add new Referral...', icon: InboxInIcon, shortcut: 'R', url: '/leader/referral/new' },
-  { name: 'Add new Transaction...', icon: CashIcon, shortcut: 'T', url: '/leader/transaction/new' },
+  { name: 'Add new Referral...', icon: PaperAirplaneIcon, shortcut: 'R', url: '/leader/referral/new' },
+  { name: 'Add new Transaction...', icon: BanknotesIcon, shortcut: 'T', url: '/leader/transaction/new' },
 ]
 
 function classNames(...classes: (string | boolean)[]) {

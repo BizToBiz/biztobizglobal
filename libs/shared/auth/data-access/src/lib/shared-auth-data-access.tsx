@@ -11,10 +11,11 @@ import {
   useResetPasswordMutation,
   useSpyOnUserMutation,
 } from '@biztobiz/shared/util-sdk'
-import React, { createContext } from 'react'
+import React, { createContext, useState } from 'react'
 
 import { useAtom } from 'jotai'
 import { RESET } from 'jotai/utils'
+import { WebUiAlertProps } from '@biztobiz/web-ui/alert'
 
 export interface SharedAuthContextProps {
   login: (input: LoginInput) => Promise<{ user: User | null; error: string | null }>
@@ -24,6 +25,8 @@ export interface SharedAuthContextProps {
   resetPassword: (input: ResetPasswordInput) => Promise<{ success: boolean; error: string }>
   spyOnUser: (userId: string) => void
   restoreAdminUser: () => void
+  formError: WebUiAlertProps | null
+  setFormError: (error: WebUiAlertProps | null) => void
 }
 
 const SharedAuthContext = createContext<SharedAuthContextProps>({
@@ -34,6 +37,8 @@ const SharedAuthContext = createContext<SharedAuthContextProps>({
   resetPassword: (_: ResetPasswordInput) => Promise.resolve({ success: false, error: '' }),
   spyOnUser: (_: string) => null,
   restoreAdminUser: () => null,
+  formError: null,
+  setFormError: () => null,
 })
 
 const { Provider } = SharedAuthContext
@@ -47,6 +52,7 @@ interface SharedAuthProviderProps {
 
 function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children }: SharedAuthProviderProps) {
   const [identity, setIdentity] = useAtom(identityAtom)
+  const [formError, setFormError] = useState<WebUiAlertProps | null>(null)
   const [, setIsRemembered] = useAtom(isRememberedAtom)
   const [spyUser, setSpyUser] = useAtom(spyAtom)
   const [loginMutation] = useLoginMutation()
@@ -122,6 +128,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children 
   }
 
   async function spyOnUser(userId: string) {
+    console.log('spy function called ')
     setSpyUser(identity)
     try {
       const newSpyUser = await spyOnUserMutation({ variables: { input: { userId: userId } } })
@@ -139,9 +146,11 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children 
     if (spyUser) {
       const id = (spyUser as User).id
       if (id) {
-        await spyOnUserMutation({ variables: { input: { userId: id } } })
-        setIdentity(spyUser)
-        setSpyUser(RESET)
+        const originalUser = await spyOnUserMutation({ variables: { input: { userId: id } } })
+        if (originalUser?.data?.spyOnUser?.user) {
+          await setIdentity(originalUser.data.spyOnUser.user)
+          await setSpyUser(RESET)
+        }
       }
     }
   }
@@ -156,6 +165,8 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children 
         resetPassword,
         spyOnUser,
         restoreAdminUser,
+        formError,
+        setFormError,
       }}
     >
       {children}

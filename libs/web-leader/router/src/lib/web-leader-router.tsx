@@ -56,7 +56,7 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
     // Add New Nav Objects Here
   ]
 
-  return props?.user?.isLeader || props?.user.role === 'Admin' ? (
+  return props?.user?.isLeader || props?.user?.role === 'Admin' ? (
     <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout} spyOnUser={spyOnUser}>
       <Routes>
         <Route path="dashboard" element={<WebLeaderDashboard />} />

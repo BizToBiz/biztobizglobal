@@ -1,32 +1,34 @@
-import { LoginInput } from '@biztobiz/shared/util-sdk'
+import { LoginInput, Role } from '@biztobiz/shared/util-sdk'
 import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
-import React, { ReactNode, useContext, useState } from 'react'
+import React, { ReactNode, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import { isRememberedAtom } from '@biztobiz/web/global/data-access'
 import { useAtom } from 'jotai'
 import { WebAuthPage } from '@biztobiz/web/auth/ui'
-import { WebUiAlertProps } from '@biztobiz/web-ui/alert'
 
 export function WebFeatureLogin() {
-  const { login } = useContext(SharedAuthContext)
+  const { login, formError, setFormError } = useContext(SharedAuthContext)
   const navigate = useNavigate()
-  const [alert, setAlert] = useState<WebUiAlertProps>()
   const [isRemembered] = useAtom(isRememberedAtom)
 
   const processLogin = async (input: LoginInput) => {
     const loginInfo = await login(input)
     navigate('/leader/dashboard')
-    // if (loginInfo?.user?.role === Role.Admin) {
-    //   navigate('/admin/dashboard')
-    // } else if (loginInfo?.user?.id) {
-    //   navigate('/members/dashboard')
-    // } else if (loginInfo?.error) {
-    //   setAlert({ alertType: 'warning', title: loginInfo?.error })
-    // } else {
-    //   setAlert({ alertType: 'warning', title: 'Something went wrong' })
-    // }
+    if (loginInfo?.user?.role === Role.Admin) {
+      navigate('/admin/dashboard')
+    } else if (loginInfo?.user?.isLeader === true) {
+      navigate('/leader/dashboard')
+    } else if (loginInfo?.user?.id) {
+      navigate('/members/dashboard')
+    } else if (loginInfo?.error) {
+      console.error('defo got error', loginInfo.error)
+      setFormError({ alertType: 'warning', title: loginInfo.error })
+    } else {
+      setFormError({ alertType: 'warning', title: 'Something went wrong' })
+    }
   }
+
   const fields: WebUiFormField[] = [
     WebUiFormField.email('email', {
       label: 'Email',
@@ -66,7 +68,7 @@ export function WebFeatureLogin() {
         </p>
       }
       fields={fields}
-      alert={alert}
+      error={formError}
       buttonText={'Sign In'}
     />
   )

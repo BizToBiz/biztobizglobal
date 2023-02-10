@@ -9,7 +9,7 @@ import { WebUiAlertProps } from '@biztobiz/web-ui/alert'
 export function WebFeatureRegister() {
   const { register } = useContext(SharedAuthContext)
   const navigate = useNavigate()
-  const [alert, setAlert] = useState<WebUiAlertProps>()
+  const [thisAlert, setAlert] = useState<WebUiAlertProps>()
 
   const registerFunction = async (input: RegisterInput) => {
     const registerInfo = await register(input)
@@ -38,7 +38,7 @@ export function WebFeatureRegister() {
       }
       submit={(input) => registerFunction(input)}
       fields={fields}
-      alert={alert}
+      error={thisAlert}
       buttonText={'Register'}
     />
   )
