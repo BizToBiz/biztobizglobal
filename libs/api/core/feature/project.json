@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/core/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/core/feature"],
       "options": {
         "jestConfig": "libs/api/core/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:feature"]
+  "tags": ["scope:api", "type:feature"],
+  "name": "api-core-feature"
 }

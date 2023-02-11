@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/router"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/router"],
       "options": {
         "jestConfig": "libs/web-admin/router/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-router"
 }

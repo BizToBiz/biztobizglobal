@@ -34,5 +34,6 @@
       }
     }
   },
-  "tags": ["scope:api", "type:feature"]
+  "tags": ["scope:api", "type:feature"],
+  "name": "previous-api-substitute-feature"
 }

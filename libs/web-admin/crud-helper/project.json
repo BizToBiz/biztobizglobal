@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/crud-helper"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/crud-helper"],
       "options": {
         "jestConfig": "libs/web-admin/crud-helper/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-crud-helper"
 }

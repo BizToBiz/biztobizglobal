@@ -25,5 +25,6 @@
     }
   },
   "tags": ["scope:web", "type:e2e"],
-  "implicitDependencies": ["web"]
+  "implicitDependencies": ["web"],
+  "name": "web-e2e"
 }

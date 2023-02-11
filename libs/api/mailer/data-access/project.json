@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/mailer/data-access"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/mailer/data-access"],
       "options": {
         "jestConfig": "libs/api/mailer/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"]
+  "tags": ["scope:api", "type:data-access"],
+  "name": "api-mailer-data-access"
 }

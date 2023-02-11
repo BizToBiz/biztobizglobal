@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/attendance-reminder"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/attendance-reminder"],
       "options": {
         "jestConfig": "libs/web-admin/attendance-reminder/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-attendance-reminder"
 }

@@ -1,5 +1,4 @@
 {
-  "root": "libs/api/industry/feature",
   "sourceRoot": "libs/api/industry/feature/src",
   "projectType": "library",
   "targets": {
@@ -12,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/industry/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/industry/feature"],
       "options": {
         "jestConfig": "libs/api/industry/feature/jest.config.js",
         "passWithNoTests": true
@@ -20,7 +19,7 @@
     },
     "e2e-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/industry/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/industry/feature"],
       "options": {
         "jestConfig": "libs/api/industry/feature/jest.e2e.config.js",
         "passWithNoTests": true
@@ -28,12 +27,13 @@
     },
     "load-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/industry/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/industry/feature"],
       "options": {
         "jestConfig": "libs/api/industry/feature/jest.load.config.js",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:feature"]
+  "tags": ["scope:api", "type:feature"],
+  "name": "api-industry-feature"
 }

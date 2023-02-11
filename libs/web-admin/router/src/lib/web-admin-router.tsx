@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { currentPathAtom, isAdminAtom } from '@biztobiz/web/global/data-access'
+import { currentPathAtom, isAdminAtom, spyTransitionAtom } from '@biztobiz/web/global/data-access'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import React, { useContext } from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
@@ -93,6 +93,7 @@ export interface WebAdminRouterProps {
 export function WebAdminRouter(props: WebAdminRouterProps) {
   const [isAdmin] = useAtom(isAdminAtom)
   const [currentPath] = useAtom(currentPathAtom)
+  const [spyTransition] = useAtom(spyTransitionAtom)
   const { logout, spyOnUser } = useContext(SharedAuthContext)
 
   const navigation = [
@@ -219,7 +220,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
     // Add New Nav Objects Here
   ]
 
-  return isAdmin ? (
+  return isAdmin || spyTransition ? (
     <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout} spyOnUser={spyOnUser}>
       <Routes>
         <Route path="dashboard" element={<WebAdminDashboard />} />

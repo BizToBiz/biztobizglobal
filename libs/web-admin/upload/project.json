@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/upload"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/upload"],
       "options": {
         "jestConfig": "libs/web-admin/upload/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-upload"
 }

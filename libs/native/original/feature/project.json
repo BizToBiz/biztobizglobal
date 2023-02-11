@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/native/original/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/native/original/feature"],
       "options": {
         "jestConfig": "libs/native/original/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "native-original-feature"
 }

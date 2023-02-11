@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-ui/data-table/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-ui/data-table/feature"],
       "options": {
         "jestConfig": "libs/web-ui/data-table/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-ui-data-table-feature"
 }

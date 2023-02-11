@@ -11,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/chapter-member/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chapter-member/feature"],
       "options": {
         "jestConfig": "libs/api/chapter-member/feature/jest.config.js",
         "passWithNoTests": true
@@ -19,7 +19,7 @@
     },
     "e2e-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/chapter-member/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chapter-member/feature"],
       "options": {
         "jestConfig": "libs/api/chapter-member/feature/jest.e2e.config.js",
         "passWithNoTests": true
@@ -27,12 +27,13 @@
     },
     "load-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/chapter-member/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chapter-member/feature"],
       "options": {
         "jestConfig": "libs/api/chapter-member/feature/jest.load.config.js",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:feature"]
+  "tags": ["scope:api", "type:feature"],
+  "name": "api-chapter-member-feature"
 }

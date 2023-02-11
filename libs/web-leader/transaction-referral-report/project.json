@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-leader/transaction-referral-report"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-leader/transaction-referral-report"],
       "options": {
         "jestConfig": "libs/web-leader/transaction-referral-report/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-leader-transaction-referral-report"
 }

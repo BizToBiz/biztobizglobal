@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/core/util"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/core/util"],
       "options": {
         "jestConfig": "libs/api/core/util/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "name": "api-core-util"
 }

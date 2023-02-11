@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/chapter/data-access"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chapter/data-access"],
       "options": {
         "jestConfig": "libs/api/chapter/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"]
+  "tags": ["scope:api", "type:data-access"],
+  "name": "api-chapter-data-access"
 }

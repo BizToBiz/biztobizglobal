@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web/auth/ui"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web/auth/ui"],
       "options": {
         "jestConfig": "libs/web/auth/ui/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:web", "type:ui"]
+  "tags": ["scope:web", "type:ui"],
+  "name": "web-auth-ui"
 }

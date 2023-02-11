@@ -16,6 +16,7 @@ import React, { createContext, useState } from 'react'
 import { useAtom } from 'jotai'
 import { RESET } from 'jotai/utils'
 import { WebUiAlertProps } from '@biztobiz/web-ui/alert'
+import { spyTransitionAtom } from '@biztobiz/web/global/data-access'
 
 export interface SharedAuthContextProps {
   login: (input: LoginInput) => Promise<{ user: User | null; error: string | null }>
@@ -55,6 +56,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children 
   const [formError, setFormError] = useState<WebUiAlertProps | null>(null)
   const [, setIsRemembered] = useAtom(isRememberedAtom)
   const [spyUser, setSpyUser] = useAtom(spyAtom)
+  const [spyTransition, setSpyTransition] = useAtom(spyTransitionAtom)
   const [loginMutation] = useLoginMutation()
   const [logoutMutation] = useLogoutMutation()
   const [registerMutation] = useRegisterMutation()
@@ -128,13 +130,15 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children 
   }
 
   async function spyOnUser(userId: string) {
-    console.log('spy function called ')
+    setSpyTransition(true)
     setSpyUser(identity)
     try {
       const newSpyUser = await spyOnUserMutation({ variables: { input: { userId: userId } } })
+      console.log('newSpyUser', newSpyUser)
       if (newSpyUser?.data?.spyOnUser?.user) {
         setIdentity(newSpyUser.data.spyOnUser.user)
       }
+      setSpyTransition(false)
       return { success: true, error: null }
     } catch (e: any) {
       console.log(e.message)

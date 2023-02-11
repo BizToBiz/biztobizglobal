@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/native/ui-button"],
+      "outputs": ["{workspaceRoot}/coverage/libs/native/ui-button"],
       "options": {
         "jestConfig": "libs/native/ui-button/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:native", "type:ui"]
+  "tags": ["scope:native", "type:ui"],
+  "name": "native-ui-button"
 }

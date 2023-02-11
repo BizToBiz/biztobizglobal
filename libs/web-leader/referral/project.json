@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-leader/referral"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-leader/referral"],
       "options": {
         "jestConfig": "libs/web-leader/referral/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-leader-referral"
 }

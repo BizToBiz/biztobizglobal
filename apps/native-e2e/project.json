@@ -60,5 +60,6 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["native"]
+  "implicitDependencies": ["native"],
+  "name": "native-e2e"
 }

@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-leader/transaction"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-leader/transaction"],
       "options": {
         "jestConfig": "libs/web-leader/transaction/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-leader-transaction"
 }

@@ -1,5 +1,4 @@
 {
-  "root": "libs/api/chapter/feature",
   "sourceRoot": "libs/api/chapter/feature/src",
   "projectType": "library",
   "targets": {
@@ -12,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/chapter/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chapter/feature"],
       "options": {
         "jestConfig": "libs/api/chapter/feature/jest.config.js",
         "passWithNoTests": true
@@ -20,7 +19,7 @@
     },
     "e2e-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/chapter/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chapter/feature"],
       "options": {
         "jestConfig": "libs/api/chapter/feature/jest.e2e.config.js",
         "passWithNoTests": true
@@ -28,12 +27,13 @@
     },
     "load-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/chapter/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chapter/feature"],
       "options": {
         "jestConfig": "libs/api/chapter/feature/jest.load.config.js",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:feature"]
+  "tags": ["scope:api", "type:feature"],
+  "name": "api-chapter-feature"
 }
