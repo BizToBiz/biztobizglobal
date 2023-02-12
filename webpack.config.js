@@ -18,5 +18,8 @@ module.exports = (config) => {
       ],
     },
     ignoreWarnings: [/Failed to parse source map/],
+    output: {
+      hashFunction: 'xxhash64',
+    },
   }
 }
