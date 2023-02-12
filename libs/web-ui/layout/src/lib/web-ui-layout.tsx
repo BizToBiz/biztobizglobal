@@ -6,8 +6,6 @@ import { isAuthenticatedAtom } from '@biztobiz/web/global/data-access'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { User } from '@biztobiz/shared/util-sdk'
-import logo from './logo.png'
-import fullLogo from './full-logo.png'
 
 interface WebUiLayoutProps {
   children: React.ReactNode
@@ -48,8 +46,20 @@ export function WebUiLayout(props: WebUiLayoutProps) {
                 <div className="flex justify-between h-16">
                   <div className="flex">
                     <div className="flex-shrink-0 flex items-center mr-6">
-                      <img className="block lg:hidden h-16 w-auto" src={logo} alt="Biz to Biz Global Network" />
-                      <img className="hidden lg:block h-16 w-auto" src={fullLogo} alt="Biz to Biz Global Network" />
+                      <img
+                        className="block lg:hidden h-16 w-auto"
+                        src={
+                          'https://res.cloudinary.com/biz-to-biz-global-networking-inc/image/upload/v1676080798/logo_nddtaj.png'
+                        }
+                        alt="Biz to Biz Global Network"
+                      />
+                      <img
+                        className="hidden lg:block h-16 w-auto"
+                        src={
+                          'https://res.cloudinary.com/biz-to-biz-global-networking-inc/image/upload/v1676080797/full-logo_kk2f7h.png'
+                        }
+                        alt="Biz to Biz Global Network"
+                      />
                     </div>
                     <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                       {navigation.map((item) => (
