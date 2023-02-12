@@ -106,6 +106,7 @@
     "graphql-subscriptions": "2.0.0",
     "graphql-tools": "8.2.0",
     "graphql-type-json": "0.3.2",
+    "jest-environment-jsdom": "^29.4.2",
     "joi": "17.4.2",
     "jotai": "1.6.0",
     "js-cookie": "^3.0.1",
