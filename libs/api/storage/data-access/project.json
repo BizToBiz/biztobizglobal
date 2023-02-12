@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/storage/data-access"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/storage/data-access"],
       "options": {
         "jestConfig": "libs/api/storage/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"]
+  "tags": ["scope:api", "type:data-access"],
+  "name": "api-storage-data-access"
 }

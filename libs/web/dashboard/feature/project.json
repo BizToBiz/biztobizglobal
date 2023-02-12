@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web/dashboard/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web/dashboard/feature"],
       "options": {
         "jestConfig": "libs/web/dashboard/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:web", "type:feature"]
+  "tags": ["scope:web", "type:feature"],
+  "name": "web-dashboard-feature"
 }

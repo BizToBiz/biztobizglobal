@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/territory/data-access"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/territory/data-access"],
       "options": {
         "jestConfig": "libs/api/territory/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"]
+  "tags": ["scope:api", "type:data-access"],
+  "name": "api-territory-data-access"
 }

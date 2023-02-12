@@ -19,6 +19,7 @@ import { ApiMailerDataAccessService } from '@biztobiz/api/mailer/data-access'
 import { passwordResetEmail } from './templates/password-reset-email.template'
 import { User } from '@biztobiz/api/user/data-access'
 import { ChapterMemberRole, Role } from '@biztobiz/api/enums/data-access'
+import { SpyOnUserInput } from './dto/spy-on-user.input'
 
 @Injectable()
 export class ApiAuthDataAccessService {
@@ -104,6 +105,11 @@ export class ApiAuthDataAccessService {
     return this.signUser(user)
   }
 
+  async spyOnUser(input: SpyOnUserInput) {
+    const user = await this.findUserById(input?.userId)
+    return this.signUser(user)
+  }
+
   async forgotPassword(email: string): Promise<boolean> {
     const user = await this.findUserByEmail(email)
 
@@ -175,7 +181,6 @@ export class ApiAuthDataAccessService {
   }
 
   public setCookie(res: Response, token: string) {
-    console.log(res, this.core.cookie.name)
     return res?.cookie(this.core.cookie.name, token, this.core.cookie.options)
   }
 

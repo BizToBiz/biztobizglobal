@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/util-sdk"],
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/util-sdk"],
       "options": {
         "jestConfig": "libs/shared/util-sdk/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:shared", "type:util"]
+  "tags": ["scope:shared", "type:util"],
+  "name": "shared-util-sdk"
 }

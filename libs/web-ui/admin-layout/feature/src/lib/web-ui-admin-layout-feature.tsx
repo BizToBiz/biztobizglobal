@@ -1,13 +1,13 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { MenuAlt2Icon, XIcon } from '@heroicons/react/outline'
-import { SearchIcon } from '@heroicons/react/solid'
+import { Bars3BottomLeftIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { User } from '@biztobiz/shared/util-sdk'
-import fullLogo from './assets/full-logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
-import { currentPathAtom, searchAtom } from '@biztobiz/web/global/data-access'
+import { currentPathAtom, identityAtom, searchAtom, spyAtom } from '@biztobiz/web/global/data-access'
 import { NavigationInterface } from '@biztobiz/shared/utils/feature'
+import WebUiUserSelect from './web-ui-user-select'
+import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 
 const userNavigation: { name: string; href: string }[] = [
   // { name: 'Your Profile', href: '#' },
@@ -24,13 +24,27 @@ export interface WebAdminDashboardFeatureProps {
   user: User
   navigation: NavigationInterface[]
   logout: () => void
+  spyOnUser: (userId: string) => void
 }
 
 export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [openSpy, setOpenSpy] = useState(false)
+  const [selectedPerson, setSelectedPerson] = useState<User | null>(null)
   const [currentPath] = useAtom(currentPathAtom)
+  const [spyUser] = useAtom(spyAtom)
   const [search, setSearch] = useAtom(searchAtom)
   const navigate = useNavigate()
+  const { spyOnUser, restoreAdminUser } = useContext(SharedAuthContext)
+  const [identity] = useAtom(identityAtom)
+  async function setUpSpy() {
+    if (selectedPerson?.id) {
+      await spyOnUser(selectedPerson.id)
+      setOpenSpy(false)
+    } else {
+      alert('Please select a person to spy on')
+    }
+  }
 
   return (
     <div>
@@ -75,12 +89,18 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
-                      <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                      <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
                     </button>
                   </div>
                 </Transition.Child>
                 <div className="flex-shrink-0 flex items-center px-4">
-                  <img className="h-12 w-auto" src={fullLogo} alt="Workflow" />
+                  <img
+                    className="h-16 w-auto"
+                    src={
+                      'https://res.cloudinary.com/biz-to-biz-global-networking-inc/image/upload/v1676080797/full-logo_kk2f7h.png'
+                    }
+                    alt="Biz to Biz Logo"
+                  />
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
@@ -121,7 +141,13 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col flex-grow border-r border-gray-200 pt-1 bg-white overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4">
-            <img className="h-16 w-auto" src={fullLogo} alt="Workflow" />
+            <img
+              className="h-16 w-auto"
+              src={
+                'https://res.cloudinary.com/biz-to-biz-global-networking-inc/image/upload/v1676080797/full-logo_kk2f7h.png'
+              }
+              alt="Biz to Biz Logo"
+            />
           </div>
           <div className="mt-3 flex-grow flex flex-col">
             <nav className="flex-1 px-2 pb-4 space-y-1">
@@ -156,7 +182,7 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
           </button>
           <div className="flex-1 px-4 flex justify-between">
             <div className="flex-1 flex">
@@ -167,7 +193,7 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                   </label>
                   <div className="relative w-full text-gray-400 focus-within:text-gray-600">
                     <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                      <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                      <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <input
                       id="search-field"
@@ -198,11 +224,7 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                 <div>
                   <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src={props.user.avatarUrl ? props.user.avatarUrl : ''}
-                      alt=""
-                    />
+                    <img className="h-8 w-8 rounded-full" src={identity?.avatarUrl ?? ''} alt="" />
                   </Menu.Button>
                 </div>
                 <Transition
@@ -227,6 +249,20 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                         )}
                       </Menu.Item>
                     ))}
+                    {spyUser?.id && (
+                      <Menu.Item key="spy">
+                        <button onClick={() => restoreAdminUser()} className="block px-4 py-2 text-sm text-gray-700">
+                          Stop Emulating {identity?.firstName}
+                        </button>
+                      </Menu.Item>
+                    )}
+                    {!spyUser?.id && identity?.role === 'Admin' && (
+                      <Menu.Item key="spy">
+                        <button onClick={() => setOpenSpy(true)} className="block px-4 py-2 text-sm text-gray-700">
+                          Spy On User
+                        </button>
+                      </Menu.Item>
+                    )}
                     <Menu.Item key="logout">
                       <button onClick={props?.logout} className="block px-4 py-2 text-sm text-gray-700">
                         Log Out
@@ -267,6 +303,59 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
           </div>
         </main>
       </div>
+
+      {/*Spy On Popup*/}
+      <Transition.Root show={openSpy} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={setOpenSpy}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                  <div>
+                    <div className="mt-3 text-center sm:mt-5">
+                      <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                        Choose a User to Emulate
+                      </Dialog.Title>
+                      <div className="mt-2">
+                        <WebUiUserSelect selectedPerson={selectedPerson} setSelectedPerson={setSelectedPerson} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-5 sm:mt-6">
+                    <button
+                      type="button"
+                      className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                      onClick={() => setUpSpy()}
+                    >
+                      Emulate User
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
     </div>
   )
 }

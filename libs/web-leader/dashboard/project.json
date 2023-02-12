@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-leader/dashboard"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-leader/dashboard"],
       "options": {
         "jestConfig": "libs/web-leader/dashboard/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-leader-dashboard"
 }

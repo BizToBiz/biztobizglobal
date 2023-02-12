@@ -25,4 +25,15 @@ export class ApiUserDataAccessPublicService {
   async isLeader(userId: string) {
     return this.data.isLeader(userId)
   }
+
+  async getUserAvatarUrl(userId: string) {
+    return this.data.user.findUnique({ where: { id: userId }, include: { avatar: true } }).then((user) => {
+      if (user?.avatar?.url) {
+        return user.avatar.url
+      }
+      return user.showGravatar
+        ? user.avatarUrl
+        : 'https://www.gravatar.com/avatar/8f7daf473423ab07526ea627686f2631?s=460&d=mp'
+    })
+  }
 }

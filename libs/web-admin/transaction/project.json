@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/transaction"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/transaction"],
       "options": {
         "jestConfig": "libs/web-admin/transaction/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-transaction"
 }

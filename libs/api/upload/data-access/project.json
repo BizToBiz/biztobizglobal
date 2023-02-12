@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/upload/data-access"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/upload/data-access"],
       "options": {
         "jestConfig": "libs/api/upload/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"]
+  "tags": ["scope:api", "type:data-access"],
+  "name": "api-upload-data-access"
 }

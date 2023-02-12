@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-ui/admin-layout/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-ui/admin-layout/feature"],
       "options": {
         "jestConfig": "libs/web-ui/admin-layout/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-ui-admin-layout-feature"
 }

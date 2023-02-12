@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-ui/alert"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-ui/alert"],
       "options": {
         "jestConfig": "libs/web-ui/alert/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-ui-alert"
 }

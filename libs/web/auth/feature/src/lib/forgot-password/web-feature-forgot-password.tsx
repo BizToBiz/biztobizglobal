@@ -8,7 +8,7 @@ import { WebUiAlertProps } from '@biztobiz/web-ui/alert'
 
 export function WebFeatureForgotPassword() {
   const { forgotPassword } = useContext(SharedAuthContext)
-  const [alert, setAlert] = useState<WebUiAlertProps>()
+  const [thisAlert, setAlert] = useState<WebUiAlertProps>()
 
   const forgotPasswordFunction = async (input: ForgotPasswordInput) => {
     const complete = await forgotPassword(input)
@@ -40,7 +40,7 @@ export function WebFeatureForgotPassword() {
         </p>
       }
       fields={fields}
-      alert={alert}
+      error={thisAlert}
       buttonText={'Request Password Reset Token'}
     />
   )

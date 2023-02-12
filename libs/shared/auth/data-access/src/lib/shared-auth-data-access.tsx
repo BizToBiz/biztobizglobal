@@ -9,11 +9,14 @@ import {
   User,
   useRegisterMutation,
   useResetPasswordMutation,
+  useSpyOnUserMutation,
 } from '@biztobiz/shared/util-sdk'
-import React, { createContext } from 'react'
+import React, { createContext, useState } from 'react'
 
 import { useAtom } from 'jotai'
 import { RESET } from 'jotai/utils'
+import { WebUiAlertProps } from '@biztobiz/web-ui/alert'
+import { spyTransitionAtom } from '@biztobiz/web/global/data-access'
 
 export interface SharedAuthContextProps {
   login: (input: LoginInput) => Promise<{ user: User | null; error: string | null }>
@@ -21,6 +24,10 @@ export interface SharedAuthContextProps {
   register: (input: RegisterInput) => Promise<{ user: User | null; error: string | null }>
   forgotPassword: (input: ForgotPasswordInput) => Promise<{ success: boolean; error: string }>
   resetPassword: (input: ResetPasswordInput) => Promise<{ success: boolean; error: string }>
+  spyOnUser: (userId: string) => void
+  restoreAdminUser: () => void
+  formError: WebUiAlertProps | null
+  setFormError: (error: WebUiAlertProps | null) => void
 }
 
 const SharedAuthContext = createContext<SharedAuthContextProps>({
@@ -29,6 +36,10 @@ const SharedAuthContext = createContext<SharedAuthContextProps>({
   register: (_: RegisterInput) => Promise.resolve({ user: null, error: '' }),
   forgotPassword: (_: ForgotPasswordInput) => Promise.resolve({ success: false, error: '' }),
   resetPassword: (_: ResetPasswordInput) => Promise.resolve({ success: false, error: '' }),
+  spyOnUser: (_: string) => null,
+  restoreAdminUser: () => null,
+  formError: null,
+  setFormError: () => null,
 })
 
 const { Provider } = SharedAuthContext
@@ -37,17 +48,21 @@ interface SharedAuthProviderProps {
   children: React.ReactNode
   identityAtom: any
   isRememberedAtom: any
+  spyAtom: any
 }
 
-function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: SharedAuthProviderProps) {
-  const [, setIdentity] = useAtom(identityAtom)
+function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children }: SharedAuthProviderProps) {
+  const [identity, setIdentity] = useAtom(identityAtom)
+  const [formError, setFormError] = useState<WebUiAlertProps | null>(null)
   const [, setIsRemembered] = useAtom(isRememberedAtom)
+  const [spyUser, setSpyUser] = useAtom(spyAtom)
+  const [spyTransition, setSpyTransition] = useAtom(spyTransitionAtom)
   const [loginMutation] = useLoginMutation()
   const [logoutMutation] = useLogoutMutation()
   const [registerMutation] = useRegisterMutation()
   const [forgotPasswordMutation] = useForgotPasswordMutation()
   const [resetPasswordMutation] = useResetPasswordMutation()
-
+  const [spyOnUserMutation] = useSpyOnUserMutation()
   async function login(input: LoginInput) {
     try {
       const res = await loginMutation({ variables: { input } })
@@ -114,6 +129,36 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
     }
   }
 
+  async function spyOnUser(userId: string) {
+    setSpyTransition(true)
+    setSpyUser(identity)
+    try {
+      const newSpyUser = await spyOnUserMutation({ variables: { input: { userId: userId } } })
+      console.log('newSpyUser', newSpyUser)
+      if (newSpyUser?.data?.spyOnUser?.user) {
+        setIdentity(newSpyUser.data.spyOnUser.user)
+      }
+      setSpyTransition(false)
+      return { success: true, error: null }
+    } catch (e: any) {
+      console.log(e.message)
+      return { success: false, error: e.message }
+    }
+  }
+
+  async function restoreAdminUser() {
+    if (spyUser) {
+      const id = (spyUser as User).id
+      if (id) {
+        const originalUser = await spyOnUserMutation({ variables: { input: { userId: id } } })
+        if (originalUser?.data?.spyOnUser?.user) {
+          await setIdentity(originalUser.data.spyOnUser.user)
+          await setSpyUser(RESET)
+        }
+      }
+    }
+  }
+
   return (
     <Provider
       value={{
@@ -122,6 +167,10 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, children }: Shared
         register,
         forgotPassword,
         resetPassword,
+        spyOnUser,
+        restoreAdminUser,
+        formError,
+        setFormError,
       }}
     >
       {children}

@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/native/shell/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/native/shell/feature"],
       "options": {
         "jestConfig": "libs/native/shell/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:native", "type:feature"]
+  "tags": ["scope:native", "type:feature"],
+  "name": "native-shell-feature"
 }

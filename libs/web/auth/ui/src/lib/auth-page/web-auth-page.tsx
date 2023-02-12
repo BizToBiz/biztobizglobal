@@ -3,7 +3,7 @@ import { WebUiForm, WebUiFormField } from '@biztobiz/web-ui/form'
 import { WebUiAlert, WebUiAlertProps } from '@biztobiz/web-ui/alert'
 
 export interface WebAuthUiProps {
-  alert?: WebUiAlertProps
+  error?: WebUiAlertProps
   title?: string
   subtitle?: string | ReactNode
   fields: WebUiFormField[]
@@ -25,7 +25,7 @@ export function WebAuthPage(props: WebAuthUiProps) {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          {props?.alert ? <WebUiAlert {...props.alert} /> : null}
+          {props?.error ? <WebUiAlert {...props.error} /> : null}
           <WebUiForm fields={props?.fields} submit={(values) => props?.submit(values)} buttonText={props?.buttonText} />
         </div>
       </div>

@@ -3,5 +3,6 @@
   "sourceRoot": "libs/web/assets/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["scope:web", "type:assets"]
+  "tags": ["scope:web", "type:assets"],
+  "name": "web-assets"
 }

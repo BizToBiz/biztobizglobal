@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/territory"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/territory"],
       "options": {
         "jestConfig": "libs/web-admin/territory/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-territory"
 }

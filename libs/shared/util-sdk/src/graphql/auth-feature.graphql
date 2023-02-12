@@ -47,3 +47,9 @@ mutation ResetPassword($input: ResetPasswordInput!) {
     email
   }
 }
+
+mutation SpyOnUser($input: SpyOnUserInput!) {
+  spyOnUser(input: $input) {
+    ...UserTokenDetails
+  }
+}

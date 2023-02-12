@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/meeting"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/meeting"],
       "options": {
         "jestConfig": "libs/web-admin/meeting/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-meeting"
 }

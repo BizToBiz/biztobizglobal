@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/substitute-group"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/substitute-group"],
       "options": {
         "jestConfig": "libs/web-admin/substitute-group/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-substitute-group"
 }

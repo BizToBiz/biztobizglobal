@@ -1,5 +1,5 @@
 import './web-ui-alert.module.css'
-import { CheckCircleIcon, ExclamationIcon, InformationCircleIcon, XCircleIcon } from '@heroicons/react/solid'
+import { CheckCircleIcon, ExclamationCircleIcon, InformationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid'
 import React, { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -35,7 +35,7 @@ export function WebUiAlert(props: WebUiAlertProps) {
       headingColor = 'text-yellow-800'
       textColor = 'text-yellow-700'
       hoverColor = 'hover:text-yellow-600'
-      icon = <ExclamationIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
+      icon = <ExclamationCircleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
       break
     case 'error':
       bgColor = 'bg-red-50'

@@ -10,7 +10,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "nx start native"
       }
@@ -21,7 +21,7 @@
     },
     "bundle-ios": {
       "executor": "@nrwl/react-native:bundle",
-      "outputs": ["apps/native/build"],
+      "outputs": ["{projectRoot}/build"],
       "options": {
         "entryFile": "src/main.tsx",
         "platform": "ios",
@@ -34,7 +34,7 @@
     },
     "build-android": {
       "executor": "@nrwl/react-native:build-android",
-      "outputs": ["apps/native/android/app/build/outputs/bundle", "apps/native/android/app/build/outputs/apk"],
+      "outputs": ["{projectRoot}/android/app/build/outputs/bundle", "{projectRoot}/android/app/build/outputs/apk"],
       "options": {}
     },
     "bundle-android": {
@@ -62,12 +62,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/native"],
+      "outputs": ["{workspaceRoot}/coverage/apps/native"],
       "options": {
         "jestConfig": "apps/native/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "name": "native"
 }

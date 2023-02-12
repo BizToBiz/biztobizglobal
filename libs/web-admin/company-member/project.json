@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/company-member"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/company-member"],
       "options": {
         "jestConfig": "libs/web-admin/company-member/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-company-member"
 }

@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-admin/power-hour"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-admin/power-hour"],
       "options": {
         "jestConfig": "libs/web-admin/power-hour/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-admin-power-hour"
 }

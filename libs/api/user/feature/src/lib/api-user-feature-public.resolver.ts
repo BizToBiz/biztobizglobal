@@ -14,4 +14,9 @@ export class ApiUserFeaturePublicResolver {
   isLeader(@Parent() user: User): Promise<boolean> {
     return this.service.isLeader(user.id)
   }
+
+  @ResolveField('avatarUrl', () => String, { nullable: true })
+  avatarUrl(@Parent() user: User) {
+    return this.service.getUserAvatarUrl(user.id)
+  }
 }

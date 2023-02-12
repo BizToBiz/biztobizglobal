@@ -13,11 +13,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web-ui/dev-data/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web-ui/dev-data/feature"],
       "options": {
         "jestConfig": "libs/web-ui/dev-data/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "name": "web-ui-dev-data-feature"
 }

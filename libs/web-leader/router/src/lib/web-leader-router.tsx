@@ -1,10 +1,10 @@
 import { useAtom } from 'jotai'
-import { currentPathAtom } from '@biztobiz/web/global/data-access'
+import { currentPathAtom, identityAtom, spyTransitionAtom } from '@biztobiz/web/global/data-access'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import React, { useContext } from 'react'
 import { User } from '@biztobiz/shared/util-sdk'
 import { WebLeaderDashboard } from '@biztobiz/web-leader/dashboard'
-import { CashIcon, HomeIcon } from '@heroicons/react/outline'
+
 import { WebUiAdminLayoutFeature } from '@biztobiz/web-ui/admin-layout/feature'
 import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 
@@ -16,6 +16,7 @@ import {
   WebLeaderTransactionList,
   WebLeaderTransactionUpdate,
 } from '@biztobiz/web-leader/transaction'
+import { BanknotesIcon, HomeIcon } from '@heroicons/react/24/outline'
 
 // Add New Imports Here
 
@@ -26,7 +27,9 @@ export interface WebLeaderRouterProps {
 export function WebLeaderRouter(props: WebLeaderRouterProps) {
   console.log(props.user)
   const [currentPath] = useAtom(currentPathAtom)
-  const { logout } = useContext(SharedAuthContext)
+  const [identity] = useAtom(identityAtom)
+  const [spyTransition] = useAtom(spyTransitionAtom)
+  const { logout, spyOnUser } = useContext(SharedAuthContext)
 
   const navigation = [
     {
@@ -38,7 +41,7 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
     {
       name: 'Transactions & Referrals',
       href: '/leader/transactions-and-referrals',
-      icon: CashIcon,
+      icon: BanknotesIcon,
       current: currentPath.path.includes('/leader/transactions-and-referrals'),
     },
     // {
@@ -56,8 +59,8 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
     // Add New Nav Objects Here
   ]
 
-  return props?.user?.isLeader || props?.user.role === 'Admin' ? (
-    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout}>
+  return identity?.isLeader || identity?.role === 'Admin' || spyTransition ? (
+    <WebUiAdminLayoutFeature user={props.user} navigation={navigation} logout={logout} spyOnUser={spyOnUser}>
       <Routes>
         <Route path="dashboard" element={<WebLeaderDashboard />} />
         <Route path="referrals" element={<WebLeaderReferralList />} />

@@ -1,5 +1,4 @@
 {
-  "root": "libs/api/company-member/feature",
   "sourceRoot": "libs/api/company-member/feature/src",
   "projectType": "library",
   "targets": {
@@ -12,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/company-member/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/company-member/feature"],
       "options": {
         "jestConfig": "libs/api/company-member/feature/jest.config.js",
         "passWithNoTests": true
@@ -20,7 +19,7 @@
     },
     "e2e-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/company-member/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/company-member/feature"],
       "options": {
         "jestConfig": "libs/api/company-member/feature/jest.e2e.config.js",
         "passWithNoTests": true
@@ -28,12 +27,13 @@
     },
     "load-api": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/company-member/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/company-member/feature"],
       "options": {
         "jestConfig": "libs/api/company-member/feature/jest.load.config.js",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:feature"]
+  "tags": ["scope:api", "type:feature"],
+  "name": "api-company-member-feature"
 }

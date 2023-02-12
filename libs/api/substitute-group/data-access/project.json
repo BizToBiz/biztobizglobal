@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/substitute-group/data-access"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/substitute-group/data-access"],
       "options": {
         "jestConfig": "libs/api/substitute-group/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"]
+  "tags": ["scope:api", "type:data-access"],
+  "name": "api-substitute-group-data-access"
 }

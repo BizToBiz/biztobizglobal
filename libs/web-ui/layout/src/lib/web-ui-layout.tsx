@@ -4,7 +4,7 @@ import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
 import { useAtom } from 'jotai'
 import { isAuthenticatedAtom } from '@biztobiz/web/global/data-access'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { User } from '@biztobiz/shared/util-sdk'
 import logo from './logo.png'
 import fullLogo from './full-logo.png'
@@ -122,9 +122,9 @@ export function WebUiLayout(props: WebUiLayoutProps) {
                     <Disclosure.Button className="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                       )}
                     </Disclosure.Button>
                   </div>

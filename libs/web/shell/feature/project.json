@@ -12,12 +12,13 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/web/shell/feature"],
+      "outputs": ["{workspaceRoot}/coverage/libs/web/shell/feature"],
       "options": {
         "jestConfig": "libs/web/shell/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:web", "type:shell-feature"]
+  "tags": ["scope:web", "type:shell-feature"],
+  "name": "web-shell-feature"
 }

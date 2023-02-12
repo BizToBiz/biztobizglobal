@@ -6,10 +6,10 @@ import { WebUiForm } from '@biztobiz/web-ui/form'
 import { DocumentNode } from 'graphql'
 import { useMutation } from '@apollo/client'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { TrashIcon } from '@heroicons/react/solid'
 import { WebUiConfirmationModalFeature } from '@biztobiz/web-ui/confirmation-modal/feature'
 import { useNavigate } from 'react-router-dom'
 import { cleanFormInput } from '@biztobiz/shared/utils/feature'
+import { TrashIcon } from '@heroicons/react/24/outline'
 
 interface PathData {
   path: string
