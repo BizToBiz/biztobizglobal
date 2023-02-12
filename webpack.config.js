@@ -2,6 +2,7 @@ const nrwlConfig = require('@nrwl/react/plugins/webpack.js')
 
 module.exports = (config) => {
   nrwlConfig(config)
+  config.module.hashFunction = 'xxhash64'
   return {
     ...config,
     module: {
@@ -18,8 +19,5 @@ module.exports = (config) => {
       ],
     },
     ignoreWarnings: [/Failed to parse source map/],
-    output: {
-      hashFunction: 'xxhash64',
-    },
   }
 }
