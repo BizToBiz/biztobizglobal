@@ -1,12 +1,14 @@
 import { ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common'
 import { GqlExecutionContext } from '@nestjs/graphql'
 import { AuthGuard } from '@nestjs/passport'
+import { logger } from 'nx/src/utils/logger'
 
 @Injectable()
 export class GqlAuthAdminGuard extends AuthGuard('jwt') {
   private readonly _roles: string[] = ['Admin']
 
   getRequest(context: ExecutionContext) {
+    logger.log(context)
     const ctx = GqlExecutionContext.create(context)
 
     return ctx.getContext().req

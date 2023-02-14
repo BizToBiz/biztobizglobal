@@ -1,0 +1,20 @@
+query LeaderUser($userId: String!) {
+  user: leaderUser(userId: $userId) {
+    ...LeaderUserDetails
+  }
+}
+
+query LeaderUsers($input: ListUserInput) {
+  users: leaderUsers(input: $input) {
+    ...LeaderUserDetails
+  }
+  counters: leaderCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query LeaderUserPagination($input: ListUserInput) {
+  counters: leaderCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}

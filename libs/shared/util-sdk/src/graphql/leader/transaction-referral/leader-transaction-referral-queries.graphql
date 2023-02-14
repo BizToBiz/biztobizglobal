@@ -1,4 +1,4 @@
-query LeaderTransactionReferrals($input: AdminListTransactionInput) {
+query LeaderTransactionReferrals($input: ListTransactionInput) {
   transactions: leaderTransactions(input: $input) {
     ...LeaderTransactionReferralDetails
   }
