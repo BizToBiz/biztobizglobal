@@ -1,9 +1,9 @@
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { GraphQLResolveInfo } from 'graphql'
 import {
-  AdminListReferralInput,
   ApiReferralDataAccessLeaderService,
   LeaderReferralInput,
+  ListReferralInput,
   Referral,
 } from '@biztobiz/api/referral/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
@@ -20,7 +20,7 @@ export class ApiReferralFeatureLeaderResolver {
   leaderReferrals(
     @CtxUser() leader: User,
     @Info() info: GraphQLResolveInfo,
-    @Args({ name: 'input', type: () => AdminListReferralInput, nullable: true }) input?: AdminListReferralInput,
+    @Args({ name: 'input', type: () => ListReferralInput, nullable: true }) input?: LeaderReferralInput,
   ) {
     return this.service.leaderReferrals(info, leader.id, input)
   }
@@ -28,7 +28,7 @@ export class ApiReferralFeatureLeaderResolver {
   @Query(() => CorePaging, { nullable: true })
   leaderCountReferrals(
     @CtxUser() leader: User,
-    @Args({ name: 'input', type: () => AdminListReferralInput, nullable: true }) input?: AdminListReferralInput,
+    @Args({ name: 'input', type: () => ListReferralInput, nullable: true }) input?: LeaderReferralInput,
   ) {
     return this.service.leaderCountReferrals(leader.id, input)
   }

@@ -2,9 +2,9 @@ import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { GraphQLResolveInfo } from 'graphql'
 import {
   AdminCreateUserInput,
-  AdminListUserInput,
   AdminUpdateUserInput,
   ApiUserDataAccessLeaderService,
+  ListUserInput,
   User,
 } from '@biztobiz/api/user/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
@@ -20,7 +20,7 @@ export class ApiUserFeatureLeaderResolver {
   leaderUsers(
     @CtxUser() leader: User,
     @Info() info: GraphQLResolveInfo,
-    @Args({ name: 'input', type: () => AdminListUserInput, nullable: true }) input?: AdminListUserInput,
+    @Args({ name: 'input', type: () => ListUserInput, nullable: true }) input?: ListUserInput,
   ) {
     return this.service.leaderUsers(info, leader.id, input)
   }
@@ -28,7 +28,7 @@ export class ApiUserFeatureLeaderResolver {
   @Query(() => CorePaging, { nullable: true })
   leaderCountUsers(
     @CtxUser() leader: User,
-    @Args({ name: 'input', type: () => AdminListUserInput, nullable: true }) input?: AdminListUserInput,
+    @Args({ name: 'input', type: () => ListUserInput, nullable: true }) input?: ListUserInput,
   ) {
     return this.service.leaderCountUsers(leader.id, input)
   }

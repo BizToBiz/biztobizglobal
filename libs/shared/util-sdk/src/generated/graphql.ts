@@ -892,6 +892,15 @@ export type LeaderReferralInput = {
   transactions?: InputMaybe<Array<MultiSelectInput>>
 }
 
+export type ListUserInput = {
+  firstName?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
 export type LoginInput = {
   email: Scalars['String']
   password: Scalars['String']
@@ -2477,7 +2486,7 @@ export type QueryLeaderCountUploadsArgs = {
 }
 
 export type QueryLeaderCountUsersArgs = {
-  input?: InputMaybe<AdminListUserInput>
+  input?: InputMaybe<ListUserInput>
 }
 
 export type QueryLeaderIndustriesArgs = {
@@ -2589,7 +2598,7 @@ export type QueryLeaderUserArgs = {
 }
 
 export type QueryLeaderUsersArgs = {
-  input?: InputMaybe<AdminListUserInput>
+  input?: InputMaybe<ListUserInput>
 }
 
 export type QueryUserAttendanceReminderArgs = {
@@ -7093,6 +7102,355 @@ export type LeaderTransactionPaginationQuery = {
   } | null
 }
 
+export type LeaderUserDetailsFragment = {
+  __typename?: 'User'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  lastSeen?: any | null
+  onlineStatus?: UserOnlineStatus | null
+  status?: UserStatus | null
+  developer?: boolean | null
+  role?: Role | null
+  email?: string | null
+  emailConfirmed?: boolean | null
+  username?: string | null
+  infusionsoftId?: number | null
+  firstName?: string | null
+  lastName?: string | null
+  name?: string | null
+  password?: string | null
+  passwordResetToken?: string | null
+  passwordResetExpires?: any | null
+  confirmEmailToken?: string | null
+  confirmEmailExpires?: any | null
+  showGravatar?: boolean | null
+  avatarUrl?: string | null
+  applicationDate?: any | null
+  inactiveDate?: any | null
+  inquiryDate?: any | null
+  membershipDate?: any | null
+  renewalDate?: any | null
+  terminationDate?: any | null
+  transferDate?: any | null
+  location?: string | null
+  phone?: string | null
+  bio?: string | null
+  facebook?: string | null
+  twitter?: string | null
+  youtube?: string | null
+  linkedin?: string | null
+  instagram?: string | null
+  website?: string | null
+  industry?: string | null
+  timeInIndustry?: string | null
+  address?: string | null
+  address2?: string | null
+  cell?: string | null
+  chapterTitle?: string | null
+  city?: string | null
+  comments?: string | null
+  company?: string | null
+  fax?: string | null
+  hear?: string | null
+  hearOther?: string | null
+  internalComments?: string | null
+  launchComplete?: boolean | null
+  mentorName?: string | null
+  merchantCircle?: string | null
+  multipleBusinesses?: boolean | null
+  multipleLocations?: boolean | null
+  numberOfEmployees?: number | null
+  organizer?: number | null
+  otherBusinesses?: string | null
+  otherLocations?: string | null
+  postcode?: string | null
+  promoter?: number | null
+  recognized?: number | null
+  salesAgentName?: string | null
+  state?: string | null
+  strategizer?: number | null
+  substitute?: boolean | null
+  tagline?: string | null
+  terminatedByName?: string | null
+  terminationComments?: string | null
+  terminationReason?: string | null
+  thinker?: number | null
+  title?: string | null
+  type?: string | null
+  vet?: boolean | null
+  notifyByEmail?: boolean | null
+  notifyBySMS?: boolean | null
+  notifyByWeb?: boolean | null
+  notifyByMobile?: boolean | null
+  chapter?: { __typename?: 'ChapterMember'; id?: string | null } | null
+  companies?: Array<{ __typename?: 'Company'; id?: string | null; name?: string | null } | null> | null
+  notificationsReceived?: Array<{ __typename?: 'Notification'; id?: string | null } | null> | null
+  powerHoursFrom?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+  powerHoursTo?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+  referralsSent?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+  referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+  referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+  reminderSentBy?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+  reminderSentTo?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+  substituteAccepted?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+  substituteInvited?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+  substitutesSentBy?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+  testimonialsFrom?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+  testimonialsto?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+  transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  regionManaged?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
+  territoryManaged?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+  avatar?: { __typename?: 'Upload'; id?: string | null } | null
+  presence?: { __typename?: 'MeetingPresence'; id?: string | null } | null
+}
+
+export type LeaderUserQueryVariables = Exact<{
+  userId: Scalars['String']
+}>
+
+export type LeaderUserQuery = {
+  __typename?: 'Query'
+  user?: {
+    __typename?: 'User'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    lastSeen?: any | null
+    onlineStatus?: UserOnlineStatus | null
+    status?: UserStatus | null
+    developer?: boolean | null
+    role?: Role | null
+    email?: string | null
+    emailConfirmed?: boolean | null
+    username?: string | null
+    infusionsoftId?: number | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+    password?: string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: any | null
+    confirmEmailToken?: string | null
+    confirmEmailExpires?: any | null
+    showGravatar?: boolean | null
+    avatarUrl?: string | null
+    applicationDate?: any | null
+    inactiveDate?: any | null
+    inquiryDate?: any | null
+    membershipDate?: any | null
+    renewalDate?: any | null
+    terminationDate?: any | null
+    transferDate?: any | null
+    location?: string | null
+    phone?: string | null
+    bio?: string | null
+    facebook?: string | null
+    twitter?: string | null
+    youtube?: string | null
+    linkedin?: string | null
+    instagram?: string | null
+    website?: string | null
+    industry?: string | null
+    timeInIndustry?: string | null
+    address?: string | null
+    address2?: string | null
+    cell?: string | null
+    chapterTitle?: string | null
+    city?: string | null
+    comments?: string | null
+    company?: string | null
+    fax?: string | null
+    hear?: string | null
+    hearOther?: string | null
+    internalComments?: string | null
+    launchComplete?: boolean | null
+    mentorName?: string | null
+    merchantCircle?: string | null
+    multipleBusinesses?: boolean | null
+    multipleLocations?: boolean | null
+    numberOfEmployees?: number | null
+    organizer?: number | null
+    otherBusinesses?: string | null
+    otherLocations?: string | null
+    postcode?: string | null
+    promoter?: number | null
+    recognized?: number | null
+    salesAgentName?: string | null
+    state?: string | null
+    strategizer?: number | null
+    substitute?: boolean | null
+    tagline?: string | null
+    terminatedByName?: string | null
+    terminationComments?: string | null
+    terminationReason?: string | null
+    thinker?: number | null
+    title?: string | null
+    type?: string | null
+    vet?: boolean | null
+    notifyByEmail?: boolean | null
+    notifyBySMS?: boolean | null
+    notifyByWeb?: boolean | null
+    notifyByMobile?: boolean | null
+    chapter?: { __typename?: 'ChapterMember'; id?: string | null } | null
+    companies?: Array<{ __typename?: 'Company'; id?: string | null; name?: string | null } | null> | null
+    notificationsReceived?: Array<{ __typename?: 'Notification'; id?: string | null } | null> | null
+    powerHoursFrom?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+    powerHoursTo?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+    referralsSent?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    reminderSentBy?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+    reminderSentTo?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+    substituteAccepted?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    substituteInvited?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    substitutesSentBy?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    testimonialsFrom?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+    testimonialsto?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    regionManaged?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
+    territoryManaged?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+    avatar?: { __typename?: 'Upload'; id?: string | null } | null
+    presence?: { __typename?: 'MeetingPresence'; id?: string | null } | null
+  } | null
+}
+
+export type LeaderUsersQueryVariables = Exact<{
+  input?: InputMaybe<ListUserInput>
+}>
+
+export type LeaderUsersQuery = {
+  __typename?: 'Query'
+  users?: Array<{
+    __typename?: 'User'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    lastSeen?: any | null
+    onlineStatus?: UserOnlineStatus | null
+    status?: UserStatus | null
+    developer?: boolean | null
+    role?: Role | null
+    email?: string | null
+    emailConfirmed?: boolean | null
+    username?: string | null
+    infusionsoftId?: number | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+    password?: string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: any | null
+    confirmEmailToken?: string | null
+    confirmEmailExpires?: any | null
+    showGravatar?: boolean | null
+    avatarUrl?: string | null
+    applicationDate?: any | null
+    inactiveDate?: any | null
+    inquiryDate?: any | null
+    membershipDate?: any | null
+    renewalDate?: any | null
+    terminationDate?: any | null
+    transferDate?: any | null
+    location?: string | null
+    phone?: string | null
+    bio?: string | null
+    facebook?: string | null
+    twitter?: string | null
+    youtube?: string | null
+    linkedin?: string | null
+    instagram?: string | null
+    website?: string | null
+    industry?: string | null
+    timeInIndustry?: string | null
+    address?: string | null
+    address2?: string | null
+    cell?: string | null
+    chapterTitle?: string | null
+    city?: string | null
+    comments?: string | null
+    company?: string | null
+    fax?: string | null
+    hear?: string | null
+    hearOther?: string | null
+    internalComments?: string | null
+    launchComplete?: boolean | null
+    mentorName?: string | null
+    merchantCircle?: string | null
+    multipleBusinesses?: boolean | null
+    multipleLocations?: boolean | null
+    numberOfEmployees?: number | null
+    organizer?: number | null
+    otherBusinesses?: string | null
+    otherLocations?: string | null
+    postcode?: string | null
+    promoter?: number | null
+    recognized?: number | null
+    salesAgentName?: string | null
+    state?: string | null
+    strategizer?: number | null
+    substitute?: boolean | null
+    tagline?: string | null
+    terminatedByName?: string | null
+    terminationComments?: string | null
+    terminationReason?: string | null
+    thinker?: number | null
+    title?: string | null
+    type?: string | null
+    vet?: boolean | null
+    notifyByEmail?: boolean | null
+    notifyBySMS?: boolean | null
+    notifyByWeb?: boolean | null
+    notifyByMobile?: boolean | null
+    chapter?: { __typename?: 'ChapterMember'; id?: string | null } | null
+    companies?: Array<{ __typename?: 'Company'; id?: string | null; name?: string | null } | null> | null
+    notificationsReceived?: Array<{ __typename?: 'Notification'; id?: string | null } | null> | null
+    powerHoursFrom?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+    powerHoursTo?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+    referralsSent?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    reminderSentBy?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+    reminderSentTo?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+    substituteAccepted?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    substituteInvited?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    substitutesSentBy?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    testimonialsFrom?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+    testimonialsto?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    regionManaged?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
+    territoryManaged?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+    avatar?: { __typename?: 'Upload'; id?: string | null } | null
+    presence?: { __typename?: 'MeetingPresence'; id?: string | null } | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+    sum?: number | null
+  } | null
+}
+
+export type LeaderUserPaginationQueryVariables = Exact<{
+  input?: InputMaybe<ListUserInput>
+}>
+
+export type LeaderUserPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+    sum?: number | null
+  } | null
+}
+
 export const AdminAttendanceReminderDetailsFragmentDoc = gql`
   fragment AdminAttendanceReminderDetails on AttendanceReminder {
     id
@@ -7758,6 +8116,155 @@ export const LeaderTransactionDetailsFragmentDoc = gql`
     referral {
       id
       name
+    }
+  }
+`
+export const LeaderUserDetailsFragmentDoc = gql`
+  fragment LeaderUserDetails on User {
+    id
+    createdAt
+    updatedAt
+    lastSeen
+    onlineStatus
+    status
+    developer
+    role
+    email
+    emailConfirmed
+    username
+    infusionsoftId
+    firstName
+    lastName
+    name
+    password
+    passwordResetToken
+    passwordResetExpires
+    confirmEmailToken
+    confirmEmailExpires
+    showGravatar
+    avatarUrl
+    applicationDate
+    inactiveDate
+    inquiryDate
+    membershipDate
+    renewalDate
+    terminationDate
+    transferDate
+    location
+    phone
+    bio
+    facebook
+    twitter
+    youtube
+    linkedin
+    instagram
+    website
+    industry
+    timeInIndustry
+    address
+    address2
+    cell
+    chapterTitle
+    city
+    comments
+    company
+    fax
+    hear
+    hearOther
+    internalComments
+    launchComplete
+    mentorName
+    merchantCircle
+    multipleBusinesses
+    multipleLocations
+    numberOfEmployees
+    organizer
+    otherBusinesses
+    otherLocations
+    postcode
+    promoter
+    recognized
+    salesAgentName
+    state
+    strategizer
+    substitute
+    tagline
+    terminatedByName
+    terminationComments
+    terminationReason
+    thinker
+    title
+    type
+    vet
+    notifyByEmail
+    notifyBySMS
+    notifyByWeb
+    notifyByMobile
+    chapter {
+      id
+    }
+    companies {
+      id
+      name
+    }
+    notificationsReceived {
+      id
+    }
+    notificationsReceived {
+      id
+    }
+    powerHoursFrom {
+      id
+    }
+    powerHoursTo {
+      id
+    }
+    referralsSent {
+      id
+    }
+    referralsFrom {
+      id
+    }
+    referralsTo {
+      id
+    }
+    reminderSentBy {
+      id
+    }
+    reminderSentTo {
+      id
+    }
+    substituteAccepted {
+      id
+    }
+    substituteInvited {
+      id
+    }
+    substitutesSentBy {
+      id
+    }
+    testimonialsFrom {
+      id
+    }
+    testimonialsto {
+      id
+    }
+    transactions {
+      id
+    }
+    regionManaged {
+      id
+      name
+    }
+    territoryManaged {
+      id
+      name
+    }
+    avatar {
+      id
+    }
+    presence {
+      id
     }
   }
 `
@@ -14016,4 +14523,135 @@ export type LeaderTransactionPaginationLazyQueryHookResult = ReturnType<typeof u
 export type LeaderTransactionPaginationQueryResult = Apollo.QueryResult<
   LeaderTransactionPaginationQuery,
   LeaderTransactionPaginationQueryVariables
+>
+export const LeaderUserDocument = gql`
+  query LeaderUser($userId: String!) {
+    user: leaderUser(userId: $userId) {
+      ...LeaderUserDetails
+    }
+  }
+  ${LeaderUserDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderUserQuery__
+ *
+ * To run a query within a React component, call `useLeaderUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderUserQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useLeaderUserQuery(baseOptions: Apollo.QueryHookOptions<LeaderUserQuery, LeaderUserQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderUserQuery, LeaderUserQueryVariables>(LeaderUserDocument, options)
+}
+export function useLeaderUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderUserQuery, LeaderUserQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderUserQuery, LeaderUserQueryVariables>(LeaderUserDocument, options)
+}
+export type LeaderUserQueryHookResult = ReturnType<typeof useLeaderUserQuery>
+export type LeaderUserLazyQueryHookResult = ReturnType<typeof useLeaderUserLazyQuery>
+export type LeaderUserQueryResult = Apollo.QueryResult<LeaderUserQuery, LeaderUserQueryVariables>
+export const LeaderUsersDocument = gql`
+  query LeaderUsers($input: ListUserInput) {
+    users: leaderUsers(input: $input) {
+      ...LeaderUserDetails
+    }
+    counters: leaderCountUsers(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${LeaderUserDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderUsersQuery__
+ *
+ * To run a query within a React component, call `useLeaderUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderUsersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderUsersQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderUsersQuery, LeaderUsersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderUsersQuery, LeaderUsersQueryVariables>(LeaderUsersDocument, options)
+}
+export function useLeaderUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderUsersQuery, LeaderUsersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderUsersQuery, LeaderUsersQueryVariables>(LeaderUsersDocument, options)
+}
+export type LeaderUsersQueryHookResult = ReturnType<typeof useLeaderUsersQuery>
+export type LeaderUsersLazyQueryHookResult = ReturnType<typeof useLeaderUsersLazyQuery>
+export type LeaderUsersQueryResult = Apollo.QueryResult<LeaderUsersQuery, LeaderUsersQueryVariables>
+export const LeaderUserPaginationDocument = gql`
+  query LeaderUserPagination($input: ListUserInput) {
+    counters: leaderCountUsers(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderUserPaginationQuery__
+ *
+ * To run a query within a React component, call `useLeaderUserPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderUserPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderUserPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderUserPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderUserPaginationQuery, LeaderUserPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderUserPaginationQuery, LeaderUserPaginationQueryVariables>(
+    LeaderUserPaginationDocument,
+    options,
+  )
+}
+export function useLeaderUserPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderUserPaginationQuery, LeaderUserPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderUserPaginationQuery, LeaderUserPaginationQueryVariables>(
+    LeaderUserPaginationDocument,
+    options,
+  )
+}
+export type LeaderUserPaginationQueryHookResult = ReturnType<typeof useLeaderUserPaginationQuery>
+export type LeaderUserPaginationLazyQueryHookResult = ReturnType<typeof useLeaderUserPaginationLazyQuery>
+export type LeaderUserPaginationQueryResult = Apollo.QueryResult<
+  LeaderUserPaginationQuery,
+  LeaderUserPaginationQueryVariables
 >

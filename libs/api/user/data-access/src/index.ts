@@ -1,5 +1,6 @@
 export * from './lib/dto/admin-create-user.input'
 export * from './lib/dto/admin-list-user.input'
+export * from './lib/dto/list-user.input'
 export * from './lib/dto/admin-update-user.input'
 export * from './lib/dto/user-create-user.input'
 export * from './lib/dto/user-list-user.input'

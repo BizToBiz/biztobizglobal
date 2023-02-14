@@ -3,7 +3,7 @@ import { PrismaSelect } from '@paljs/plugins'
 import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
-import { AdminListReferralInput } from './dto/admin-list-referral.input'
+import { ListReferralInput } from './dto/list-referral.input'
 import { LeaderReferralInput } from './dto/leader-referral.input'
 
 @Injectable()
@@ -11,7 +11,7 @@ export class ApiReferralDataAccessLeaderService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
   private readonly searchFields = ['firstName', 'lastName', 'email']
-  private where(input: AdminListReferralInput): Prisma.ReferralWhereInput {
+  private where(input: ListReferralInput): Prisma.ReferralWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
 
@@ -38,7 +38,7 @@ export class ApiReferralDataAccessLeaderService {
     }
   }
 
-  leaderReferrals(info: GraphQLResolveInfo, leaderId: string, input?: AdminListReferralInput) {
+  leaderReferrals(info: GraphQLResolveInfo, leaderId: string, input?: ListReferralInput) {
     const select = new PrismaSelect(info).value
     return this.data.referral.findMany({
       take: input?.take,
@@ -47,7 +47,7 @@ export class ApiReferralDataAccessLeaderService {
     })
   }
 
-  async leaderCountReferrals(leaderId: string, input?: AdminListReferralInput): Promise<CorePaging> {
+  async leaderCountReferrals(leaderId: string, input?: ListReferralInput): Promise<CorePaging> {
     const total = await this.data.referral.count()
     const count = await this.data.referral.count({ where: this.where(input) })
     const take = input?.take || 10

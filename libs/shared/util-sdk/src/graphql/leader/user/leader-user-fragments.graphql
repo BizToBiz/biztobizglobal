@@ -1,0 +1,147 @@
+fragment LeaderUserDetails on User {
+  id
+  createdAt
+  updatedAt
+  lastSeen
+  onlineStatus
+  status
+  developer
+  role
+  email
+  emailConfirmed
+  username
+  infusionsoftId
+  firstName
+  lastName
+  name
+  password
+  passwordResetToken
+  passwordResetExpires
+  confirmEmailToken
+  confirmEmailExpires
+  showGravatar
+  avatarUrl
+  applicationDate
+  inactiveDate
+  inquiryDate
+  membershipDate
+  renewalDate
+  terminationDate
+  transferDate
+  location
+  phone
+  bio
+  facebook
+  twitter
+  youtube
+  linkedin
+  instagram
+  website
+  industry
+  timeInIndustry
+  address
+  address2
+  cell
+  chapterTitle
+  city
+  comments
+  company
+  fax
+  hear
+  hearOther
+  internalComments
+  launchComplete
+  mentorName
+  merchantCircle
+  multipleBusinesses
+  multipleLocations
+  numberOfEmployees
+  organizer
+  otherBusinesses
+  otherLocations
+  postcode
+  promoter
+  recognized
+  salesAgentName
+  state
+  strategizer
+  substitute
+  tagline
+  terminatedByName
+  terminationComments
+  terminationReason
+  thinker
+  title
+  type
+  vet
+  notifyByEmail
+  notifyBySMS
+  notifyByWeb
+  notifyByMobile
+  chapter {
+    id
+  }
+  companies {
+    id
+    name
+  }
+  notificationsReceived {
+    id
+  }
+  notificationsReceived {
+    id
+  }
+  powerHoursFrom {
+    id
+  }
+  powerHoursTo {
+    id
+  }
+  referralsSent {
+    id
+  }
+  referralsFrom {
+    id
+  }
+  referralsTo {
+    id
+  }
+  reminderSentBy {
+    id
+  }
+  reminderSentTo {
+    id
+  }
+  substituteAccepted {
+    id
+  }
+  substituteInvited {
+    id
+  }
+  substitutesSentBy {
+    id
+  }
+  testimonialsFrom {
+    id
+  }
+  testimonialsto {
+    id
+  }
+  transactions {
+    id
+  }
+  regionManaged {
+    id
+    name
+  }
+  territoryManaged {
+    id
+    name
+  }
+  avatar {
+    id
+  }
+  presence {
+    id
+  }
+}

@@ -48,18 +48,17 @@ export function WebShellFeature() {
     }),
   )
   const [user] = useAtom(identityAtom)
-  const [spyUser] = useAtom(spyAtom)
 
   return (
     <ApolloProvider client={client.client}>
       <SharedAuthProvider identityAtom={identityAtom} isRememberedAtom={isRememberedAtom} spyAtom={spyAtom}>
         <Routes>
-          <Route path="members" element={<PrivateOutlet user={spyUser ?? user} />}>
+          <Route path="members" element={<PrivateOutlet user={user} />}>
             <Route path="dashboard" element={<WebDashboardFeature />} />
             <Route path="about" element={<WebAboutFeature />} />
           </Route>
-          <Route path="admin/*" element={<WebAdminRouter user={spyUser ?? user} />}></Route>
-          <Route path="leader/*" element={<WebLeaderRouter user={spyUser ?? user} />}></Route>
+          <Route path="admin/*" element={<WebAdminRouter user={user} />}></Route>
+          <Route path="leader/*" element={<WebLeaderRouter user={user} />}></Route>
           <Route path="/" element={<WebFeatureLogin />} />
           <Route path="about" element={<WebAboutFeature />} />
           <Route path="dashboard" element={<WebDashboardFeature />} />

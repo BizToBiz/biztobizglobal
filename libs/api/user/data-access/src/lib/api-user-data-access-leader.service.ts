@@ -3,22 +3,52 @@ import { PrismaSelect } from '@paljs/plugins'
 import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
-
 import { AdminCreateUserInput } from './dto/admin-create-user.input'
-import { AdminListUserInput } from './dto/admin-list-user.input'
 import { AdminUpdateUserInput } from './dto/admin-update-user.input'
+import { ListUserInput } from './dto/list-user.input'
+import { ChapterMemberRole } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
 export class ApiUserDataAccessLeaderService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
+  private async leaderChapters(leaderId: string): Promise<string[]> {
+    const chapters = await this.data.chapter.findMany({
+      where: {
+        OR: [
+          {
+            members: {
+              some: {
+                OR: [
+                  { memberId: leaderId, role: ChapterMemberRole.President },
+                  { memberId: leaderId, role: ChapterMemberRole.VicePresident },
+                  { memberId: leaderId, role: ChapterMemberRole.Chairman },
+                ],
+              },
+            },
+          },
+          {
+            region: { manager: { id: leaderId } },
+          },
+          {
+            region: { territory: { manager: { id: leaderId } } },
+          },
+        ],
+      },
+    })
+    return chapters.map((chapter) => chapter.id)
+  }
+
   private readonly searchFields = ['firstName', 'lastName', 'email']
-  private where(input: AdminListUserInput): Prisma.UserWhereInput {
+  private async where(input: ListUserInput, leaderId: string): Promise<Prisma.UserWhereInput> {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+    const leaderChapters = await this.leaderChapters(leaderId)
 
     // TODO: implement leader search query
-    // function leaderSearch() {}
+    function leaderSearch() {
+      return { chapter: { id: { in: leaderChapters } } }
+    }
 
     function relationalSearch() {
       // TODO: implement relational search for user
@@ -33,6 +63,7 @@ export class ApiUserDataAccessLeaderService {
     return {
       AND: [
         relationalSearch(),
+        leaderSearch(),
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),
@@ -40,18 +71,20 @@ export class ApiUserDataAccessLeaderService {
     }
   }
 
-  leaderUsers(info: GraphQLResolveInfo, leaderId: string, input?: AdminListUserInput) {
+  async leaderUsers(info: GraphQLResolveInfo, leaderId: string, input?: ListUserInput) {
     const select = new PrismaSelect(info).value
+
     return this.data.user.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
+      where: await this.where(input, leaderId),
       ...select,
     })
   }
 
-  async leaderCountUsers(leaderId: string, input?: AdminListUserInput): Promise<CorePaging> {
+  async leaderCountUsers(leaderId: string, input?: ListUserInput): Promise<CorePaging> {
     const total = await this.data.user.count()
-    const count = await this.data.user.count({ where: this.where(input) })
+    const count = await this.data.user.count({ where: await this.where(input, leaderId) })
     const take = input?.take || 10
     const skip = input?.skip || 0
     const page = Math.floor(skip / take)
