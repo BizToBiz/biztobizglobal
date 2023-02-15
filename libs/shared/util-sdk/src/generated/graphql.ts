@@ -848,6 +848,18 @@ export type CorePaging = {
   total?: Maybe<Scalars['Float']>
 }
 
+export type CreateUpdateTransactionInput = {
+  amount?: InputMaybe<Scalars['Float']>
+  chapterId?: InputMaybe<Scalars['String']>
+  date?: InputMaybe<Scalars['DateTime']>
+  enteredBy?: InputMaybe<Scalars['String']>
+  enteredOn?: InputMaybe<Scalars['String']>
+  industry?: InputMaybe<Scalars['String']>
+  referralId?: InputMaybe<Scalars['String']>
+  state?: InputMaybe<Scalars['String']>
+  userId?: InputMaybe<Scalars['String']>
+}
+
 /** Day of Week */
 export enum DayOfWeek {
   Friday = 'Friday',
@@ -890,6 +902,26 @@ export type LeaderReferralInput = {
   referralDate?: InputMaybe<Scalars['DateTime']>
   toId?: InputMaybe<Scalars['String']>
   transactions?: InputMaybe<Array<MultiSelectInput>>
+}
+
+export type ListReferralInput = {
+  firstName?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
+export type ListTransactionInput = {
+  amount?: InputMaybe<Scalars['Float']>
+  endDate?: InputMaybe<Scalars['DateTime']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  startDate?: InputMaybe<Scalars['DateTime']>
+  take?: InputMaybe<Scalars['Float']>
 }
 
 export type ListUserInput = {
@@ -1460,7 +1492,7 @@ export type MutationLeaderCreateTestimonialArgs = {
 }
 
 export type MutationLeaderCreateTransactionArgs = {
-  input: AdminCreateTransactionInput
+  input: CreateUpdateTransactionInput
 }
 
 export type MutationLeaderCreateUploadArgs = {
@@ -1628,7 +1660,7 @@ export type MutationLeaderUpdateTestimonialArgs = {
 }
 
 export type MutationLeaderUpdateTransactionArgs = {
-  input: AdminUpdateTransactionInput
+  input: CreateUpdateTransactionInput
   transactionId: Scalars['String']
 }
 
@@ -2454,7 +2486,7 @@ export type QueryLeaderCountPowerHoursArgs = {
 }
 
 export type QueryLeaderCountReferralsArgs = {
-  input?: InputMaybe<AdminListReferralInput>
+  input?: InputMaybe<ListReferralInput>
 }
 
 export type QueryLeaderCountRegionsArgs = {
@@ -2478,7 +2510,7 @@ export type QueryLeaderCountTestimonialsArgs = {
 }
 
 export type QueryLeaderCountTransactionsArgs = {
-  input?: InputMaybe<AdminListTransactionInput>
+  input?: InputMaybe<ListTransactionInput>
 }
 
 export type QueryLeaderCountUploadsArgs = {
@@ -2534,7 +2566,7 @@ export type QueryLeaderReferralArgs = {
 }
 
 export type QueryLeaderReferralsArgs = {
-  input?: InputMaybe<AdminListReferralInput>
+  input?: InputMaybe<ListReferralInput>
 }
 
 export type QueryLeaderRegionArgs = {
@@ -2582,7 +2614,7 @@ export type QueryLeaderTransactionArgs = {
 }
 
 export type QueryLeaderTransactionsArgs = {
-  input?: InputMaybe<AdminListTransactionInput>
+  input?: InputMaybe<ListTransactionInput>
 }
 
 export type QueryLeaderUploadArgs = {
@@ -6709,6 +6741,7 @@ export type IntercomSubSubscription = {
 export type LeaderReferralDetailsFragment = {
   __typename?: 'Referral'
   id?: string | null
+  name?: string | null
   createdAt?: any | null
   updatedAt?: any | null
   referralDate?: any | null
@@ -6732,6 +6765,7 @@ export type LeaderCreateReferralMutation = {
   createReferral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6766,6 +6800,7 @@ export type LeaderUpdateReferralMutation = {
   updateReferral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6790,6 +6825,7 @@ export type LeaderReferralQuery = {
   referral?: {
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6806,7 +6842,7 @@ export type LeaderReferralQuery = {
 }
 
 export type LeaderReferralsQueryVariables = Exact<{
-  input?: InputMaybe<AdminListReferralInput>
+  input?: InputMaybe<ListReferralInput>
 }>
 
 export type LeaderReferralsQuery = {
@@ -6814,6 +6850,7 @@ export type LeaderReferralsQuery = {
   referrals?: Array<{
     __typename?: 'Referral'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     referralDate?: any | null
@@ -6839,7 +6876,7 @@ export type LeaderReferralsQuery = {
 }
 
 export type LeaderReferralPaginationQueryVariables = Exact<{
-  input?: InputMaybe<AdminListReferralInput>
+  input?: InputMaybe<ListReferralInput>
 }>
 
 export type LeaderReferralPaginationQuery = {
@@ -6891,7 +6928,7 @@ export type LeaderTransactionReferralDetailsFragment = {
 }
 
 export type LeaderTransactionReferralsQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTransactionInput>
+  input?: InputMaybe<ListTransactionInput>
 }>
 
 export type LeaderTransactionReferralsQuery = {
@@ -6942,7 +6979,7 @@ export type LeaderTransactionReferralsQuery = {
 }
 
 export type LeaderTransactionReferralPaginationQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTransactionInput>
+  input?: InputMaybe<ListTransactionInput>
 }>
 
 export type LeaderTransactionReferralPaginationQuery = {
@@ -6961,6 +6998,7 @@ export type LeaderTransactionReferralPaginationQuery = {
 export type LeaderTransactionDetailsFragment = {
   __typename?: 'Transaction'
   id?: string | null
+  name?: string | null
   createdAt?: any | null
   updatedAt?: any | null
   date?: any | null
@@ -6975,7 +7013,7 @@ export type LeaderTransactionDetailsFragment = {
 }
 
 export type LeaderCreateTransactionMutationVariables = Exact<{
-  input: AdminCreateTransactionInput
+  input: CreateUpdateTransactionInput
 }>
 
 export type LeaderCreateTransactionMutation = {
@@ -6983,6 +7021,7 @@ export type LeaderCreateTransactionMutation = {
   createTransaction?: {
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -7008,7 +7047,7 @@ export type LeaderDeleteTransactionMutation = {
 
 export type LeaderUpdateTransactionMutationVariables = Exact<{
   transactionId: Scalars['String']
-  input: AdminUpdateTransactionInput
+  input: CreateUpdateTransactionInput
 }>
 
 export type LeaderUpdateTransactionMutation = {
@@ -7016,6 +7055,7 @@ export type LeaderUpdateTransactionMutation = {
   updateTransaction?: {
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -7039,6 +7079,7 @@ export type LeaderTransactionQuery = {
   transaction?: {
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -7054,7 +7095,7 @@ export type LeaderTransactionQuery = {
 }
 
 export type LeaderTransactionsQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTransactionInput>
+  input?: InputMaybe<ListTransactionInput>
 }>
 
 export type LeaderTransactionsQuery = {
@@ -7062,6 +7103,7 @@ export type LeaderTransactionsQuery = {
   transactions?: Array<{
     __typename?: 'Transaction'
     id?: string | null
+    name?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     date?: any | null
@@ -7086,7 +7128,7 @@ export type LeaderTransactionsQuery = {
 }
 
 export type LeaderTransactionPaginationQueryVariables = Exact<{
-  input?: InputMaybe<AdminListTransactionInput>
+  input?: InputMaybe<ListTransactionInput>
 }>
 
 export type LeaderTransactionPaginationQuery = {
@@ -8016,6 +8058,7 @@ export const IntercomDetailsFragmentDoc = gql`
 export const LeaderReferralDetailsFragmentDoc = gql`
   fragment LeaderReferralDetails on Referral {
     id
+    name
     createdAt
     updatedAt
     referralDate
@@ -8097,6 +8140,7 @@ export const LeaderTransactionReferralDetailsFragmentDoc = gql`
 export const LeaderTransactionDetailsFragmentDoc = gql`
   fragment LeaderTransactionDetails on Transaction {
     id
+    name
     createdAt
     updatedAt
     date
@@ -14040,7 +14084,7 @@ export type LeaderReferralQueryHookResult = ReturnType<typeof useLeaderReferralQ
 export type LeaderReferralLazyQueryHookResult = ReturnType<typeof useLeaderReferralLazyQuery>
 export type LeaderReferralQueryResult = Apollo.QueryResult<LeaderReferralQuery, LeaderReferralQueryVariables>
 export const LeaderReferralsDocument = gql`
-  query LeaderReferrals($input: AdminListReferralInput) {
+  query LeaderReferrals($input: ListReferralInput) {
     referrals: leaderReferrals(input: $input) {
       ...LeaderReferralDetails
     }
@@ -14084,7 +14128,7 @@ export type LeaderReferralsQueryHookResult = ReturnType<typeof useLeaderReferral
 export type LeaderReferralsLazyQueryHookResult = ReturnType<typeof useLeaderReferralsLazyQuery>
 export type LeaderReferralsQueryResult = Apollo.QueryResult<LeaderReferralsQuery, LeaderReferralsQueryVariables>
 export const LeaderReferralPaginationDocument = gql`
-  query LeaderReferralPagination($input: AdminListReferralInput) {
+  query LeaderReferralPagination($input: ListReferralInput) {
     counters: leaderCountReferrals(input: $input) {
       ...CorePagingDetails
     }
@@ -14133,7 +14177,7 @@ export type LeaderReferralPaginationQueryResult = Apollo.QueryResult<
   LeaderReferralPaginationQueryVariables
 >
 export const LeaderTransactionReferralsDocument = gql`
-  query LeaderTransactionReferrals($input: AdminListTransactionInput) {
+  query LeaderTransactionReferrals($input: ListTransactionInput) {
     transactions: leaderTransactions(input: $input) {
       ...LeaderTransactionReferralDetails
     }
@@ -14186,7 +14230,7 @@ export type LeaderTransactionReferralsQueryResult = Apollo.QueryResult<
   LeaderTransactionReferralsQueryVariables
 >
 export const LeaderTransactionReferralPaginationDocument = gql`
-  query LeaderTransactionReferralPagination($input: AdminListTransactionInput) {
+  query LeaderTransactionReferralPagination($input: ListTransactionInput) {
     counters: leaderCountTransactions(input: $input) {
       ...CorePagingDetails
     }
@@ -14245,7 +14289,7 @@ export type LeaderTransactionReferralPaginationQueryResult = Apollo.QueryResult<
   LeaderTransactionReferralPaginationQueryVariables
 >
 export const LeaderCreateTransactionDocument = gql`
-  mutation leaderCreateTransaction($input: AdminCreateTransactionInput!) {
+  mutation leaderCreateTransaction($input: CreateUpdateTransactionInput!) {
     createTransaction: leaderCreateTransaction(input: $input) {
       ...LeaderTransactionDetails
     }
@@ -14334,7 +14378,7 @@ export type LeaderDeleteTransactionMutationOptions = Apollo.BaseMutationOptions<
   LeaderDeleteTransactionMutationVariables
 >
 export const LeaderUpdateTransactionDocument = gql`
-  mutation leaderUpdateTransaction($transactionId: String!, $input: AdminUpdateTransactionInput!) {
+  mutation leaderUpdateTransaction($transactionId: String!, $input: CreateUpdateTransactionInput!) {
     updateTransaction: leaderUpdateTransaction(transactionId: $transactionId, input: $input) {
       ...LeaderTransactionDetails
     }
@@ -14423,7 +14467,7 @@ export type LeaderTransactionQueryHookResult = ReturnType<typeof useLeaderTransa
 export type LeaderTransactionLazyQueryHookResult = ReturnType<typeof useLeaderTransactionLazyQuery>
 export type LeaderTransactionQueryResult = Apollo.QueryResult<LeaderTransactionQuery, LeaderTransactionQueryVariables>
 export const LeaderTransactionsDocument = gql`
-  query LeaderTransactions($input: AdminListTransactionInput) {
+  query LeaderTransactions($input: ListTransactionInput) {
     transactions: leaderTransactions(input: $input) {
       ...LeaderTransactionDetails
     }
@@ -14473,7 +14517,7 @@ export type LeaderTransactionsQueryResult = Apollo.QueryResult<
   LeaderTransactionsQueryVariables
 >
 export const LeaderTransactionPaginationDocument = gql`
-  query LeaderTransactionPagination($input: AdminListTransactionInput) {
+  query LeaderTransactionPagination($input: ListTransactionInput) {
     counters: leaderCountTransactions(input: $input) {
       ...CorePagingDetails
     }

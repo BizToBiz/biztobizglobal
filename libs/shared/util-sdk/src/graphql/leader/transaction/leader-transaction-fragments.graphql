@@ -1,5 +1,6 @@
 fragment LeaderTransactionDetails on Transaction {
   id
+  name
   createdAt
   updatedAt
   date

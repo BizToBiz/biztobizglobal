@@ -40,15 +40,16 @@ export class ApiUserDataAccessLeaderService {
   }
 
   private readonly searchFields = ['firstName', 'lastName', 'email']
-  private async where(input: ListUserInput, leaderId: string): Promise<Prisma.UserWhereInput> {
+  private where(input: ListUserInput, leaderId: string): Prisma.UserWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
-    const leaderChapters = await this.leaderChapters(leaderId)
+    // const leaderChapters = await this.leaderChapters(leaderId)
+    // console.log(leaderChapters)
 
     // TODO: implement leader search query
-    function leaderSearch() {
-      return { chapter: { id: { in: leaderChapters } } }
-    }
+    // function leaderSearch() {
+    //   return { OR: [{ fromChapterId: { in: leaderChapters } }, { toChapterId: { in: leaderChapters } }] }
+    // }
 
     function relationalSearch() {
       // TODO: implement relational search for user
@@ -63,7 +64,6 @@ export class ApiUserDataAccessLeaderService {
     return {
       AND: [
         relationalSearch(),
-        leaderSearch(),
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),
@@ -77,14 +77,14 @@ export class ApiUserDataAccessLeaderService {
     return this.data.user.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
-      where: await this.where(input, leaderId),
+      where: this.where(input, leaderId),
       ...select,
     })
   }
 
   async leaderCountUsers(leaderId: string, input?: ListUserInput): Promise<CorePaging> {
     const total = await this.data.user.count()
-    const count = await this.data.user.count({ where: await this.where(input, leaderId) })
+    const count = await this.data.user.count({ where: this.where(input, leaderId) })
     const take = input?.take || 10
     const skip = input?.skip || 0
     const page = Math.floor(skip / take)

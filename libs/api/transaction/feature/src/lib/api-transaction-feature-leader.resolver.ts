@@ -1,10 +1,9 @@
-import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { GraphQLResolveInfo } from 'graphql'
 import {
-  AdminCreateTransactionInput,
-  AdminListTransactionInput,
-  AdminUpdateTransactionInput,
   ApiTransactionDataAccessLeaderService,
+  CreateUpdateTransactionInput,
+  ListTransactionInput,
   Transaction,
 } from '@biztobiz/api/transaction/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
@@ -21,7 +20,7 @@ export class ApiTransactionFeatureLeaderResolver {
   leaderTransactions(
     @CtxUser() leader: User,
     @Info() info: GraphQLResolveInfo,
-    @Args({ name: 'input', type: () => AdminListTransactionInput, nullable: true }) input?: AdminListTransactionInput,
+    @Args({ name: 'input', type: () => ListTransactionInput, nullable: true }) input?: ListTransactionInput,
   ) {
     return this.service.leaderTransactions(info, leader.id, input)
   }
@@ -29,7 +28,7 @@ export class ApiTransactionFeatureLeaderResolver {
   @Query(() => CorePaging, { nullable: true })
   leaderCountTransactions(
     @CtxUser() leader: User,
-    @Args({ name: 'input', type: () => AdminListTransactionInput, nullable: true }) input?: AdminListTransactionInput,
+    @Args({ name: 'input', type: () => ListTransactionInput, nullable: true }) input?: ListTransactionInput,
   ) {
     return this.service.leaderCountTransactions(leader.id, input)
   }
@@ -47,7 +46,7 @@ export class ApiTransactionFeatureLeaderResolver {
   leaderCreateTransaction(
     @CtxUser() leader: User,
     @Info() info: GraphQLResolveInfo,
-    @Args('input') input: AdminCreateTransactionInput,
+    @Args('input') input: CreateUpdateTransactionInput,
   ) {
     return this.service.leaderCreateTransaction(info, leader.id, input)
   }
@@ -57,7 +56,7 @@ export class ApiTransactionFeatureLeaderResolver {
     @CtxUser() leader: User,
     @Info() info: GraphQLResolveInfo,
     @Args('transactionId') transactionId: string,
-    @Args('input') input: AdminUpdateTransactionInput,
+    @Args('input') input: CreateUpdateTransactionInput,
   ) {
     return this.service.leaderUpdateTransaction(info, leader.id, transactionId, input)
   }

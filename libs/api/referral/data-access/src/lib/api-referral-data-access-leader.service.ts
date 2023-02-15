@@ -41,8 +41,10 @@ export class ApiReferralDataAccessLeaderService {
   leaderReferrals(info: GraphQLResolveInfo, leaderId: string, input?: ListReferralInput) {
     const select = new PrismaSelect(info).value
     return this.data.referral.findMany({
-      take: input?.take,
-      skip: input?.skip,
+      take: input?.take ?? 10,
+      skip: input?.skip ?? 0,
+      where: this.where(input),
+      orderBy: { createdAt: 'desc' },
       ...select,
     })
   }
