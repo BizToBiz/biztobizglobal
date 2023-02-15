@@ -1,5 +1,6 @@
 fragment LeaderReferralDetails on Referral {
   id
+  name
   createdAt
   updatedAt
   referralDate

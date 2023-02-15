@@ -4,7 +4,7 @@ query LeaderReferral($referralId: String!) {
   }
 }
 
-query LeaderReferrals($input: ListReferralsInput) {
+query LeaderReferrals($input: ListReferralInput) {
   referrals: leaderReferrals(input: $input) {
     ...LeaderReferralDetails
   }

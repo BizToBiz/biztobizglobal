@@ -3,9 +3,8 @@ import { PrismaSelect } from '@paljs/plugins'
 import { Prisma } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
-import { AdminCreateTransactionInput } from './dto/admin-create-transaction.input'
 import { AdminListTransactionInput } from './dto/admin-list-transaction.input'
-import { AdminUpdateTransactionInput } from './dto/admin-update-transaction.input'
+import { CreateUpdateTransactionInput } from './dto/create-update-transaction.input'
 import { ChapterMemberRole } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
@@ -162,7 +161,7 @@ export class ApiTransactionDataAccessLeaderService {
     return this.data.transaction.findUnique({ where: { id: transactionId }, ...select })
   }
 
-  async leaderCreateTransaction(info: GraphQLResolveInfo, leaderId: string, input: AdminCreateTransactionInput) {
+  async leaderCreateTransaction(info: GraphQLResolveInfo, leaderId: string, input: CreateUpdateTransactionInput) {
     const select = new PrismaSelect(info).value
 
     const user = await this.data.user.findUnique({
@@ -211,7 +210,7 @@ export class ApiTransactionDataAccessLeaderService {
     info: GraphQLResolveInfo,
     leaderId: string,
     transactionId,
-    input: AdminUpdateTransactionInput,
+    input: CreateUpdateTransactionInput,
   ) {
     const select = new PrismaSelect(info).value
 

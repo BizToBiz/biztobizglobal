@@ -1,6 +1,6 @@
 import { WebUiFormField } from '@biztobiz/web-ui/form'
 import React from 'react'
-import { AdminReferralsDocument, AdminUsersDocument } from '@biztobiz/shared/util-sdk'
+import { LeaderReferralsDocument, LeaderUsersDocument } from '@biztobiz/shared/util-sdk'
 
 // TODO: Create custom filter functions
 // function regionFilterFunction(regions: Region[]) {
@@ -12,12 +12,12 @@ export const transactionFields: WebUiFormField[] = [
   WebUiFormField.datePicker('date', { label: 'Date', required: true }),
   WebUiFormField.relationSelect('userId', {
     label: 'Member',
-    document: AdminUsersDocument,
+    document: LeaderUsersDocument,
     dataType: 'users',
   }),
   WebUiFormField.relationSelect('referralId', {
     label: 'Referral',
-    document: AdminReferralsDocument,
+    document: LeaderReferralsDocument,
     dataType: 'referrals',
   }),
 ]

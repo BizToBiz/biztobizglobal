@@ -12,6 +12,7 @@ interface RelationSelectProps {
 }
 
 function label(item: { id: string; name?: string; firstName?: string; lastName?: string }) {
+  console.log(item)
   if (item?.name) {
     return item.name
   }
