@@ -5,18 +5,50 @@ import { GraphQLResolveInfo } from 'graphql'
 import { ApiCoreDataAccessService, CorePaging } from '@biztobiz/api/core/data-access'
 import { ListReferralInput } from './dto/list-referral.input'
 import { LeaderReferralInput } from './dto/leader-referral.input'
+import { ChapterMemberRole, UserStatus } from '@biztobiz/api/enums/data-access'
 
 @Injectable()
 export class ApiReferralDataAccessLeaderService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
+  private async leaderChapters(leaderId: string): Promise<string[]> {
+    const chapters = await this.data.chapter.findMany({
+      where: {
+        OR: [
+          {
+            members: {
+              some: {
+                OR: [
+                  { memberId: leaderId, role: ChapterMemberRole.President },
+                  { memberId: leaderId, role: ChapterMemberRole.VicePresident },
+                  { memberId: leaderId, role: ChapterMemberRole.Chairman },
+                ],
+              },
+            },
+          },
+          {
+            region: { manager: { id: leaderId } },
+          },
+          {
+            region: { territory: { manager: { id: leaderId } } },
+          },
+        ],
+      },
+    })
+    return chapters.map((chapter) => chapter.id)
+  }
   private readonly searchFields = ['firstName', 'lastName', 'email']
-  private where(input: ListReferralInput): Prisma.ReferralWhereInput {
+  private async where(input: ListReferralInput, leaderId?: string): Promise<Prisma.ReferralWhereInput> {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+    const leaderChapters = leaderId ? await this.leaderChapters(leaderId) : null
 
     // TODO: implement leader search query
-    // function leaderSearch() {}
+    function leaderSearch() {
+      return {
+        AND: [{ fromChapterId: { in: leaderChapters } }, { from: { status: UserStatus.Active } }],
+      }
+    }
 
     function relationalSearch() {
       // TODO: implement relational search for referral
@@ -31,6 +63,7 @@ export class ApiReferralDataAccessLeaderService {
     return {
       AND: [
         relationalSearch(),
+        leaderId ? leaderSearch() : null,
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),
@@ -38,12 +71,12 @@ export class ApiReferralDataAccessLeaderService {
     }
   }
 
-  leaderReferrals(info: GraphQLResolveInfo, leaderId: string, input?: ListReferralInput) {
+  async leaderReferrals(info: GraphQLResolveInfo, leaderId: string, input?: ListReferralInput) {
     const select = new PrismaSelect(info).value
     return this.data.referral.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
-      where: this.where(input),
+      where: await this.where(input, leaderId),
       orderBy: { createdAt: 'desc' },
       ...select,
     })
@@ -51,7 +84,7 @@ export class ApiReferralDataAccessLeaderService {
 
   async leaderCountReferrals(leaderId: string, input?: ListReferralInput): Promise<CorePaging> {
     const total = await this.data.referral.count()
-    const count = await this.data.referral.count({ where: this.where(input) })
+    const count = await this.data.referral.count({ where: await this.where(input, leaderId) })
     const take = input?.take || 10
     const skip = input?.skip || 0
     const page = Math.floor(skip / take)

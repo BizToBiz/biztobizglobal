@@ -2058,8 +2058,10 @@ export type Query = {
   leaderAttendanceReminder?: Maybe<AttendanceReminder>
   leaderAttendanceReminders?: Maybe<Array<AttendanceReminder>>
   leaderChapter?: Maybe<Chapter>
+  leaderChapterCountUsers?: Maybe<CorePaging>
   leaderChapterMember?: Maybe<ChapterMember>
   leaderChapterMembers?: Maybe<Array<ChapterMember>>
+  leaderChapterUsers?: Maybe<Array<User>>
   leaderChapters?: Maybe<Array<Chapter>>
   leaderCompanies?: Maybe<Array<Company>>
   leaderCompany?: Maybe<Company>
@@ -2417,12 +2419,20 @@ export type QueryLeaderChapterArgs = {
   chapterId: Scalars['String']
 }
 
+export type QueryLeaderChapterCountUsersArgs = {
+  input?: InputMaybe<ListUserInput>
+}
+
 export type QueryLeaderChapterMemberArgs = {
   chapterMemberId: Scalars['String']
 }
 
 export type QueryLeaderChapterMembersArgs = {
   input?: InputMaybe<AdminListChapterMemberInput>
+}
+
+export type QueryLeaderChapterUsersArgs = {
+  input?: InputMaybe<ListUserInput>
 }
 
 export type QueryLeaderChaptersArgs = {
@@ -7362,6 +7372,125 @@ export type LeaderUsersQueryVariables = Exact<{
 }>
 
 export type LeaderUsersQuery = {
+  __typename?: 'Query'
+  users?: Array<{
+    __typename?: 'User'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    lastSeen?: any | null
+    onlineStatus?: UserOnlineStatus | null
+    status?: UserStatus | null
+    developer?: boolean | null
+    role?: Role | null
+    email?: string | null
+    emailConfirmed?: boolean | null
+    username?: string | null
+    infusionsoftId?: number | null
+    firstName?: string | null
+    lastName?: string | null
+    name?: string | null
+    password?: string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: any | null
+    confirmEmailToken?: string | null
+    confirmEmailExpires?: any | null
+    showGravatar?: boolean | null
+    avatarUrl?: string | null
+    applicationDate?: any | null
+    inactiveDate?: any | null
+    inquiryDate?: any | null
+    membershipDate?: any | null
+    renewalDate?: any | null
+    terminationDate?: any | null
+    transferDate?: any | null
+    location?: string | null
+    phone?: string | null
+    bio?: string | null
+    facebook?: string | null
+    twitter?: string | null
+    youtube?: string | null
+    linkedin?: string | null
+    instagram?: string | null
+    website?: string | null
+    industry?: string | null
+    timeInIndustry?: string | null
+    address?: string | null
+    address2?: string | null
+    cell?: string | null
+    chapterTitle?: string | null
+    city?: string | null
+    comments?: string | null
+    company?: string | null
+    fax?: string | null
+    hear?: string | null
+    hearOther?: string | null
+    internalComments?: string | null
+    launchComplete?: boolean | null
+    mentorName?: string | null
+    merchantCircle?: string | null
+    multipleBusinesses?: boolean | null
+    multipleLocations?: boolean | null
+    numberOfEmployees?: number | null
+    organizer?: number | null
+    otherBusinesses?: string | null
+    otherLocations?: string | null
+    postcode?: string | null
+    promoter?: number | null
+    recognized?: number | null
+    salesAgentName?: string | null
+    state?: string | null
+    strategizer?: number | null
+    substitute?: boolean | null
+    tagline?: string | null
+    terminatedByName?: string | null
+    terminationComments?: string | null
+    terminationReason?: string | null
+    thinker?: number | null
+    title?: string | null
+    type?: string | null
+    vet?: boolean | null
+    notifyByEmail?: boolean | null
+    notifyBySMS?: boolean | null
+    notifyByWeb?: boolean | null
+    notifyByMobile?: boolean | null
+    chapter?: { __typename?: 'ChapterMember'; id?: string | null } | null
+    companies?: Array<{ __typename?: 'Company'; id?: string | null; name?: string | null } | null> | null
+    notificationsReceived?: Array<{ __typename?: 'Notification'; id?: string | null } | null> | null
+    powerHoursFrom?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+    powerHoursTo?: Array<{ __typename?: 'PowerHour'; id?: string | null } | null> | null
+    referralsSent?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null } | null> | null
+    reminderSentBy?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+    reminderSentTo?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null } | null> | null
+    substituteAccepted?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    substituteInvited?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    substitutesSentBy?: Array<{ __typename?: 'Substitute'; id?: string | null } | null> | null
+    testimonialsFrom?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+    testimonialsto?: Array<{ __typename?: 'Testimonial'; id?: string | null } | null> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    regionManaged?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
+    territoryManaged?: { __typename?: 'Territory'; id?: string | null; name?: string | null } | null
+    avatar?: { __typename?: 'Upload'; id?: string | null } | null
+    presence?: { __typename?: 'MeetingPresence'; id?: string | null } | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+    sum?: number | null
+  } | null
+}
+
+export type LeaderChapterUsersQueryVariables = Exact<{
+  input?: InputMaybe<ListUserInput>
+}>
+
+export type LeaderChapterUsersQuery = {
   __typename?: 'Query'
   users?: Array<{
     __typename?: 'User'
@@ -14650,6 +14779,56 @@ export function useLeaderUsersLazyQuery(
 export type LeaderUsersQueryHookResult = ReturnType<typeof useLeaderUsersQuery>
 export type LeaderUsersLazyQueryHookResult = ReturnType<typeof useLeaderUsersLazyQuery>
 export type LeaderUsersQueryResult = Apollo.QueryResult<LeaderUsersQuery, LeaderUsersQueryVariables>
+export const LeaderChapterUsersDocument = gql`
+  query LeaderChapterUsers($input: ListUserInput) {
+    users: leaderChapterUsers(input: $input) {
+      ...LeaderUserDetails
+    }
+    counters: leaderChapterCountUsers(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${LeaderUserDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __useLeaderChapterUsersQuery__
+ *
+ * To run a query within a React component, call `useLeaderChapterUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLeaderChapterUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLeaderChapterUsersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLeaderChapterUsersQuery(
+  baseOptions?: Apollo.QueryHookOptions<LeaderChapterUsersQuery, LeaderChapterUsersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<LeaderChapterUsersQuery, LeaderChapterUsersQueryVariables>(LeaderChapterUsersDocument, options)
+}
+export function useLeaderChapterUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<LeaderChapterUsersQuery, LeaderChapterUsersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<LeaderChapterUsersQuery, LeaderChapterUsersQueryVariables>(
+    LeaderChapterUsersDocument,
+    options,
+  )
+}
+export type LeaderChapterUsersQueryHookResult = ReturnType<typeof useLeaderChapterUsersQuery>
+export type LeaderChapterUsersLazyQueryHookResult = ReturnType<typeof useLeaderChapterUsersLazyQuery>
+export type LeaderChapterUsersQueryResult = Apollo.QueryResult<
+  LeaderChapterUsersQuery,
+  LeaderChapterUsersQueryVariables
+>
 export const LeaderUserPaginationDocument = gql`
   query LeaderUserPagination($input: ListUserInput) {
     counters: leaderCountUsers(input: $input) {

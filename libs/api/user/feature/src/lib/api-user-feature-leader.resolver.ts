@@ -9,7 +9,7 @@ import {
 } from '@biztobiz/api/user/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
 import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
-import { UseGuards } from '@nestjs/common'
+import { Logger, UseGuards } from '@nestjs/common'
 
 @Resolver()
 @UseGuards(GqlAuthGuard)
@@ -25,12 +25,29 @@ export class ApiUserFeatureLeaderResolver {
     return this.service.leaderUsers(info, leader.id, input)
   }
 
+  @Query(() => [User], { nullable: true })
+  leaderChapterUsers(
+    @CtxUser() leader: User,
+    @Info() info: GraphQLResolveInfo,
+    @Args({ name: 'input', type: () => ListUserInput, nullable: true }) input?: ListUserInput,
+  ) {
+    Logger.log(this.service.leaderChapterUsers(info, leader.id, input))
+    return this.service.leaderChapterUsers(info, leader.id, input)
+  }
   @Query(() => CorePaging, { nullable: true })
   leaderCountUsers(
     @CtxUser() leader: User,
     @Args({ name: 'input', type: () => ListUserInput, nullable: true }) input?: ListUserInput,
   ) {
     return this.service.leaderCountUsers(leader.id, input)
+  }
+
+  @Query(() => CorePaging, { nullable: true })
+  leaderChapterCountUsers(
+    @CtxUser() leader: User,
+    @Args({ name: 'input', type: () => ListUserInput, nullable: true }) input?: ListUserInput,
+  ) {
+    return this.service.leaderChapterCountUsers(leader.id, input)
   }
 
   @Query(() => User, { nullable: true })

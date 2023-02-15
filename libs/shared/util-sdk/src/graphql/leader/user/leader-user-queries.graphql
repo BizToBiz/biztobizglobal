@@ -13,6 +13,15 @@ query LeaderUsers($input: ListUserInput) {
   }
 }
 
+query LeaderChapterUsers($input: ListUserInput) {
+  users: leaderChapterUsers(input: $input) {
+    ...LeaderUserDetails
+  }
+  counters: leaderChapterCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
 query LeaderUserPagination($input: ListUserInput) {
   counters: leaderCountUsers(input: $input) {
     ...CorePagingDetails
