@@ -42,12 +42,13 @@ export class ApiUserDataAccessLeaderService {
   private readonly searchFields = ['firstName', 'lastName', 'email']
   private async where(input: ListUserInput, leaderId?: string): Promise<Prisma.UserWhereInput> {
     const query = input?.search?.trim()
+    console.log(query)
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
+    console.log(terms)
     const leaderChapters = leaderId ? await this.leaderChapters(leaderId) : null
 
-    // TODO: implement leader search query
     function leaderSearch() {
-      return { chapter: { chapterId: { in: leaderChapters } }, status: UserStatus.Active }
+      return leaderId ? { chapter: { chapterId: { in: leaderChapters } } } : null
     }
 
     function relationalSearch() {
@@ -63,7 +64,8 @@ export class ApiUserDataAccessLeaderService {
     return {
       AND: [
         relationalSearch(),
-        leaderId ? leaderSearch() : null,
+        leaderSearch(),
+        { status: UserStatus.Active },
         ...terms.map((term) => ({
           OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
         })),
@@ -77,7 +79,7 @@ export class ApiUserDataAccessLeaderService {
     return this.data.user.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
-      where: this.where(input),
+      where: await this.where(input),
       ...select,
     })
   }
