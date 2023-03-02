@@ -42,9 +42,7 @@ export class ApiUserDataAccessLeaderService {
   private readonly searchFields = ['firstName', 'lastName', 'email']
   private async where(input: ListUserInput, leaderId?: string): Promise<Prisma.UserWhereInput> {
     const query = input?.search?.trim()
-    console.log(query)
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
-    console.log(terms)
     const leaderChapters = leaderId ? await this.leaderChapters(leaderId) : null
 
     function leaderSearch() {

@@ -321,6 +321,7 @@ export type AdminListChapterInput = {
 }
 
 export type AdminListChapterMemberInput = {
+  chapterId?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
@@ -361,6 +362,7 @@ export type AdminListIndustryInput = {
 }
 
 export type AdminListMeetingInput = {
+  chapterId?: InputMaybe<Scalars['String']>
   date?: InputMaybe<Scalars['DateTime']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>

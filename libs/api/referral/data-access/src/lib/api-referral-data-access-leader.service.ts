@@ -202,8 +202,6 @@ export class ApiReferralDataAccessLeaderService {
     const fromChapterId = fromUser?.chapter?.chapterId
     const toChapterId = toUser?.chapter?.chapterId
 
-    console.log(fromChapterId, toChapterId)
-
     const select = new PrismaSelect(info).value
 
     return this.data.referral.update({

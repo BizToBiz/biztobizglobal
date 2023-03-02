@@ -54,7 +54,6 @@ export class ApiReferralFeatureLeaderResolver {
     @Args('referralId') referralId: string,
     @Args('input') input: LeaderReferralInput,
   ) {
-    console.log(referralId)
     return this.service.leaderUpdateReferral(info, leader.id, referralId, input)
   }
 

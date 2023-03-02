@@ -3,13 +3,14 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useAdminMeetingsQuery, useAdminMeetingPaginationQuery } from '@biztobiz/shared/util-sdk'
+import { useAdminMeetingPaginationQuery, useAdminMeetingsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 
 interface WebAdminMeetingListProps {
   userId?: string
   chapterId?: string
   referralId?: string
+  isTab?: boolean
 }
 
 export function WebAdminMeetingList(props: WebAdminMeetingListProps) {

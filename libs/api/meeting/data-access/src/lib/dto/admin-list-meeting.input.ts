@@ -5,4 +5,7 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 export class AdminListMeetingInput extends CorePagingInput {
   @Field({ nullable: true })
   date?: Date
+
+  @Field({ nullable: true })
+  chapterId?: string
 }

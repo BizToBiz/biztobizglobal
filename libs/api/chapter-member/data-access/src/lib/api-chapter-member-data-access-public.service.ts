@@ -12,7 +12,6 @@ export class ApiChapterMemberDataAccessPublicService {
         select: { chapter: { select: { name: true } }, member: { select: { firstName: true, lastName: true } } },
       })
       .then((chapterMember) => {
-        console.log(chapterMember)
         return `${chapterMember?.chapter?.name} - ${chapterMember?.member?.firstName} ${chapterMember?.member?.lastName}`
       })
   }

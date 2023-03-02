@@ -6,19 +6,24 @@ import { useParams } from 'react-router-dom'
 import { cleanDatabaseOutput } from '@biztobiz/shared/utils/feature'
 import { chapterFields } from './web-admin-chapter-helper'
 import { WebAdminUpdateForm } from '@biztobiz/web-admin/crud-helper'
+import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
 
-export function WebAdminChapterUpdate() {
+interface WebAdminChapterUpdateProps {
+  chapterId?: string
+}
+export function WebAdminChapterUpdate(props: WebAdminChapterUpdateProps) {
   const params = useParams()
   const [isDev] = useAtom(isDevAtom)
+  const chapterId = props?.chapterId ?? params?.['id'] ?? null
 
   const { data: chapter, loading } = useAdminChapterQuery({
-    skip: !params?.['id'],
+    skip: !chapterId,
     variables: {
-      chapterId: params?.['id'] ?? 'NoId',
+      chapterId: chapterId,
     },
   })
 
-  if (!params?.['id']) return <div>No Id</div>
+  if (!chapterId) return <div>Unknown Chapter</div>
 
   function defaultValues() {
     if (chapter?.chapter && !loading) {
@@ -38,15 +43,18 @@ export function WebAdminChapterUpdate() {
   }
 
   return (
-    <WebAdminUpdateForm
-      pathData={pathData}
-      id={params['id']}
-      defaultValues={defaultValues()}
-      document={AdminUpdateChapterDocument}
-      deleteDocument={AdminDeleteChapterDocument}
-      buttonText={'Chapter'}
-      fields={chapterFields}
-      idName={'chapterId'}
-    />
+    <>
+      <WebAdminUpdateForm
+        pathData={pathData}
+        id={params['id']}
+        defaultValues={defaultValues()}
+        document={AdminUpdateChapterDocument}
+        deleteDocument={AdminDeleteChapterDocument}
+        buttonText={'Chapter'}
+        fields={chapterFields}
+        idName={'chapterId'}
+      />
+      {isDev && chapter?.chapter ? <WebUiDevDataFeature data={chapter} /> : null}
+    </>
   )
 }

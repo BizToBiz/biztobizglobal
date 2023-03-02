@@ -38,7 +38,6 @@ export class ApiAuthFeatureResolver {
 
   @Mutation(() => UserToken, { nullable: true })
   async register(@Context() context, @Args('input') input: RegisterInput) {
-    Logger.log('register', input)
     const userToken = await this.service.register(input)
     this.service.setCookie(context.res, userToken.token)
     return userToken

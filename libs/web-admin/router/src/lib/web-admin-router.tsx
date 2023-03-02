@@ -33,7 +33,7 @@ import {
   WebAdminAttendanceReminderList,
   WebAdminAttendanceReminderUpdate,
 } from '@biztobiz/web-admin/attendance-reminder'
-import { WebAdminChapterCreate, WebAdminChapterList, WebAdminChapterUpdate } from '@biztobiz/web-admin/chapter'
+import { WebAdminChapterCreate, WebAdminChapterDashboard, WebAdminChapterList } from '@biztobiz/web-admin/chapter'
 import {
   WebAdminChapterMemberCreate,
   WebAdminChapterMemberList,
@@ -237,7 +237,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
         <Route path="chapters" element={<WebAdminChapterList />} />
         <Route path="chapter">
           <Route path="new" element={<WebAdminChapterCreate />} />
-          <Route path=":id" element={<WebAdminChapterUpdate />} />
+          <Route path=":id" element={<WebAdminChapterDashboard />} />
         </Route>
         <Route path="chapter-members" element={<WebAdminChapterMemberList />} />
         <Route path="chapter-member">
