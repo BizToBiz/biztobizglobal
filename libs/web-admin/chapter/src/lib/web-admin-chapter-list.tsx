@@ -6,7 +6,7 @@ import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
 import { useAdminChapterPaginationQuery, useAdminChaptersQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
 import { Popover, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 interface WebAdminChapterListProps {
   userId?: string
