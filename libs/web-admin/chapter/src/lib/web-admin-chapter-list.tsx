@@ -37,6 +37,7 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
     data: chapters,
     refetch,
     loading,
+    error,
   } = useAdminChaptersQuery({
     variables,
   })
@@ -72,15 +73,15 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
     }
   }, [])
 
-  function updateFilters(sectionId: string, option: string) {
+  async function updateFilters(sectionId: string, option: string) {
     const currentFilter = filters?.[sectionId] || []
     currentFilter?.includes(option)
       ? currentFilter?.splice(currentFilter?.indexOf(option), 1)
       : currentFilter?.push(option)
 
     setFilters?.({ ...filters, [sectionId]: currentFilter })
-    refetch(variables)
-    refetchPagination(variables)
+    // await refetch(variables)
+    // await refetchPagination(variables)
   }
 
   return (
