@@ -97,9 +97,11 @@ export class ApiChapterMemberDataAccessAdminService {
     input: AdminUpdateChapterMemberInput,
   ) {
     const select = new PrismaSelect(info).value
+    const isTrainer = !!input?.isTrainer
+    const isMentor = !!input?.isMentor
     return this.data.chapterMember.update({
       where: { id: chapterMemberId },
-      data: { ...input },
+      data: { ...input, isTrainer, isMentor },
       ...select,
     })
   }

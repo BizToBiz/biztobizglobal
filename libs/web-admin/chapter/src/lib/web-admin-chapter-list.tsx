@@ -19,7 +19,7 @@ export function WebAdminChapterList(props: WebAdminChapterListProps) {
   const [search] = useAtom(searchAtom)
   const [isDev] = useAtom(isDevAtom)
   const [skip, setSkip] = useState(0)
-  const [filters, setFilters] = useState([])
+  const [filters, setFilters] = useState({ status: ['Active'] })
 
   const variables = {
     input: {
