@@ -73,7 +73,8 @@ export class ApiTransactionDataAccessLeaderService {
         return {
           date: { lte: input.endDate },
         }
-      } else return null
+      }
+      return null
     }
 
     function amountSearch(): Prisma.TransactionWhereInput {
@@ -89,16 +90,17 @@ export class ApiTransactionDataAccessLeaderService {
         relationalSearch(),
         dateSearch(),
         amountSearch(),
-        ...terms.map((term) => ({
-          OR: [
-            { referral: { firstName: { contains: term } } },
-            { referral: { lastName: { contains: term } } },
-            { referral: { from: { firstName: { contains: term } } } },
-            { referral: { from: { lastName: { contains: term } } } },
-            { referral: { to: { firstName: { contains: term } } } },
-            { referral: { to: { lastName: { contains: term } } } },
-          ],
-        })),
+        ...(input.search &&
+          terms.map((term) => ({
+            OR: [
+              { referral: { firstName: { contains: term } } },
+              { referral: { lastName: { contains: term } } },
+              { referral: { from: { firstName: { contains: term } } } },
+              { referral: { from: { lastName: { contains: term } } } },
+              { referral: { to: { firstName: { contains: term } } } },
+              { referral: { to: { lastName: { contains: term } } } },
+            ],
+          }))),
       ],
     }
   }
@@ -125,6 +127,7 @@ export class ApiTransactionDataAccessLeaderService {
   async leaderTransactions(info: GraphQLResolveInfo, leaderId: string, input?: AdminListTransactionInput) {
     const orderBy = this.getOrderBy(input?.orderBy, input?.orderDirection ?? 'desc')
     const select = new PrismaSelect(info).value
+
     return this.data.transaction.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
