@@ -4,7 +4,10 @@ import { useHotkeys } from 'react-hotkeys-hook'
 import { useNavigate } from 'react-router-dom'
 import { BanknotesIcon, ChartBarIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 
-const reports = [{ id: 1, name: 'Transaction & Referral Report', url: '/leader/transactions-and-referrals' }]
+const reports = [
+  { id: 1, name: 'Transactions with Referrals Report', url: '/leader/transactions-and-referrals' },
+  { id: 2, name: 'All Referrals Report', url: '/leader/referrals' },
+]
 
 const quickActions = [
   { name: 'Add new Referral...', icon: PaperAirplaneIcon, shortcut: 'R', url: '/leader/referral/new' },

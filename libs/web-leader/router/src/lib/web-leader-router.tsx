@@ -16,7 +16,7 @@ import {
   WebLeaderTransactionList,
   WebLeaderTransactionUpdate,
 } from '@biztobiz/web-leader/transaction'
-import { BanknotesIcon, HomeIcon } from '@heroicons/react/24/outline'
+import { BanknotesIcon, HomeIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 
 // Add New Imports Here
 
@@ -39,17 +39,18 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
       current: currentPath.path.includes('/leader/dashboard'),
     },
     {
-      name: 'Transactions & Referrals',
+      name: 'Transactions with Referrals',
       href: '/leader/transactions-and-referrals',
       icon: BanknotesIcon,
       current: currentPath.path.includes('/leader/transactions-and-referrals'),
     },
-    // {
-    //   name: 'Referrals',
-    //   href: '/leader/referrals',
-    //   icon: InboxInIcon,
-    //   current: currentPath.path.includes('/leader/referrals'),
-    // },
+    {
+      name: 'All Referrals',
+      href: '/leader/referrals',
+      icon: PaperAirplaneIcon,
+      current: currentPath.path.includes('/leader/referrals'),
+    },
+
     // {
     //   name: 'Transactions',
     //   href: '/leader/transactions',
