@@ -40,6 +40,7 @@ export class ApiMeetingDataAccessAdminService {
     return this.data.meeting.findMany({
       take: input?.take,
       skip: input?.skip,
+      orderBy: input?.orderBy ?? { date: 'desc' },
       where: this.where(input),
       ...select,
     })

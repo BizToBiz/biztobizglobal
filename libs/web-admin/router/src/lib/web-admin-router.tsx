@@ -46,7 +46,12 @@ import {
   WebAdminCompanyMemberUpdate,
 } from '@biztobiz/web-admin/company-member'
 import { WebAdminIndustryCreate, WebAdminIndustryList, WebAdminIndustryUpdate } from '@biztobiz/web-admin/industry'
-import { WebAdminMeetingCreate, WebAdminMeetingList, WebAdminMeetingUpdate } from '@biztobiz/web-admin/meeting'
+import {
+  WebAdminMeetingAttendance,
+  WebAdminMeetingCreate,
+  WebAdminMeetingList,
+  WebAdminMeetingUpdate,
+} from '@biztobiz/web-admin/meeting'
 import {
   WebAdminMeetingPresenceCreate,
   WebAdminMeetingPresenceList,
@@ -263,6 +268,7 @@ export function WebAdminRouter(props: WebAdminRouterProps) {
         <Route path="meeting">
           <Route path="new" element={<WebAdminMeetingCreate />} />
           <Route path=":id" element={<WebAdminMeetingUpdate />} />
+          <Route path=":id/attendance" element={<WebAdminMeetingAttendance />} />
         </Route>
         <Route path="meeting-presences" element={<WebAdminMeetingPresenceList />} />
         <Route path="meeting-presence">
