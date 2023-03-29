@@ -54,11 +54,11 @@ export function WebLeaderTransactionReferralReport(props: WebLeaderTransactionRe
   useLayoutEffect(() => {
     setCurrentPath({
       path: '/leader/transaction-referral-report',
-      name: 'Transactions & Referrals Report',
+      name: '$ in Biz',
       description: 'View and manage all transactions (with referral data) in your organization',
       showSearch: true,
-      // actionText: 'Add Referral',
-      // actionLink: '/leader/referral/new',
+      actionText: 'Add $ in Biz',
+      actionLink: '/leader/transaction/new',
     })
 
     return () => {

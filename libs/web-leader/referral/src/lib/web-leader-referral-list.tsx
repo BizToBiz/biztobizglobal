@@ -3,8 +3,9 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useLeaderReferralPaginationQuery, useLeaderReferralsQuery } from '@biztobiz/shared/util-sdk'
+import { Referral, useLeaderReferralPaginationQuery, useLeaderReferralsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
+import dayjs from 'dayjs'
 
 interface WebLeaderReferralListProps {
   userId?: string
@@ -52,12 +53,18 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
     }
   }, [])
 
+  const originalData: Referral[] = referrals?.referrals
+
+  const cleanData = originalData?.map((referral) => {
+    return { ...referral, referralDate: dayjs(referral.referralDate).format('MM/DD/YYYY') }
+  })
+
   return (
     <>
       <WebUiDataTableFeature
-        data={referrals?.referrals}
+        data={cleanData}
         path={'/leader/referral'}
-        fields={['from', 'to', 'firstName', 'lastName']}
+        fields={['referralDate', 'from', 'to', 'firstName', 'lastName']}
         pagination={pagination?.counters}
         setSkip={setSkip}
       />

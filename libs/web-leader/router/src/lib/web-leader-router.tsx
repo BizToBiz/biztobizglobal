@@ -39,13 +39,13 @@ export function WebLeaderRouter(props: WebLeaderRouterProps) {
       current: currentPath.path.includes('/leader/dashboard'),
     },
     {
-      name: 'Transactions with Referrals',
+      name: '$ in Biz',
       href: '/leader/transactions-and-referrals',
       icon: BanknotesIcon,
       current: currentPath.path.includes('/leader/transactions-and-referrals'),
     },
     {
-      name: 'All Referrals',
+      name: 'Referrals',
       href: '/leader/referrals',
       icon: PaperAirplaneIcon,
       current: currentPath.path.includes('/leader/referrals'),
