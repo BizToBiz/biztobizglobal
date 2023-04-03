@@ -15,11 +15,13 @@ export interface WebUiDataTableFeatureProps {
   setFilters?: (filters: any) => void
   filterOptions?: { id: string; name: string; options: { value: string; label: string }[] }[]
   loading?: boolean
+  additionalFilters?: JSX.Element | null
 }
 
 export function WebUiDataTableFeature(props: WebUiDataTableFeatureProps) {
   return props.data && !props.loading ? (
     <>
+      {props?.additionalFilters && props.additionalFilters}
       <div className="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
         <table className="min-w-full divide-y divide-gray-300">
           <thead className="bg-gray-50">

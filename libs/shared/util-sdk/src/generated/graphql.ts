@@ -905,11 +905,12 @@ export type LeaderReferralInput = {
 }
 
 export type ListReferralInput = {
-  firstName?: InputMaybe<Scalars['String']>
+  endDate?: InputMaybe<Scalars['DateTime']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
+  startDate?: InputMaybe<Scalars['DateTime']>
   take?: InputMaybe<Scalars['Float']>
 }
 

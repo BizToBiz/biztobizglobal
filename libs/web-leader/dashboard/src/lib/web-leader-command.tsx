@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { BanknotesIcon, ChartBarIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 
 const reports = [
-  { id: 1, name: 'Transactions with Referrals Report', url: '/leader/transactions-and-referrals' },
-  { id: 2, name: 'All Referrals Report', url: '/leader/referrals' },
+  { id: 1, name: '$ in Biz Report', url: '/leader/transactions-and-referrals' },
+  { id: 2, name: 'Referrals Report', url: '/leader/referrals' },
 ]
 
 const quickActions = [
   { name: 'Add new Referral...', icon: PaperAirplaneIcon, shortcut: 'R', url: '/leader/referral/new' },
-  { name: 'Add new Transaction...', icon: BanknotesIcon, shortcut: 'T', url: '/leader/transaction/new' },
+  { name: 'Add new $ in Biz...', icon: BanknotesIcon, shortcut: 'T', url: '/leader/transaction/new' },
 ]
 
 function classNames(...classes: (string | boolean)[]) {

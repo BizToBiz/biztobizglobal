@@ -3,8 +3,9 @@ import { useAtom } from 'jotai'
 import { currentPathAtom, isDevAtom, searchAtom } from '@biztobiz/web/global/data-access'
 import { WebUiDataTableFeature } from '@biztobiz/web-ui/data-table/feature'
 import { WebUiDevDataFeature } from '@biztobiz/web-ui/dev-data/feature'
-import { useLeaderReferralPaginationQuery, useLeaderReferralsQuery } from '@biztobiz/shared/util-sdk'
+import { Referral, useLeaderReferralPaginationQuery, useLeaderReferralsQuery } from '@biztobiz/shared/util-sdk'
 import { RESET } from 'jotai/utils'
+import dayjs from 'dayjs'
 
 interface WebLeaderReferralListProps {
   userId?: string
@@ -17,6 +18,8 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
   const [search] = useAtom(searchAtom)
   const [isDev] = useAtom(isDevAtom)
   const [skip, setSkip] = useState(0)
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const variables = {
     input: {
@@ -24,6 +27,8 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
       userId: props?.userId,
       chapterId: props?.chapterId,
       referralId: props?.referralId,
+      startDate: startDate || null,
+      endDate: endDate || null,
       skip,
       search,
     },
@@ -52,14 +57,42 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
     }
   }, [])
 
+  const originalData: Referral[] = referrals?.referrals
+
+  const cleanData = originalData?.map((referral) => {
+    return { ...referral, referralDate: dayjs(referral.referralDate).format('MM/DD/YYYY') }
+  })
+
+  const additionalFilters = (
+    <>
+      Search by Date:{' '}
+      <input
+        id="startDate"
+        type="date"
+        className="text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+      />{' '}
+      to{' '}
+      <input
+        id="endDate"
+        type="date"
+        className="text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+      />
+    </>
+  )
+
   return (
     <>
       <WebUiDataTableFeature
-        data={referrals?.referrals}
+        data={cleanData}
         path={'/leader/referral'}
-        fields={['from', 'to', 'firstName', 'lastName']}
+        fields={['referralDate', 'from', 'to', 'firstName', 'lastName']}
         pagination={pagination?.counters}
         setSkip={setSkip}
+        additionalFilters={additionalFilters}
       />
       {isDev && referrals?.referrals ? <WebUiDevDataFeature data={referrals} /> : null}
     </>
