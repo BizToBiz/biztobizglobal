@@ -60,13 +60,40 @@ export class ApiReferralDataAccessLeaderService {
       // }
       return null
     }
+
+    function dateSearch(): Prisma.ReferralWhereInput {
+      if (input?.startDate && input?.endDate) {
+        return {
+          AND: [{ referralDate: { gte: input.startDate } }, { referralDate: { lte: input.endDate } }],
+        }
+      } else if (input?.startDate) {
+        return {
+          referralDate: { gte: input.startDate },
+        }
+      } else if (input?.endDate) {
+        return {
+          referralDate: { lte: input.endDate },
+        }
+      }
+      return null
+    }
+
     return {
       AND: [
         relationalSearch(),
         leaderId ? leaderSearch() : null,
-        ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
-        })),
+        dateSearch(),
+        ...(input.search &&
+          terms.map((term) => ({
+            OR: [
+              { firstName: { contains: term, mode: 'insensitive' } },
+              { lastName: { contains: term, mode: 'insensitive' } },
+              { from: { firstName: { contains: term } } },
+              { from: { lastName: { contains: term } } },
+              { to: { firstName: { contains: term } } },
+              { to: { lastName: { contains: term } } },
+            ],
+          }))),
       ],
     }
   }

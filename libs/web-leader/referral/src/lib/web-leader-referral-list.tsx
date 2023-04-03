@@ -18,6 +18,8 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
   const [search] = useAtom(searchAtom)
   const [isDev] = useAtom(isDevAtom)
   const [skip, setSkip] = useState(0)
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const variables = {
     input: {
@@ -25,6 +27,8 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
       userId: props?.userId,
       chapterId: props?.chapterId,
       referralId: props?.referralId,
+      startDate: startDate || null,
+      endDate: endDate || null,
       skip,
       search,
     },
@@ -59,6 +63,27 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
     return { ...referral, referralDate: dayjs(referral.referralDate).format('MM/DD/YYYY') }
   })
 
+  const additionalFilters = (
+    <>
+      Search by Date:{' '}
+      <input
+        id="startDate"
+        type="date"
+        className="text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+      />{' '}
+      to{' '}
+      <input
+        id="endDate"
+        type="date"
+        className="text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+      />
+    </>
+  )
+
   return (
     <>
       <WebUiDataTableFeature
@@ -67,6 +92,7 @@ export function WebLeaderReferralList(props: WebLeaderReferralListProps) {
         fields={['referralDate', 'from', 'to', 'firstName', 'lastName']}
         pagination={pagination?.counters}
         setSkip={setSkip}
+        additionalFilters={additionalFilters}
       />
       {isDev && referrals?.referrals ? <WebUiDevDataFeature data={referrals} /> : null}
     </>
