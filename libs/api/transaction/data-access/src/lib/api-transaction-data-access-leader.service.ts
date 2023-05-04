@@ -90,7 +90,7 @@ export class ApiTransactionDataAccessLeaderService {
         relationalSearch(),
         dateSearch(),
         amountSearch(),
-        ...(input.search &&
+        ...(terms &&
           terms.map((term) => ({
             OR: [
               { referral: { firstName: { contains: term } } },
