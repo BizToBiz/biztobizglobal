@@ -83,7 +83,7 @@ export class ApiReferralDataAccessLeaderService {
         relationalSearch(),
         leaderId ? leaderSearch() : null,
         dateSearch(),
-        ...(input.search &&
+        ...(terms &&
           terms.map((term) => ({
             OR: [
               { firstName: { contains: term, mode: 'insensitive' } },
@@ -100,10 +100,11 @@ export class ApiReferralDataAccessLeaderService {
 
   async leaderReferrals(info: GraphQLResolveInfo, leaderId: string, input?: ListReferralInput) {
     const select = new PrismaSelect(info).value
+    const where = await this.where(input, leaderId)
     return this.data.referral.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
-      where: await this.where(input, leaderId),
+      where: where,
       orderBy: { createdAt: 'desc' },
       ...select,
     })

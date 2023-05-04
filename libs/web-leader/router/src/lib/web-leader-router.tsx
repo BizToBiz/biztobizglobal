@@ -25,7 +25,6 @@ export interface WebLeaderRouterProps {
 }
 
 export function WebLeaderRouter(props: WebLeaderRouterProps) {
-  console.log(props.user)
   const [currentPath] = useAtom(currentPathAtom)
   const [identity] = useAtom(identityAtom)
   const [spyTransition] = useAtom(spyTransitionAtom)
