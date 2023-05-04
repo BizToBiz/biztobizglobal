@@ -12,7 +12,6 @@ interface RelationSelectProps {
 }
 
 function label(item: { id: string; name?: string; firstName?: string; lastName?: string }) {
-  console.log(item)
   if (item?.name) {
     return item.name
   }
@@ -34,6 +33,7 @@ function defaultOptionsMap(
 export function RelationSelect(props: RelationSelectProps) {
   const { data, loading, refetch, error } = useQuery(props?.field?.options?.document ?? UptimeDocument)
 
+  console.log('RelationSelect', data, loading, error)
   let dataList =
     props?.field?.options?.dataType && !loading
       ? data?.[props.field.options.dataType]
