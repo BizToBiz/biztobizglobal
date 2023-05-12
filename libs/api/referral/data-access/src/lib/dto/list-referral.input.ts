@@ -8,4 +8,10 @@ export class ListReferralInput extends CorePagingInput {
 
   @Field({ nullable: true })
   endDate?: Date
+
+  @Field({ nullable: true })
+  fromId?: string
+
+  @Field({ nullable: true })
+  toId?: string
 }

@@ -42,7 +42,7 @@ export function WebLeaderTransactionList(props: WebLeaderTransactionListProps) {
       path: '/leader/transactions',
       name: 'Transactions',
       description: 'View and manage all transactions in your organization',
-      showSearch: true,
+      showSearch: false,
       actionText: 'Add Transaction',
       actionLink: '/leader/transaction/new',
     })

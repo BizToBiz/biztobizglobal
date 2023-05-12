@@ -906,12 +906,14 @@ export type LeaderReferralInput = {
 
 export type ListReferralInput = {
   endDate?: InputMaybe<Scalars['DateTime']>
+  fromId?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>
   skip?: InputMaybe<Scalars['Float']>
   startDate?: InputMaybe<Scalars['DateTime']>
   take?: InputMaybe<Scalars['Float']>
+  toId?: InputMaybe<Scalars['String']>
 }
 
 export type ListTransactionInput = {
@@ -927,6 +929,7 @@ export type ListTransactionInput = {
 
 export type ListUserInput = {
   firstName?: InputMaybe<Scalars['String']>
+  lastName?: InputMaybe<Scalars['String']>
   orderBy?: InputMaybe<Scalars['String']>
   orderDirection?: InputMaybe<Scalars['String']>
   search?: InputMaybe<Scalars['String']>

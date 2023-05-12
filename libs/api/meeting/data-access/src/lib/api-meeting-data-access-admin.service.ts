@@ -31,7 +31,7 @@ export class ApiMeetingDataAccessAdminService {
       AND: [
         relationalSearch(),
         ...terms.map((term) => ({
-          OR: [{ chapter: { name: { contains: term, mode: 'insensitive' } } }],
+          OR: [{ chapter: { name: { contains: term, mode: Prisma.QueryMode.insensitive } } }],
         })),
       ],
     }

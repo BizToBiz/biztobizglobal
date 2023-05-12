@@ -56,7 +56,7 @@ export function WebLeaderTransactionReferralReport(props: WebLeaderTransactionRe
       path: '/leader/transaction-referral-report',
       name: '$ in Biz',
       description: 'View and manage all transactions (with referral data) in your organization',
-      showSearch: true,
+      showSearch: false,
       actionText: 'Add $ in Biz',
       actionLink: '/leader/transaction/new',
     })

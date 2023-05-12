@@ -32,11 +32,11 @@ export class ApiAttendanceReminderDataAccessAdminService {
         relationalSearch(),
         ...terms.map((term) => ({
           OR: [
-            { chapter: { name: { contains: term, mode: 'insensitive' } } },
-            { sentBy: { firstName: { contains: term, mode: 'insensitive' } } },
-            { sentBy: { lastName: { contains: term, mode: 'insensitive' } } },
-            { sentTo: { firstName: { contains: term, mode: 'insensitive' } } },
-            { sentTo: { lastName: { contains: term, mode: 'insensitive' } } },
+            { chapter: { name: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { sentBy: { firstName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { sentBy: { lastName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { sentTo: { firstName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { sentTo: { lastName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
           ],
         })),
       ],
