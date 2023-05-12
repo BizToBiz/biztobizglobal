@@ -43,7 +43,6 @@ export class ApiReferralDataAccessLeaderService {
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
     const leaderChapters = leaderId ? await this.leaderChapters(leaderId) : null
 
-    // TODO: implement leader search query
     function leaderSearch() {
       return {
         AND: [{ fromChapterId: { in: leaderChapters } }, { from: { status: UserStatus.Active } }],
@@ -51,13 +50,12 @@ export class ApiReferralDataAccessLeaderService {
     }
 
     function relationalSearch() {
-      // TODO: implement relational search for referral
-      // if (input?.regionId) {
-      //   return { regionId: input.regionId }
-      // }
-      // if (input?.memberId) {
-      //   return { members: { some: { id: input.memberId } } }
-      // }
+      if (input?.fromId) {
+        return { fromId: input.fromId }
+      }
+      if (input?.toId) {
+        return { toId: input.toId }
+      }
       return null
     }
 
@@ -83,17 +81,9 @@ export class ApiReferralDataAccessLeaderService {
         relationalSearch(),
         leaderId ? leaderSearch() : null,
         dateSearch(),
-        ...(terms &&
-          terms.map((term) => ({
-            OR: [
-              { firstName: { contains: term, mode: 'insensitive' } },
-              { lastName: { contains: term, mode: 'insensitive' } },
-              { from: { firstName: { contains: term } } },
-              { from: { lastName: { contains: term } } },
-              { to: { firstName: { contains: term } } },
-              { to: { lastName: { contains: term } } },
-            ],
-          }))),
+        ...terms.map((term) => ({
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: Prisma.QueryMode.insensitive } })),
+        })),
       ],
     }
   }

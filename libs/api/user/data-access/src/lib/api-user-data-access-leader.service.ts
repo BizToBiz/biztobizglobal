@@ -13,6 +13,52 @@ export class ApiUserDataAccessLeaderService {
   constructor(private readonly data: ApiCoreDataAccessService) {}
 
   private async leaderChapters(leaderId: string): Promise<string[]> {
+    console.time('leaderChapters')
+    // const chapters = []
+
+    // const leadersChapters = await this.data.chapterMember.findMany({
+    //   where: {
+    //     OR: [
+    //       { memberId: leaderId, role: ChapterMemberRole.President },
+    //       { memberId: leaderId, role: ChapterMemberRole.VicePresident },
+    //       { memberId: leaderId, role: ChapterMemberRole.Chairman },
+    //     ],
+    //   },
+    //   include: { chapter: true },
+    // })
+    //
+    // for (const chapter of leadersChapters) {
+    //   chapters.push(chapter.chapter.id)
+    // }
+    //
+    // const leadersRegions = await this.data.region.findMany({
+    //   where: {
+    //     manager: { id: leaderId },
+    //   },
+    //   include: { chapters: true },
+    // })
+    //
+    // for (const region of leadersRegions) {
+    //   for (const chapter of region.chapters) {
+    //     chapters.push(chapter.id)
+    //   }
+    // }
+    //
+    // const leadersTerritories = await this.data.territory.findMany({
+    //   where: {
+    //     manager: { id: leaderId },
+    //   },
+    //   include: { regions: { include: { chapters: true } } },
+    // })
+    //
+    // for (const territory of leadersTerritories) {
+    //   for (const region of territory.regions) {
+    //     for (const chapter of region.chapters) {
+    //       chapters.push(chapter.id)
+    //     }
+    //   }
+    // }
+
     const chapters = await this.data.chapter.findMany({
       where: {
         OR: [
@@ -36,15 +82,14 @@ export class ApiUserDataAccessLeaderService {
         ],
       },
     })
+    console.timeEnd('leaderChapters')
     return chapters.map((chapter) => chapter.id)
   }
 
   private readonly searchFields = ['firstName', 'lastName', 'email']
   private async where(input: ListUserInput, leaderId?: string): Promise<Prisma.UserWhereInput> {
     const query = input?.search?.trim()
-    console.log(query)
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
-    console.log(terms)
     const leaderChapters = leaderId ? await this.leaderChapters(leaderId) : null
 
     function leaderSearch() {
@@ -61,13 +106,14 @@ export class ApiUserDataAccessLeaderService {
       // }
       return null
     }
+
     return {
       AND: [
         relationalSearch(),
         leaderSearch(),
         { status: UserStatus.Active },
         ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: Prisma.QueryMode.insensitive } })),
         })),
       ],
     }
@@ -75,11 +121,13 @@ export class ApiUserDataAccessLeaderService {
 
   async leaderUsers(info: GraphQLResolveInfo, leaderId: string, input?: ListUserInput) {
     const select = new PrismaSelect(info).value
-
+    console.time('leaderWhere')
+    const where = await this.where(input, leaderId)
+    console.timeEnd('leaderWhere')
     return this.data.user.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
-      where: await this.where(input),
+      where,
       ...select,
     })
   }

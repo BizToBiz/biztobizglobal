@@ -32,12 +32,12 @@ export class ApiReferralDataAccessAdminService {
         relationalSearch(),
         ...terms.map((term) => ({
           OR: [
-            { firstName: { contains: term, mode: 'insensitive' } },
-            { lastName: { contains: term, mode: 'insensitive' } },
-            { from: { firstName: { contains: term, mode: 'insensitive' } } },
-            { from: { lastName: { contains: term, mode: 'insensitive' } } },
-            { to: { firstName: { contains: term, mode: 'insensitive' } } },
-            { to: { lastName: { contains: term, mode: 'insensitive' } } },
+            { firstName: { contains: term, mode: Prisma.QueryMode.insensitive } },
+            { lastName: { contains: term, mode: Prisma.QueryMode.insensitive } },
+            { from: { firstName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { from: { lastName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { to: { firstName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { to: { lastName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
           ],
         })),
       ],

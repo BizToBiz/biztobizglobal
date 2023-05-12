@@ -34,7 +34,7 @@ export class ApiIndustryDataAccessUserService {
       AND: [
         relationalSearch(),
         ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: Prisma.QueryMode.insensitive } })),
         })),
       ],
     }
