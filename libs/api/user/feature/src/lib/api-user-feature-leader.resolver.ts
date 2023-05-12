@@ -9,7 +9,7 @@ import {
 } from '@biztobiz/api/user/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
 import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
-import { Logger, UseGuards } from '@nestjs/common'
+import { UseGuards } from '@nestjs/common'
 
 @Resolver()
 @UseGuards(GqlAuthGuard)
@@ -22,7 +22,9 @@ export class ApiUserFeatureLeaderResolver {
     @Info() info: GraphQLResolveInfo,
     @Args({ name: 'input', type: () => ListUserInput, nullable: true }) input?: ListUserInput,
   ) {
+    console.time('leaderUsers')
     return this.service.leaderUsers(info, leader.id, input)
+    console.timeEnd('leaderUsers')
   }
 
   @Query(() => [User], { nullable: true })
@@ -31,7 +33,6 @@ export class ApiUserFeatureLeaderResolver {
     @Info() info: GraphQLResolveInfo,
     @Args({ name: 'input', type: () => ListUserInput, nullable: true }) input?: ListUserInput,
   ) {
-    Logger.log(this.service.leaderChapterUsers(info, leader.id, input))
     return this.service.leaderChapterUsers(info, leader.id, input)
   }
   @Query(() => CorePaging, { nullable: true })

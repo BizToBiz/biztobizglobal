@@ -20,7 +20,7 @@ export class ApiReferralFeatureLeaderResolver {
   leaderReferrals(
     @CtxUser() leader: User,
     @Info() info: GraphQLResolveInfo,
-    @Args({ name: 'input', type: () => ListReferralInput, nullable: true }) input?: LeaderReferralInput,
+    @Args({ name: 'input', type: () => ListReferralInput, nullable: true }) input?: ListReferralInput,
   ) {
     return this.service.leaderReferrals(info, leader.id, input)
   }
@@ -28,7 +28,7 @@ export class ApiReferralFeatureLeaderResolver {
   @Query(() => CorePaging, { nullable: true })
   leaderCountReferrals(
     @CtxUser() leader: User,
-    @Args({ name: 'input', type: () => ListReferralInput, nullable: true }) input?: LeaderReferralInput,
+    @Args({ name: 'input', type: () => ListReferralInput, nullable: true }) input?: ListReferralInput,
   ) {
     return this.service.leaderCountReferrals(leader.id, input)
   }

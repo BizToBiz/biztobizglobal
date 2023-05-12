@@ -5,4 +5,7 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 export class ListUserInput extends CorePagingInput {
   @Field({ nullable: true })
   firstName?: string
+
+  @Field({ nullable: true })
+  lastName?: string
 }

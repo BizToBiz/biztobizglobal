@@ -32,9 +32,9 @@ export class ApiCompanyMemberDataAccessAdminService {
         relationalSearch(),
         ...terms.map((term) => ({
           OR: [
-            { company: { name: { contains: term, mode: 'insensitive' } } },
-            { member: { firstName: { contains: term, mode: 'insensitive' } } },
-            { member: { lastName: { contains: term, mode: 'insensitive' } } },
+            { company: { name: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { member: { firstName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { member: { lastName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
           ],
         })),
       ],

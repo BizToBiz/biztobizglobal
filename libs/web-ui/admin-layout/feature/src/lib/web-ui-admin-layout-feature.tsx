@@ -1,13 +1,14 @@
 import { Fragment, useContext, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Bars3BottomLeftIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { User } from '@biztobiz/shared/util-sdk'
+import { AdminUsersDocument, User } from '@biztobiz/shared/util-sdk'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { currentPathAtom, identityAtom, searchAtom, spyAtom } from '@biztobiz/web/global/data-access'
 import { NavigationInterface } from '@biztobiz/shared/utils/feature'
-import WebUiUserSelect from './web-ui-user-select'
+
 import { SharedAuthContext } from '@biztobiz/shared/auth/data-access'
+import { WebUiUserSelect } from '@biztobiz/web-ui/user-select'
 
 const userNavigation: { name: string; href: string }[] = [
   // { name: 'Your Profile', href: '#' },
@@ -337,7 +338,12 @@ export function WebUiAdminLayoutFeature(props: WebAdminDashboardFeatureProps) {
                         Choose a User to Emulate
                       </Dialog.Title>
                       <div className="mt-2">
-                        <WebUiUserSelect selectedPerson={selectedPerson} setSelectedPerson={setSelectedPerson} />
+                        <WebUiUserSelect
+                          document={AdminUsersDocument}
+                          selectedPerson={selectedPerson}
+                          setSelectedPerson={setSelectedPerson}
+                          label="Choose a User to Emulate"
+                        />
                       </div>
                     </div>
                   </div>

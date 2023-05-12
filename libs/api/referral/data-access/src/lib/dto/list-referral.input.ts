@@ -4,5 +4,14 @@ import { CorePagingInput } from '@biztobiz/api/core/data-access'
 @InputType()
 export class ListReferralInput extends CorePagingInput {
   @Field({ nullable: true })
-  firstName?: string
+  startDate: Date
+
+  @Field({ nullable: true })
+  endDate?: Date
+
+  @Field({ nullable: true })
+  fromId?: string
+
+  @Field({ nullable: true })
+  toId?: string
 }

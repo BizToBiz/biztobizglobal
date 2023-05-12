@@ -25,13 +25,15 @@ export class ApiMeetingDataAccessAdminService {
       // if (input?.memberId) {
       //   return { members: { some: { id: input.memberId } } }
       // }
-      if (input?.chapterId) {
-        return { chapter: { id: input.chapterId } }
-      }
       return null
     }
     return {
-      AND: [relationalSearch(), { OR: [...terms.map((term) => ({ chapter: { name: { contains: term } } }))] }],
+      AND: [
+        relationalSearch(),
+        ...terms.map((term) => ({
+          OR: [{ chapter: { name: { contains: term, mode: Prisma.QueryMode.insensitive } } }],
+        })),
+      ],
     }
   }
 

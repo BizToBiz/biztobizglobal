@@ -16,12 +16,7 @@ export class ApiChapterMemberDataAccessAdminService {
   private where(input: AdminListChapterMemberInput): Prisma.ChapterMemberWhereInput {
     const query = input?.search?.trim()
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
-    function capitalizeFirstLetter(str) {
-      // converting first letter to uppercase
-      const capitalized = str.charAt(0).toUpperCase() + str.slice(1)
 
-      return capitalized
-    }
     function relationalSearch() {
       // TODO: implement relational search for chapter-member
       // if (input?.regionId) {
@@ -40,12 +35,9 @@ export class ApiChapterMemberDataAccessAdminService {
         relationalSearch(),
         ...terms.map((term) => ({
           OR: [
-            { chapter: { name: { contains: term.toLowerCase() } } },
-            { member: { firstName: { contains: term.toLowerCase() } } },
-            { member: { lastName: { contains: term.toLowerCase() } } },
-            { chapter: { name: { contains: capitalizeFirstLetter(term) } } },
-            { member: { firstName: { contains: capitalizeFirstLetter(term) } } },
-            { member: { lastName: { contains: capitalizeFirstLetter(term) } } },
+            { chapter: { name: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { member: { firstName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
+            { member: { lastName: { contains: term, mode: Prisma.QueryMode.insensitive } } },
           ],
         })),
       ],

@@ -43,7 +43,6 @@ export class ApiReferralDataAccessLeaderService {
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
     const leaderChapters = leaderId ? await this.leaderChapters(leaderId) : null
 
-    // TODO: implement leader search query
     function leaderSearch() {
       return {
         AND: [{ fromChapterId: { in: leaderChapters } }, { from: { status: UserStatus.Active } }],
@@ -51,21 +50,39 @@ export class ApiReferralDataAccessLeaderService {
     }
 
     function relationalSearch() {
-      // TODO: implement relational search for referral
-      // if (input?.regionId) {
-      //   return { regionId: input.regionId }
-      // }
-      // if (input?.memberId) {
-      //   return { members: { some: { id: input.memberId } } }
-      // }
+      if (input?.fromId) {
+        return { fromId: input.fromId }
+      }
+      if (input?.toId) {
+        return { toId: input.toId }
+      }
       return null
     }
+
+    function dateSearch(): Prisma.ReferralWhereInput {
+      if (input?.startDate && input?.endDate) {
+        return {
+          AND: [{ referralDate: { gte: input.startDate } }, { referralDate: { lte: input.endDate } }],
+        }
+      } else if (input?.startDate) {
+        return {
+          referralDate: { gte: input.startDate },
+        }
+      } else if (input?.endDate) {
+        return {
+          referralDate: { lte: input.endDate },
+        }
+      }
+      return null
+    }
+
     return {
       AND: [
         relationalSearch(),
         leaderId ? leaderSearch() : null,
+        dateSearch(),
         ...terms.map((term) => ({
-          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: 'insensitive' } })),
+          OR: this.searchFields.map((field) => ({ [field]: { contains: term, mode: Prisma.QueryMode.insensitive } })),
         })),
       ],
     }
@@ -73,10 +90,11 @@ export class ApiReferralDataAccessLeaderService {
 
   async leaderReferrals(info: GraphQLResolveInfo, leaderId: string, input?: ListReferralInput) {
     const select = new PrismaSelect(info).value
+    const where = await this.where(input, leaderId)
     return this.data.referral.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
-      where: await this.where(input, leaderId),
+      where: where,
       orderBy: { createdAt: 'desc' },
       ...select,
     })
