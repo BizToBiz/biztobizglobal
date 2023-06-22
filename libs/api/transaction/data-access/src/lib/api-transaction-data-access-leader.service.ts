@@ -43,9 +43,11 @@ export class ApiTransactionDataAccessLeaderService {
     const terms: string[] = query?.includes(' ') ? query.split(' ') : [query]
     const leaderChapters = await this.leaderChapters(leaderId)
 
+    console.log(leaderChapters)
+
     function leaderSearch(): Prisma.TransactionWhereInput {
       return {
-        OR: [{ user: { chapter: { id: { in: leaderChapters } } } }, { chapter: { id: { in: leaderChapters } } }],
+        OR: [{ user: { chapter: { chapterId: { in: leaderChapters } } } }, { chapter: { id: { in: leaderChapters } } }],
       }
     }
 
@@ -90,17 +92,17 @@ export class ApiTransactionDataAccessLeaderService {
         relationalSearch(),
         dateSearch(),
         amountSearch(),
-        ...(terms &&
-          terms.map((term) => ({
-            OR: [
-              { referral: { firstName: { contains: term } } },
-              { referral: { lastName: { contains: term } } },
-              { referral: { from: { firstName: { contains: term } } } },
-              { referral: { from: { lastName: { contains: term } } } },
-              { referral: { to: { firstName: { contains: term } } } },
-              { referral: { to: { lastName: { contains: term } } } },
-            ],
-          }))),
+        // ...(terms &&
+        //   terms.map((term) => ({
+        //     OR: [
+        //       { referral: { firstName: { contains: term } } },
+        //       { referral: { lastName: { contains: term } } },
+        //       { referral: { from: { firstName: { contains: term } } } },
+        //       { referral: { from: { lastName: { contains: term } } } },
+        //       { referral: { to: { firstName: { contains: term } } } },
+        //       { referral: { to: { lastName: { contains: term } } } },
+        //     ],
+        //   }))),
       ],
     }
   }
@@ -128,11 +130,14 @@ export class ApiTransactionDataAccessLeaderService {
     const orderBy = this.getOrderBy(input?.orderBy, input?.orderDirection ?? 'desc')
     const select = new PrismaSelect(info).value
 
+    const where = await this.where(input, leaderId)
+    console.log(JSON.stringify(where))
+
     return this.data.transaction.findMany({
       take: input?.take ?? 10,
       skip: input?.skip ?? 0,
       orderBy: orderBy,
-      where: await this.where(input, leaderId),
+      where: where,
       ...select,
     })
   }
