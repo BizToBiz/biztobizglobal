@@ -1,17 +1,18 @@
 {
+  "name": "native-auth-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/native/auth/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/native/auth/feature/**/*.{ts,tsx,js,jsx}"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/native/auth/feature"],
       "options": {
         "jestConfig": "libs/native/auth/feature/jest.config.ts",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": ["scope:native", "type:feature"],
-  "name": "native-auth-feature"
+  "tags": ["scope:native", "type:feature"]
 }

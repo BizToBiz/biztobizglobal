@@ -1,16 +1,18 @@
 {
+  "name": "api-power-hour-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/power-hour/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/api/power-hour/feature/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/power-hour/feature"],
       "options": {
         "jestConfig": "libs/api/power-hour/feature/jest.config.js",
@@ -18,7 +20,7 @@
       }
     },
     "e2e-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/power-hour/feature"],
       "options": {
         "jestConfig": "libs/api/power-hour/feature/jest.e2e.config.js",
@@ -26,7 +28,7 @@
       }
     },
     "load-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/power-hour/feature"],
       "options": {
         "jestConfig": "libs/api/power-hour/feature/jest.load.config.js",
@@ -34,6 +36,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:feature"],
-  "name": "api-power-hour-feature"
+  "tags": ["scope:api", "type:feature"]
 }

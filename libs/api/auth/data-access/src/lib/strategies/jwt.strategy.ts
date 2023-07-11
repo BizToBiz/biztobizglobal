@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { Request } from 'express'
 import { ExtractJwt, Strategy } from 'passport-jwt'
@@ -8,6 +8,7 @@ import { User } from '@biztobiz/api/user/data-access'
 
 function headerAndCookieExtractor(req: Request): string {
   const token = ExtractJwt.fromAuthHeaderAsBearerToken()(req)
+  Logger.log({ token })
   if (!token) {
     return cookieExtractor(req)
   }
@@ -16,6 +17,7 @@ function headerAndCookieExtractor(req: Request): string {
 
 function cookieExtractor(req: Request): string {
   const name = process.env.API_COOKIE_NAME || '__session'
+  Logger.log('cookie', req?.cookies?.[name])
   return req?.cookies?.[name] ? req.cookies[name] : undefined
 }
 
@@ -28,11 +30,21 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(payload: JwtDto): Promise<User> {
+  async validate(request: Request, payload: JwtDto): Promise<User> {
+    // Check if the route is public
+    // const isPublicRoute = request?.route?.path === '/public-route' // Adjust the path as per your requirements
+
+    // If it's a public route, return true to allow access without validation
+    // if (isPublicRoute) {
+    //   return true
+    // }
+
+    Logger.log({ payload })
+
     const user = await this.auth.validateUser(payload.userId)
-    if (!user) {
-      throw new UnauthorizedException()
-    }
+    // if (!user) {
+    //   throw new UnauthorizedException()
+    // }
     return user
   }
 }

@@ -1998,6 +1998,18 @@ export enum PowerHourStatus {
   Proposed = 'Proposed',
 }
 
+export type PublicListChapterInput = {
+  memberId?: InputMaybe<Scalars['String']>
+  orderBy?: InputMaybe<Scalars['String']>
+  orderDirection?: InputMaybe<Scalars['String']>
+  regionId?: InputMaybe<Scalars['String']>
+  search?: InputMaybe<Scalars['String']>
+  skip?: InputMaybe<Scalars['Float']>
+  status?: InputMaybe<Array<Scalars['String']>>
+  substituteGroupId?: InputMaybe<Scalars['String']>
+  take?: InputMaybe<Scalars['Float']>
+}
+
 export type Query = {
   __typename?: 'Query'
   accountProfile?: Maybe<User>
@@ -2119,6 +2131,9 @@ export type Query = {
   leaderUser?: Maybe<User>
   leaderUsers?: Maybe<Array<User>>
   me?: Maybe<User>
+  publicChapter?: Maybe<Chapter>
+  publicChapters?: Maybe<Array<Chapter>>
+  publicCountChapters?: Maybe<CorePaging>
   uptime?: Maybe<Scalars['Float']>
   userAttendanceReminder?: Maybe<AttendanceReminder>
   userAttendanceReminders?: Maybe<Array<AttendanceReminder>>
@@ -2645,6 +2660,18 @@ export type QueryLeaderUserArgs = {
 
 export type QueryLeaderUsersArgs = {
   input?: InputMaybe<ListUserInput>
+}
+
+export type QueryPublicChapterArgs = {
+  chapterId: Scalars['String']
+}
+
+export type QueryPublicChaptersArgs = {
+  input?: InputMaybe<PublicListChapterInput>
+}
+
+export type QueryPublicCountChaptersArgs = {
+  input?: InputMaybe<PublicListChapterInput>
 }
 
 export type QueryUserAttendanceReminderArgs = {
@@ -7626,6 +7653,133 @@ export type LeaderUserPaginationQuery = {
   } | null
 }
 
+export type PublicChapterDetailsFragment = {
+  __typename?: 'Chapter'
+  id?: string | null
+  createdAt?: any | null
+  updatedAt?: any | null
+  establishedDate?: any | null
+  name?: string | null
+  description?: string | null
+  avatarEmail?: string | null
+  avatarUrl?: string | null
+  latitude?: string | null
+  longitude?: string | null
+  city?: string | null
+  state?: string | null
+  facebook?: string | null
+  meetingDay?: DayOfWeek | null
+  meetingTime?: string | null
+  meetingDetails?: string | null
+  status?: ChapterStatus | null
+  meetings?: Array<{ __typename?: 'Meeting'; id?: string | null }> | null
+  members?: Array<{ __typename?: 'ChapterMember'; id?: string | null }> | null
+  transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+  referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
+  referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
+  substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
+  region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
+  attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+}
+
+export type PublicChapterQueryVariables = Exact<{
+  chapterId: Scalars['String']
+}>
+
+export type PublicChapterQuery = {
+  __typename?: 'Query'
+  chapter?: {
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    establishedDate?: any | null
+    name?: string | null
+    description?: string | null
+    avatarEmail?: string | null
+    avatarUrl?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
+    state?: string | null
+    facebook?: string | null
+    meetingDay?: DayOfWeek | null
+    meetingTime?: string | null
+    meetingDetails?: string | null
+    status?: ChapterStatus | null
+    meetings?: Array<{ __typename?: 'Meeting'; id?: string | null }> | null
+    members?: Array<{ __typename?: 'ChapterMember'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
+    referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+  } | null
+}
+
+export type PublicChaptersQueryVariables = Exact<{
+  input?: InputMaybe<PublicListChapterInput>
+}>
+
+export type PublicChaptersQuery = {
+  __typename?: 'Query'
+  chapters?: Array<{
+    __typename?: 'Chapter'
+    id?: string | null
+    createdAt?: any | null
+    updatedAt?: any | null
+    establishedDate?: any | null
+    name?: string | null
+    description?: string | null
+    avatarEmail?: string | null
+    avatarUrl?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
+    state?: string | null
+    facebook?: string | null
+    meetingDay?: DayOfWeek | null
+    meetingTime?: string | null
+    meetingDetails?: string | null
+    status?: ChapterStatus | null
+    meetings?: Array<{ __typename?: 'Meeting'; id?: string | null }> | null
+    members?: Array<{ __typename?: 'ChapterMember'; id?: string | null }> | null
+    transactions?: Array<{ __typename?: 'Transaction'; id?: string | null }> | null
+    referralsFrom?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
+    referralsTo?: Array<{ __typename?: 'Referral'; id?: string | null }> | null
+    substituteGroup?: { __typename?: 'SubstituteGroup'; id?: string | null; name?: string | null } | null
+    region?: { __typename?: 'Region'; id?: string | null; name?: string | null } | null
+    attendanceReminders?: Array<{ __typename?: 'AttendanceReminder'; id?: string | null }> | null
+  }> | null
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+    sum?: number | null
+  } | null
+}
+
+export type PublicChapterPaginationQueryVariables = Exact<{
+  input?: InputMaybe<PublicListChapterInput>
+}>
+
+export type PublicChapterPaginationQuery = {
+  __typename?: 'Query'
+  counters?: {
+    __typename?: 'CorePaging'
+    count?: number | null
+    take?: number | null
+    page?: number | null
+    skip?: number | null
+    total?: number | null
+    sum?: number | null
+  } | null
+}
+
 export const AdminAttendanceReminderDetailsFragmentDoc = gql`
   fragment AdminAttendanceReminderDetails on AttendanceReminder {
     id
@@ -8441,6 +8595,53 @@ export const LeaderUserDetailsFragmentDoc = gql`
       id
     }
     presence {
+      id
+    }
+  }
+`
+export const PublicChapterDetailsFragmentDoc = gql`
+  fragment PublicChapterDetails on Chapter {
+    id
+    createdAt
+    updatedAt
+    establishedDate
+    name
+    description
+    avatarEmail
+    avatarUrl
+    latitude
+    longitude
+    city
+    state
+    facebook
+    meetingDay
+    meetingTime
+    meetingDetails
+    status
+    meetings {
+      id
+    }
+    members {
+      id
+    }
+    transactions {
+      id
+    }
+    referralsFrom {
+      id
+    }
+    referralsTo {
+      id
+    }
+    substituteGroup {
+      id
+      name
+    }
+    region {
+      id
+      name
+    }
+    attendanceReminders {
       id
     }
   }
@@ -14881,4 +15082,137 @@ export type LeaderUserPaginationLazyQueryHookResult = ReturnType<typeof useLeade
 export type LeaderUserPaginationQueryResult = Apollo.QueryResult<
   LeaderUserPaginationQuery,
   LeaderUserPaginationQueryVariables
+>
+export const PublicChapterDocument = gql`
+  query PublicChapter($chapterId: String!) {
+    chapter: publicChapter(chapterId: $chapterId) {
+      ...PublicChapterDetails
+    }
+  }
+  ${PublicChapterDetailsFragmentDoc}
+`
+
+/**
+ * __usePublicChapterQuery__
+ *
+ * To run a query within a React component, call `usePublicChapterQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicChapterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePublicChapterQuery({
+ *   variables: {
+ *      chapterId: // value for 'chapterId'
+ *   },
+ * });
+ */
+export function usePublicChapterQuery(
+  baseOptions: Apollo.QueryHookOptions<PublicChapterQuery, PublicChapterQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<PublicChapterQuery, PublicChapterQueryVariables>(PublicChapterDocument, options)
+}
+export function usePublicChapterLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<PublicChapterQuery, PublicChapterQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<PublicChapterQuery, PublicChapterQueryVariables>(PublicChapterDocument, options)
+}
+export type PublicChapterQueryHookResult = ReturnType<typeof usePublicChapterQuery>
+export type PublicChapterLazyQueryHookResult = ReturnType<typeof usePublicChapterLazyQuery>
+export type PublicChapterQueryResult = Apollo.QueryResult<PublicChapterQuery, PublicChapterQueryVariables>
+export const PublicChaptersDocument = gql`
+  query PublicChapters($input: PublicListChapterInput) {
+    chapters: publicChapters(input: $input) {
+      ...PublicChapterDetails
+    }
+    counters: publicCountChapters(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${PublicChapterDetailsFragmentDoc}
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __usePublicChaptersQuery__
+ *
+ * To run a query within a React component, call `usePublicChaptersQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicChaptersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePublicChaptersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function usePublicChaptersQuery(
+  baseOptions?: Apollo.QueryHookOptions<PublicChaptersQuery, PublicChaptersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<PublicChaptersQuery, PublicChaptersQueryVariables>(PublicChaptersDocument, options)
+}
+export function usePublicChaptersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<PublicChaptersQuery, PublicChaptersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<PublicChaptersQuery, PublicChaptersQueryVariables>(PublicChaptersDocument, options)
+}
+export type PublicChaptersQueryHookResult = ReturnType<typeof usePublicChaptersQuery>
+export type PublicChaptersLazyQueryHookResult = ReturnType<typeof usePublicChaptersLazyQuery>
+export type PublicChaptersQueryResult = Apollo.QueryResult<PublicChaptersQuery, PublicChaptersQueryVariables>
+export const PublicChapterPaginationDocument = gql`
+  query PublicChapterPagination($input: PublicListChapterInput) {
+    counters: publicCountChapters(input: $input) {
+      ...CorePagingDetails
+    }
+  }
+  ${CorePagingDetailsFragmentDoc}
+`
+
+/**
+ * __usePublicChapterPaginationQuery__
+ *
+ * To run a query within a React component, call `usePublicChapterPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicChapterPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePublicChapterPaginationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function usePublicChapterPaginationQuery(
+  baseOptions?: Apollo.QueryHookOptions<PublicChapterPaginationQuery, PublicChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<PublicChapterPaginationQuery, PublicChapterPaginationQueryVariables>(
+    PublicChapterPaginationDocument,
+    options,
+  )
+}
+export function usePublicChapterPaginationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<PublicChapterPaginationQuery, PublicChapterPaginationQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<PublicChapterPaginationQuery, PublicChapterPaginationQueryVariables>(
+    PublicChapterPaginationDocument,
+    options,
+  )
+}
+export type PublicChapterPaginationQueryHookResult = ReturnType<typeof usePublicChapterPaginationQuery>
+export type PublicChapterPaginationLazyQueryHookResult = ReturnType<typeof usePublicChapterPaginationLazyQuery>
+export type PublicChapterPaginationQueryResult = Apollo.QueryResult<
+  PublicChapterPaginationQuery,
+  PublicChapterPaginationQueryVariables
 >

@@ -1,24 +1,24 @@
 {
+  "name": "web-leader-referral",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-leader/referral/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-leader/referral/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-leader/referral"],
       "options": {
         "jestConfig": "libs/web-leader/referral/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-leader-referral"
+  }
 }

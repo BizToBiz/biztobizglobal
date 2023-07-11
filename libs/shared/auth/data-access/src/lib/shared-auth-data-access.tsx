@@ -6,6 +6,7 @@ import {
   useForgotPasswordMutation,
   useLoginMutation,
   useLogoutMutation,
+  useMeQuery,
   User,
   useRegisterMutation,
   useResetPasswordMutation,
@@ -28,6 +29,7 @@ export interface SharedAuthContextProps {
   restoreAdminUser: () => void
   formError: WebUiAlertProps | null
   setFormError: (error: WebUiAlertProps | null) => void
+  isAuthenticated: boolean
 }
 
 const SharedAuthContext = createContext<SharedAuthContextProps>({
@@ -40,6 +42,7 @@ const SharedAuthContext = createContext<SharedAuthContextProps>({
   restoreAdminUser: () => null,
   formError: null,
   setFormError: () => null,
+  isAuthenticated: false,
 })
 
 const { Provider } = SharedAuthContext
@@ -63,6 +66,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children 
   const [forgotPasswordMutation] = useForgotPasswordMutation()
   const [resetPasswordMutation] = useResetPasswordMutation()
   const [spyOnUserMutation] = useSpyOnUserMutation()
+  const { data } = useMeQuery()
   async function login(input: LoginInput) {
     try {
       const res = await loginMutation({ variables: { input } })
@@ -171,6 +175,7 @@ function SharedAuthProvider({ identityAtom, isRememberedAtom, spyAtom, children 
         restoreAdminUser,
         formError,
         setFormError,
+        isAuthenticated: !!data?.me?.id,
       }}
     >
       {children}

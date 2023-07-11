@@ -1,16 +1,18 @@
 {
+  "name": "api-industry-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/industry/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/api/industry/feature/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/industry/feature"],
       "options": {
         "jestConfig": "libs/api/industry/feature/jest.config.js",
@@ -18,7 +20,7 @@
       }
     },
     "e2e-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/industry/feature"],
       "options": {
         "jestConfig": "libs/api/industry/feature/jest.e2e.config.js",
@@ -26,7 +28,7 @@
       }
     },
     "load-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/industry/feature"],
       "options": {
         "jestConfig": "libs/api/industry/feature/jest.load.config.js",
@@ -34,6 +36,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:feature"],
-  "name": "api-industry-feature"
+  "tags": ["scope:api", "type:feature"]
 }

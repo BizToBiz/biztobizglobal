@@ -1,17 +1,19 @@
-import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql'
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { GraphQLResolveInfo } from 'graphql'
 import {
+  ApiChapterDataAccessUserService,
+  Chapter,
   UserCreateChapterInput,
   UserListChapterInput,
   UserUpdateChapterInput,
-  ApiChapterDataAccessUserService,
-  Chapter,
 } from '@biztobiz/api/chapter/data-access'
 import { CorePaging } from '@biztobiz/api/core/data-access'
-import { CtxUser } from '@biztobiz/api/auth/util'
+import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
 import { User } from '@biztobiz/api/user/data-access'
+import { UseGuards } from '@nestjs/common'
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class ApiChapterFeatureUserResolver {
   constructor(private readonly service: ApiChapterDataAccessUserService) {}
 

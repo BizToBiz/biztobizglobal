@@ -1,17 +1,18 @@
 {
+  "name": "web-auth-ui",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web/auth/ui/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/web/auth/ui/**/*.{ts,tsx,js,jsx}"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web/auth/ui"],
       "options": {
         "jestConfig": "libs/web/auth/ui/jest.config.ts",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": ["scope:web", "type:ui"],
-  "name": "web-auth-ui"
+  "tags": ["scope:web", "type:ui"]
 }

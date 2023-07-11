@@ -1,24 +1,24 @@
 {
+  "name": "web-admin-router",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-admin/router/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-admin/router/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-admin/router"],
       "options": {
         "jestConfig": "libs/web-admin/router/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-admin-router"
+  }
 }

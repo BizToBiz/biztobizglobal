@@ -1,24 +1,24 @@
 {
+  "name": "web-admin-attendance-reminder",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-admin/attendance-reminder/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-admin/attendance-reminder/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-admin/attendance-reminder"],
       "options": {
         "jestConfig": "libs/web-admin/attendance-reminder/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-admin-attendance-reminder"
+  }
 }

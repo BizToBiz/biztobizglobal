@@ -1,17 +1,18 @@
 {
+  "name": "api-enums-data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/enums/data-access/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/api/enums/data-access/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/enums/data-access"],
       "options": {
         "jestConfig": "libs/api/enums/data-access/jest.config.ts",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "api-enums-data-access"
+  "tags": []
 }

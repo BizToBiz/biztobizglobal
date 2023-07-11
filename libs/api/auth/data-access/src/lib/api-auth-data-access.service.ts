@@ -173,7 +173,10 @@ export class ApiAuthDataAccessService {
   }
 
   public findUserById(userId: string) {
-    return this.data.user.findUnique({ where: { id: userId } })
+    if (userId) {
+      return this.data.user.findUnique({ where: { id: userId } })
+    }
+    throw 'No User Id'
   }
 
   public findUserByUsername(username: string) {

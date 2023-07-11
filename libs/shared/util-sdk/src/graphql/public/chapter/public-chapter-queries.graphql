@@ -1,0 +1,20 @@
+query PublicChapter($chapterId: String!) {
+  chapter: publicChapter(chapterId: $chapterId) {
+    ...PublicChapterDetails
+  }
+}
+
+query PublicChapters($input: PublicListChapterInput) {
+  chapters: publicChapters(input: $input) {
+    ...PublicChapterDetails
+  }
+  counters: publicCountChapters(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicChapterPagination($input: PublicListChapterInput) {
+  counters: publicCountChapters(input: $input) {
+    ...CorePagingDetails
+  }
+}

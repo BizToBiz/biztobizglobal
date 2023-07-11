@@ -1,17 +1,18 @@
 {
+  "name": "previous-api-meeting-data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/meeting/data-access/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/api/meeting/data-access/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/meeting/data-access"],
       "options": {
         "jestConfig": "libs/api/meeting/data-access/jest.config.ts",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"],
-  "name": "previous-api-meeting-data-access"
+  "tags": ["scope:api", "type:data-access"]
 }

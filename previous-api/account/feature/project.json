@@ -1,17 +1,18 @@
 {
+  "name": "previous-api-account-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/account/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/api/account/feature/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/account/feature"],
       "options": {
         "jestConfig": "libs/api/account/feature/jest.config.ts",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:feature"],
-  "name": "previous-api-account-feature"
+  "tags": ["scope:api", "type:feature"]
 }

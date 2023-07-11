@@ -20,7 +20,7 @@ export function WebLeaderTransactionReferralReport(props: WebLeaderTransactionRe
   const [search] = useAtom(searchAtom)
   const [isDev] = useAtom(isDevAtom)
   const [skip, setSkip] = useState(0)
-  const [orderBy, setOrderBy] = useState('createdAt')
+  const [orderBy, setOrderBy] = useState('date')
   const [orderDirection, setOrderDirection] = useState<'asc' | 'desc'>('desc')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')

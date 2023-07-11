@@ -23,7 +23,7 @@ export interface WebUiFormFieldOptions {
   placeholder?: string
   required?: true
   customWrapper?: (children: ReactNode) => JSX.Element
-  defaultValue?: string | number | readonly string[] | undefined
+  defaultValue?: string | number | readonly string[] | undefined | null
   defaultChecked?: boolean
   enum?: { [s: string]: unknown } | ArrayLike<unknown>
   selectOptions?: { label: string; value: string }[]

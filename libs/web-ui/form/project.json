@@ -1,24 +1,24 @@
 {
+  "name": "web-ui-form",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-ui/form/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-ui/form/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-ui/form"],
       "options": {
         "jestConfig": "libs/web-ui/form/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-ui-form"
+  }
 }

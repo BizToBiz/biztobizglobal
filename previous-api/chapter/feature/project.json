@@ -1,17 +1,18 @@
 {
-  "root": "libs/api/chapter/feature",
+  "name": "previous-api-chapter-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/chapter/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/api/chapter/feature/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/chapter/feature"],
       "options": {
         "jestConfig": "libs/api/chapter/feature/jest.config.js",
@@ -19,7 +20,7 @@
       }
     },
     "e2e-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/chapter/feature"],
       "options": {
         "jestConfig": "libs/api/chapter/feature/jest.e2e.config.js",
@@ -27,7 +28,7 @@
       }
     },
     "load-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/chapter/feature"],
       "options": {
         "jestConfig": "libs/api/chapter/feature/jest.load.config.js",
@@ -35,6 +36,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:feature"],
-  "name": "previous-api-chapter-feature"
+  "tags": ["scope:api", "type:feature"]
 }

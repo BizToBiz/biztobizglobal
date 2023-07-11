@@ -1,17 +1,18 @@
 {
+  "name": "previous-api-substitute-group-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/substitute-group/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/api/substitute-group/feature/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/substitute-group/feature"],
       "options": {
         "jestConfig": "libs/api/substitute-group/feature/jest.config.js",
@@ -19,7 +20,7 @@
       }
     },
     "e2e-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/substitute-group/feature"],
       "options": {
         "jestConfig": "libs/api/substitute-group/feature/jest.e2e.config.js",
@@ -27,7 +28,7 @@
       }
     },
     "load-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/api/substitute-group/feature"],
       "options": {
         "jestConfig": "libs/api/substitute-group/feature/jest.load.config.js",
@@ -35,6 +36,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:feature"],
-  "name": "previous-api-substitute-group-feature"
+  "tags": ["scope:api", "type:feature"]
 }

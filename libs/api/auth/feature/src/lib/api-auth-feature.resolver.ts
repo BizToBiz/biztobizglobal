@@ -8,8 +8,8 @@ import {
   UserToken,
 } from '@biztobiz/api/auth/data-access'
 import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Logger, UseGuards } from '@nestjs/common'
-import { CtxUser, GqlAuthGuard } from '@biztobiz/api/auth/util'
+import { Logger } from '@nestjs/common'
+import { CtxUser } from '@biztobiz/api/auth/util'
 import { User } from '@biztobiz/api/user/data-access'
 
 @Resolver(() => UserToken)
@@ -17,8 +17,8 @@ export class ApiAuthFeatureResolver {
   constructor(private readonly service: ApiAuthDataAccessService) {}
 
   @Query(() => User, { nullable: true })
-  @UseGuards(GqlAuthGuard)
   async me(@CtxUser() user: User) {
+    console.log({ user })
     return user
   }
 

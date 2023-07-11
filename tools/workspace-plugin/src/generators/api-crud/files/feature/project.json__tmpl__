@@ -1,0 +1,39 @@
+{
+  "root": "libs/<%= filePath %>/<%= type %>",
+  "sourceRoot": "libs/<%= filePath %>/<%= type %>/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/<%= filePath %>/<%= type %>/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["coverage/libs/<%= filePath %>/<%= type %>"],
+      "options": {
+        "jestConfig": "libs/<%= filePath %>/<%= type %>/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e-api": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["coverage/libs/<%= filePath %>/<%= type %>"],
+      "options": {
+        "jestConfig": "libs/<%= filePath %>/<%= type %>/jest.e2e.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "load-api": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["coverage/libs/<%= filePath %>/<%= type %>"],
+      "options": {
+        "jestConfig": "libs/<%= filePath %>/<%= type %>/jest.load.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:<%= directory %>", "type:<%= type %>"]
+}

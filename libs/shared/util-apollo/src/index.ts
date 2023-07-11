@@ -4,13 +4,22 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { onError } from 'apollo-link-error'
+import { createContext } from 'react'
+import ws from 'ws'
 
-export function createApolloClient(uri: string, wsuri: string, getHeaders?: () => Promise<{ authorization?: string }>) {
-  const httpLink = createHttpLink({
-    uri,
-  })
+const isBrowser = typeof window !== 'undefined'
+
+const initialState = isBrowser ? window.__INITIAL_STATE__ : {}
+export function createApolloClient(
+  uri: string,
+  getHeaders?: () => Promise<{ authorization?: string }>,
+  ssrMode = true,
+) {
+  const httpLink = createHttpLink({ uri })
 
   const authLink = setContext(async (_, { headers }) => {
+    const headers1 = await getHeaders()
+    console.log({ headers1 })
     // return the headers to the context so httpLink can read them
     const authHeader = await getHeaders()
     return {
@@ -18,16 +27,20 @@ export function createApolloClient(uri: string, wsuri: string, getHeaders?: () =
     }
   })
 
-  const subClient = new SubscriptionClient(wsuri, {
-    connectionParams: async () => {
-      return getHeaders()
+  const subClient = new SubscriptionClient(
+    uri.replace('http', 'ws'),
+    {
+      connectionParams: async () => {
+        return getHeaders()
+      },
+      lazy: true,
+      reconnect: true,
+      timeout: 45000,
     },
-    lazy: true,
-    reconnect: true,
-    timeout: 45000,
-  })
+    ws,
+  )
 
-  const ws = new WebSocketLink(subClient)
+  const socket = new WebSocketLink(subClient)
 
   function closeSocket(): void {
     subClient.unsubscribeAll()
@@ -72,7 +85,7 @@ export function createApolloClient(uri: string, wsuri: string, getHeaders?: () =
       const definition = getMainDefinition(query)
       return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
     },
-    ws,
+    socket,
     authLink,
   )
 
@@ -89,10 +102,13 @@ export function createApolloClient(uri: string, wsuri: string, getHeaders?: () =
 
   const client = new ApolloClient({
     link: link.concat(httpLink),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache().restore(initialState),
     defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
+    ssrMode,
   })
 
   // TODO: Fix merge logic when apollo updates.
   return { client, closeSocket }
 }
+
+export default createContext(initialState)

@@ -3,7 +3,7 @@ import { WebUiForm, WebUiFormField } from '@biztobiz/web-ui/form'
 import { WebUiAlert, WebUiAlertProps } from '@biztobiz/web-ui/alert'
 
 export interface WebAuthUiProps {
-  error?: WebUiAlertProps
+  error?: WebUiAlertProps | null
   title?: string
   subtitle?: string | ReactNode
   fields: WebUiFormField[]
