@@ -1,23 +1,17 @@
-const nrwlConfig = require('@nrwl/react/plugins/webpack.js')
+const { composePlugins, withNx } = require('@nrwl/webpack')
+const { merge } = require('webpack-merge')
+const { withReact } = require('@nrwl/react')
 
-module.exports = (config) => {
-  nrwlConfig(config)
-  config.module.hashFunction = 'xxhash64'
-  return {
-    ...config,
+// Nx plugins for webpack.
+module.exports = composePlugins(withNx(), withReact(), (config, { options, context }) => {
+  return merge(config, {
     module: {
       rules: [
-        ...config.module.rules,
         {
-          test: /\.css$/,
-          use: [
-            {
-              loader: 'postcss-loader',
-            },
-          ],
+          test: /\.css$/i,
+          use: ['postcss-loader'],
         },
       ],
     },
-    ignoreWarnings: [/Failed to parse source map/],
-  }
-}
+  })
+})

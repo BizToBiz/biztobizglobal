@@ -1,4 +1,5 @@
 {
+  "name": "web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/web/src",
   "projectType": "application",
@@ -26,7 +27,8 @@
         ],
         "styles": ["libs/web/style/src/styles.css"],
         "scripts": [],
-        "webpackConfig": "webpack.config.js"
+        "webpackConfig": "webpack.config.js",
+        "isolatedConfig": true
       },
       "configurations": {
         "production": {
@@ -92,6 +94,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "web"
+  "tags": []
 }
