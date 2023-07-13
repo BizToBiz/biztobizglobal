@@ -1,24 +1,24 @@
 {
+  "name": "web-admin-territory",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-admin/territory/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-admin/territory/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-admin/territory"],
       "options": {
         "jestConfig": "libs/web-admin/territory/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-admin-territory"
+  }
 }

@@ -1,17 +1,18 @@
 {
+  "name": "shared-util-apollo",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/util-apollo/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/shared/util-apollo/**/*.{ts,tsx,js,jsx}"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/shared/util-apollo"],
       "options": {
         "jestConfig": "libs/shared/util-apollo/jest.config.ts",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": ["scope:shared", "type:util"],
-  "name": "shared-util-apollo"
+  "tags": ["scope:shared", "type:util"]
 }

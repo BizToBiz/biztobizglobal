@@ -1,17 +1,18 @@
 {
+  "name": "api-region-data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/region/data-access/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/api/region/data-access/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/region/data-access"],
       "options": {
         "jestConfig": "libs/api/region/data-access/jest.config.ts",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:data-access"],
-  "name": "api-region-data-access"
+  "tags": ["scope:api", "type:data-access"]
 }

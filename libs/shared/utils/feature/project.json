@@ -1,24 +1,24 @@
 {
+  "name": "shared-utils-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/utils/feature/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/shared/utils/feature/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/shared/utils/feature"],
       "options": {
         "jestConfig": "libs/shared/utils/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "shared-utils-feature"
+  }
 }

@@ -1,16 +1,18 @@
 {
+  "name": "api-transaction-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/transaction/feature/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/api/transaction/feature/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/transaction/feature"],
       "options": {
         "jestConfig": "libs/api/transaction/feature/jest.config.js",
@@ -18,7 +20,7 @@
       }
     },
     "e2e-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/transaction/feature"],
       "options": {
         "jestConfig": "libs/api/transaction/feature/jest.e2e.config.js",
@@ -26,7 +28,7 @@
       }
     },
     "load-api": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/transaction/feature"],
       "options": {
         "jestConfig": "libs/api/transaction/feature/jest.load.config.js",
@@ -34,6 +36,5 @@
       }
     }
   },
-  "tags": ["scope:api", "type:feature"],
-  "name": "api-transaction-feature"
+  "tags": ["scope:api", "type:feature"]
 }

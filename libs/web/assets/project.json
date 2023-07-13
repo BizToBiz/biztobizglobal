@@ -1,8 +1,8 @@
 {
+  "name": "web-assets",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web/assets/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["scope:web", "type:assets"],
-  "name": "web-assets"
+  "tags": ["scope:web", "type:assets"]
 }

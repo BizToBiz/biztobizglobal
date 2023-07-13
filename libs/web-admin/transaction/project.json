@@ -1,24 +1,24 @@
 {
+  "name": "web-admin-transaction",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-admin/transaction/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-admin/transaction/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-admin/transaction"],
       "options": {
         "jestConfig": "libs/web-admin/transaction/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-admin-transaction"
+  }
 }

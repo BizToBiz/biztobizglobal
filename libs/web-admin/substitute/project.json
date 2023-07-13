@@ -1,24 +1,24 @@
 {
+  "name": "web-admin-substitute",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-admin/substitute/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-admin/substitute/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-admin/substitute"],
       "options": {
         "jestConfig": "libs/web-admin/substitute/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-admin-substitute"
+  }
 }

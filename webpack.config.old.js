@@ -1,4 +1,4 @@
-const nrwlConfig = require('@nrwl/react/plugins/webpack.js')
+const nrwlConfig = require('@nx/react/plugins/webpack.js')
 
 module.exports = (config) => {
   nrwlConfig(config)

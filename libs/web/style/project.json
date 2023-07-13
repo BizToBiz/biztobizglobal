@@ -1,8 +1,8 @@
 {
+  "name": "web-style",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web/style/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["scope:web", "type:style"],
-  "name": "web-style"
+  "tags": ["scope:web", "type:style"]
 }
