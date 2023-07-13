@@ -130,7 +130,8 @@
       "@biztobiz/web/environments": ["libs/web/environments/src/index.ts"],
       "@biztobiz/web/global/data-access": ["libs/web/global/data-access/src/index.ts"],
       "@biztobiz/web/shell/feature": ["libs/web/shell/feature/src/index.ts"],
-      "@biztobiz/web/style": ["libs/web/style/src/index.ts"]
+      "@biztobiz/web/style": ["libs/web/style/src/index.ts"],
+      "@biztobiz/workspace-plugin": ["tools/workspace-plugin/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,4 +1,4 @@
-const { withNxMetro } = require('@nrwl/react-native')
+const { withNxMetro } = require('@nx/react-native')
 
 module.exports = withNxMetro(
   {

@@ -1,24 +1,24 @@
 {
+  "name": "native-global",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/native/global/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/native/global/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/native/global"],
       "options": {
         "jestConfig": "libs/native/global/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "native-global"
+  }
 }

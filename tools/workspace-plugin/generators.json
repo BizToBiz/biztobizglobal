@@ -1,0 +1,84 @@
+{
+  "generators": {
+    "api-crud": {
+      "implementation": "./src/generators/api-crud",
+      "schema": "./src/generators/api-crud/schema.json",
+      "description": "Generator api-crud"
+    },
+    "api-feature": {
+      "implementation": "./src/generators/api-feature",
+      "schema": "./src/generators/api-feature/schema.json",
+      "description": "Generator api-feature"
+    },
+    "api-lib-account": {
+      "implementation": "./src/generators/api-lib-account",
+      "schema": "./src/generators/api-lib-account/schema.json",
+      "description": "Generator api-lib-account"
+    },
+    "api-lib-auth": {
+      "implementation": "./src/generators/api-lib-auth",
+      "schema": "./src/generators/api-lib-auth/schema.json",
+      "description": "Generator api-lib-auth"
+    },
+    "api-lib-core": {
+      "implementation": "./src/generators/api-lib-core",
+      "schema": "./src/generators/api-lib-core/schema.json",
+      "description": "Generator api-lib-core"
+    },
+    "api-lib-mailer": {
+      "implementation": "./src/generators/api-lib-mailer",
+      "schema": "./src/generators/api-lib-mailer/schema.json",
+      "description": "Generator api-lib-mailer"
+    },
+    "api-lib-user": {
+      "implementation": "./src/generators/api-lib-user",
+      "schema": "./src/generators/api-lib-user/schema.json",
+      "description": "Generator api-lib-user"
+    },
+    "crud": {
+      "implementation": "./src/generators/crud",
+      "schema": "./src/generators/crud/schema.json",
+      "description": "Generator crud"
+    },
+    "prisma-seed": {
+      "implementation": "./src/generators/prisma-seed",
+      "schema": "./src/generators/prisma-seed/schema.json",
+      "description": "Generator prisma-seed"
+    },
+    "web-admin-crud": {
+      "implementation": "./src/generators/web-admin-crud",
+      "schema": "./src/generators/web-admin-crud/schema.json",
+      "description": "Generator web-admin-crud"
+    },
+    "web-admin-crud-helper": {
+      "implementation": "./src/generators/web-admin-crud-helper",
+      "schema": "./src/generators/web-admin-crud-helper/schema.json",
+      "description": "Generator web-admin-crud-helper"
+    },
+    "web-component": {
+      "implementation": "./src/generators/web-component",
+      "schema": "./src/generators/web-component/schema.json",
+      "description": "Generator web-component"
+    },
+    "web-feature": {
+      "implementation": "./src/generators/web-feature",
+      "schema": "./src/generators/web-feature/schema.json",
+      "description": "Generator web-feature"
+    },
+    "web-leader-crud": {
+      "implementation": "./src/generators/web-leader-crud",
+      "schema": "./src/generators/web-leader-crud/schema.json",
+      "description": "Generator web-leader-crud"
+    },
+    "web-module": {
+      "implementation": "./src/generators/web-module",
+      "schema": "./src/generators/web-module/schema.json",
+      "description": "Generator web-module"
+    },
+    "workspace-setup": {
+      "implementation": "./src/generators/workspace-setup",
+      "schema": "./src/generators/workspace-setup/schema.json",
+      "description": "Generator workspace-setup"
+    }
+  }
+}

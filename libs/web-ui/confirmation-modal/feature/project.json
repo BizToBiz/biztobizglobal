@@ -1,24 +1,24 @@
 {
+  "name": "web-ui-confirmation-modal-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web-ui/confirmation-modal/feature/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/web-ui/confirmation-modal/feature/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/web-ui/confirmation-modal/feature"],
       "options": {
         "jestConfig": "libs/web-ui/confirmation-modal/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "name": "web-ui-confirmation-modal-feature"
+  }
 }
