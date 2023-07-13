@@ -80,8 +80,6 @@
     "@nestjs/passport": "8.1.0",
     "@nestjs/platform-express": "10.0.5",
     "@nestjs/serve-static": "^3.0.0",
-    "@nx/remix": "^16.4.0",
-    "@nx/webpack": "16.5.1",
     "@paljs/plugins": "^4.1.0",
     "@prisma/client": "4.8.1",
     "@react-native-async-storage/async-storage": "1.18.2",
@@ -101,6 +99,7 @@
     "apollo-link-error": "1.1.13",
     "apollo-server-express": "3.6.8",
     "autoprefixer": "10.4.13",
+    "axios": "^1.0.0",
     "bcryptjs": "2.4.3",
     "class-transformer": "0.3.2",
     "class-validator": "0.12.2",
@@ -147,7 +146,7 @@
     "react-select-search": "^3.0.10",
     "reflect-metadata": "0.1.13",
     "regenerator-runtime": "0.13.7",
-    "rxjs": "7.5.4",
+    "rxjs": "^7.8.0",
     "supertest": "5.0.0",
     "tailwind-rn": "4.2.0",
     "tailwindcss": "3.2.7",
@@ -169,7 +168,6 @@
     "@graphql-codegen/typescript-react-apollo": "3.2.5",
     "@nestjs/schematics": "10.0.1",
     "@nestjs/testing": "10.0.5",
-    "@nrwl/tao": "16.5.1",
     "@nx/cypress": "16.5.1",
     "@nx/detox": "16.5.1",
     "@nx/devkit": "16.5.1",
@@ -182,8 +180,10 @@
     "@nx/plugin": "16.5.1",
     "@nx/react": "16.5.1",
     "@nx/react-native": "16.5.1",
+    "@nx/remix": "^16.4.0",
     "@nx/vite": "16.5.1",
     "@nx/web": "16.5.1",
+    "@nx/webpack": "16.5.1",
     "@nx/workspace": "16.5.1",
     "@nxpm/cli": "4.21.0",
     "@nxpm/stack": "^4.21.0",
@@ -228,6 +228,7 @@
     "husky": "4.3.8",
     "jest": "29.4.3",
     "jest-circus": "27.0.3",
+    "jest-environment-node": "^29.4.1",
     "jest-jasmine2": "29.4.3",
     "jest-react-native": "18.0.0",
     "jsdom": "~22.1.0",
@@ -280,4 +281,3 @@
     ]
   }
 }
-
